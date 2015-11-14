@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <com.ogaclejapan.smarttablayout.SmartTabLayout
-    android:id="@+id/smarttab"
+    android:id="@+id/tab_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:clipToPadding="false"
+    android:layout_marginTop="50dp"
     android:paddingLeft="4dp"
     android:paddingRight="4dp"
-    app:stl_defaultTabTextColor="@color/material_drawer_dark_divider"
+    app:stl_defaultTabTextColor="@color/primary_text"
     app:stl_defaultTabTextHorizontalPadding="18dp"
-    app:stl_dividerColor="@color/divider"
+    app:stl_dividerColor="@color/primary"
     app:stl_dividerThickness="0dp"
+    app:stl_indicatorColor="@color/primary_light"
     app:stl_indicatorCornerRadius="18dp"
     app:stl_indicatorInterpolation="smart"
     app:stl_indicatorGravity="center"
     app:stl_indicatorThickness="36dp"
+    app:stl_underlineColor="@color/divider"
     app:stl_underlineThickness="0dp"
+    android:background="@color/divider"
     />
     <android.support.v4.view.ViewPager
         android:id="@+id/inner_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-</merge>
+        android:layout_height="wrap_content"/>
+</LinearLayout>

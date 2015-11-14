@@ -27,7 +27,7 @@ public abstract class AbsTopNavigationFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         parentView = View.inflate(getContext(), R.layout.layout_top_navigation,null);
         viewPager = (ViewPager) parentView.findViewById(R.id.inner_viewpager);
-        smartTabLayout = (SmartTabLayout) parentView.findViewById(R.id.smarttab);
+        smartTabLayout = (SmartTabLayout) parentView.findViewById(R.id.tab_layout);
         pagerAdapter = initPagerAdapter();
         viewPager.setAdapter(pagerAdapter);
         smartTabLayout.setViewPager(viewPager);

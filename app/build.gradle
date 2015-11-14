@@ -28,4 +28,6 @@ dependencies {
         transitive = true
     }
     compile 'com.android.support:design:23.1.0'
+    compile files('libs/volley.jar')
+    compile 'com.yalantis:phoenix:1.2.2'
 }
