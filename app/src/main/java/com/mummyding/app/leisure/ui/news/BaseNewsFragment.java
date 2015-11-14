@@ -31,7 +31,6 @@ public class BaseNewsFragment extends AbsTopNavigationFragment {
         pagerAdapter = new PagerAdapter(getFragmentManager(),name) {
             @Override
             public Fragment getItem(int position) {
-
                 Utils.DLog(name.length+" "+url.length);
                 NewsFragment fragment = new NewsFragment();
                 Bundle bundle = new Bundle();
