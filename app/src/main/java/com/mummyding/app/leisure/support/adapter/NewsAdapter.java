@@ -1,13 +1,18 @@
 package com.mummyding.app.leisure.support.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.nfc.tech.NfcB;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.model.NewsBean;
+import com.mummyding.app.leisure.support.Utils;
+import com.mummyding.app.leisure.ui.news.NewsDetailsActivity;
 
 import java.util.List;
 
@@ -16,15 +21,25 @@ import java.util.List;
  */
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private List<NewsBean> items;
+    private Context mContext ;
 
-    public NewsAdapter(List<NewsBean> items) {
+    public NewsAdapter(Context context,List<NewsBean> items) {
         this.items = items;
+        this.mContext = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(parent.getContext(),R.layout.item_news,null);
-        ViewHolder vh = new ViewHolder(view);
+        final ViewHolder vh = new ViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, NewsDetailsActivity.class);
+                intent.putExtra("url",getItem(vh.position).getLink());
+                mContext.startActivity(intent);
+            }
+        });
         return vh;
     }
 
@@ -34,6 +49,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.description.setText(newsBean.getDescription());
         holder.title.setText(newsBean.getTitle());
         holder.date.setText(newsBean.getPubTime());
+        holder.position = position;
     }
 
     @Override
@@ -47,7 +63,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         TextView title;
         TextView description;
         TextView date;
-
+        int position;
          ViewHolder(View itemView) {
             super(itemView);
              title = (TextView) itemView.findViewById(R.id.title);
@@ -55,4 +71,5 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
              date = (TextView) itemView.findViewById(R.id.date);
          }
     }
+
 }

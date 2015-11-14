@@ -37,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initData();
         switchFragment(new BaseNewsFragment());
-     /*   fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.framelayout, new NewsFragment());
-        fragmentTransaction.commit();*/
     }
     private void switchFragment(Fragment fragment){
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -72,9 +69,6 @@ public class MainActivity extends AppCompatActivity {
                         switch (drawerItem.getIdentifier()) {
                             case R.mipmap.ic_news:
                                 switchFragment(new BaseNewsFragment());
-                             /*   fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.framelayout,new NewsFragment());
-                                fragmentTransaction.commit();*/
                                 break;
                             case R.mipmap.ic_reading:
                                 Toast.makeText(MainActivity.this,"reading",Toast.LENGTH_SHORT).show();
