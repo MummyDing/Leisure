@@ -3,6 +3,8 @@ package com.mummyding.app.leisure;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 /**
  * Created by mummyding on 15-11-13.
  */
@@ -12,5 +14,6 @@ public class LeisureApplication extends Application {
     public void onCreate() {
         super.onCreate();
         AppContext = getApplicationContext();
+        Fresco.initialize(AppContext);
     }
 }
