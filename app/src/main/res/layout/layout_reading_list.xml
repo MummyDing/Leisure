@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/text"
-        android:layout_width="wrap_content"
+        android:text="text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-</LinearLayout>
+</ScrollView>
+
+    <!--<com.yalantis.phoenix.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:layout_margin="10dp"
+            android:scrollbars="vertical"
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.yalantis.phoenix.PullToRefreshView>-->
+
+</FrameLayout>
