@@ -1,6 +1,6 @@
 package com.mummyding.app.leisure.support.sax;
 
-import com.mummyding.app.leisure.model.NewsBean;
+import com.mummyding.app.leisure.model.news.NewsBean;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;

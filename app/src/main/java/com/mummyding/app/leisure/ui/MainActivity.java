@@ -22,6 +22,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.ui.news.BaseNewsFragment;
 import com.mummyding.app.leisure.ui.news.NewsFragment;
+import com.mummyding.app.leisure.ui.reading.BaseReadingFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,9 +63,11 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.science).withIcon(R.mipmap.ic_science).withIdentifier(R.mipmap.ic_science),
                         new PrimaryDrawerItem().withName(R.string.video).withIcon(R.mipmap.ic_video).withIdentifier(R.mipmap.ic_video),
                         new PrimaryDrawerItem().withName(R.string.music).withIcon(R.mipmap.ic_music).withIdentifier(R.mipmap.ic_music),
+                        new PrimaryDrawerItem().withName(R.string.shake).withIcon(R.mipmap.ic_shake).withIdentifier(R.mipmap.ic_shake),
                         new SectionDrawerItem(),
                         new SecondaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_setting).withIdentifier(R.mipmap.ic_setting),
                         new SecondaryDrawerItem().withName(R.string.about).withIcon(R.mipmap.ic_about).withIdentifier(R.mipmap.ic_about)
+
                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                                 switchFragment(new BaseNewsFragment(),"新闻");
                                 break;
                             case R.mipmap.ic_reading:
-                                Toast.makeText(MainActivity.this,"reading",Toast.LENGTH_SHORT).show();
+                                switchFragment(new BaseReadingFragment(), "阅读");
 
                                 break;
                             case R.mipmap.ic_science:
@@ -91,7 +94,9 @@ public class MainActivity extends AppCompatActivity {
                             case R.mipmap.ic_about:
                                 Toast.makeText(MainActivity.this,"about",Toast.LENGTH_SHORT).show();
                                 break;
-
+                            case R.mipmap.ic_shake:
+                                Toast.makeText(MainActivity.this,"Shake Shakes",Toast.LENGTH_SHORT).show();
+                                break;
                         }
                         return false;
                     }

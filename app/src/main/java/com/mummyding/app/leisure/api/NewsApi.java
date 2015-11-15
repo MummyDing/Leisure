@@ -1,4 +1,4 @@
-package com.mummyding.app.leisure.model;
+package com.mummyding.app.leisure.api;
 
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.support.Utils;
@@ -11,7 +11,7 @@ import java.io.InputStream;
 /**
  * Created by mummyding on 15-11-14.
  */
-public class Entity {
+public class NewsApi {
     private static String [] newsUrl = null;
     private static String [] newsTitle = null;
     private static Document document = null;

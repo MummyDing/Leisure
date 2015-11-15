@@ -1,4 +1,4 @@
-package com.mummyding.app.leisure.model;
+package com.mummyding.app.leisure.model.news;
 
 import com.mummyding.app.leisure.support.Utils;
 

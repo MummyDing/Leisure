@@ -2,16 +2,13 @@ package com.mummyding.app.leisure.support.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.nfc.tech.NfcB;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
-import com.mummyding.app.leisure.model.NewsBean;
-import com.mummyding.app.leisure.support.Utils;
+import com.mummyding.app.leisure.model.news.NewsBean;
 import com.mummyding.app.leisure.ui.news.NewsDetailsActivity;
 
 import java.util.List;
