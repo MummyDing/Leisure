@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".ui.news.NewsDetailsActivity" >
         </activity>
+        <activity android:name=".ui.reading.ReadingDetailsActivity" >
+        </activity>
     </application>
 
 </manifest>

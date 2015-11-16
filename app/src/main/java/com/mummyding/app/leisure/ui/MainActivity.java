@@ -43,19 +43,19 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.framelayout, fragment);
         fragmentTransaction.commit();
-        this.setTitle(title);
+        getSupportActionBar().setTitle(title);
     }
     private void initData(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         frameLayout = (FrameLayout) findViewById(R.id.framelayout);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         header = new AccountHeaderBuilder().withActivity(this)
                 .withCompactStyle(false)
                 .withHeaderBackground(R.drawable.header)
                 .build();
         drawer = new DrawerBuilder().withActivity(this)
                 .withToolbar(toolbar)
+                .withActionBarDrawerToggleAnimated(true)
                 .withAccountHeader(header)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(R.string.news).withIcon(R.mipmap.ic_news).withIdentifier(R.mipmap.ic_news),

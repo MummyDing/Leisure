@@ -1,10 +1,12 @@
 package com.mummyding.app.leisure.ui;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +23,16 @@ public abstract class AbsTopNavigationFragment extends Fragment{
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private SmartTabLayout smartTabLayout;
+    private Toolbar toolbar;
     protected abstract PagerAdapter initPagerAdapter();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         parentView = View.inflate(getContext(), R.layout.layout_top_navigation,null);
+        //toolbar = (Toolbar) parentView.findViewById(R.id.toolbar);
         viewPager = (ViewPager) parentView.findViewById(R.id.inner_viewpager);
-        smartTabLayout = (SmartTabLayout) parentView.findViewById(R.id.tab_layout);
+        smartTabLayout = (SmartTabLayout) getActivity().findViewById(R.id.tab_layout);
+        smartTabLayout.setVisibility(View.VISIBLE);
         pagerAdapter = initPagerAdapter();
         viewPager.setAdapter(pagerAdapter);
         smartTabLayout.setViewPager(viewPager);
