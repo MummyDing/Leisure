@@ -29,7 +29,6 @@ public abstract class AbsTopNavigationFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         parentView = View.inflate(getContext(), R.layout.layout_top_navigation,null);
-        //toolbar = (Toolbar) parentView.findViewById(R.id.toolbar);
         viewPager = (ViewPager) parentView.findViewById(R.id.inner_viewpager);
         smartTabLayout = (SmartTabLayout) getActivity().findViewById(R.id.tab_layout);
         smartTabLayout.setVisibility(View.VISIBLE);

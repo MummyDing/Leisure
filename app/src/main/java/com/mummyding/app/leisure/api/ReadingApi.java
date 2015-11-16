@@ -1,5 +1,6 @@
 package com.mummyding.app.leisure.api;
 
+import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.support.Utils;
 
 /**
@@ -19,7 +20,7 @@ public class ReadingApi {
     public static String CultureTag[] ={"历史","心理学","哲学","传记","文化","社会学","艺术","设计","政治","社会","建筑","宗教","电影","数学","政治学","回忆录","思想","国学","中国历史","音乐","人文","戏剧","人物传记","绘画","艺术史","佛教","军事","西方哲学","近代史","二战","自由主义","考古","美术"};
     public static String LifeTag[]={"爱情","旅行", "生活", "励志", "成长", "心理", "摄影", "女性", "职场", "美食", "教育", "游记", "灵修", "情感", "健康", "手工", "养生", "两性", "人际关系", "家居", "自助游"};
     public static String FinancialTag[] ={"经济学", "管理", "经济", "金融", "商业", "投资", "营销", "创业", "理财", "广告", "股票", "企业史", "策划"};
-
+    public static String bookTab_Titles[] ={"内容简介","目录","作者简介"};
     public static String[] getApiTag(int pos){
         switch (pos){
             case 0:
@@ -58,5 +59,19 @@ public class ReadingApi {
             res[i] = tag[tmp];
         }
         return res;
+    }
+    public static String getBookInfo(int position,BookBean book){
+        switch (position){
+            case 0:
+                if(Utils.hasString(book.getSummary()) == false) break;
+                return book.getSummary();
+            case 1:
+                if(Utils.hasString(book.getCatalog()) == false)break;
+                return  book.getCatalog();
+            case 2:
+                if(Utils.hasString(book.getAurhor_intro()) == false)break;
+                return book.getAurhor_intro();
+        }
+        return "\n\n\n\n\t\t\t\t\t\t\t\t\t抱歉,暂无信息";
     }
 }

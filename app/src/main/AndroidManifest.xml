@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.news.NewsDetailsActivity" >
+        <activity android:name=".ui.WebViewActivity" >
         </activity>
         <activity android:name=".ui.reading.ReadingDetailsActivity" >
         </activity>

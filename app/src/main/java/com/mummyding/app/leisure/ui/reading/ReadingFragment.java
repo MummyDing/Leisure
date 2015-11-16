@@ -38,8 +38,6 @@ public class ReadingFragment extends Fragment {
     private View parentView;
     private PullToRefreshView refreshView;
     private RecyclerView recyclerView;
-   // private TextView textView;
-    private List<ReadingBean> readingData = new ArrayList<>();
     private List<BookBean> items= new ArrayList<>();
     private RequestQueue queue;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -86,7 +84,6 @@ public class ReadingFragment extends Fragment {
                     for(BookBean bookBean: bookBeans){
                         items.add(bookBean);
                     }
-                    //readingData.add(gson.fromJson(s, ReadingBean.class));
                     handler.sendEmptyMessage(0);
                      refreshView.setRefreshing(false);
                 }
@@ -106,8 +103,6 @@ public class ReadingFragment extends Fragment {
         @Override
         public boolean handleMessage(Message msg) {
             adapter.notifyDataSetChanged();
-
-            //textView.setText(readingData.toString());
             return false;
         }
     });

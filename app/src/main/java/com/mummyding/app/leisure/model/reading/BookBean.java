@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by mummyding on 15-11-15.
  */
-public class BookBean {
+public class BookBean implements Serializable{
     Rating rating;
     String subtitle;
     String [] author;
