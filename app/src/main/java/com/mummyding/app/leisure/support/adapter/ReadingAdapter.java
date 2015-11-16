@@ -34,7 +34,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_reading, parent, false); // View.inflate(mContext, R.layout.item_reading,null);
+                .inflate(R.layout.item_reading, parent, false);
         ViewHolder vh = new ViewHolder(itemView);
         return vh;
     }
@@ -56,7 +56,8 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
             }
         });
         if(Utils.hasString(readingBean.getEbook_url()))
-        holder.parentView.setBackgroundColor(R.color.primary);
+        holder.parentView.setBackgroundColor(mContext.getResources().getColor(R.color.item_bg));
+        else holder.parentView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
     }
     public BookBean getItem(int pos){
         return items.get(pos);

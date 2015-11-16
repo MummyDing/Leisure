@@ -8,6 +8,7 @@
     <color name="secondary_text">#B9B9B9</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
-    <color name="white">#fff</color>
+    <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>
+    <color name="item_bg">#B23AEE</color>
 </resources>

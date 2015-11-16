@@ -5,4 +5,5 @@
     <dimen name="card_margin">5dp</dimen>
     <dimen name="tab_height">50dp</dimen>
     <dimen name="text_padding">20dp</dimen>
+    <dimen name="item_padding">15dp</dimen>
 </resources>
