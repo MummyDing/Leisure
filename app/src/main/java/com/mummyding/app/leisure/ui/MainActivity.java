@@ -23,6 +23,7 @@ import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.ui.news.BaseNewsFragment;
 import com.mummyding.app.leisure.ui.news.NewsFragment;
 import com.mummyding.app.leisure.ui.reading.BaseReadingFragment;
+import com.mummyding.app.leisure.ui.science.BaseScienceFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 break;
                             case R.mipmap.ic_science:
-                                Toast.makeText(MainActivity.this,"science",Toast.LENGTH_SHORT).show();
+                                switchFragment(new BaseScienceFragment(),"科学");
                                 break;
                             case R.mipmap.ic_video:
                                 Toast.makeText(MainActivity.this,"video",Toast.LENGTH_SHORT).show();
