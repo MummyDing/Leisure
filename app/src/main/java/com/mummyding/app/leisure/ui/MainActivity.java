@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
                         new SectionDrawerItem(),
                         new SecondaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_setting).withIdentifier(R.mipmap.ic_setting),
                         new SecondaryDrawerItem().withName(R.string.about).withIcon(R.mipmap.ic_about).withIdentifier(R.mipmap.ic_about)
-
                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case R.mipmap.ic_reading:
                                 switchFragment(new BaseReadingFragment(), "阅读");
-
                                 break;
                             case R.mipmap.ic_science:
                                 switchFragment(new BaseScienceFragment(),"科学");

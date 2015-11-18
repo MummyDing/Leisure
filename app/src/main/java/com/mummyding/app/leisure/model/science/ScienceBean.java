@@ -9,7 +9,7 @@ public class ScienceBean implements Serializable {
     private String now;
     private boolean ok ;
     private int limit;
-    private ArticleBean result;
+    private ArticleBean[] result;
     int offset;
     int total;
 
@@ -37,11 +37,11 @@ public class ScienceBean implements Serializable {
         this.limit = limit;
     }
 
-    public ArticleBean getResult() {
+    public ArticleBean[] getResult() {
         return result;
     }
 
-    public void setResult(ArticleBean result) {
+    public void setResult(ArticleBean[] result) {
         this.result = result;
     }
 

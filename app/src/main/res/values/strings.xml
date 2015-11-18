@@ -9,4 +9,6 @@
     <string name="about">About</string>
     <string name="shake">Shake</string>
     <string name="text_ebook">电子书</string>
+    <string name="id_pos">position</string>
+    <string name="id_url">url</string>
 </resources>

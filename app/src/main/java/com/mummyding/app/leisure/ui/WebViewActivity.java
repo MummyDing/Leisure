@@ -24,7 +24,7 @@ public class WebViewActivity extends AppCompatActivity {
     private void initData(){
         webView = (WebView) findViewById(R.id.webview);
         textView = (TextView) findViewById(R.id.text_notify);
-        final String url = getIntent().getStringExtra("url");
+        final String url = getIntent().getStringExtra(getString(R.string.id_url));
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setSupportMultipleWindows(false);
         /*webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);

@@ -196,7 +196,7 @@ public class ArticleBean implements Serializable{
     private boolean is_show_summary;
     private String minisite_key;
     private Image_info image_info;
-    class Image_info implements Serializable{
+    public class Image_info implements Serializable{
         String url;
         int width;
         int height;
@@ -285,7 +285,7 @@ public class ArticleBean implements Serializable{
     }
     private String [] tags;
     private String date_published;
-    private Author authors;
+    //private Author[] authors;
     private int replies_count;
     private boolean is_author_external;
     private int recommends_count;
@@ -435,13 +435,13 @@ public class ArticleBean implements Serializable{
         this.date_published = date_published;
     }
 
-    public Author getAuthors() {
+    /*public Author[] getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Author authors) {
+    public void setAuthors(Author[] authors) {
         this.authors = authors;
-    }
+    }*/
 
     public int getReplies_count() {
         return replies_count;
@@ -537,5 +537,10 @@ public class ArticleBean implements Serializable{
 
     public void setResource_url(String resource_url) {
         this.resource_url = resource_url;
+    }
+
+    @Override
+    public String toString() {
+        return getAuthor().getNickname()+"  "+getDate_published();
     }
 }
