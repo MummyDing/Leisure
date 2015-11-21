@@ -20,6 +20,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.ui.daily.DailyFragment;
 import com.mummyding.app.leisure.ui.news.BaseNewsFragment;
 import com.mummyding.app.leisure.ui.news.NewsFragment;
 import com.mummyding.app.leisure.ui.reading.BaseReadingFragment;
@@ -73,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         switch (drawerItem.getIdentifier()) {
                             case R.mipmap.ic_news:
-                                switchFragment(new BaseNewsFragment(),"新闻");
+                                switchFragment(new DailyFragment(),"日报");
+                                //switchFragment(new BaseNewsFragment(),"新闻");
                                 break;
                             case R.mipmap.ic_reading:
                                 switchFragment(new BaseReadingFragment(), "阅读");
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                                 switchFragment(new BaseScienceFragment(),"科学");
                                 break;
                             case R.mipmap.ic_video:
+                                switchFragment(new DailyFragment(),"日报");
                                 Toast.makeText(MainActivity.this,"video",Toast.LENGTH_SHORT).show();
                                 break;
                             case R.mipmap.ic_music:
