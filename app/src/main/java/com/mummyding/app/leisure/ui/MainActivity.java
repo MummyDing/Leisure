@@ -20,6 +20,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.support.ScreenUtil;
 import com.mummyding.app.leisure.ui.daily.DailyFragment;
 import com.mummyding.app.leisure.ui.news.BaseNewsFragment;
 import com.mummyding.app.leisure.ui.news.NewsFragment;
@@ -38,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ScreenUtil.init(this);
         initData();
         switchFragment(new DailyFragment(), "日报");
-        //switchFragment(new BaseNewsFragment(), "新闻");
     }
     private void switchFragment(Fragment fragment,String title){
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -61,11 +62,10 @@ public class MainActivity extends AppCompatActivity {
                 .withActionBarDrawerToggleAnimated(true)
                 .withAccountHeader(header)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.news).withIcon(R.mipmap.ic_news).withIdentifier(R.mipmap.ic_news),
+                        new PrimaryDrawerItem().withName(R.string.daily).withIcon(R.mipmap.ic_home).withIdentifier(R.mipmap.ic_home),
                         new PrimaryDrawerItem().withName(R.string.reading).withIcon(R.mipmap.ic_reading).withIdentifier(R.mipmap.ic_reading),
+                        new PrimaryDrawerItem().withName(R.string.news).withIcon(R.mipmap.ic_news).withIdentifier(R.mipmap.ic_news),
                         new PrimaryDrawerItem().withName(R.string.science).withIcon(R.mipmap.ic_science).withIdentifier(R.mipmap.ic_science),
-                        new PrimaryDrawerItem().withName(R.string.video).withIcon(R.mipmap.ic_video).withIdentifier(R.mipmap.ic_video),
-                        new PrimaryDrawerItem().withName(R.string.music).withIcon(R.mipmap.ic_music).withIdentifier(R.mipmap.ic_music),
                         new PrimaryDrawerItem().withName(R.string.shake).withIcon(R.mipmap.ic_shake).withIdentifier(R.mipmap.ic_shake),
                         new SectionDrawerItem(),
                         new SecondaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_setting).withIdentifier(R.mipmap.ic_setting),
@@ -74,21 +74,17 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         switch (drawerItem.getIdentifier()) {
-                            case R.mipmap.ic_news:
-                                switchFragment(new BaseNewsFragment(),"新闻");
+                            case R.mipmap.ic_home:
+                                switchFragment(new DailyFragment(), "日报");
                                 break;
                             case R.mipmap.ic_reading:
                                 switchFragment(new BaseReadingFragment(), "阅读");
                                 break;
+                            case R.mipmap.ic_news:
+                                switchFragment(new BaseNewsFragment(), "新闻");
+                                break;
                             case R.mipmap.ic_science:
-                                switchFragment(new BaseScienceFragment(),"科学");
-                                break;
-                            case R.mipmap.ic_video:
-                                switchFragment(new DailyFragment(),"日报");
-                                Toast.makeText(MainActivity.this,"video",Toast.LENGTH_SHORT).show();
-                                break;
-                            case R.mipmap.ic_music:
-                                Toast.makeText(MainActivity.this,"music",Toast.LENGTH_SHORT).show();
+                                switchFragment(new BaseScienceFragment(), "科学");
                                 break;
                             case R.mipmap.ic_setting:
                                 Toast.makeText(MainActivity.this,"setting",Toast.LENGTH_SHORT).show();

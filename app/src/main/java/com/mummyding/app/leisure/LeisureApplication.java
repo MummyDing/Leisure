@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.mummyding.app.leisure.model.science.ScienceBean;
+import com.mummyding.app.leisure.support.ScreenUtil;
 
 /**
  * Created by mummyding on 15-11-13.

@@ -77,6 +77,6 @@ public class Utils {
         Log.d("调试数据：", text);
     }
     public static String getImageHtml(){
-        return "<head><style>img{max-width:320px !important;}</style></head>";
+        return "<head><style>img{max-width:"+(ScreenUtil.getScreenWidth()*0.4)+"px !important;}</style></head>";
     }
 }

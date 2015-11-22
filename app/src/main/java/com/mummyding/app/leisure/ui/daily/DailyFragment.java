@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -55,15 +56,17 @@ public class DailyFragment extends Fragment{
     private RequestQueue queue;
     private final OkHttpClient client = new OkHttpClient();
     protected static final String TYPE_UTF8_CHARSET = "charset=UTF-8";
+    private String url = "https://diy-devz.rhcloud.com/zhihu";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         parentView = View.inflate(getActivity(),R.layout.layout_common_list,null);
         initData();
-        loadNewsFromNet("https://diy-devz.rhcloud.com/zhihu");
+        loadNewsFromNet(url);
         return parentView;
     }
     private void initData(){
+        getActivity().findViewById(R.id.tab_layout).setVisibility(View.GONE);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
         refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -73,9 +76,20 @@ public class DailyFragment extends Fragment{
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        client.setConnectTimeout(30, TimeUnit.SECONDS);
+        client.setReadTimeout(30, TimeUnit.SECONDS);
+        client.setWriteTimeout(30, TimeUnit.SECONDS);
+
+        refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadNewsFromNet(url);
+            }
+        });
     }
 
     private void loadNewsFromNet(final String url){
+        refreshView.setRefreshing(true);
         new Thread(new Runnable() {
             @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
@@ -111,9 +125,7 @@ public class DailyFragment extends Fragment{
         @Override
         public boolean handleMessage(Message msg) {
             adapter.notifyDataSetChanged();
-            for(DailyBean dailyBean: items) {
-                Utils.DLog("图片" + dailyBean.getImage());
-            }
+            refreshView.setRefreshing(false);
             return false;
         }
     });
