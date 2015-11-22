@@ -2,6 +2,7 @@ package com.mummyding.app.leisure.support.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -9,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.model.daily.DailyBean;
 import com.mummyding.app.leisure.ui.WebViewActivity;
+import com.mummyding.app.leisure.ui.WebViewLocalActivity;
 
 import java.util.List;
 
@@ -39,14 +42,14 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
     public void onBindViewHolder(ViewHolder holder, int position) {
         final DailyBean dailyBean = getItem(position);
         holder.title.setText(dailyBean.getTitle());
-        holder.description.setText(Html.fromHtml(dailyBean.getDescription()));
-        holder.info.setText("作者: "+dailyBean.getAuthor()+"  "+dailyBean.getPubDate());
+        holder.image.setImageURI(Uri.parse(dailyBean.getImage()));
+        holder.info.setText(dailyBean.toString());
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
+                Intent intent = new Intent(mContext, WebViewLocalActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString(String.valueOf(R.string.id_url),dailyBean.getLink());
+                bundle.putString(mContext.getString(R.string.id_html_content),dailyBean.getDescription());
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
@@ -64,13 +67,13 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
     class ViewHolder extends RecyclerView.ViewHolder{
         private View parentView;
         private TextView title;
-        private TextView description;
+        private SimpleDraweeView image;
         private TextView info;
         public ViewHolder(View itemView) {
             super(itemView);
              parentView = itemView;
             title = (TextView) parentView.findViewById(R.id.title);
-            description = (TextView) parentView.findViewById(R.id.description);
+            image = (SimpleDraweeView) parentView.findViewById(R.id.image);
             info = (TextView) parentView.findViewById(R.id.info);
         }
     }

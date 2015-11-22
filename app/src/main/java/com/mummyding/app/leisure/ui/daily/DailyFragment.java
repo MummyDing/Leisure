@@ -77,6 +77,7 @@ public class DailyFragment extends Fragment{
 
     private void loadNewsFromNet(final String url){
         new Thread(new Runnable() {
+            @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void run() {
                 Request.Builder builder = new Request.Builder();
@@ -91,9 +92,11 @@ public class DailyFragment extends Fragment{
                 try {
                     InputStream is =
                             new ByteArrayInputStream(response.body().string().getBytes(StandardCharsets.UTF_8));
-                    System.out.println(response.body().string());
+
                     items.clear();
                     items.addAll(SAXDailyParse.parse(is));
+                    handler.sendEmptyMessage(0);
+                    System.out.println(response.body().string());
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (ParserConfigurationException e) {
@@ -108,6 +111,9 @@ public class DailyFragment extends Fragment{
         @Override
         public boolean handleMessage(Message msg) {
             adapter.notifyDataSetChanged();
+            for(DailyBean dailyBean: items) {
+                Utils.DLog("图片" + dailyBean.getImage());
+            }
             return false;
         }
     });

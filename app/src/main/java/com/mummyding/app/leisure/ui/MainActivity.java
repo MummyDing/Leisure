@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initData();
-        switchFragment(new BaseNewsFragment(), "新闻");
+        switchFragment(new DailyFragment(), "日报");
+        //switchFragment(new BaseNewsFragment(), "新闻");
     }
     private void switchFragment(Fragment fragment,String title){
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -74,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         switch (drawerItem.getIdentifier()) {
                             case R.mipmap.ic_news:
-                                switchFragment(new DailyFragment(),"日报");
-                                //switchFragment(new BaseNewsFragment(),"新闻");
+                                switchFragment(new BaseNewsFragment(),"新闻");
                                 break;
                             case R.mipmap.ic_reading:
                                 switchFragment(new BaseReadingFragment(), "阅读");

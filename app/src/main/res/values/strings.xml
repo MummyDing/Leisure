@@ -11,4 +11,5 @@
     <string name="text_ebook">电子书</string>
     <string name="id_pos">position</string>
     <string name="id_url">url</string>
+    <string name="id_html_content">content</string>
 </resources>

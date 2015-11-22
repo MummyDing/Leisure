@@ -10,8 +10,8 @@ public class DailyBean {
     private String link;
     private String author;
     private String pubDate;
-    private String Description;
-
+    private String description;
+    private String image;
     public String getTitle() {
         return title;
     }
@@ -40,20 +40,53 @@ public class DailyBean {
         return pubDate;
     }
 
+    public void setPubDateWithFormat(String pubDate) {
+        this.pubDate = formatTime(pubDate);
+    }
     public void setPubDate(String pubDate) {
         this.pubDate = pubDate;
     }
-
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return "作者: "+getAuthor()+"  title"+getTitle()+" description "+getDescription();
+        return "作者: "+getAuthor()+"\t\t"+getPubDate();
     }
+
+    public String getImage() {
+        if(image == null) {
+            setImage();
+        }
+        return image;
+    }
+
+    public void setImage() {
+        String url = Utils.RegexFind("<img class=\"content-image\\\" src=\"[^>]*jpg\"|<img src=\"[^>]*jpg\"",description,5,0);
+        url = Utils.RegexFind("\"[^\"]*jpg\"",url);
+        image = url.length() > 80 ? "http://pic.baike.soso.com/p/20140126/20140126144232-793838389.jpg":url;
+    }
+    private String formatTime(String pubTime){
+        String date = Utils.RegexFind(" \\d{4} ", pubTime)+"年"+
+                formatMonth(Utils.RegexFind(" \\w{3} ", pubTime))+"月"+
+                Utils.RegexFind(" \\d{1,2} ", pubTime)+"日"+
+                Utils.RegexFind(" \\d{2}:", pubTime)+"点"+
+                Utils.RegexFind(":\\d{2}:", pubTime)+"分"+
+                Utils.RegexFind(":\\d{2} ", pubTime)+"秒";
+        return date;
+    }
+    private  final String MONTH [] =
+            {"","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"};
+    private int formatMonth(String month){
+        for(int i = 1 ; i < MONTH.length;i++)
+            if(month.equalsIgnoreCase(MONTH[i]))
+                return i;
+        return -1;
+    }
+
 }

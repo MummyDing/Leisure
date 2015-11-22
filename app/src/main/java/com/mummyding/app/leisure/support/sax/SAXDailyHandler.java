@@ -44,23 +44,20 @@ public class SAXDailyHandler extends DefaultHandler {
         super.endElement(uri, localName, qName);
         if(isStart){
             if(qName.equalsIgnoreCase("title")){
-                Utils.DLog("title "+tmpVal.toString().trim());
-                tmpBean.setTitle(tmpVal.toString());
+                tmpBean.setTitle(tmpVal.toString().trim());
                 tmpVal = new StringBuffer();
             }else if(qName.equalsIgnoreCase("link")){
                 tmpVal = new StringBuffer();
             }else if(qName.equalsIgnoreCase("author")){
-                tmpBean.setAuthor(tmpVal.toString());
+                tmpBean.setAuthor(tmpVal.toString().trim());
                 tmpVal = new StringBuffer();
             }else if(qName.equalsIgnoreCase("pubDate")){
-                tmpBean.setPubDate(tmpVal.toString().trim());
+                tmpBean.setPubDateWithFormat(tmpVal.toString().trim());
                 tmpVal = new StringBuffer();
             }else if(qName.equalsIgnoreCase("description")){
-                tmpBean.setDescription(tmpVal.toString().trim());
-                Utils.DLog("description " + tmpVal.toString());
+                tmpBean.setDescription((Utils.getImageHtml()+tmpVal.toString()).trim());
                 tmpVal = new StringBuffer();
             }else if(qName.equalsIgnoreCase("guid")){
-                Utils.DLog("guid "+tmpVal.toString().trim());
                 tmpVal = new StringBuffer();
             }
 

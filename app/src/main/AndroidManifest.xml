@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".ui.reading.ReadingDetailsActivity" >
         </activity>
+        <activity android:name=".ui.WebViewLocalActivity" >
+        </activity>
     </application>
 
 </manifest>
