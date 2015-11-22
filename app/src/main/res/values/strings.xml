@@ -12,5 +12,5 @@
     <string name="id_pos">position</string>
     <string name="id_url">url</string>
     <string name="id_html_content">content</string>
-    <string name="daily">日报</string>
+    <string name="daily">Daily</string>
 </resources>

@@ -16,19 +16,22 @@ import android.view.ViewGroup;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.api.DailyApi;
 import com.mummyding.app.leisure.model.daily.DailyBean;
+import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.DailyAdapter;
 import com.mummyding.app.leisure.support.adapter.DividerItemDecoration;
 import com.mummyding.app.leisure.support.sax.SAXDailyParse;
 import com.mummyding.app.leisure.support.sax.SAXNewsParse;
+import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import com.yalantis.phoenix.PullToRefreshView;
 
 import org.xml.sax.SAXException;
@@ -54,9 +57,9 @@ public class DailyFragment extends Fragment{
     private List<DailyBean> items = new ArrayList<>();
     private DailyAdapter adapter;
     private RequestQueue queue;
-    private final OkHttpClient client = new OkHttpClient();
+  //  private final OkHttpClient client = new OkHttpClient();
     protected static final String TYPE_UTF8_CHARSET = "charset=UTF-8";
-    private String url = "https://diy-devz.rhcloud.com/zhihu";
+    private String url = DailyApi.daily_url;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,9 +79,7 @@ public class DailyFragment extends Fragment{
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        client.setConnectTimeout(30, TimeUnit.SECONDS);
-        client.setReadTimeout(30, TimeUnit.SECONDS);
-        client.setWriteTimeout(30, TimeUnit.SECONDS);
+
 
         refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
@@ -97,27 +98,31 @@ public class DailyFragment extends Fragment{
                 Request.Builder builder = new Request.Builder();
                 builder.url(url);
                 Request request = builder.build();
-                com.squareup.okhttp.Response response = null;
-                try {
-                    response = client.newCall(request).execute();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    InputStream is =
-                            new ByteArrayInputStream(response.body().string().getBytes(StandardCharsets.UTF_8));
-
-                    items.clear();
-                    items.addAll(SAXDailyParse.parse(is));
-                    handler.sendEmptyMessage(0);
-                    System.out.println(response.body().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParserConfigurationException e) {
-                    e.printStackTrace();
-                } catch (SAXException e) {
-                    e.printStackTrace();
-                }
+                HttpUtil.enqueue(request, new Callback() {
+                    @Override
+                    public void onFailure(Request request, IOException e) {
+                        Utils.DLog("网络异常");
+                        handler.sendEmptyMessage(0);
+                    }
+                    @Override
+                    public void onResponse(Response response) throws IOException {
+                        if(response.isSuccessful() == false) {
+                            handler.sendEmptyMessage(0);
+                            return;
+                        }
+                        InputStream is =
+                                new ByteArrayInputStream(response.body().string().getBytes(StandardCharsets.UTF_8));
+                        items.clear();
+                        try {
+                            items.addAll(SAXDailyParse.parse(is));
+                        } catch (ParserConfigurationException e) {
+                            e.printStackTrace();
+                        } catch (SAXException e) {
+                            e.printStackTrace();
+                        }
+                        handler.sendEmptyMessage(0);
+                    }
+                });
             }
         }).start();
     }

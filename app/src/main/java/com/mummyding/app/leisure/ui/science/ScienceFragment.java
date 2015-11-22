@@ -42,6 +42,7 @@ public class ScienceFragment extends Fragment{
     private View parentView;
     private ScienceBean scienceBean;
     private List<ArticleBean> items = new ArrayList<>();
+    private List<ArticleBean> tmpitems = new ArrayList<>();
     private PullToRefreshView refreshView;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -74,9 +75,10 @@ public class ScienceFragment extends Fragment{
                 @Override
                 public void onResponse(String s) {
                     Gson gson = new Gson();
-                    ArticleBean[] articleBeans = gson.fromJson(s, ScienceBean.class).getResult();
+                    ArticleBean[] articleBeans = (gson.fromJson(s, ScienceBean.class)).getResult();
+                    tmpitems.clear();
                     for(ArticleBean articleBean: articleBeans){
-                        items.add(articleBean);
+                        tmpitems.add(articleBean);
                     }
                     handler.sendEmptyMessage(0);
                     refreshView.setRefreshing(false);
@@ -94,6 +96,8 @@ public class ScienceFragment extends Fragment{
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
+
+            items = tmpitems;
             adapter.notifyDataSetChanged();
             return false;
         }

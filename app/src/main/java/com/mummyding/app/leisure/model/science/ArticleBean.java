@@ -435,14 +435,6 @@ public class ArticleBean implements Serializable{
         this.date_published = date_published;
     }
 
-    /*public Author[] getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Author[] authors) {
-        this.authors = authors;
-    }*/
-
     public int getReplies_count() {
         return replies_count;
     }

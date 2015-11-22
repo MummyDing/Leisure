@@ -85,6 +85,7 @@ public class NewsFragment extends Fragment {
     }
     private void loadNewsFromNet(String url){
         queue = Volley.newRequestQueue(getContext());
+
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
 
             @TargetApi(Build.VERSION_CODES.KITKAT)
