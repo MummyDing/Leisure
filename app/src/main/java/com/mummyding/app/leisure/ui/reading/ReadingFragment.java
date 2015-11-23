@@ -1,5 +1,7 @@
 package com.mummyding.app.leisure.ui.reading;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,13 +25,26 @@ import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ReadingApi;
 import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.model.reading.ReadingBean;
+import com.mummyding.app.leisure.support.CONSTANT;
+import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.DividerItemDecoration;
 import com.mummyding.app.leisure.support.adapter.ReadingAdapter;
+import com.mummyding.app.leisure.support.sax.SAXDailyParse;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
 import com.yalantis.phoenix.PullToRefreshView;
 
+import org.xml.sax.SAXException;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Created by mummyding on 15-11-15.
@@ -38,9 +53,9 @@ public class ReadingFragment extends Fragment {
     private View parentView;
     private PullToRefreshView refreshView;
     private RecyclerView recyclerView;
-    private List<BookBean> items= new ArrayList<>();
-    private RequestQueue queue;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    private List<BookBean> items= new ArrayList<>();
     private ReadingAdapter adapter;
     private int pos;
     @Nullable
@@ -51,7 +66,7 @@ public class ReadingFragment extends Fragment {
         return parentView;
     }
     private void initData(){
-        pos = getArguments().getInt("pos");
+        pos = getArguments().getInt(getString(R.string.id_pos));
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
         refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -71,38 +86,53 @@ public class ReadingFragment extends Fragment {
         });
     }
     private void loadNewsFromNet(int pos){
-        queue = Volley.newRequestQueue(getContext());
-        String[] tags = ReadingApi.getTags(ReadingApi.getApiTag(pos));
-        for(int i = 0; i < ReadingApi.TAG_LEN;i++){
-            String url = ReadingApi.searchByTag+ tags[i];
-            Utils.DLog(url);
-            StringRequest request = new StringRequest(url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String s) {
-                    Gson gson = new Gson();
-                    BookBean [] bookBeans = gson.fromJson(s, ReadingBean.class).getBooks();
-                    for(BookBean bookBean: bookBeans){
-                        items.add(bookBean);
-                    }
-                    handler.sendEmptyMessage(0);
-                     refreshView.setRefreshing(false);
+        final String[] tags = ReadingApi.getTags(ReadingApi.getApiTag(pos));
+        refreshView.setRefreshing(true);
+        new Thread(new Runnable() {
+            @TargetApi(Build.VERSION_CODES.KITKAT)
+            @Override
+            public void run() {
+                for (int i = 0; i < ReadingApi.TAG_LEN; i++) {
+                    String url = ReadingApi.searchByTag + tags[i];
+                    Request.Builder builder = new Request.Builder();
+                    builder.url(url);
+                    Request request = builder.build();
+                    HttpUtil.enqueue(request, new Callback() {
+                        @Override
+                        public void onFailure(Request request, IOException e) {
+                            handler.sendEmptyMessage(CONSTANT.ID_FAILURE);
+                        }
+                        @Override
+                        public void onResponse(com.squareup.okhttp.Response response) throws IOException {
+                            if (response.isSuccessful() == false) {
+                                handler.sendEmptyMessage(CONSTANT.ID_FAILURE);
+                                return;
+                            }
+                            Gson gson = new Gson();
+                            BookBean [] bookBeans = gson.fromJson(response.body().string(), ReadingBean.class).getBooks();
+                            for(BookBean bookBean: bookBeans){
+                                items.add(bookBean);
+                            }
+                            handler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
+                        }
+                    });
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    Utils.showToast("网络异常 刷新失败");
-                     refreshView.setRefreshing(false);
-                }
-            });
-            request.setShouldCache(false);
-            queue.add(request);
-        }
+            }
+        }).start();
 
     }
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            adapter.notifyDataSetChanged();
+            refreshView.setRefreshing(false);
+            switch (msg.what){
+                case CONSTANT.ID_FAILURE:
+                    Utils.DLog(getString(R.string.Text_Net_Exception));
+                    break;
+                case CONSTANT.ID_SUCCESS:
+                    adapter.notifyDataSetChanged();
+                    break;
+            }
             return false;
         }
     });

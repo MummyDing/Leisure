@@ -27,7 +27,7 @@ public class ReadingTabFragment extends Fragment{
         return parentview;
     }
     private void initData(){
-        pos = getArguments().getInt("pos");
+        pos = getArguments().getInt(getString(R.string.id_pos));
         textView = (TextView) parentview.findViewById(R.id.text);
         textView.setText(ReadingApi.getBookInfo(pos, ReadingDetailsActivity.bookBean));
     }

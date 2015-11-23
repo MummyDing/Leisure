@@ -22,14 +22,13 @@ import com.android.volley.toolbox.Volley;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.DailyApi;
 import com.mummyding.app.leisure.model.daily.DailyBean;
+import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.DailyAdapter;
 import com.mummyding.app.leisure.support.adapter.DividerItemDecoration;
 import com.mummyding.app.leisure.support.sax.SAXDailyParse;
-import com.mummyding.app.leisure.support.sax.SAXNewsParse;
 import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.yalantis.phoenix.PullToRefreshView;
@@ -42,7 +41,6 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -54,11 +52,10 @@ public class DailyFragment extends Fragment{
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private PullToRefreshView refreshView;
+
     private List<DailyBean> items = new ArrayList<>();
     private DailyAdapter adapter;
-    private RequestQueue queue;
-  //  private final OkHttpClient client = new OkHttpClient();
-    protected static final String TYPE_UTF8_CHARSET = "charset=UTF-8";
+
     private String url = DailyApi.daily_url;
     @Nullable
     @Override
@@ -80,7 +77,6 @@ public class DailyFragment extends Fragment{
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
-
         refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -101,13 +97,12 @@ public class DailyFragment extends Fragment{
                 HttpUtil.enqueue(request, new Callback() {
                     @Override
                     public void onFailure(Request request, IOException e) {
-                        Utils.DLog("网络异常");
-                        handler.sendEmptyMessage(0);
+                        handler.sendEmptyMessage(CONSTANT.ID_FAILURE);
                     }
                     @Override
                     public void onResponse(Response response) throws IOException {
                         if(response.isSuccessful() == false) {
-                            handler.sendEmptyMessage(0);
+                            handler.sendEmptyMessage(CONSTANT.ID_FAILURE);
                             return;
                         }
                         InputStream is =
@@ -120,7 +115,7 @@ public class DailyFragment extends Fragment{
                         } catch (SAXException e) {
                             e.printStackTrace();
                         }
-                        handler.sendEmptyMessage(0);
+                        handler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
                     }
                 });
             }
@@ -129,8 +124,15 @@ public class DailyFragment extends Fragment{
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            adapter.notifyDataSetChanged();
             refreshView.setRefreshing(false);
+            switch (msg.what){
+                case CONSTANT.ID_FAILURE:
+                    Utils.DLog(getString(R.string.Text_Net_Exception));
+                    break;
+                case CONSTANT.ID_SUCCESS:
+                    adapter.notifyDataSetChanged();
+                    break;
+            }
             return false;
         }
     });

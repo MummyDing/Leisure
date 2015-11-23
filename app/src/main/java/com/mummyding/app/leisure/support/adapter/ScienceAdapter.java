@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.model.science.ArticleBean;
-import com.mummyding.app.leisure.ui.WebViewActivity;
+import com.mummyding.app.leisure.ui.WebViewUrlActivity;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class ScienceAdapter extends RecyclerView.Adapter<ScienceAdapter.ViewHold
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
+                Intent intent = new Intent(mContext, WebViewUrlActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString(mContext.getString(R.string.id_url),articleBean.getUrl());
                 intent.putExtras(bundle);

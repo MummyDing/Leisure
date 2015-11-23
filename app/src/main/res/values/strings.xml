@@ -13,4 +13,12 @@
     <string name="id_url">url</string>
     <string name="id_html_content">content</string>
     <string name="daily">Daily</string>
+    <string name="Text_Net_Exception">网络异常</string>
+    <string name="id_book">book</string>
+    <string name="text_noinfo">\n\n\n\n\t\t\t\t\t\t\t\t\t抱歉,暂无信息</string>
+    <string name="text_author">"作者 "</string>
+    <string name="text_debug_data">"调试数据 "</string>
+    <string name="text_pubdate">"出版日期 "</string>
+    <string name="id_pages">"页数 "</string>
+    <string name="text_price">"价格 "</string>
 </resources>

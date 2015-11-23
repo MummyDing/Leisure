@@ -11,16 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ReadingApi;
 import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.PagerAdapter;
-import com.mummyding.app.leisure.support.adapter.ReadingAdapter;
-import com.mummyding.app.leisure.ui.WebViewActivity;
-
-import static com.mummyding.app.leisure.R.id.tab_layout;
+import com.mummyding.app.leisure.ui.WebViewUrlActivity;
 
 public class ReadingDetailsActivity extends AppCompatActivity {
     public static BookBean bookBean;
@@ -28,7 +24,6 @@ public class ReadingDetailsActivity extends AppCompatActivity {
     private PagerAdapter adapter;
     private Toolbar toolbar;
     private TabLayout tabLayout;
-    private SimpleDraweeView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +38,7 @@ public class ReadingDetailsActivity extends AppCompatActivity {
         for(String title: ReadingApi.bookTab_Titles){
             tabLayout.addTab(tabLayout.newTab().setText(title));
         }
-        bookBean = (BookBean) getIntent().getSerializableExtra("book");
+        bookBean = (BookBean) getIntent().getSerializableExtra(getString(R.string.id_book));
         getSupportActionBar().setTitle(bookBean.getTitle());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -57,7 +52,7 @@ public class ReadingDetailsActivity extends AppCompatActivity {
             public Fragment getItem(int position) {
                 ReadingTabFragment fragment = new ReadingTabFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("pos",position);
+                bundle.putInt(getString(R.string.id_pos),position);
                 fragment.setArguments(bundle);
                 return fragment;
             }
@@ -68,10 +63,9 @@ public class ReadingDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_ebook,menu);
-        if(bookBean.getEbook_url()==null||bookBean.getEbook_url().equals(""))
+        getMenuInflater().inflate(R.menu.menu_ebook, menu);
+        if(Utils.hasString(bookBean.getEbook_url())==false)
             menu.getItem(0).setVisible(false);
-        else Utils.showToast(bookBean.getEbook_url());
         return true;
     }
 
@@ -79,8 +73,8 @@ public class ReadingDetailsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_ebook:
-                Intent intent = new Intent(ReadingDetailsActivity.this, WebViewActivity.class);
-                intent.putExtra("url",ReadingApi.readEBook+Utils.RegexFind("/[0-9]+/",bookBean.getEbook_url()));
+                Intent intent = new Intent(ReadingDetailsActivity.this, WebViewUrlActivity.class);
+                intent.putExtra(getString(R.string.id_url),ReadingApi.readEBook+Utils.RegexFind("/[0-9]+/",bookBean.getEbook_url()));
                 startActivity(intent);
             break;
         }

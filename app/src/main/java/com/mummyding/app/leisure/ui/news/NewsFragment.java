@@ -23,10 +23,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.model.news.NewsBean;
+import com.mummyding.app.leisure.support.CONSTANT;
+import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.DividerItemDecoration;
 import com.mummyding.app.leisure.support.adapter.NewsAdapter;
+import com.mummyding.app.leisure.support.sax.SAXDailyParse;
 import com.mummyding.app.leisure.support.sax.SAXNewsParse;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
 import com.yalantis.phoenix.PullToRefreshView;
 
 import org.apache.http.params.HttpParams;
@@ -50,11 +55,11 @@ public class NewsFragment extends Fragment {
     private View parentView;
     private PullToRefreshView refreshView;
     private RecyclerView recyclerView;
-    private RequestQueue queue;
+    private RecyclerView.LayoutManager mLayoutManager;
+
     private List<NewsBean> items = new ArrayList<>();
     private NewsAdapter adapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    protected static final String TYPE_UTF8_CHARSET = "charset=UTF-8";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,11 +68,10 @@ public class NewsFragment extends Fragment {
         return parentView;
     }
     void initData(){
-
         adapter = new NewsAdapter(getContext(),items);
         refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
-        final String url = getArguments().getString("url");
+        final String url = getArguments().getString(getString(R.string.id_url));
         mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
@@ -83,64 +87,59 @@ public class NewsFragment extends Fragment {
             }
         });
     }
-    private void loadNewsFromNet(String url){
-        queue = Volley.newRequestQueue(getContext());
-
-        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
-
+    private void loadNewsFromNet(final String url){
+        refreshView.setRefreshing(true);
+        new Thread(new Runnable() {
             @TargetApi(Build.VERSION_CODES.KITKAT)
-
             @Override
-            public void onResponse(String s) {
-                InputStream is =
-                        new ByteArrayInputStream(s.getBytes(StandardCharsets.UTF_8));
-                try {
-                    items.clear();
-                    items.addAll(SAXNewsParse.parse(is));
-                } catch (ParserConfigurationException e) {
-                    e.printStackTrace();
-                } catch (SAXException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                handler.sendEmptyMessage(0);
-                refreshView.setRefreshing(false);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Utils.showToast("网络异常 刷新失败");
-                refreshView.setRefreshing(false);
-            }
-        }){
-            @Override
-            protected Response<String> parseNetworkResponse(
-                    NetworkResponse response) {
-                try {
-                    String type = response.headers.get("Content-Type");
-                    if (type == null) {
-                        // Log.d(LOG_TAG, "content type was null");
-                        type = TYPE_UTF8_CHARSET;
-                        response.headers.put("Content-Type", type);
-                    } else if (!type.contains("UTF-8")) {
-                        //   Log.d(LOG_TAG, "content type had UTF-8 missing");
-                        type += ";" + TYPE_UTF8_CHARSET;
-                        response.headers.put("Content-Type", type);
+            public void run() {
+                Request.Builder builder = new Request.Builder();
+                builder.url(url);
+                Request request = builder.build();
+                HttpUtil.enqueue(request, new Callback() {
+                    @Override
+                    public void onFailure(Request request, IOException e) {
+                        handler.sendEmptyMessage(CONSTANT.ID_FAILURE);
                     }
-                } catch (Exception e) {
-                    //print stacktrace e.g.
-                }
-                return super.parseNetworkResponse(response);
+                    @Override
+                    public void onResponse(com.squareup.okhttp.Response response) throws IOException {
+                        if (response.isSuccessful() == false) {
+                            handler.sendEmptyMessage(CONSTANT.ID_FAILURE);
+                            return;
+                        }
+                        InputStream is =
+                                new ByteArrayInputStream(response.body().string().getBytes(StandardCharsets.UTF_8));
+                        items.clear();
+                        try {
+                            items.clear();
+                            items.addAll(SAXNewsParse.parse(is));
+                        } catch (ParserConfigurationException e) {
+                            e.printStackTrace();
+                        } catch (SAXException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        handler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
+                    }
+                });
             }
-        };
-        request.setShouldCache(false);
-        queue.add(request);
+        }).start();
+
     }
+
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            adapter.notifyDataSetChanged();
+            refreshView.setRefreshing(false);
+            switch (msg.what){
+                case CONSTANT.ID_FAILURE:
+                    Utils.DLog(getString(R.string.Text_Net_Exception));
+                    break;
+                case CONSTANT.ID_SUCCESS:
+                    adapter.notifyDataSetChanged();
+                    break;
+            }
             return false;
         }
     });

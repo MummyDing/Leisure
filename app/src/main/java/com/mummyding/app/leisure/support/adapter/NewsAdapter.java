@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.model.news.NewsBean;
-import com.mummyding.app.leisure.ui.WebViewActivity;
+import com.mummyding.app.leisure.ui.WebViewUrlActivity;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
+                Intent intent = new Intent(mContext, WebViewUrlActivity.class);
                 intent.putExtra("url",getItem(vh.position).getLink());
                 mContext.startActivity(intent);
             }

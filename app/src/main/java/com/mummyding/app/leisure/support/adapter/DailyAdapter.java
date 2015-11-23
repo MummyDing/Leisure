@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.model.daily.DailyBean;
-import com.mummyding.app.leisure.ui.WebViewActivity;
 import com.mummyding.app.leisure.ui.WebViewLocalActivity;
 
 import java.util.List;

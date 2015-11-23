@@ -1,5 +1,7 @@
 package com.mummyding.app.leisure.api;
 
+import com.mummyding.app.leisure.LeisureApplication;
+import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.support.Utils;
 
@@ -49,7 +51,6 @@ public class ReadingApi {
             while (flag) {
                 flag = false;
                  tmp = (int) (Math.random() * len);
-                Utils.DLog(tmp+"");
                 for(int j = 0; j<i;j++)
                     if(res[j].equals(tag[tmp])) {
                         flag = true;
@@ -72,6 +73,6 @@ public class ReadingApi {
                 if(Utils.hasString(book.getAurhor_intro()) == false)break;
                 return book.getAurhor_intro();
         }
-        return "\n\n\n\n\t\t\t\t\t\t\t\t\t抱歉,暂无信息";
+        return LeisureApplication.AppContext.getString(R.string.text_noinfo);
     }
 }

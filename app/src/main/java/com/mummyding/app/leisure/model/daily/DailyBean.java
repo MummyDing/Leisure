@@ -1,5 +1,8 @@
 package com.mummyding.app.leisure.model.daily;
 
+import com.mummyding.app.leisure.LeisureApplication;
+import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.Utils;
 
 /**
@@ -56,7 +59,7 @@ public class DailyBean {
 
     @Override
     public String toString() {
-        return "作者: "+getAuthor()+"\t\t"+getPubDate();
+        return LeisureApplication.AppContext.getString(R.string.text_author)+getAuthor()+"\t\t"+getPubDate();
     }
 
     public String getImage() {
@@ -80,11 +83,9 @@ public class DailyBean {
                 Utils.RegexFind(":\\d{2} ", pubTime)+"秒";
         return date;
     }
-    private  final String MONTH [] =
-            {"","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"};
     private int formatMonth(String month){
-        for(int i = 1 ; i < MONTH.length;i++)
-            if(month.equalsIgnoreCase(MONTH[i]))
+        for(int i = 1 ; i < CONSTANT.MONTH.length;i++)
+            if(month.equalsIgnoreCase(CONSTANT.MONTH[i]))
                 return i;
         return -1;
     }

@@ -1,11 +1,17 @@
 package com.mummyding.app.leisure.model.reading;
 
+import android.content.Context;
+
+import com.mummyding.app.leisure.LeisureApplication;
+import com.mummyding.app.leisure.R;
+
 import java.io.Serializable;
 
 /**
  * Created by mummyding on 15-11-15.
  */
 public class BookBean implements Serializable{
+
     Rating rating;
     String subtitle;
     String [] author;
@@ -359,10 +365,14 @@ public class BookBean implements Serializable{
 
     @Override
     public String toString() {
+        Context mContext = LeisureApplication.AppContext;
         StringBuffer sb = new StringBuffer();
         for(String s: getAuthor()){
             sb.append(" "+s);
         }
-        return "作者:"+sb+"\n出版日期:"+getPubdate()+"\n页数:"+getPages()+"\n价格:"+getPrice();
+        return mContext.getString(R.string.text_author)+sb+"\n"+
+                mContext.getString(R.string.text_pubdate)+getPubdate()+"\n" +
+                mContext.getString(R.string.id_pages)+getPages()+"\n" +
+                mContext.getString(R.string.text_price)+getPrice();
     }
 }

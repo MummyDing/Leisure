@@ -5,12 +5,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permisson.ACCESS_WIFI_STATE" />
+
     <supports-screens
-        android:smallScreens="true"
-        android:normalScreens="true"
+        android:anyDensity="true"
         android:largeScreens="true"
+        android:normalScreens="true"
         android:resizeable="true"
-        android:anyDensity="true" />
+        android:smallScreens="true" />
+
     <application
         android:name=".LeisureApplication"
         android:allowBackup="true"
@@ -25,11 +27,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.WebViewActivity" >
+        <activity android:name=".ui.WebViewUrlActivity" >
         </activity>
         <activity android:name=".ui.reading.ReadingDetailsActivity" >
         </activity>
         <activity android:name=".ui.WebViewLocalActivity" >
+        </activity>
+        <activity android:name=".ui.BaseWebViewActivity" >
         </activity>
     </application>
 

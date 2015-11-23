@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ScreenUtil.init(this);
         initData();
-        switchFragment(new DailyFragment(), "日报");
+        switchFragment(new DailyFragment(), getString(R.string.daily));
     }
     private void switchFragment(Fragment fragment,String title){
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -75,16 +75,16 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         switch (drawerItem.getIdentifier()) {
                             case R.mipmap.ic_home:
-                                switchFragment(new DailyFragment(), "日报");
+                                switchFragment(new DailyFragment(), getString(R.string.daily));
                                 break;
                             case R.mipmap.ic_reading:
-                                switchFragment(new BaseReadingFragment(), "阅读");
+                                switchFragment(new BaseReadingFragment(), getString(R.string.reading));
                                 break;
                             case R.mipmap.ic_news:
-                                switchFragment(new BaseNewsFragment(), "新闻");
+                                switchFragment(new BaseNewsFragment(), getString(R.string.news));
                                 break;
                             case R.mipmap.ic_science:
-                                switchFragment(new BaseScienceFragment(), "科学");
+                                switchFragment(new BaseScienceFragment(), getString(R.string.science));
                                 break;
                             case R.mipmap.ic_setting:
                                 Toast.makeText(MainActivity.this,"setting",Toast.LENGTH_SHORT).show();

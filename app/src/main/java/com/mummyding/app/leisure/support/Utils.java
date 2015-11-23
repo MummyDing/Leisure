@@ -74,9 +74,9 @@ public class Utils {
         Toast.makeText(mContext,text,Toast.LENGTH_SHORT).show();
     }
     public static void DLog(String text){
-        Log.d("调试数据：", text);
+        Log.d(mContext.getString(R.string.text_debug_data), text);
     }
     public static String getImageHtml(){
-        return "<head><style>img{max-width:"+(ScreenUtil.getScreenWidth()*0.4)+"px !important;}</style></head>";
+        return "<head><style>img{max-width: 320px !important;}</style></head>";
     }
 }

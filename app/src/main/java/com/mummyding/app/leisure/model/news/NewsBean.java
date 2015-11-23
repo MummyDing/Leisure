@@ -1,5 +1,6 @@
 package com.mummyding.app.leisure.model.news;
 
+import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.Utils;
 
 /**
@@ -62,12 +63,10 @@ public class NewsBean {
     private String formatClearHtmlLabel(String string){
       return  this.description = Utils.RegexReplace("<[^>\n]*>",string,"");
     }
-    private  final String MONTH [] =
-            {"","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"};
 
     private int formatMonth(String month){
-        for(int i = 1 ; i < MONTH.length;i++)
-            if(month.equalsIgnoreCase(MONTH[i]))
+        for(int i = 1 ; i < CONSTANT.MONTH.length;i++)
+            if(month.equalsIgnoreCase(CONSTANT.MONTH[i]))
             return i;
         return -1;
     }
