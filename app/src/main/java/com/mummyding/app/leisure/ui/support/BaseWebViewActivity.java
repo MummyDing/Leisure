@@ -1,4 +1,4 @@
-package com.mummyding.app.leisure.ui;
+package com.mummyding.app.leisure.ui.support;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,7 +52,7 @@ public abstract class BaseWebViewActivity extends AppCompatActivity {
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 if (isLoading) {
-                    progressBar.incrementProgressBy(newProgress  - progressBar.getProgress());
+                    progressBar.incrementProgressBy(newProgress - progressBar.getProgress());
                     if (newProgress > 25) {
                         isLoading = false;
                         progressBar.setVisibility(View.GONE);

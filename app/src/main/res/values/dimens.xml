@@ -10,4 +10,5 @@
     <dimen name="item_image_height">200dp</dimen>
     <dimen name="text_description">16sp</dimen>
     <dimen name="item_margin">20dp</dimen>
+    <dimen name="image_width">150dp</dimen>
 </resources>

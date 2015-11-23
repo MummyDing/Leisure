@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
@@ -59,7 +60,7 @@ public class NewsFragment extends Fragment {
 
     private List<NewsBean> items = new ArrayList<>();
     private NewsAdapter adapter;
-
+    private ImageView sad_face;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class NewsFragment extends Fragment {
     }
     void initData(){
         adapter = new NewsAdapter(getContext(),items);
+        sad_face = (ImageView) parentView.findViewById(R.id.sad_face);
         refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
         final String url = getArguments().getString(getString(R.string.id_url));
@@ -83,6 +85,13 @@ public class NewsFragment extends Fragment {
         refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                loadNewsFromNet(url);
+            }
+        });
+        sad_face.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sad_face.setVisibility(View.GONE);
                 loadNewsFromNet(url);
             }
         });
@@ -139,6 +148,11 @@ public class NewsFragment extends Fragment {
                 case CONSTANT.ID_SUCCESS:
                     adapter.notifyDataSetChanged();
                     break;
+            }
+            if(items.isEmpty()){
+                sad_face.setVisibility(View.VISIBLE);
+            }else {
+                sad_face.setVisibility(View.GONE);
             }
             return false;
         }

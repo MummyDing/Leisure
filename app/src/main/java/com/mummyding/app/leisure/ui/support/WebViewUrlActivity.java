@@ -1,8 +1,9 @@
-package com.mummyding.app.leisure.ui;
+package com.mummyding.app.leisure.ui.support;
 
 
 
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.ui.support.BaseWebViewActivity;
 
 public class WebViewUrlActivity extends BaseWebViewActivity {
     @Override

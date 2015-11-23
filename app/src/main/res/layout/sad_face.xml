@@ -1,0 +1,8 @@
+<ImageView
+    android:id="@+id/sad_face"
+    android:background="@drawable/sad_face"
+    android:layout_width="@dimen/image_width"
+    android:layout_height="@dimen/image_width"
+    android:visibility="gone"
+    android:layout_gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

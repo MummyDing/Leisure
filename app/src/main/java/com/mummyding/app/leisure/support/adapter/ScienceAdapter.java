@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.model.science.ArticleBean;
-import com.mummyding.app.leisure.ui.WebViewUrlActivity;
+import com.mummyding.app.leisure.ui.support.WebViewUrlActivity;
 
 import java.util.List;
 

@@ -21,4 +21,5 @@
     <string name="text_pubdate">"出版日期 "</string>
     <string name="id_pages">"页数 "</string>
     <string name="text_price">"价格 "</string>
+    <string name="text_search">搜索</string>
 </resources>

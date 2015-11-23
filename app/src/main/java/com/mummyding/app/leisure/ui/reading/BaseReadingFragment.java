@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ReadingApi;
 import com.mummyding.app.leisure.support.adapter.PagerAdapter;
-import com.mummyding.app.leisure.ui.AbsTopNavigationFragment;
+import com.mummyding.app.leisure.ui.support.AbsTopNavigationFragment;
 
 /**
  * Created by mummyding on 15-11-15.

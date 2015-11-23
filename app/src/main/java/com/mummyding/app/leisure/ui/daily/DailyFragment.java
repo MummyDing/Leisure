@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
@@ -52,6 +53,7 @@ public class DailyFragment extends Fragment{
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private PullToRefreshView refreshView;
+    private ImageView sad_face;
 
     private List<DailyBean> items = new ArrayList<>();
     private DailyAdapter adapter;
@@ -67,6 +69,7 @@ public class DailyFragment extends Fragment{
     }
     private void initData(){
         getActivity().findViewById(R.id.tab_layout).setVisibility(View.GONE);
+        sad_face = (ImageView) parentView.findViewById(R.id.sad_face);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
         refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -80,6 +83,13 @@ public class DailyFragment extends Fragment{
         refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                loadNewsFromNet(url);
+            }
+        });
+        sad_face.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sad_face.setVisibility(View.GONE);
                 loadNewsFromNet(url);
             }
         });
@@ -132,6 +142,11 @@ public class DailyFragment extends Fragment{
                 case CONSTANT.ID_SUCCESS:
                     adapter.notifyDataSetChanged();
                     break;
+            }
+            if(items.isEmpty()){
+                sad_face.setVisibility(View.VISIBLE);
+            }else {
+                sad_face.setVisibility(View.GONE);
             }
             return false;
         }

@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.mummyding.app.leisure.R;
@@ -42,6 +43,7 @@ public class ScienceFragment extends Fragment{
     private PullToRefreshView refreshView;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
+    private ImageView sad_face;
     private ScienceAdapter adapter;
     private String url;
     @Nullable
@@ -53,6 +55,7 @@ public class ScienceFragment extends Fragment{
     }
     private void initData(){
         url = ScienceApi.science_channel_url+ScienceApi.channel_tag[getArguments().getInt(getString(R.string.id_pos))];
+        sad_face = (ImageView) parentView.findViewById(R.id.sad_face);
         refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -62,6 +65,13 @@ public class ScienceFragment extends Fragment{
         adapter = new ScienceAdapter(getContext(),items);
         recyclerView.setAdapter(adapter);
         loadNewsFromNet();
+        sad_face.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sad_face.setVisibility(View.GONE);
+                loadNewsFromNet();
+            }
+        });
     }
     private void loadNewsFromNet(){
         refreshView.setRefreshing(true);
@@ -107,6 +117,11 @@ public class ScienceFragment extends Fragment{
                 case CONSTANT.ID_SUCCESS:
                     adapter.notifyDataSetChanged();
                     break;
+            }
+            if(items.isEmpty()){
+                sad_face.setVisibility(View.VISIBLE);
+            }else {
+                sad_face.setVisibility(View.GONE);
             }
             return false;
         }

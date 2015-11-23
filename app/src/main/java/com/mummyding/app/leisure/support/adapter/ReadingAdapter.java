@@ -1,8 +1,10 @@
 package com.mummyding.app.leisure.support.adapter;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,6 +41,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         return vh;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(ViewHolder holder,int position) {
         final BookBean readingBean = getItem(position);
@@ -55,9 +58,12 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
                 mContext.startActivity(intent);
             }
         });
-        if(Utils.hasString(readingBean.getEbook_url()))
-        holder.parentView.setBackgroundColor(mContext.getResources().getColor(R.color.item_bg));
-        else holder.parentView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+        if(Utils.hasString(readingBean.getEbook_url())) {
+            holder.parentView.setBackground(mContext.getResources().getDrawable(R.drawable.item_bg_selected,null)); //setBackgroundColor(mContext.getResources().getColor(R.color.item_bg));
+        }
+        else {
+            holder.parentView.setBackground(mContext.getResources().getDrawable(R.drawable.item_bg, null));
+        }
     }
     public BookBean getItem(int pos){
         return items.get(pos);

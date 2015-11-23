@@ -16,7 +16,7 @@ import com.mummyding.app.leisure.api.ReadingApi;
 import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.PagerAdapter;
-import com.mummyding.app.leisure.ui.WebViewUrlActivity;
+import com.mummyding.app.leisure.ui.support.WebViewUrlActivity;
 
 public class ReadingDetailsActivity extends AppCompatActivity {
     public static BookBean bookBean;

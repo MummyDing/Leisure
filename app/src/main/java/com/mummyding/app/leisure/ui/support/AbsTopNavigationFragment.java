@@ -1,4 +1,4 @@
-package com.mummyding.app.leisure.ui;
+package com.mummyding.app.leisure.ui.support;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

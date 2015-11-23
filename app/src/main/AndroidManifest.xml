@@ -27,13 +27,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.WebViewUrlActivity" >
+        <activity android:name=".ui.support.WebViewUrlActivity" >
         </activity>
         <activity android:name=".ui.reading.ReadingDetailsActivity" >
         </activity>
-        <activity android:name=".ui.WebViewLocalActivity" >
+        <activity android:name=".ui.support.WebViewLocalActivity" >
         </activity>
-        <activity android:name=".ui.BaseWebViewActivity" >
+        <activity android:name=".ui.support.BaseWebViewActivity" >
         </activity>
     </application>
 

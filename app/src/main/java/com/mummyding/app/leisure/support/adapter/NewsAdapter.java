@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.model.news.NewsBean;
-import com.mummyding.app.leisure.ui.WebViewUrlActivity;
+import com.mummyding.app.leisure.ui.support.WebViewUrlActivity;
 
 import java.util.List;
 
