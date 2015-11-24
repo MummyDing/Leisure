@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.PagerAdapter;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 

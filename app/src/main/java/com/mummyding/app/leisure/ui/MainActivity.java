@@ -1,15 +1,21 @@
 package com.mummyding.app.leisure.ui;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -28,6 +34,7 @@ import com.mummyding.app.leisure.ui.daily.DailyFragment;
 import com.mummyding.app.leisure.ui.news.BaseNewsFragment;
 import com.mummyding.app.leisure.ui.news.NewsFragment;
 import com.mummyding.app.leisure.ui.reading.BaseReadingFragment;
+import com.mummyding.app.leisure.ui.reading.ReadingActivity;
 import com.mummyding.app.leisure.ui.science.BaseScienceFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Drawer drawer ;
     private AccountHeader header;
-    private FrameLayout frameLayout;
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private FragmentTransaction fragmentTransaction;
     private Menu menu;
@@ -71,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     }
     private void initData(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        frameLayout = (FrameLayout) findViewById(R.id.framelayout);
         setSupportActionBar(toolbar);
         header = new AccountHeaderBuilder().withActivity(this)
                 .withCompactStyle(false)
@@ -149,9 +154,30 @@ public class MainActivity extends AppCompatActivity {
                 switchFragment(new BaseScienceFragment());
                 break;
             case R.id.menu_search:
-
+                showSearchDialog();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void showSearchDialog(){
+        final EditText editText = new EditText(this);
+        editText.setGravity(Gravity.CENTER);
+        editText.setSingleLine();
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.text_search_books))
+                .setIcon(R.mipmap.ic_search)
+                .setView(editText)
+                .setPositiveButton(getString(R.string.text_ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(Utils.hasString(editText.getText().toString())){
+                            Intent intent = new Intent(MainActivity.this,ReadingActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString(getString(R.string.id_search_text),editText.getText().toString());
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    }
+                }).show();
     }
 }

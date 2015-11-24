@@ -151,5 +151,11 @@ public class DailyFragment extends Fragment{
             return false;
         }
     });
+    @Override
+    public void onPause() {
+        Utils.DLog("切换");
+        items.clear();
+        super.onPause();
+    }
 
 }

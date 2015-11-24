@@ -11,7 +11,7 @@ import com.mummyding.app.leisure.ui.support.AbsTopNavigationFragment;
 /**
  * Created by mummyding on 15-11-13.
  */
-public class BaseNewsFragment extends AbsTopNavigationFragment {
+public  class BaseNewsFragment extends AbsTopNavigationFragment {
     private PagerAdapter pagerAdapter;
     private String [] name ;
     private String [] url ;

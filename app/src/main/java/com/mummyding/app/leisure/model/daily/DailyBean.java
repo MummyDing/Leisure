@@ -10,7 +10,6 @@ import com.mummyding.app.leisure.support.Utils;
  */
 public class DailyBean {
     private String title;
-    private String link;
     private String author;
     private String pubDate;
     private String description;
@@ -22,15 +21,6 @@ public class DailyBean {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
     public String getAuthor() {
         return author;
     }

@@ -50,8 +50,6 @@ public class NewsBean {
         this.description = formatClearHtmlLabel(description);
     }
     private String formatTime(String pubTime){
-
-        Utils.DLog(pubTime);
         String date = Utils.RegexFind("-.{4} ", pubTime)+"年"+
                 formatMonth(Utils.RegexFind("-.{3}-", pubTime))+"月"+
                 Utils.RegexFind(",.{1,2}-", pubTime)+"日"+

@@ -52,12 +52,12 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class ReadingFragment extends Fragment {
     private View parentView;
-    private PullToRefreshView refreshView;
+    protected PullToRefreshView refreshView;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private ImageView sad_face;
 
-    private List<BookBean> items= new ArrayList<>();
+    protected List<BookBean> items= new ArrayList<>();
     private ReadingAdapter adapter;
     private int pos;
     @Nullable
@@ -67,8 +67,11 @@ public class ReadingFragment extends Fragment {
         initData();
         return parentView;
     }
-    private void initData(){
+    protected void getData(){
         pos = getArguments().getInt(getString(R.string.id_pos));
+    }
+    protected void initData(){
+        getData();
         sad_face = (ImageView) parentView.findViewById(R.id.sad_face);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
         refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
@@ -80,22 +83,22 @@ public class ReadingFragment extends Fragment {
         adapter = new ReadingAdapter(items,getContext());
         recyclerView.setAdapter(adapter);
         refreshView.setRefreshing(true);
-        loadNewsFromNet(pos);
+        loadNewsFromNet();
         refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadNewsFromNet(pos);
+                loadNewsFromNet();
             }
         });
         sad_face.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sad_face.setVisibility(View.GONE);
-                loadNewsFromNet(pos);
+                loadNewsFromNet();
             }
         });
     }
-    private void loadNewsFromNet(int pos){
+    protected void loadNewsFromNet(){
         final String[] tags = ReadingApi.getTags(ReadingApi.getApiTag(pos));
         refreshView.setRefreshing(true);
         new Thread(new Runnable() {
@@ -131,7 +134,7 @@ public class ReadingFragment extends Fragment {
         }).start();
 
     }
-    private Handler handler = new Handler(new Handler.Callback() {
+    protected Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             refreshView.setRefreshing(false);

@@ -22,4 +22,8 @@
     <string name="id_pages">"页数 "</string>
     <string name="text_price">"价格 "</string>
     <string name="text_search">搜索</string>
+    <string name="id_search_text">search_text</string>
+    <string name="text_search_result">查询结果</string>
+    <string name="text_ok">确定</string>
+    <string name="text_search_books">"  查询图书"</string>
 </resources>

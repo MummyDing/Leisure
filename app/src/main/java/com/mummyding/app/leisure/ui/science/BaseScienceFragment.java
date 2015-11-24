@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ScienceApi;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.PagerAdapter;
 import com.mummyding.app.leisure.ui.support.AbsTopNavigationFragment;
 
@@ -26,5 +27,10 @@ public class BaseScienceFragment extends AbsTopNavigationFragment {
             }
         };
         return pagerAdapter;
+    }
+    @Override
+    public void onPause() {
+        Utils.DLog("切换");
+        super.onPause();
     }
 }

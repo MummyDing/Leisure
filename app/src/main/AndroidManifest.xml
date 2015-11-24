@@ -35,6 +35,8 @@
         </activity>
         <activity android:name=".ui.support.BaseWebViewActivity" >
         </activity>
+        <activity android:name=".ui.reading.ReadingActivity" >
+        </activity>
     </application>
 
 </manifest>
