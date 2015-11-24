@@ -45,25 +45,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ScreenUtil.init(this);
         initData();
-        switchFragment(new BaseNewsFragment(), getString(R.string.daily), R.menu.menu_daily);
+        switchFragment(new DailyFragment());
     }
 
     private void switchFragment(Fragment fragment){
         if(fragment instanceof DailyFragment){
-            if(drawer.getCurrentSelection() == R.mipmap.ic_home)return;
-            drawer.setSelection(R.mipmap.ic_home);
             switchFragment(fragment, getString(R.string.daily), R.menu.menu_daily);
         }else if(fragment instanceof BaseReadingFragment){
-            if(drawer.getCurrentSelection() == R.mipmap.ic_reading)return;
-            drawer.setSelection(R.mipmap.ic_reading);
             switchFragment(fragment, getString(R.string.reading),R.menu.menu_reading);
         }else if(fragment instanceof BaseNewsFragment){
-            if(drawer.getCurrentSelection() == R.mipmap.ic_news)return;
-            drawer.setSelection(R.mipmap.ic_news);
             switchFragment(fragment, getString(R.string.news),R.menu.menu_news);
         }else if(fragment instanceof BaseScienceFragment){
-            if(drawer.getCurrentSelection() == R.mipmap.ic_science)return;
-            drawer.setSelection(R.mipmap.ic_science);
             switchFragment(fragment, getString(R.string.science),R.menu.menu_science);
         }
     }
@@ -141,15 +133,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.menu_home:
+                drawer.setSelection(R.mipmap.ic_home);
                 switchFragment(new DailyFragment());
                 break;
             case R.id.menu_reading:
+                drawer.setSelection(R.mipmap.ic_reading);
                 switchFragment(new BaseReadingFragment());
                 break;
             case R.id.menu_news:
+                drawer.setSelection(R.mipmap.ic_news);
                 switchFragment(new BaseNewsFragment());
                 break;
             case R.id.menu_science:
+                drawer.setSelection(R.mipmap.ic_science);
                 switchFragment(new BaseScienceFragment());
                 break;
             case R.id.menu_search:
