@@ -1,7 +1,9 @@
 package com.mummyding.app.leisure.ui;
 
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -51,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ScreenUtil.init(this);
         initData();
+        Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
+                "://" + getResources().getResourcePackageName(R.drawable.daily_placeholder)
+                + '/' + getResources().getResourceTypeName(R.drawable.daily_placeholder) + '/' + getResources().getResourceEntryName(R.drawable.daily_placeholder));
+        Utils.DLog("--==---=-="+imageUri.toString());
         switchFragment(new DailyFragment());
     }
 

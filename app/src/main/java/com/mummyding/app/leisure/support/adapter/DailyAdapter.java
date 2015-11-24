@@ -40,6 +40,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
     public void onBindViewHolder(ViewHolder holder, int position) {
         final DailyBean dailyBean = getItem(position);
         holder.title.setText(dailyBean.getTitle());
+        holder.image.setImageURI(null);
         holder.image.setImageURI(Uri.parse(dailyBean.getImage()));
         holder.info.setText(dailyBean.toString());
         holder.parentView.setOnClickListener(new View.OnClickListener() {

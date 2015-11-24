@@ -60,9 +60,14 @@ public class DailyBean {
     }
 
     public void setImage() {
-        String url = Utils.RegexFind("<img class=\"content-image\\\" src=\"[^>]*jpg\"|<img src=\"[^>]*jpg\"",description,5,0);
-        url = Utils.RegexFind("\"[^\"]*jpg\"",url);
-        image = url.length() > 80 ? "http://pic.baike.soso.com/p/20140126/20140126144232-793838389.jpg":url;
+        int originlength = description.length();
+        String url = Utils.RegexFind("<img class=\"content-image\\\" src=\"[^>]*jpg\"|<img src=\"[^>]*jpg\"", description,5,0);
+        int currentlength = url.length()+5;
+        Utils.DLog(originlength+"  "+currentlength);
+        if(originlength != currentlength) {
+            url = Utils.RegexFind("\"[^\"]*jpg\"", url);
+        }
+        image = originlength==currentlength ? CONSTANT.placeHolderUri:url;
     }
     private String formatTime(String pubTime){
         String date = Utils.RegexFind(" \\d{4} ", pubTime)+"年"+
