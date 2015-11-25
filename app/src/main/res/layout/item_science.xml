@@ -4,13 +4,31 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/item_margin"
     >
-    <TextView
-        android:id="@+id/title"
-        android:textSize="@dimen/title_size"
-        android:textColor="@color/md_black_1000"
-        android:padding="@dimen/item_padding"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/title"
+            android:textSize="@dimen/title_size"
+            android:layout_weight="1"
+            android:textColor="@color/md_black_1000"
+            android:padding="@dimen/item_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/comment"
+            android:drawableTop="@mipmap/ic_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="5dp"
+            />
+
+    </LinearLayout>
+
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/image"
         android:padding="@dimen/item_padding"
