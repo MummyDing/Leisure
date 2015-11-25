@@ -1,11 +1,5 @@
 package com.mummyding.app.leisure.support;
 
-import android.content.ContentResolver;
-import android.content.res.Resources;
-import android.net.Uri;
-
-import com.mummyding.app.leisure.LeisureApplication;
-import com.mummyding.app.leisure.R;
 
 /**
  * Created by mummyding on 15-11-23.

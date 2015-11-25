@@ -1,5 +1,7 @@
 package com.mummyding.app.leisure.model.science;
 
+import com.mummyding.app.leisure.support.Utils;
+
 import java.io.Serializable;
 
 /**
@@ -50,6 +52,12 @@ public class ArticleBean implements Serializable{
 
 
     public String getDate_published() {
+        StringBuffer tmpStr = new StringBuffer(date_published);
+        if(date_published.length() >20){
+            tmpStr.setCharAt(10,' ');
+            date_published = tmpStr.substring(0,19);
+        }
+        Utils.DLog("Time: "+this.date_published);
         return date_published;
     }
 
