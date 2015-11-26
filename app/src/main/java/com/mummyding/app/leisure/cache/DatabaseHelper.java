@@ -4,6 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.mummyding.app.leisure.cache.table.DailyTable;
+import com.mummyding.app.leisure.cache.table.NewsTable;
+import com.mummyding.app.leisure.cache.table.ReadingTable;
+import com.mummyding.app.leisure.cache.table.ScienceTable;
+
 /**
  * Created by mummyding on 15-11-26.
  */
@@ -18,7 +23,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(DailyTable.CREATE_TABLE);
+        db.execSQL(DailyTable.CREATE_COLLECTION_TABLE);
 
+        db.execSQL(NewsTable.CREATE_TABLE);
+        db.execSQL(NewsTable.CREATE_COLLECTION_TABLE);
+
+        db.execSQL(ReadingTable.CREATE_TABLE);
+        db.execSQL(ReadingTable.CREATE_COLLECTION_TABLE);
+
+        db.execSQL(ScienceTable.CREATE_TABLE);
+        db.execSQL(ScienceTable.COMMENT_COUNT);
     }
 
     @Override
