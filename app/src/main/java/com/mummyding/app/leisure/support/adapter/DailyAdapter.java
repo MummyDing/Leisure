@@ -42,7 +42,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
         holder.title.setText(dailyBean.getTitle());
         holder.image.setImageURI(null);
         holder.image.setImageURI(Uri.parse(dailyBean.getImage()));
-        holder.info.setText(dailyBean.toString());
+        holder.info.setText(dailyBean.getInfo());
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

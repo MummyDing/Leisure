@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.DailyApi;
+import com.mummyding.app.leisure.cache.cache.DailyCache;
 import com.mummyding.app.leisure.model.daily.DailyBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
@@ -42,6 +43,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -131,13 +133,20 @@ public class DailyFragment extends Fragment{
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
+            DailyCache cache = new DailyCache(getContext());
             refreshView.setRefreshing(false);
             switch (msg.what){
                 case CONSTANT.ID_FAILURE:
                     Utils.DLog(getString(R.string.Text_Net_Exception));
+                    List<Object> tmpList = cache.loadFromCache();
+                    for(Object object : tmpList){
+                        items.add((DailyBean) object);
+                    }
                     break;
                 case CONSTANT.ID_SUCCESS:
                     adapter.notifyDataSetChanged();
+
+                    cache.cache(items);
                     break;
             }
             if(items.isEmpty()){

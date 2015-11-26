@@ -1,25 +1,56 @@
 package com.mummyding.app.leisure.cache.cache;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.mummyding.app.leisure.cache.table.DailyTable;
+import com.mummyding.app.leisure.model.daily.DailyBean;
+import com.mummyding.app.leisure.model.news.NewsBean;
+
+import org.xml.sax.DTDHandler;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by mummyding on 15-11-26.
  */
 public class DailyCache extends BaseCache{
-
-    protected DailyCache(Context context) {
+    protected DailyTable table;
+    private List<Object> dailyList = new ArrayList<>();
+    public DailyCache(Context context) {
         super(context);
+        table = new DailyTable();
     }
 
     @Override
-    public void cache(List<Object> list) {
-
+    protected void putData(List<? extends Object> list) {
+        db.execSQL(mHelper.DROP_TABLE + table.NAME);
+        db.execSQL(table.CREATE_TABLE);
+        for(Object dailyBean:list){
+            DailyBean tmpDaily = (DailyBean)dailyBean;
+            values.put(DailyTable.TITLE,tmpDaily.getTitle());
+            values.put(DailyTable.DESCRIPTION,tmpDaily.getDescription());
+            values.put(DailyTable.IMAGE,tmpDaily.getImage());
+            values.put(DailyTable.INFO, tmpDaily.toString());
+            values.put(DailyTable.IS_COLLECTED,tmpDaily.getIs_collected());
+            db.insert(DailyTable.NAME, null, values);
+        }
+        db.execSQL(table.SQL_INIT_COLLECTION_FLAG);
     }
-
     @Override
-    public void loadFromCache() {
-
+    public List<Object> loadFromCache() {
+        Cursor cursor = query(table.NAME);
+        while (cursor.moveToNext()){
+            DailyBean dailyBean = new DailyBean();
+            dailyBean.setTitle(cursor.getString(DailyTable.ID_TITLE));
+            dailyBean.setImage(cursor.getString(DailyTable.ID_IMAGE));
+            dailyBean.setInfo(cursor.getString(DailyTable.ID_INFO));
+            dailyBean.setIs_collected(cursor.getInt(DailyTable.ID_IS_COLLETED));
+            dailyList.add(dailyBean);
+        }
+        cursor.close();
+        return dailyList;
     }
 }

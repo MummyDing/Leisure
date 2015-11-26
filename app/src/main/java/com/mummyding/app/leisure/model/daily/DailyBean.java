@@ -14,6 +14,14 @@ public class DailyBean {
     private String pubDate;
     private String description;
     private String image;
+
+    /*
+        self define
+     */
+    private String Info;
+    private Boolean is_collected;
+
+
     public String getTitle() {
         return title;
     }
@@ -69,6 +77,28 @@ public class DailyBean {
         }
         image = originlength==currentlength ? CONSTANT.placeHolderUri:url;
     }
+    public void setImage(String image){
+        this.image = image;
+    }
+
+    public String getInfo() {
+        if(Info == null) return toString();
+        return Info;
+    }
+
+    public void setInfo(String info) {
+        Info = info;
+    }
+
+    public Boolean getIs_collected() {
+        return is_collected;
+    }
+
+    public void setIs_collected(int is_collected) {
+        if(is_collected == 1) this.is_collected = true;
+        else this.is_collected = false;
+    }
+
     private String formatTime(String pubTime){
         String date = Utils.RegexFind(" \\d{4} ", pubTime)+"年"+
                 formatMonth(Utils.RegexFind(" \\w{3} ", pubTime))+"月"+

@@ -22,18 +22,16 @@ public class DailyTable {
 
 
     public static final String CREATE_TABLE = "create table "+NAME+
-            "("+TITLE+" text primary key,"+
-            INFO+" text,"+
-            IMAGE+" text,"+
-            DESCRIPTION+" text,"+
-            IS_COLLECTED+" integer)";
-
-
+                        "("+TITLE+" text primary key,"+
+                        INFO+" text,"+
+                        IMAGE+" text,"+
+                        DESCRIPTION+" text,"+
+                        IS_COLLECTED+" integer)";
     public static final String CREATE_COLLECTION_TABLE = "create table "+COLLECTION_NAME+
-            "("+TITLE+" text primary key,"+
-            INFO+" text,"+
-            IMAGE+" text,"+
-            DESCRIPTION+" text)";
+                        "("+TITLE+" text primary key,"+
+                        INFO+" text,"+
+                        IMAGE+" text,"+
+                        DESCRIPTION+" text)";
 
     public static final String SQL_INIT_COLLECTION_FLAG= "update "+NAME+
             " set "+IS_COLLECTED+" =1 where "+TITLE+" in ( select "+TITLE+

@@ -7,14 +7,14 @@ import java.util.List;
 /**
  * Created by mummyding on 15-11-26.
  */
-public class ReadingCache extends BaseCache{
+public class ReadingCache {
 
 
-    protected ReadingCache(Context context) {
+   /* protected ReadingCache(Context context) {
         super(context);
     }
-
-    @Override
+*/
+    /*@Override
     public void cache(List<Object> list) {
 
     }
@@ -22,5 +22,5 @@ public class ReadingCache extends BaseCache{
     @Override
     public void loadFromCache() {
 
-    }
+    }*/
 }

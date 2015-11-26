@@ -7,10 +7,10 @@ import java.util.List;
 /**
  * Created by mummyding on 15-11-26.
  */
-public class ScienceCache extends BaseCache{
+public class ScienceCache {
 
 
-    protected ScienceCache(Context context) {
+    /*protected ScienceCache(Context context) {
         super(context);
     }
 
@@ -22,5 +22,5 @@ public class ScienceCache extends BaseCache{
     @Override
     public void loadFromCache() {
 
-    }
+    }*/
 }
