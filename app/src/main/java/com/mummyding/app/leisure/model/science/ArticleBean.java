@@ -1,6 +1,5 @@
 package com.mummyding.app.leisure.model.science;
 
-import com.mummyding.app.leisure.support.Utils;
 
 import java.io.Serializable;
 
@@ -10,6 +9,14 @@ import java.io.Serializable;
 public class ArticleBean implements Serializable{
 
     private Author author;
+    private String date_published;
+    private int replies_count;
+    private Image_info image_info;
+    private String url;
+    private String title;
+    private String summary;
+
+
     class Author implements Serializable{
         String nickname;
         public String getNickname() {
@@ -18,8 +25,8 @@ public class ArticleBean implements Serializable{
         public void setNickname(String nickname) {
             this.nickname = nickname;
         }
-  }
-    private Image_info image_info;
+    }
+
     public class Image_info implements Serializable{
         String url;
         public String getUrl() {
@@ -29,11 +36,7 @@ public class ArticleBean implements Serializable{
             this.url = url;
         }
     }
-    private String date_published;
-    private int replies_count;
-    private String url;
-    private String title;
-    private String summary;
+
 
     public Author getAuthor() {
         return author;
