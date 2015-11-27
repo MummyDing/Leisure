@@ -23,6 +23,12 @@ public class BookBean implements Serializable{
     String summary;
     String price;
 
+    /*
+        self define
+     */
+    private String Info;
+    private int is_collected = 0;
+
     public String[] getAuthor() {
         return author;
     }
@@ -117,10 +123,27 @@ public class BookBean implements Serializable{
         this.price = price;
     }
 
+    public String getInfo() {
+        if(Info == null) return toString();
+        return Info;
+    }
+
+    public void setInfo(String info) {
+        Info = info;
+    }
+
+    public int getIs_collected() {
+        return is_collected;
+    }
+
+    public void setIs_collected(int is_collected) {
+        this.is_collected = is_collected;
+    }
     @Override
     public String toString() {
         Context mContext = LeisureApplication.AppContext;
         StringBuffer sb = new StringBuffer();
+        if(getAuthor() !=null)
         for(String s: getAuthor()){
             sb.append(" "+s);
         }

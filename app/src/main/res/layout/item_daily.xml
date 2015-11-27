@@ -6,7 +6,7 @@
     android:padding="@dimen/item_padding"
     >
     <TextView
-        android:text="--------------------------------------------------------.........................."
+        android:text="--------------------------------------------------------.............................................."
         android:singleLine="true"
         android:textColor="@color/primary"
         android:layout_width="match_parent"

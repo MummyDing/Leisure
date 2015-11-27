@@ -1,6 +1,5 @@
 package com.mummyding.app.leisure.cache.table;
 
-import java.net.PortUnreachableException;
 
 /**
  * Created by mummyding on 15-11-26.
@@ -36,9 +35,9 @@ public class NewsTable {
 
     public static  String updateCollectionFlag(String title,int flag){
         return "update "+NAME+" set "+IS_COLLECTED+" ="+flag+" where "+
-                TITLE+"="+title;
+                TITLE+"=\'"+title+"\'";
     }
     public static String deleteCollectionFlag(String title){
-        return "delete from "+COLLECTION_NAME+" where title="+title;
+        return "delete from "+COLLECTION_NAME+" where title=\'"+title+"\'";
     }
 }

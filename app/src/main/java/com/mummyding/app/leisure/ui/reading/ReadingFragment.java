@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ReadingApi;
+import com.mummyding.app.leisure.cache.cache.ReadingCache;
 import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.model.reading.ReadingBean;
 import com.mummyding.app.leisure.support.CONSTANT;
@@ -60,6 +61,7 @@ public class ReadingFragment extends Fragment {
     protected List<BookBean> items= new ArrayList<>();
     private ReadingAdapter adapter;
     private int pos;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -137,13 +139,19 @@ public class ReadingFragment extends Fragment {
     protected Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
+            ReadingCache cache = new ReadingCache(getContext());
             refreshView.setRefreshing(false);
             switch (msg.what){
                 case CONSTANT.ID_FAILURE:
                     Utils.DLog(getString(R.string.Text_Net_Exception));
+                    List<Object> tmpList = cache.loadFromCache();
+                    for(Object object : tmpList){
+                        items.add((BookBean) object);
+                    }
                     break;
                 case CONSTANT.ID_SUCCESS:
                     adapter.notifyDataSetChanged();
+                    cache.cache(items);
                     break;
             }
             if(items.isEmpty()){

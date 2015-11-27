@@ -33,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(ReadingTable.CREATE_COLLECTION_TABLE);
 
         db.execSQL(ScienceTable.CREATE_TABLE);
-        db.execSQL(ScienceTable.COMMENT_COUNT);
+        db.execSQL(ScienceTable.CREATE_COLLECTION_TABLE);
     }
 
     @Override

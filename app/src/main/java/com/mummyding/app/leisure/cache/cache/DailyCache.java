@@ -17,7 +17,7 @@ import java.util.List;
  * Created by mummyding on 15-11-26.
  */
 public class DailyCache extends BaseCache{
-    protected DailyTable table;
+    private DailyTable table;
     private List<Object> dailyList = new ArrayList<>();
     public DailyCache(Context context) {
         super(context);
@@ -33,7 +33,7 @@ public class DailyCache extends BaseCache{
             values.put(DailyTable.TITLE,tmpDaily.getTitle());
             values.put(DailyTable.DESCRIPTION,tmpDaily.getDescription());
             values.put(DailyTable.IMAGE,tmpDaily.getImage());
-            values.put(DailyTable.INFO, tmpDaily.toString());
+            values.put(DailyTable.INFO, tmpDaily.getInfo());
             values.put(DailyTable.IS_COLLECTED,tmpDaily.getIs_collected());
             db.insert(DailyTable.NAME, null, values);
         }

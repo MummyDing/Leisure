@@ -16,7 +16,7 @@ public class ReadingTable {
     public static final int ID_TITLE = 0;
     public static final int ID_INFO = 1;
     public static final int ID_IMAGE = 2;
-    public static final int ID_IS_COLLETED = 3;
+    public static final int ID_IS_COLLECTED = 3;
 
 
     public static final String CREATE_TABLE = "create table "+NAME+
@@ -37,9 +37,9 @@ public class ReadingTable {
 
     public static  String updateCollectionFlag(String title,int flag){
         return "update "+NAME+" set "+IS_COLLECTED+" ="+flag+" where "+
-                TITLE+"="+title;
+                TITLE+"=\'"+title+"\'";
     }
     public static String deleteCollectionFlag(String title){
-        return "delete from "+COLLECTION_NAME+" where title="+title;
+        return "delete from "+COLLECTION_NAME+" where title=\'"+title+"\'";
     }
 }

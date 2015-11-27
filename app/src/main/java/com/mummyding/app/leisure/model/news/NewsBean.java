@@ -12,6 +12,11 @@ public class NewsBean {
     private String description;
     private String pubTime;
 
+    /*
+        self define
+     */
+    private int is_collected = 0;
+
     public String getPubTime() {
         return pubTime;
     }
@@ -41,6 +46,14 @@ public class NewsBean {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getIs_collected() {
+        return is_collected;
+    }
+
+    public void setIs_collected(int is_collected) {
+        this.is_collected = is_collected;
     }
 
     public void setDescription(String description) {

@@ -19,7 +19,7 @@ public class DailyBean {
         self define
      */
     private String Info;
-    private Boolean is_collected = false;
+    private int is_collected = 0;
 
 
     public String getTitle() {
@@ -90,13 +90,12 @@ public class DailyBean {
         Info = info;
     }
 
-    public Boolean getIs_collected() {
+    public int getIs_collected() {
         return is_collected;
     }
 
     public void setIs_collected(int is_collected) {
-        if(is_collected == 1) this.is_collected = true;
-        else this.is_collected = false;
+        this.is_collected = is_collected;
     }
 
     private String formatTime(String pubTime){

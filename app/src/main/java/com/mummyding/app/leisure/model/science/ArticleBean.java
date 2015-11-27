@@ -15,7 +15,11 @@ public class ArticleBean implements Serializable{
     private String url;
     private String title;
     private String summary;
-
+    /*
+            self define
+         */
+    private String Info;
+    private int is_collected = 0;
 
     class Author implements Serializable{
         String nickname;
@@ -101,7 +105,22 @@ public class ArticleBean implements Serializable{
         this.summary = summary;
     }
 
+    public String getInfo() {
+        if(Info == null) return toString();
+        return Info;
+    }
 
+    public void setInfo(String info) {
+        Info = info;
+    }
+
+    public int getIs_collected() {
+        return is_collected;
+    }
+
+    public void setIs_collected(int is_collected) {
+        this.is_collected = is_collected;
+    }
     @Override
     public String toString() {
         return getAuthor().getNickname()+"  "+getDate_published();

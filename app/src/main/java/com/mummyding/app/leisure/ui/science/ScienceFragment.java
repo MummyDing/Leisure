@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.google.gson.Gson;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ScienceApi;
+import com.mummyding.app.leisure.cache.cache.ScienceCache;
 import com.mummyding.app.leisure.model.science.ArticleBean;
 import com.mummyding.app.leisure.model.science.ScienceBean;
 import com.mummyding.app.leisure.support.CONSTANT;
@@ -31,6 +32,7 @@ import com.yalantis.phoenix.PullToRefreshView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -109,13 +111,19 @@ public class ScienceFragment extends Fragment{
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
+            ScienceCache cache = new ScienceCache(getContext());
             refreshView.setRefreshing(false);
             switch (msg.what){
                 case CONSTANT.ID_FAILURE:
                     Utils.DLog(getString(R.string.Text_Net_Exception));
+                    List<Object> tmpList = cache.loadFromCache();
+                    for(Object object:tmpList){
+                        items.add((ArticleBean) object);
+                    }
                     break;
                 case CONSTANT.ID_SUCCESS:
                     adapter.notifyDataSetChanged();
+                    cache.cache(items);
                     break;
             }
             if(items.isEmpty()){

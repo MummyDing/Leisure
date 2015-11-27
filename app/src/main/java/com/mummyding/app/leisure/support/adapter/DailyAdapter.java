@@ -72,7 +72,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
                 }
             }
         });
-        holder.collect_cb.setChecked(dailyBean.getIs_collected());
+        holder.collect_cb.setChecked(dailyBean.getIs_collected()==1 ? true:false);
     }
 
     private DailyBean getItem(int position){

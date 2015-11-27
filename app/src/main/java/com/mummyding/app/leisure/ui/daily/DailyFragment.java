@@ -61,6 +61,7 @@ public class DailyFragment extends Fragment{
     private DailyAdapter adapter;
 
     private String url = DailyApi.daily_url;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,6 +93,7 @@ public class DailyFragment extends Fragment{
                 loadNewsFromNet(url);
             }
         });
+
     }
 
     private void loadNewsFromNet(final String url){

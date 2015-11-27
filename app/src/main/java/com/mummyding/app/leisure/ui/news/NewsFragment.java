@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.cache.cache.NewsCache;
 import com.mummyding.app.leisure.model.news.NewsBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
@@ -61,6 +62,8 @@ public class NewsFragment extends Fragment {
     private List<NewsBean> items = new ArrayList<>();
     private NewsAdapter adapter;
     private ImageView sad_face;
+
+    private NewsCache cache ;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -95,6 +98,7 @@ public class NewsFragment extends Fragment {
                 loadNewsFromNet(url);
             }
         });
+
     }
     private void loadNewsFromNet(final String url){
         refreshView.setRefreshing(true);
@@ -140,17 +144,24 @@ public class NewsFragment extends Fragment {
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
+            cache = new NewsCache(getContext());
             refreshView.setRefreshing(false);
             switch (msg.what){
                 case CONSTANT.ID_FAILURE:
                     Utils.DLog(getString(R.string.Text_Net_Exception));
+                    List<Object> tmpList = cache.loadFromCache();
+                    for(Object object : tmpList){
+                        items.add((NewsBean) object);
+                    }
                     break;
                 case CONSTANT.ID_SUCCESS:
                     adapter.notifyDataSetChanged();
+                    cache.cache(items);
                     break;
             }
             if(items.isEmpty()){
                 sad_face.setVisibility(View.VISIBLE);
+
             }else {
                 sad_face.setVisibility(View.GONE);
             }
