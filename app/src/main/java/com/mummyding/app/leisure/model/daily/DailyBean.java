@@ -19,7 +19,7 @@ public class DailyBean {
         self define
      */
     private String Info;
-    private Boolean is_collected;
+    private Boolean is_collected = false;
 
 
     public String getTitle() {

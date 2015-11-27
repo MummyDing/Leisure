@@ -145,7 +145,6 @@ public class DailyFragment extends Fragment{
                     break;
                 case CONSTANT.ID_SUCCESS:
                     adapter.notifyDataSetChanged();
-
                     cache.cache(items);
                     break;
             }
