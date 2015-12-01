@@ -63,14 +63,16 @@ public class DailyFragment extends Fragment{
     private ProgressBar progressBar;
 
     private List<DailyBean> items = new ArrayList<>();
+    private List<DailyBean> tmpItems = new ArrayList<>();
     private DailyAdapter adapter;
 
     private String url = DailyApi.daily_url;
     private DailyCache cache;
+    private Thread thread;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
+        //setRetainInstance(true);
     }
 
     @Nullable
@@ -129,9 +131,8 @@ public class DailyFragment extends Fragment{
                         }
                         InputStream is =
                                 new ByteArrayInputStream(response.body().string().getBytes(StandardCharsets.UTF_8));
-                        items.clear();
                         try {
-                            items.addAll(SAXDailyParse.parse(is));
+                            tmpItems.addAll(SAXDailyParse.parse(is));
                             is.close();
                         } catch (ParserConfigurationException e) {
                             e.printStackTrace();
@@ -155,41 +156,50 @@ public class DailyFragment extends Fragment{
                     }
                     break;
                 case CONSTANT.ID_SUCCESS:
-                    cache.cache(items, null);
-                    items.clear();
+                    cache.cache(tmpItems, null);
                     loadCache();
                     break;
                 case CONSTANT.ID_LOAD_FROM_NET:
-                    refreshView.setRefreshing(true);
                     loadNewsFromNet();
-                    return false;
-            }
-            if(items.isEmpty()){
-                sad_face.setVisibility(View.VISIBLE);
-            }else {
-                sad_face.setVisibility(View.GONE);
+                    break;
+                case CONSTANT.ID_UPDATE_UI:
+                    if(items.isEmpty()){
+                        sad_face.setVisibility(View.VISIBLE);
+                    }else {
+                        sad_face.setVisibility(View.GONE);
+                    }
+                    progressBar.setVisibility(View.GONE);
+                    adapter.notifyDataSetChanged();
+                    break;
             }
             return false;
         }
     });
-    private void loadCache(){
-        List<Object> tmpList = cache.loadFromCache(null);
-
-        for(Object object : tmpList){
-            items.add((DailyBean) object);
-        }
-        tmpList = null;
-        if(progressBar.getVisibility() == View.VISIBLE){
-            progressBar.setVisibility(View.GONE);
-            if(items.isEmpty()){
-                handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
+    private synchronized void loadCache(){
+         thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                tmpItems.clear();
+                List<Object> tmpList = cache.loadFromCache(null);
+                for(int i = 0 ;i<tmpList.size();i++){
+                    tmpItems.add((DailyBean) tmpList.get(i));
+                }
+                tmpList.clear();
+                items.clear();
+                items.addAll(tmpItems);
+                tmpItems.clear();
+                if(progressBar.getVisibility() == View.VISIBLE){
+                    if(items.isEmpty()){
+                        handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
+                    }
+                }
+                handler.sendEmptyMessage(CONSTANT.ID_UPDATE_UI);
             }
-        }
-
-        adapter.notifyDataSetChanged();
+        });
+        thread.start();
     }
 
-    @Override
+   /* @Override
     public void onDestroyView() {
         super.onDestroyView();
         items =null;
@@ -201,7 +211,6 @@ public class DailyFragment extends Fragment{
         refreshView = null;
         sad_face = null;
         progressBar = null;
-
     }
 
     @Override
@@ -218,5 +227,5 @@ public class DailyFragment extends Fragment{
         progressBar = null;
 
         Utils.DLog("-------***************调用了");
-    }
+    }*/
 }

@@ -19,7 +19,6 @@ import com.google.gson.Gson;
 import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ScienceApi;
-import com.mummyding.app.leisure.cache.cache.NewsCache;
 import com.mummyding.app.leisure.cache.cache.ScienceCache;
 import com.mummyding.app.leisure.model.science.ArticleBean;
 import com.mummyding.app.leisure.model.science.ScienceBean;
@@ -35,7 +34,6 @@ import com.yalantis.phoenix.PullToRefreshView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 /**
@@ -44,7 +42,7 @@ import java.util.Objects;
 public class ScienceFragment extends Fragment{
     private View parentView;
     private List<ArticleBean> items = new ArrayList<>();
-    private List<ArticleBean> tmpitems = new ArrayList<>();
+    private List<ArticleBean> tmpItems = new ArrayList<>();
     private PullToRefreshView refreshView;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -55,6 +53,13 @@ public class ScienceFragment extends Fragment{
     private String url;
     private String category;
     private ScienceCache cache;
+    private Thread thread;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+       // setRetainInstance(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,8 +80,6 @@ public class ScienceFragment extends Fragment{
         progressBar = (ProgressBar) parentView.findViewById(R.id.progressbar);
         adapter = new ScienceAdapter(getContext(),items);
         recyclerView.setAdapter(adapter);
-        loadNewsFromNet();
-        Utils.DLog("Science" + category);
         sad_face.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,10 +112,8 @@ public class ScienceFragment extends Fragment{
                         Gson gson = new Gson();
                         ArticleBean[] articleBeans = (gson.fromJson(response.body().string(), ScienceBean.class)).getResult();
                         for(ArticleBean articleBean: articleBeans){
-                            tmpitems.add(articleBean);
+                            tmpItems.add(articleBean);
                         }
-                        items.addAll(tmpitems);
-                        tmpitems.clear();
                         handler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
                     }
                 });
@@ -128,35 +129,58 @@ public class ScienceFragment extends Fragment{
                     Utils.DLog(getString(R.string.Text_Net_Exception));
                     break;
                 case CONSTANT.ID_SUCCESS:
-                    adapter.notifyDataSetChanged();
-                    cache.cache(items, category);
-                    items.clear();
+                    cache.cache(tmpItems, category);
                     loadCache();
-                    adapter.notifyDataSetChanged();
                     break;
                 case CONSTANT.ID_LOAD_FROM_NET:
                     loadNewsFromNet();
                     break;
-            }
-            if(items.isEmpty()){
-                sad_face.setVisibility(View.VISIBLE);
-            }else {
-                sad_face.setVisibility(View.GONE);
+                case CONSTANT.ID_UPDATE_UI:
+                    if(items.isEmpty()){
+                        sad_face.setVisibility(View.VISIBLE);
+                    }else {
+                        sad_face.setVisibility(View.GONE);
+                    }
+                    progressBar.setVisibility(View.GONE);
+                    adapter.notifyDataSetChanged();
+                    break;
             }
             return true;
         }
     });
-    private void loadCache(){
-        List<Object> tmpList = cache.loadFromCache(category);
-        for(Object object:tmpList){
-            items.add((ArticleBean) object);
-        }
-        if(progressBar.getVisibility() == View.VISIBLE){
-            progressBar.setVisibility(View.GONE);
-            if(items.isEmpty()){
-                handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
+    private synchronized void loadCache(){
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                tmpItems.clear();
+                List<Object> tmpList = cache.loadFromCache(category);
+                for(int i = 0 ;i<tmpList.size();i++){
+                    tmpItems.add((ArticleBean) tmpList.get(i));
+                }
+                tmpList.clear();
+                items.clear();
+                items.addAll(tmpItems);
+                if(progressBar.getVisibility() == View.VISIBLE){
+                    if(items.isEmpty()){
+                        handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
+                    }
+                }
+                handler.sendEmptyMessage(CONSTANT.ID_UPDATE_UI);
             }
-        }
-        adapter.notifyDataSetChanged();
+        });
+        thread.start();
     }
+    /*public void onDestroyView() {
+        super.onDestroyView();
+        items =null;
+        adapter = null;
+        parentView = null;
+        cache = null;
+        recyclerView = null;
+        mLayoutManager = null;
+        refreshView = null;
+        sad_face = null;
+        progressBar = null;
+
+    }*/
 }

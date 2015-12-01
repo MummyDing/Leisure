@@ -42,6 +42,7 @@ public class Utils {
         }
         try {
              doc = builder.parse(is);
+             is.close();
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (IOException e) {

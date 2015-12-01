@@ -38,6 +38,7 @@ import com.mummyding.app.leisure.ui.news.BaseNewsFragment;
 import com.mummyding.app.leisure.ui.news.NewsFragment;
 import com.mummyding.app.leisure.ui.reading.BaseReadingFragment;
 import com.mummyding.app.leisure.ui.reading.ReadingActivity;
+import com.mummyding.app.leisure.ui.reading.ReadingFragment;
 import com.mummyding.app.leisure.ui.science.BaseScienceFragment;
 
 import java.lang.ref.WeakReference;
@@ -104,47 +105,47 @@ public class MainActivity extends AppCompatActivity {
                         new SecondaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_setting).withIdentifier(R.mipmap.ic_setting),
                         new SecondaryDrawerItem().withName(R.string.about).withIcon(R.mipmap.ic_about).withIdentifier(R.mipmap.ic_about)
                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        switch (drawerItem.getIdentifier()) {
-                            case R.mipmap.ic_home:
-                                if(currentFragment instanceof DailyFragment){
-                                    return false;
-                                }
-                                currentFragment = new DailyFragment();
-                                break;
-                            case R.mipmap.ic_reading:
-                                if(currentFragment instanceof BaseReadingFragment){
-                                    return false;
-                                }
-                                currentFragment = new BaseReadingFragment();
-                                break;
-                            case R.mipmap.ic_news:
-                                if(currentFragment instanceof BaseNewsFragment){
-                                    return false;
-                                }
-                                currentFragment = new BaseNewsFragment();
-                                break;
-                            case R.mipmap.ic_science:
-                                if(currentFragment instanceof BaseScienceFragment){
-                                    return false;
-                                }
-                                currentFragment = new BaseScienceFragment();
-                                break;
-                            case R.mipmap.ic_setting:
-                                Toast.makeText(MainActivity.this,"setting",Toast.LENGTH_SHORT).show();
-                                break;
-                            case R.mipmap.ic_about:
-                                Toast.makeText(MainActivity.this,"about",Toast.LENGTH_SHORT).show();
-                                break;
-                            case R.mipmap.ic_shake:
-                                Toast.makeText(MainActivity.this,"Shake Shakes",Toast.LENGTH_SHORT).show();
-                                break;
-                        }
-                        switchFragment();
-                        return false;
-                    }
-                })
+                   @Override
+                   public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                       switch (drawerItem.getIdentifier()) {
+                           case R.mipmap.ic_home:
+                               if (currentFragment instanceof DailyFragment) {
+                                   return false;
+                               }
+                               currentFragment = new DailyFragment();
+                               break;
+                           case R.mipmap.ic_reading:
+                               if (currentFragment instanceof BaseReadingFragment) {
+                                   return false;
+                               }
+                               currentFragment = new BaseReadingFragment();
+                               break;
+                           case R.mipmap.ic_news:
+                               if (currentFragment instanceof BaseNewsFragment) {
+                                   return false;
+                               }
+                               currentFragment = new BaseNewsFragment();
+                               break;
+                           case R.mipmap.ic_science:
+                               if (currentFragment instanceof BaseScienceFragment) {
+                                   return false;
+                               }
+                               currentFragment = new BaseScienceFragment();
+                               break;
+                           case R.mipmap.ic_setting:
+                               Toast.makeText(MainActivity.this, "setting", Toast.LENGTH_SHORT).show();
+                               break;
+                           case R.mipmap.ic_about:
+                               Toast.makeText(MainActivity.this, "about", Toast.LENGTH_SHORT).show();
+                               break;
+                           case R.mipmap.ic_shake:
+                               Toast.makeText(MainActivity.this, "Shake Shakes", Toast.LENGTH_SHORT).show();
+                               break;
+                       }
+                       switchFragment();
+                       return false;
+                   }
+               })
                 .build();
     }
 

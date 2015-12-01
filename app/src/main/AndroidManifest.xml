@@ -30,13 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.support.WebViewUrlActivity" >
+        <activity android:launchMode="singleInstance" android:name=".ui.support.WebViewUrlActivity" >
         </activity>
-        <activity android:name=".ui.reading.ReadingDetailsActivity" >
+        <activity android:launchMode="singleInstance" android:name=".ui.reading.ReadingDetailsActivity" >
         </activity>
-        <activity android:name=".ui.support.WebViewLocalActivity" >
+        <activity android:launchMode="singleInstance" android:name=".ui.support.WebViewLocalActivity" >
         </activity>
-        <activity android:name=".ui.reading.ReadingActivity" >
+        <activity android:launchMode="singleInstance" android:name=".ui.reading.ReadingActivity" >
         </activity>
     </application>
 

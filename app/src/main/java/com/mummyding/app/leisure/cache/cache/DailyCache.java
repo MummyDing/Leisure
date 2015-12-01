@@ -51,7 +51,7 @@ public class DailyCache extends BaseCache{
     }
 
     @Override
-    public List<Object> loadFromCache(String category) {
+    public synchronized List<Object> loadFromCache(String category) {
         String sql = "select * from "+table.NAME;
         Cursor cursor = query(sql);
         while (cursor.moveToNext()){

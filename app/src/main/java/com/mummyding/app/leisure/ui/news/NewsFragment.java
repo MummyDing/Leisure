@@ -62,6 +62,7 @@ public class NewsFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private List<NewsBean> items = new ArrayList<>();
+    private List<NewsBean> tmpItems = new ArrayList<>();
     private NewsAdapter adapter;
     private ImageView sad_face;
     private ProgressBar progressBar;
@@ -70,6 +71,12 @@ public class NewsFragment extends Fragment {
 
     private String url;
     private String category;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //setRetainInstance(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,7 +85,6 @@ public class NewsFragment extends Fragment {
         return parentView;
     }
     void initData(){
-        adapter = new NewsAdapter(getContext(),items);
         sad_face = (ImageView) parentView.findViewById(R.id.sad_face);
         refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
@@ -87,9 +93,10 @@ public class NewsFragment extends Fragment {
         category = getArguments().getString(getString(R.string.id_category));
         mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
+        adapter = new NewsAdapter(getContext(),items);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        loadNewsFromNet();
+
         refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -128,8 +135,8 @@ public class NewsFragment extends Fragment {
                         InputStream is =
                                 new ByteArrayInputStream(response.body().string().getBytes(StandardCharsets.UTF_8));
                         try {
-                            items.clear();
-                            items.addAll(SAXNewsParse.parse(is));
+                            tmpItems.addAll(SAXNewsParse.parse(is));
+                            is.close();
                         } catch (ParserConfigurationException e) {
                             e.printStackTrace();
                         } catch (SAXException e) {
@@ -154,34 +161,59 @@ public class NewsFragment extends Fragment {
                     Utils.DLog(getString(R.string.Text_Net_Exception));
                     break;
                 case CONSTANT.ID_SUCCESS:
-                    cache.cache(items, category);
-                    items.clear();
+                    cache.cache(tmpItems, category);
                     loadCache();
                     break;
                 case CONSTANT.ID_LOAD_FROM_NET:
-                    refreshView.setRefreshing(true);
                     loadNewsFromNet();
                     break;
-            }
-            if(items.isEmpty()){
-                sad_face.setVisibility(View.VISIBLE);
-            }else {
-                sad_face.setVisibility(View.GONE);
+                case CONSTANT.ID_UPDATE_UI:
+                    if(items.isEmpty()){
+                        sad_face.setVisibility(View.VISIBLE);
+                    }else {
+                        sad_face.setVisibility(View.GONE);
+                    }
+                    progressBar.setVisibility(View.GONE);
+                    adapter.notifyDataSetChanged();
+                    break;
             }
             return false;
         }
     });
-    private void loadCache(){
-        List<Object> tmpList = cache.loadFromCache(category);
-        for (Object object : tmpList) {
-            items.add((NewsBean) object);
-        }
-        if(progressBar.getVisibility() == View.VISIBLE){
-            progressBar.setVisibility(View.GONE);
-            if(items.isEmpty()){
-                handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
+   private synchronized void loadCache(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                tmpItems.clear();
+                List<Object> tmpList = cache.loadFromCache(category);
+                for(int i = 0 ;i<tmpList.size();i++){
+                    tmpItems.add((NewsBean) tmpList.get(i));
+                }
+                tmpList.clear();
+                items.clear();
+                items.addAll(tmpItems);
+                tmpItems.clear();
+                if(progressBar.getVisibility() == View.VISIBLE){
+                    if(items.isEmpty()){
+                        handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
+                    }
+                }
+                handler.sendEmptyMessage(CONSTANT.ID_UPDATE_UI);
             }
-        }
-        adapter.notifyDataSetChanged();
+        });
+        thread.start();
     }
+   /*  public void onDestroyView() {
+        super.onDestroyView();
+        items =null;
+        adapter = null;
+        parentView = null;
+        cache = null;
+        recyclerView = null;
+        mLayoutManager = null;
+        refreshView = null;
+        sad_face = null;
+        progressBar = null;
+
+    }*/
 }

@@ -62,22 +62,29 @@ public class ReadingFragment extends Fragment {
     private ProgressBar progressBar;
 
     protected List<BookBean> items= new ArrayList<>();
+    private List<BookBean> tmpItems = new ArrayList<>();
     private ReadingAdapter adapter;
     private int pos;
     private String category;
     private String url;
     private ReadingCache cache;
+    private Thread thread;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //setRetainInstance(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        parentView = View.inflate(getContext(), R.layout.layout_reading_list,null);
+        parentView = View.inflate(getContext(), R.layout.layout_reading_list, null);
         initData();
         return parentView;
     }
     protected void getData(){
         pos = getArguments().getInt(getString(R.string.id_pos));
         category = getArguments().getString(getString(R.string.id_category));
-        Utils.DLog("Reading"+category);
     }
     protected void initData(){
         getData();
@@ -92,7 +99,6 @@ public class ReadingFragment extends Fragment {
                 getActivity(), DividerItemDecoration.VERTICAL_LIST));
         adapter = new ReadingAdapter(items,getContext());
         recyclerView.setAdapter(adapter);
-        loadNewsFromNet();
         refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -134,7 +140,7 @@ public class ReadingFragment extends Fragment {
                             Gson gson = new Gson();
                             BookBean [] bookBeans = gson.fromJson(response.body().string(), ReadingBean.class).getBooks();
                             for(BookBean bookBean: bookBeans){
-                                items.add(bookBean);
+                                tmpItems.add(bookBean);
                             }
                             handler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
                         }
@@ -152,33 +158,60 @@ public class ReadingFragment extends Fragment {
                     Utils.DLog(getString(R.string.Text_Net_Exception));
                     break;
                 case CONSTANT.ID_SUCCESS:
-                    cache.cache(items,category);
-                    items.clear();
+                    cache.cache(tmpItems, category);
                     loadCache();
                     break;
                 case CONSTANT.ID_LOAD_FROM_NET:
                     loadNewsFromNet();
                     break;
-            }
-            if(items.isEmpty()){
-                sad_face.setVisibility(View.VISIBLE);
-            }else {
-                sad_face.setVisibility(View.GONE);
+                case CONSTANT.ID_UPDATE_UI:
+                    if(items.isEmpty()){
+                        sad_face.setVisibility(View.VISIBLE);
+                    }else {
+                        sad_face.setVisibility(View.GONE);
+                    }
+                    progressBar.setVisibility(View.GONE);
+                    adapter.notifyDataSetChanged();
+                    break;
             }
             return false;
         }
     });
-    private void loadCache(){
-        List<Object> tmpList = cache.loadFromCache(category);
-        for(Object object : tmpList){
-            items.add((BookBean) object);
-        }
-        if(progressBar.getVisibility() == View.VISIBLE){
-            progressBar.setVisibility(View.GONE);
-            if(items.isEmpty()){
-                handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
+    private synchronized void loadCache(){
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                tmpItems.clear();
+                List<Object> tmpList = cache.loadFromCache(category);
+                for(int i = 0 ;i<tmpList.size();i++){
+                    tmpItems.add((BookBean) tmpList.get(i));
+                }
+                tmpList.clear();
+                items.clear();
+                items.addAll(tmpItems);
+                tmpItems.clear();
+                if(progressBar.getVisibility() == View.VISIBLE){
+                    if(items.isEmpty()){
+                        handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
+                    }
+                }
+                handler.sendEmptyMessage(CONSTANT.ID_UPDATE_UI);
             }
-        }
-        adapter.notifyDataSetChanged();
+        });
+        thread.start();
     }
+    /*public void onDestroyView() {
+        super.onDestroyView();
+        items =null;
+        adapter = null;
+        parentView = null;
+        cache = null;
+        recyclerView = null;
+        mLayoutManager = null;
+        refreshView = null;
+        sad_face = null;
+        progressBar = null;
+
+    }*/
+
 }

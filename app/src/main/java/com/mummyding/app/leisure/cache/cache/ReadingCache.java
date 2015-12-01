@@ -57,7 +57,7 @@ public class ReadingCache extends BaseCache{
     }
 
     @Override
-    public List<Object> loadFromCache(String category) {
+    public synchronized List<Object> loadFromCache(String category) {
         String sql = null;
         if(category == null){
             sql = "select * from "+table.NAME;

@@ -28,4 +28,10 @@ public class BaseReadingFragment extends AbsTopNavigationFragment{
         };
         return pagerAdapter;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        pagerAdapter = null;
+    }
 }
