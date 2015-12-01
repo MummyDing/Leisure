@@ -26,4 +26,6 @@
     <string name="text_search_result">查询结果</string>
     <string name="text_ok">确定</string>
     <string name="text_search_books">"  查询图书"</string>
+    <string name="id_category">category</string>
+    <string name="text_collection">收 藏</string>
 </resources>

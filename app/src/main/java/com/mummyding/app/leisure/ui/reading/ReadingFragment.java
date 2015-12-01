@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -22,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ReadingApi;
 import com.mummyding.app.leisure.cache.cache.ReadingCache;
@@ -57,11 +59,14 @@ public class ReadingFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private ImageView sad_face;
+    private ProgressBar progressBar;
 
     protected List<BookBean> items= new ArrayList<>();
     private ReadingAdapter adapter;
     private int pos;
-
+    private String category;
+    private String url;
+    private ReadingCache cache;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,12 +76,15 @@ public class ReadingFragment extends Fragment {
     }
     protected void getData(){
         pos = getArguments().getInt(getString(R.string.id_pos));
+        category = getArguments().getString(getString(R.string.id_category));
+        Utils.DLog("Reading"+category);
     }
     protected void initData(){
         getData();
         sad_face = (ImageView) parentView.findViewById(R.id.sad_face);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
         refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
+        progressBar = (ProgressBar) parentView.findViewById(R.id.progressbar);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -84,7 +92,6 @@ public class ReadingFragment extends Fragment {
                 getActivity(), DividerItemDecoration.VERTICAL_LIST));
         adapter = new ReadingAdapter(items,getContext());
         recyclerView.setAdapter(adapter);
-        refreshView.setRefreshing(true);
         loadNewsFromNet();
         refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
@@ -99,16 +106,17 @@ public class ReadingFragment extends Fragment {
                 loadNewsFromNet();
             }
         });
+        cache = new ReadingCache(LeisureApplication.AppContext);
+        loadCache();
     }
     protected void loadNewsFromNet(){
         final String[] tags = ReadingApi.getTags(ReadingApi.getApiTag(pos));
-        refreshView.setRefreshing(true);
         new Thread(new Runnable() {
             @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void run() {
                 for (int i = 0; i < ReadingApi.TAG_LEN; i++) {
-                    String url = ReadingApi.searchByTag + tags[i];
+                    url = ReadingApi.searchByTag + tags[i];
                     Request.Builder builder = new Request.Builder();
                     builder.url(url);
                     Request request = builder.build();
@@ -139,19 +147,17 @@ public class ReadingFragment extends Fragment {
     protected Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            ReadingCache cache = new ReadingCache(getContext());
-            refreshView.setRefreshing(false);
             switch (msg.what){
                 case CONSTANT.ID_FAILURE:
                     Utils.DLog(getString(R.string.Text_Net_Exception));
-                    List<Object> tmpList = cache.loadFromCache();
-                    for(Object object : tmpList){
-                        items.add((BookBean) object);
-                    }
                     break;
                 case CONSTANT.ID_SUCCESS:
-                    adapter.notifyDataSetChanged();
-                    cache.cache(items);
+                    cache.cache(items,category);
+                    items.clear();
+                    loadCache();
+                    break;
+                case CONSTANT.ID_LOAD_FROM_NET:
+                    loadNewsFromNet();
                     break;
             }
             if(items.isEmpty()){
@@ -162,4 +168,17 @@ public class ReadingFragment extends Fragment {
             return false;
         }
     });
+    private void loadCache(){
+        List<Object> tmpList = cache.loadFromCache(category);
+        for(Object object : tmpList){
+            items.add((BookBean) object);
+        }
+        if(progressBar.getVisibility() == View.VISIBLE){
+            progressBar.setVisibility(View.GONE);
+            if(items.isEmpty()){
+                handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
 }

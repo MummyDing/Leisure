@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -13,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.cache.cache.DailyCache;
 import com.mummyding.app.leisure.cache.table.DailyTable;
@@ -30,10 +32,10 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
     private List<DailyBean> item;
     private Context mContext;
     private DailyCache cache ;
-    public DailyAdapter(List<DailyBean> item, Context mContext) {
+    public DailyAdapter(List<DailyBean> item, Context context) {
         this.item = item;
-        this.mContext = mContext;
-        cache = new DailyCache(mContext);
+        this.mContext = context;
+        cache = new DailyCache(LeisureApplication.AppContext);
     }
 
     @Override

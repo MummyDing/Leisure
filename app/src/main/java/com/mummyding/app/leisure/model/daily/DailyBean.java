@@ -71,7 +71,6 @@ public class DailyBean {
         int originlength = description.length();
         String url = Utils.RegexFind("<img class=\"content-image\\\" src=\"[^>]*jpg\"|<img src=\"[^>]*jpg\"", description,5,0);
         int currentlength = url.length()+5;
-        Utils.DLog(originlength+"  "+currentlength);
         if(originlength != currentlength) {
             url = Utils.RegexFind("\"[^\"]*jpg\"", url);
         }

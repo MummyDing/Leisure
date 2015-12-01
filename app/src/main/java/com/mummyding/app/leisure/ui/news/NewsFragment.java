@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
@@ -22,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.cache.cache.NewsCache;
 import com.mummyding.app.leisure.model.news.NewsBean;
@@ -62,8 +64,12 @@ public class NewsFragment extends Fragment {
     private List<NewsBean> items = new ArrayList<>();
     private NewsAdapter adapter;
     private ImageView sad_face;
+    private ProgressBar progressBar;
 
     private NewsCache cache ;
+
+    private String url;
+    private String category;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,32 +82,31 @@ public class NewsFragment extends Fragment {
         sad_face = (ImageView) parentView.findViewById(R.id.sad_face);
         refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
-        final String url = getArguments().getString(getString(R.string.id_url));
+        progressBar = (ProgressBar) parentView.findViewById(R.id.progressbar);
+        url = getArguments().getString(getString(R.string.id_url));
+        category = getArguments().getString(getString(R.string.id_category));
         mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(
-                getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        loadNewsFromNet(url);
-
+        loadNewsFromNet();
         refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadNewsFromNet(url);
+                loadNewsFromNet();
             }
         });
         sad_face.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sad_face.setVisibility(View.GONE);
-                loadNewsFromNet(url);
+                loadNewsFromNet();
             }
         });
-
+        cache = new NewsCache(LeisureApplication.AppContext);
+        loadCache();
     }
-    private void loadNewsFromNet(final String url){
-        refreshView.setRefreshing(true);
+    private void loadNewsFromNet(){
         new Thread(new Runnable() {
             @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
@@ -122,7 +127,6 @@ public class NewsFragment extends Fragment {
                         }
                         InputStream is =
                                 new ByteArrayInputStream(response.body().string().getBytes(StandardCharsets.UTF_8));
-                        items.clear();
                         try {
                             items.clear();
                             items.addAll(SAXNewsParse.parse(is));
@@ -144,28 +148,40 @@ public class NewsFragment extends Fragment {
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            cache = new NewsCache(getContext());
             refreshView.setRefreshing(false);
             switch (msg.what){
                 case CONSTANT.ID_FAILURE:
                     Utils.DLog(getString(R.string.Text_Net_Exception));
-                    List<Object> tmpList = cache.loadFromCache();
-                    for(Object object : tmpList){
-                        items.add((NewsBean) object);
-                    }
                     break;
                 case CONSTANT.ID_SUCCESS:
-                    adapter.notifyDataSetChanged();
-                    cache.cache(items);
+                    cache.cache(items, category);
+                    items.clear();
+                    loadCache();
+                    break;
+                case CONSTANT.ID_LOAD_FROM_NET:
+                    refreshView.setRefreshing(true);
+                    loadNewsFromNet();
                     break;
             }
             if(items.isEmpty()){
                 sad_face.setVisibility(View.VISIBLE);
-
             }else {
                 sad_face.setVisibility(View.GONE);
             }
             return false;
         }
     });
+    private void loadCache(){
+        List<Object> tmpList = cache.loadFromCache(category);
+        for (Object object : tmpList) {
+            items.add((NewsBean) object);
+        }
+        if(progressBar.getVisibility() == View.VISIBLE){
+            progressBar.setVisibility(View.GONE);
+            if(items.isEmpty()){
+                handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
 }

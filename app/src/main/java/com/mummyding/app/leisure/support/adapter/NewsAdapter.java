@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.cache.cache.NewsCache;
 import com.mummyding.app.leisure.cache.table.NewsTable;
@@ -27,7 +28,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public NewsAdapter(Context context,List<NewsBean> items) {
         this.items = items;
         this.mContext = context;
-        cache = new NewsCache(mContext);
+        cache = new NewsCache(LeisureApplication.AppContext);
     }
 
     @Override

@@ -25,6 +25,7 @@ public  class BaseNewsFragment extends AbsTopNavigationFragment {
                 NewsFragment fragment = new NewsFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString(getString(R.string.id_url),url[position]);
+                bundle.putString(getString(R.string.id_category),name[position]);
                 fragment.setArguments(bundle);
                 return fragment;
             }

@@ -70,8 +70,8 @@ public class ReadingApi {
                 if(Utils.hasString(book.getCatalog()) == false)break;
                 return  book.getCatalog();
             case 2:
-                if(Utils.hasString(book.getAurhor_intro()) == false)break;
-                return book.getAurhor_intro();
+                if(Utils.hasString(book.getAuthor_intro()) == false)break;
+                return book.getAuthor_intro();
         }
         return LeisureApplication.AppContext.getString(R.string.text_noinfo);
     }

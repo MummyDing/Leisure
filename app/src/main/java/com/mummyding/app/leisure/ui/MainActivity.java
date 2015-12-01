@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -39,6 +40,8 @@ import com.mummyding.app.leisure.ui.reading.BaseReadingFragment;
 import com.mummyding.app.leisure.ui.reading.ReadingActivity;
 import com.mummyding.app.leisure.ui.science.BaseScienceFragment;
 
+import java.lang.ref.WeakReference;
+
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private AccountHeader header;
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private FragmentTransaction fragmentTransaction;
+    private  Fragment currentFragment ;
     private Menu menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,22 +57,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ScreenUtil.init(this);
         initData();
-        Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
-                "://" + getResources().getResourcePackageName(R.drawable.daily_placeholder)
-                + '/' + getResources().getResourceTypeName(R.drawable.daily_placeholder) + '/' + getResources().getResourceEntryName(R.drawable.daily_placeholder));
-        Utils.DLog("--==---=-="+imageUri.toString());
-        switchFragment(new DailyFragment());
+        currentFragment =new DailyFragment();
+        switchFragment();
     }
 
-    private void switchFragment(Fragment fragment){
-        if(fragment instanceof DailyFragment){
-            switchFragment(fragment, getString(R.string.daily), R.menu.menu_daily);
-        }else if(fragment instanceof BaseReadingFragment){
-            switchFragment(fragment, getString(R.string.reading),R.menu.menu_reading);
-        }else if(fragment instanceof BaseNewsFragment){
-            switchFragment(fragment, getString(R.string.news),R.menu.menu_news);
-        }else if(fragment instanceof BaseScienceFragment){
-            switchFragment(fragment, getString(R.string.science),R.menu.menu_science);
+    private void switchFragment(){
+        if(currentFragment instanceof DailyFragment){
+            switchFragment(currentFragment, getString(R.string.daily), R.menu.menu_daily);
+        }else if(currentFragment instanceof BaseReadingFragment){
+            switchFragment(currentFragment, getString(R.string.reading),R.menu.menu_reading);
+        }else if(currentFragment instanceof BaseNewsFragment){
+            switchFragment(currentFragment, getString(R.string.news),R.menu.menu_news);
+        }else if(currentFragment instanceof BaseScienceFragment){
+            switchFragment(currentFragment, getString(R.string.science),R.menu.menu_science);
         }
     }
     private void switchFragment(Fragment fragment,String title,int resourceMenu){
@@ -80,15 +81,16 @@ public class MainActivity extends AppCompatActivity {
             menu.clear();
             getMenuInflater().inflate(resourceMenu, menu);
         }
+        currentFragment = null;
     }
     private void initData(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        header = new AccountHeaderBuilder().withActivity(this)
+         header = new AccountHeaderBuilder().withActivity(this)
                 .withCompactStyle(false)
                 .withHeaderBackground(R.drawable.header)
                 .build();
-        drawer = new DrawerBuilder().withActivity(this)
+       drawer = new DrawerBuilder().withActivity(this)
                 .withToolbar(toolbar)
                 .withActionBarDrawerToggleAnimated(true)
                 .withAccountHeader(header)
@@ -106,16 +108,28 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         switch (drawerItem.getIdentifier()) {
                             case R.mipmap.ic_home:
-                                switchFragment(new DailyFragment());
+                                if(currentFragment instanceof DailyFragment){
+                                    return false;
+                                }
+                                currentFragment = new DailyFragment();
                                 break;
                             case R.mipmap.ic_reading:
-                                switchFragment(new BaseReadingFragment());
+                                if(currentFragment instanceof BaseReadingFragment){
+                                    return false;
+                                }
+                                currentFragment = new BaseReadingFragment();
                                 break;
                             case R.mipmap.ic_news:
-                                switchFragment(new BaseNewsFragment());
+                                if(currentFragment instanceof BaseNewsFragment){
+                                    return false;
+                                }
+                                currentFragment = new BaseNewsFragment();
                                 break;
                             case R.mipmap.ic_science:
-                                switchFragment(new BaseScienceFragment());
+                                if(currentFragment instanceof BaseScienceFragment){
+                                    return false;
+                                }
+                                currentFragment = new BaseScienceFragment();
                                 break;
                             case R.mipmap.ic_setting:
                                 Toast.makeText(MainActivity.this,"setting",Toast.LENGTH_SHORT).show();
@@ -127,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this,"Shake Shakes",Toast.LENGTH_SHORT).show();
                                 break;
                         }
+                        switchFragment();
                         return false;
                     }
                 })
@@ -136,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
-        getMenuInflater().inflate(R.menu.menu_daily,menu);
+        getMenuInflater().inflate(R.menu.menu_daily, menu);
         return true;
     }
 
@@ -145,24 +160,26 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.menu_home:
                 drawer.setSelection(R.mipmap.ic_home);
-                switchFragment(new DailyFragment());
+                currentFragment =  new DailyFragment();
                 break;
             case R.id.menu_reading:
                 drawer.setSelection(R.mipmap.ic_reading);
-                switchFragment(new BaseReadingFragment());
+                currentFragment = new BaseReadingFragment();
                 break;
             case R.id.menu_news:
                 drawer.setSelection(R.mipmap.ic_news);
-                switchFragment(new BaseNewsFragment());
+                currentFragment = new BaseNewsFragment();
                 break;
             case R.id.menu_science:
                 drawer.setSelection(R.mipmap.ic_science);
-                switchFragment(new BaseScienceFragment());
+                currentFragment = new BaseScienceFragment();
                 break;
             case R.id.menu_search:
                 showSearchDialog();
-                break;
+                return true;
         }
+        switchFragment();
+        currentFragment = null;
         return super.onOptionsItemSelected(item);
     }
     private void showSearchDialog(){

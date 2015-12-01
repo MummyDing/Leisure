@@ -13,7 +13,9 @@ public class ScreenUtil {
     private static int ScreenHeight = 0;
     private static Context mContext = null;
     public static void init(Context context){
-        mContext = context;
+        if(mContext == null) {
+            mContext = context;
+        }
     }
     public static int   getScreenWidth(){
         if(ScreenWidth !=0) return ScreenWidth;

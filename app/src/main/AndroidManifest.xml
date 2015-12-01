@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mummyding.app.leisure" >
+    package="com.mummyding.app.leisure">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,7 +11,8 @@
         android:largeScreens="true"
         android:normalScreens="true"
         android:resizeable="true"
-        android:smallScreens="true" />
+        android:smallScreens="true"
+        />
 
     <application
         android:name=".LeisureApplication"
@@ -19,8 +20,10 @@
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".ui.MainActivity" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.MainActivity"
+            android:screenOrientation="nosensor"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,8 +35,6 @@
         <activity android:name=".ui.reading.ReadingDetailsActivity" >
         </activity>
         <activity android:name=".ui.support.WebViewLocalActivity" >
-        </activity>
-        <activity android:name=".ui.support.BaseWebViewActivity" >
         </activity>
         <activity android:name=".ui.reading.ReadingActivity" >
         </activity>

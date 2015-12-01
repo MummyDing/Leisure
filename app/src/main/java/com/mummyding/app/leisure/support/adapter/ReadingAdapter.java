@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.cache.cache.ReadingCache;
 import com.mummyding.app.leisure.cache.table.ReadingTable;
@@ -36,7 +37,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
     public ReadingAdapter(List<BookBean> items, Context mContext) {
         this.items = items;
         this.mContext = mContext;
-        cache = new ReadingCache(mContext);
+        cache = new ReadingCache(LeisureApplication.AppContext);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder,int position) {
         final BookBean bookBean = getItem(position);
         holder.title.setText(bookBean.getTitle());
-        holder.info.setText(bookBean.toString());
+        holder.info.setText(bookBean.getInfo());
         holder.imageView.setImageURI(Uri.parse(bookBean.getImage()));
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override

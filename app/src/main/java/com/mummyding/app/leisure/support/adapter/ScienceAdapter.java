@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.cache.cache.DailyCache;
 import com.mummyding.app.leisure.cache.cache.ScienceCache;
@@ -32,7 +33,7 @@ public class ScienceAdapter extends RecyclerView.Adapter<ScienceAdapter.ViewHold
     public ScienceAdapter(Context mContext, List<ArticleBean> items) {
         this.mContext = mContext;
         this.items = items;
-        cache = new ScienceCache(mContext);
+        cache = new ScienceCache(LeisureApplication.AppContext);
     }
 
     @Override
@@ -48,7 +49,7 @@ public class ScienceAdapter extends RecyclerView.Adapter<ScienceAdapter.ViewHold
         holder.title.setText(articleBean.getTitle());
         holder.image.setImageURI(Uri.parse(articleBean.getImage_info().getUrl()));
         holder.description.setText(articleBean.getSummary());
-        holder.info.setText(articleBean.toString());
+        holder.info.setText(articleBean.getInfo());
         holder.comment.setText(String.valueOf(articleBean.getReplies_count()));
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override

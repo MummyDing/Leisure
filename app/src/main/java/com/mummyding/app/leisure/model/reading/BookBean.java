@@ -19,7 +19,7 @@ public class BookBean implements Serializable{
     String pages;
     String id;
     String title;
-    String aurhor_intro;
+    String author_intro;
     String summary;
     String price;
 
@@ -99,12 +99,12 @@ public class BookBean implements Serializable{
     }
 
 
-    public String getAurhor_intro() {
-        return aurhor_intro;
+    public String getAuthor_intro() {
+        return author_intro;
     }
 
-    public void setAurhor_intro(String aurhor_intro) {
-        this.aurhor_intro = aurhor_intro;
+    public void setAuthor_intro(String author_intro) {
+        this.author_intro = author_intro;
     }
 
     public String getSummary() {

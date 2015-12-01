@@ -33,25 +33,31 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/md_black_1000"/>
-            <LinearLayout
-                android:orientation="horizontal"
+            <TextView
+                android:id="@+id/bookInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/md_black_1000"/>
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/bookInfo"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:textColor="@color/secondary_text" />
                 <CheckBox
                     android:id="@+id/collect_cb"
                     style="@style/CustomCollectTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    />
-            </LinearLayout>
+                    android:layout_alignParentRight="true"
+                    android:checked="false" />
+                <TextView
+                    android:text="@string/text_collection"
+                    android:layout_below="@+id/collect_cb"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
         </LinearLayout>
 
     </LinearLayout>

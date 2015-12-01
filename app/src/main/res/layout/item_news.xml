@@ -5,6 +5,14 @@
     android:padding="@dimen/item_padding"
     >
     <TextView
+        android:text="***********------------------------------------------------.............................................."
+        android:singleLine="true"
+        android:textColor="@color/primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/divider_margin"
+        />
+    <TextView
         android:id="@+id/title"
         android:textSize="20sp"
         android:textColor="@color/md_black_1000"

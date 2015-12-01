@@ -14,5 +14,6 @@ public class CONSTANT {
             //"android.resource://com.mummyding.app.leisure/drawable/daily_placeholder.jpg";
     public static final int ID_SUCCESS = 1;
     public static final int ID_FAILURE = 2;
+    public static final int ID_LOAD_FROM_NET = 3;
 
 }

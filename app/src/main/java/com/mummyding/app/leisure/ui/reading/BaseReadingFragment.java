@@ -21,6 +21,7 @@ public class BaseReadingFragment extends AbsTopNavigationFragment{
                 ReadingFragment fragment = new ReadingFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt(getString(R.string.id_pos),position);
+                bundle.putString(getString(R.string.id_category),ReadingApi.Tag_Titles[position]);
                 fragment.setArguments(bundle);
                 return fragment;
             }

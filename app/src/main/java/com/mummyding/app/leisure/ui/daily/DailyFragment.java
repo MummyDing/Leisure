@@ -14,12 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.DailyApi;
 import com.mummyding.app.leisure.cache.cache.DailyCache;
@@ -42,6 +44,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,18 +60,24 @@ public class DailyFragment extends Fragment{
     private RecyclerView.LayoutManager mLayoutManager;
     private PullToRefreshView refreshView;
     private ImageView sad_face;
+    private ProgressBar progressBar;
 
     private List<DailyBean> items = new ArrayList<>();
     private DailyAdapter adapter;
 
     private String url = DailyApi.daily_url;
+    private DailyCache cache;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        parentView = View.inflate(getActivity(),R.layout.layout_common_list,null);
+        parentView =inflater.inflate(R.layout.layout_common_list, container, false);
         initData();
-        loadNewsFromNet(url);
         return parentView;
     }
     private void initData(){
@@ -75,7 +85,8 @@ public class DailyFragment extends Fragment{
         sad_face = (ImageView) parentView.findViewById(R.id.sad_face);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
         refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
-        mLayoutManager = new LinearLayoutManager(getContext());
+        progressBar = (ProgressBar) parentView.findViewById(R.id.progressbar);
+        mLayoutManager = new LinearLayoutManager(LeisureApplication.AppContext);
         recyclerView.setLayoutManager(mLayoutManager);
         adapter = new DailyAdapter(items,getContext());
         recyclerView.setAdapter(adapter);
@@ -83,21 +94,21 @@ public class DailyFragment extends Fragment{
         refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadNewsFromNet(url);
+                loadNewsFromNet();
             }
         });
         sad_face.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sad_face.setVisibility(View.GONE);
-                loadNewsFromNet(url);
+                loadNewsFromNet();
             }
         });
-
+        cache =new DailyCache(LeisureApplication.AppContext);
+        loadCache();
     }
 
-    private void loadNewsFromNet(final String url){
-        refreshView.setRefreshing(true);
+    private void loadNewsFromNet(){
         new Thread(new Runnable() {
             @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
@@ -121,6 +132,7 @@ public class DailyFragment extends Fragment{
                         items.clear();
                         try {
                             items.addAll(SAXDailyParse.parse(is));
+                            is.close();
                         } catch (ParserConfigurationException e) {
                             e.printStackTrace();
                         } catch (SAXException e) {
@@ -135,20 +147,22 @@ public class DailyFragment extends Fragment{
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            DailyCache cache = new DailyCache(getContext());
             refreshView.setRefreshing(false);
             switch (msg.what){
                 case CONSTANT.ID_FAILURE:
-                    Utils.DLog(getString(R.string.Text_Net_Exception));
-                    List<Object> tmpList = cache.loadFromCache();
-                    for(Object object : tmpList){
-                        items.add((DailyBean) object);
+                    if(isAdded()) {
+                        Utils.DLog(getString(R.string.Text_Net_Exception));
                     }
                     break;
                 case CONSTANT.ID_SUCCESS:
-                    adapter.notifyDataSetChanged();
-                    cache.cache(items);
+                    cache.cache(items, null);
+                    items.clear();
+                    loadCache();
                     break;
+                case CONSTANT.ID_LOAD_FROM_NET:
+                    refreshView.setRefreshing(true);
+                    loadNewsFromNet();
+                    return false;
             }
             if(items.isEmpty()){
                 sad_face.setVisibility(View.VISIBLE);
@@ -158,5 +172,51 @@ public class DailyFragment extends Fragment{
             return false;
         }
     });
+    private void loadCache(){
+        List<Object> tmpList = cache.loadFromCache(null);
 
+        for(Object object : tmpList){
+            items.add((DailyBean) object);
+        }
+        tmpList = null;
+        if(progressBar.getVisibility() == View.VISIBLE){
+            progressBar.setVisibility(View.GONE);
+            if(items.isEmpty()){
+                handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
+            }
+        }
+
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        items =null;
+        adapter = null;
+        parentView = null;
+        cache = null;
+        recyclerView = null;
+        mLayoutManager = null;
+        refreshView = null;
+        sad_face = null;
+        progressBar = null;
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        items =null;
+        adapter = null;
+        parentView = null;
+        cache = null;
+        recyclerView = null;
+        mLayoutManager = null;
+        refreshView = null;
+        sad_face = null;
+        progressBar = null;
+
+        Utils.DLog("-------***************调用了");
+    }
 }

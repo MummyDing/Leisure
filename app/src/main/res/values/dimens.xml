@@ -11,4 +11,6 @@
     <dimen name="text_description">16sp</dimen>
     <dimen name="item_margin">20dp</dimen>
     <dimen name="image_width">150dp</dimen>
+    <dimen name="divider_margin">10dp</dimen>
+    <dimen name="progressbar_width">82dp</dimen>
 </resources>

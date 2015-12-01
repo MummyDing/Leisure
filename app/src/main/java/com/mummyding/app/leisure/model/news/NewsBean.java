@@ -22,7 +22,7 @@ public class NewsBean {
     }
 
     public void setPubTime(String pubTime) {
-        this.pubTime = formatTime(pubTime);
+        this.pubTime = pubTime;
     }
     public void setPubTimeWithFormat(String pubTime) {
         this.pubTime = formatTime(pubTime);
