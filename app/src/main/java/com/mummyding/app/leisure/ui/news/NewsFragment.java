@@ -67,7 +67,7 @@ public class NewsFragment extends Fragment {
     private ImageView sad_face;
     private ProgressBar progressBar;
 
-    private NewsCache cache ;
+    private NewsCache cache;
 
     private String url;
     private String category;
@@ -203,17 +203,4 @@ public class NewsFragment extends Fragment {
         });
         thread.start();
     }
-   /*  public void onDestroyView() {
-        super.onDestroyView();
-        items =null;
-        adapter = null;
-        parentView = null;
-        cache = null;
-        recyclerView = null;
-        mLayoutManager = null;
-        refreshView = null;
-        sad_face = null;
-        progressBar = null;
-
-    }*/
 }

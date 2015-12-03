@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -14,12 +12,10 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.cache.cache.DailyCache;
 import com.mummyding.app.leisure.cache.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.DailyBean;
-import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.support.WebViewLocalActivity;
 
 import java.util.List;
@@ -29,13 +25,13 @@ import java.util.List;
  */
 public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
 
-    private List<DailyBean> item;
+    private List<DailyBean> mItems;
     private Context mContext;
-    private DailyCache cache ;
-    public DailyAdapter(List<DailyBean> item, Context context) {
-        this.item = item;
-        this.mContext = context;
-        cache = new DailyCache(LeisureApplication.AppContext);
+    private DailyCache mCache;
+    public DailyAdapter(DailyCache cache, Context context) {
+        mContext = context;
+        mCache = cache;
+        mItems = cache.getmList();
     }
 
     @Override
@@ -66,11 +62,11 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 dailyBean.setIs_collected(isChecked ? 1:0);
-                cache.execSQL(DailyTable.updateCollectionFlag(dailyBean.getTitle(), isChecked ? 1 : 0));
+                mCache.execSQL(DailyTable.updateCollectionFlag(dailyBean.getTitle(), isChecked ? 1 : 0));
                 if(isChecked){
-                    cache.addToCollection(dailyBean);
+                    mCache.addToCollection(dailyBean);
                 }else{
-                    cache.execSQL(DailyTable.deleteCollectionFlag(dailyBean.getTitle()));
+                    mCache.execSQL(DailyTable.deleteCollectionFlag(dailyBean.getTitle()));
                 }
             }
         });
@@ -78,11 +74,11 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
     }
 
     private DailyBean getItem(int position){
-        return item.get(position);
+        return mItems.get(position);
     }
     @Override
     public int getItemCount() {
-        return item.size();
+        return mItems.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

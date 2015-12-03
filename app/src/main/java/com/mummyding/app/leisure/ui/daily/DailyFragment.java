@@ -32,6 +32,7 @@ import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.DailyAdapter;
 import com.mummyding.app.leisure.support.adapter.DividerItemDecoration;
 import com.mummyding.app.leisure.support.sax.SAXDailyParse;
+import com.mummyding.app.leisure.ui.support.BaseListFragment;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -42,6 +43,7 @@ import org.xml.sax.SAXException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.SoftReference;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,178 +56,37 @@ import javax.xml.parsers.ParserConfigurationException;
 /**
  * Created by mummyding on 15-11-21.
  */
-public class DailyFragment extends Fragment{
-    private View parentView;
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private PullToRefreshView refreshView;
-    private ImageView sad_face;
-    private ProgressBar progressBar;
+public class DailyFragment extends BaseListFragment{
 
-    private List<DailyBean> items = new ArrayList<>();
-    private List<DailyBean> tmpItems = new ArrayList<>();
-    private DailyAdapter adapter;
+    private DailyCache dailyCache;
 
-    private String url = DailyApi.daily_url;
-    private DailyCache cache;
-    private Thread thread;
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //setRetainInstance(true);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        parentView =inflater.inflate(R.layout.layout_common_list, container, false);
-        initData();
-        return parentView;
-    }
-    private void initData(){
-        getActivity().findViewById(R.id.tab_layout).setVisibility(View.GONE);
-        sad_face = (ImageView) parentView.findViewById(R.id.sad_face);
-        recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
-        refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
-        progressBar = (ProgressBar) parentView.findViewById(R.id.progressbar);
-        mLayoutManager = new LinearLayoutManager(LeisureApplication.AppContext);
-        recyclerView.setLayoutManager(mLayoutManager);
-        adapter = new DailyAdapter(items,getContext());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadNewsFromNet();
-            }
-        });
-        sad_face.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sad_face.setVisibility(View.GONE);
-                loadNewsFromNet();
-            }
-        });
-        cache =new DailyCache(LeisureApplication.AppContext);
-        loadCache();
-    }
-
-    private void loadNewsFromNet(){
-        new Thread(new Runnable() {
-            @TargetApi(Build.VERSION_CODES.KITKAT)
-            @Override
-            public void run() {
-                Request.Builder builder = new Request.Builder();
-                builder.url(url);
-                Request request = builder.build();
-                HttpUtil.enqueue(request, new Callback() {
-                    @Override
-                    public void onFailure(Request request, IOException e) {
-                        handler.sendEmptyMessage(CONSTANT.ID_FAILURE);
-                    }
-                    @Override
-                    public void onResponse(Response response) throws IOException {
-                        if(response.isSuccessful() == false) {
-                            handler.sendEmptyMessage(CONSTANT.ID_FAILURE);
-                            return;
-                        }
-                        InputStream is =
-                                new ByteArrayInputStream(response.body().string().getBytes(StandardCharsets.UTF_8));
-                        try {
-                            tmpItems.addAll(SAXDailyParse.parse(is));
-                            is.close();
-                        } catch (ParserConfigurationException e) {
-                            e.printStackTrace();
-                        } catch (SAXException e) {
-                            e.printStackTrace();
-                        }
-                        handler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
-                    }
-                });
-            }
-        }).start();
-    }
-    private Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            refreshView.setRefreshing(false);
-            switch (msg.what){
-                case CONSTANT.ID_FAILURE:
-                    if(isAdded()) {
-                        Utils.DLog(getString(R.string.Text_Net_Exception));
-                    }
-                    break;
-                case CONSTANT.ID_SUCCESS:
-                    cache.cache(tmpItems, null);
-                    loadCache();
-                    break;
-                case CONSTANT.ID_LOAD_FROM_NET:
-                    loadNewsFromNet();
-                    break;
-                case CONSTANT.ID_UPDATE_UI:
-                    if(items.isEmpty()){
-                        sad_face.setVisibility(View.VISIBLE);
-                    }else {
-                        sad_face.setVisibility(View.GONE);
-                    }
-                    progressBar.setVisibility(View.GONE);
-                    adapter.notifyDataSetChanged();
-                    break;
-            }
-            return false;
-        }
-    });
-    private synchronized void loadCache(){
-         thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                tmpItems.clear();
-                List<Object> tmpList = cache.loadFromCache(null);
-                for(int i = 0 ;i<tmpList.size();i++){
-                    tmpItems.add((DailyBean) tmpList.get(i));
-                }
-                tmpList.clear();
-                items.clear();
-                items.addAll(tmpItems);
-                tmpItems.clear();
-                if(progressBar.getVisibility() == View.VISIBLE){
-                    if(items.isEmpty()){
-                        handler.sendEmptyMessage(CONSTANT.ID_LOAD_FROM_NET);
-                    }
-                }
-                handler.sendEmptyMessage(CONSTANT.ID_UPDATE_UI);
-            }
-        });
-        thread.start();
-    }
-
-   /* @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        items =null;
-        adapter = null;
-        parentView = null;
-        cache = null;
-        recyclerView = null;
-        mLayoutManager = null;
-        refreshView = null;
-        sad_face = null;
-        progressBar = null;
+    protected boolean setHeaderTab() {
+        return false;
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        items =null;
-        adapter = null;
-        parentView = null;
-        cache = null;
-        recyclerView = null;
-        mLayoutManager = null;
-        refreshView = null;
-        sad_face = null;
-        progressBar = null;
+    protected void onCreateCache() {
+        dailyCache = new DailyCache(getContext(),handler);
+    }
 
-        Utils.DLog("-------***************调用了");
-    }*/
+    @Override
+    protected RecyclerView.Adapter bindAdapter() {
+        return new DailyAdapter(dailyCache,getContext());
+    }
+
+    @Override
+    protected void loadFromNet() {
+        dailyCache.load();
+    }
+
+    @Override
+    protected void loadFromCache() {
+        dailyCache.loadFromCache();
+    }
+
+    @Override
+    protected boolean hasData() {
+        return dailyCache.hasData();
+    }
 }
