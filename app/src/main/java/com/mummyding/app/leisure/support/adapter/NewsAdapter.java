@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.cache.cache.ICache;
 import com.mummyding.app.leisure.cache.cache.NewsCache;
 import com.mummyding.app.leisure.cache.table.NewsTable;
 import com.mummyding.app.leisure.model.news.NewsBean;
@@ -21,14 +22,11 @@ import java.util.List;
 /**
  * Created by mummyding on 15-11-14.
  */
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
-    private List<NewsBean> items;
-    private Context mContext ;
-    private NewsCache cache;
-    public NewsAdapter(Context context,List<NewsBean> items) {
-        this.items = items;
-        this.mContext = context;
-        cache = new NewsCache(LeisureApplication.AppContext);
+public class NewsAdapter extends BaseListAdapter<NewsBean,NewsAdapter.ViewHolder> {
+
+
+    public NewsAdapter(Context context, ICache<NewsBean> cache) {
+        super(context, cache);
     }
 
     @Override
@@ -47,42 +45,50 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final NewsBean newsBean = getItem(position);
         holder.description.setText(newsBean.getDescription());
         holder.title.setText(newsBean.getTitle());
         holder.date.setText(newsBean.getPubTime());
         holder.position = position;
+        holder.parentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, WebViewUrlActivity.class);
+                intent.putExtra("url", getItem(position).getLink());
+                mContext.startActivity(intent);
+            }
+        });
+
+        if(isCollection){
+            return;
+        }
+
         holder.collect_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 newsBean.setIs_collected(isChecked ? 1 : 0);
-                cache.execSQL(NewsTable.updateCollectionFlag(newsBean.getTitle(), isChecked ? 1 : 0));
+                mCache.execSQL(NewsTable.updateCollectionFlag(newsBean.getTitle(), isChecked ? 1 : 0));
                 if (isChecked) {
-                    cache.addToCollection(newsBean);
+                    mCache.addToCollection(newsBean);
                 } else {
-                    cache.execSQL(NewsTable.deleteCollectionFlag(newsBean.getTitle()));
+                    mCache.execSQL(NewsTable.deleteCollectionFlag(newsBean.getTitle()));
                 }
             }
         });
         holder.collect_cb.setChecked(newsBean.getIs_collected() == 1 ? true:false);
     }
 
-    @Override
-    public int getItemCount() {
-        return items.size();
-    }
-    private NewsBean getItem(int position){
-        return items.get(position);
-    }
     public class ViewHolder extends RecyclerView.ViewHolder{
+        private View parentView;
         private TextView title;
         private TextView description;
         private TextView date;
         private CheckBox collect_cb;
         private int position;
          ViewHolder(View itemView) {
-            super(itemView);
+             super(itemView);
+             parentView = itemView;
              title = (TextView) itemView.findViewById(R.id.title);
              description = (TextView) itemView.findViewById(R.id.description);
              date = (TextView) itemView.findViewById(R.id.date);

@@ -13,31 +13,28 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.R;
-import com.mummyding.app.leisure.cache.cache.DailyCache;
+import com.mummyding.app.leisure.cache.cache.ICache;
 import com.mummyding.app.leisure.cache.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.DailyBean;
 import com.mummyding.app.leisure.ui.support.WebViewLocalActivity;
 
-import java.util.List;
+import com.mummyding.app.leisure.support.adapter.DailyAdapter.ViewHolder;
+
 
 /**
  * Created by mummyding on 15-11-21.
  */
-public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
+public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
 
-    private List<DailyBean> mItems;
-    private Context mContext;
-    private DailyCache mCache;
-    public DailyAdapter(DailyCache cache, Context context) {
-        mContext = context;
-        mCache = cache;
-        mItems = cache.getmList();
+
+    public DailyAdapter(Context context, ICache<DailyBean> cache) {
+        super(context, cache);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(mContext, R.layout.item_daily, null);
-        ViewHolder vh = new ViewHolder(view);
+        View parentView = View.inflate(mContext,R.layout.item_daily,null);
+        ViewHolder vh = new ViewHolder(parentView);
         return vh;
     }
 
@@ -58,6 +55,11 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
                 mContext.startActivity(intent);
             }
         });
+
+        if(isCollection){
+            return;
+        }
+
         holder.collect_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -73,14 +75,6 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
         holder.collect_cb.setChecked(dailyBean.getIs_collected()==1 ? true:false);
     }
 
-    private DailyBean getItem(int position){
-        return mItems.get(position);
-    }
-    @Override
-    public int getItemCount() {
-        return mItems.size();
-    }
-
     class ViewHolder extends RecyclerView.ViewHolder{
         private View parentView;
         private TextView title;
@@ -93,7 +87,9 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder>{
             title = (TextView) parentView.findViewById(R.id.title);
             image = (SimpleDraweeView) parentView.findViewById(R.id.image);
             info = (TextView) parentView.findViewById(R.id.info);
-            collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
+            if(isCollection == false) {
+                collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ public abstract class BaseListFragment extends Fragment{
 
     protected View parentView;
     protected RecyclerView recyclerView;
-    protected RecyclerView.LayoutManager mLayoutgManager;
+    protected RecyclerView.LayoutManager mLayoutManager;
     protected PullToRefreshView refreshView;
 
     protected ImageView placeHolder;
@@ -37,10 +37,10 @@ public abstract class BaseListFragment extends Fragment{
 
     protected int mLayout = 0;
 
+
     protected boolean withHeaderTab = true;
     protected boolean withRefreshView = true;
     protected boolean isNewLoad = true;
-
 
 
     protected abstract void onCreateCache();
@@ -50,11 +50,13 @@ public abstract class BaseListFragment extends Fragment{
     protected abstract void loadFromNet();
     protected abstract void loadFromCache();
     protected abstract boolean hasData();
+    protected abstract void getArgs();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setLayout();
+        getArgs();
         parentView = inflater.inflate(mLayout, container, false);
         withHeaderTab = setHeaderTab();
         withRefreshView = setRefreshView();
@@ -68,7 +70,7 @@ public abstract class BaseListFragment extends Fragment{
         adapter = bindAdapter();
 
 
-        mLayoutgManager = new LinearLayoutManager(LeisureApplication.AppContext);
+        mLayoutManager = new LinearLayoutManager(LeisureApplication.AppContext);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -141,7 +143,6 @@ public abstract class BaseListFragment extends Fragment{
                 }
                 placeHolder.setVisibility(View.VISIBLE);
             }
-
 
             progressBar.setVisibility(View.GONE);
             adapter.notifyDataSetChanged();

@@ -2,39 +2,47 @@ package com.mummyding.app.leisure.cache.cache;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Handler;
 
+import com.google.gson.Gson;
+import com.mummyding.app.leisure.api.ReadingApi;
 import com.mummyding.app.leisure.cache.table.ReadingTable;
 import com.mummyding.app.leisure.model.reading.BookBean;
+import com.mummyding.app.leisure.model.reading.ReadingBean;
+import com.mummyding.app.leisure.support.CONSTANT;
+import com.mummyding.app.leisure.support.HttpUtil;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by mummyding on 15-11-26.
  */
-public class ReadingCache extends BaseCache{
+public class ReadingCache extends BaseCache<BookBean>{
 
     private ReadingTable table;
-    private List<Object> readingList = new ArrayList<>();
 
-    public ReadingCache(Context context) {
-        super(context);
-        table = new ReadingTable();
+    protected ReadingCache(Context context, Handler handler, String category, String[] urls) {
+        super(context, handler, category, urls);
     }
 
+
     @Override
-    protected void putData(List<? extends Object> list,String category) {
-        db.execSQL(mHelper.DROP_TABLE+table.NAME);
+    protected void putData() {
+        db.execSQL(mHelper.DROP_TABLE + table.NAME);
         db.execSQL(table.CREATE_TABLE);
-        for(int i=0;i<list.size();i++){
-            BookBean bookBean = (BookBean) list.get(i);
+        for(int i=0;i<mList.size();i++){
+            BookBean bookBean = mList.get(i);
             values.put(ReadingTable.TITLE,bookBean.getTitle());
             values.put(ReadingTable.INFO,bookBean.getInfo());
             values.put(ReadingTable.IMAGE, bookBean.getImage());
             values.put(ReadingTable.AUTHOR_INTRO,bookBean.getAuthor_intro() ==null ? "":bookBean.getAuthor_intro());
             values.put(ReadingTable.CATALOG,bookBean.getCatalog() == null? "":bookBean.getCatalog());
             values.put(ReadingTable.EBOOK_URL,bookBean.getEbook_url() == null?"":bookBean.getEbook_url());
-            values.put(ReadingTable.CATEGORY,category);
+            values.put(ReadingTable.CATEGORY,mCategory);
             values.put(ReadingTable.SUMMARY,bookBean.getSummary() == null?"":bookBean.getSummary());
             values.put(ReadingTable.IS_COLLECTED,bookBean.getIs_collected());
             db.insert(ReadingTable.NAME,null,values);
@@ -42,9 +50,9 @@ public class ReadingCache extends BaseCache{
         db.execSQL(table.SQL_INIT_COLLECTION_FLAG);
     }
 
+
     @Override
-    protected void putData(Object object) {
-        BookBean bookBean = (BookBean) object;
+    protected void putData(BookBean bookBean) {
         values.put(ReadingTable.TITLE,bookBean.getTitle());
         values.put(ReadingTable.INFO,bookBean.getInfo());
         values.put(ReadingTable.IMAGE, bookBean.getImage());
@@ -57,12 +65,12 @@ public class ReadingCache extends BaseCache{
     }
 
     @Override
-    public synchronized List<Object> loadFromCache(String category) {
+    public synchronized List<BookBean> loadFromCache() {
         String sql = null;
-        if(category == null){
+        if(mCategory == null){
             sql = "select * from "+table.NAME;
         }else {
-            sql = "select * from "+table.NAME +" where "+table.CATEGORY+"=\'"+category+"\'";
+            sql = "select * from "+table.NAME +" where "+table.CATEGORY+"=\'"+mCategory+"\'";
         }
         Cursor cursor = query(sql);
         while (cursor.moveToNext()){
@@ -75,9 +83,42 @@ public class ReadingCache extends BaseCache{
             bookBean.setEbook_url(cursor.getString(ReadingTable.ID_EBOOK_URL));
             bookBean.setSummary(cursor.getString(ReadingTable.ID_SUMMARY));
             bookBean.setIs_collected(cursor.getInt(ReadingTable.ID_IS_COLLECTED));
-            readingList.add(bookBean);
+            mList.add(bookBean);
         }
         cursor.close();
-        return readingList;
+        return mList;
+    }
+
+    @Override
+    public void load() {
+
+        for(int i = 0 ; i<mUrls.length; i++){
+            String url = mUrls[i];
+            Request.Builder builder = new Request.Builder();
+            builder.url(url);
+            Request request = builder.build();
+
+            HttpUtil.enqueue(request, new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    mHandler.sendEmptyMessage(CONSTANT.ID_FAILURE);
+                }
+
+                @Override
+                public void onResponse(com.squareup.okhttp.Response response) throws IOException {
+                    if (response.isSuccessful() == false) {
+                        mHandler.sendEmptyMessage(CONSTANT.ID_FAILURE);
+                        return;
+                    }
+                    Gson gson = new Gson();
+                    BookBean[] bookBeans = gson.fromJson(response.body().string(), ReadingBean.class).getBooks();
+                    for (BookBean bookBean : bookBeans) {
+                        mList.add(bookBean);
+                    }
+                    mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
+                }
+            });
+        }
+
     }
 }

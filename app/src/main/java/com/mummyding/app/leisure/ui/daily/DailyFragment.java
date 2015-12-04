@@ -72,7 +72,7 @@ public class DailyFragment extends BaseListFragment{
 
     @Override
     protected RecyclerView.Adapter bindAdapter() {
-        return new DailyAdapter(dailyCache,getContext());
+        return new DailyAdapter(getContext(),dailyCache);
     }
 
     @Override
@@ -88,5 +88,10 @@ public class DailyFragment extends BaseListFragment{
     @Override
     protected boolean hasData() {
         return dailyCache.hasData();
+    }
+
+    @Override
+    protected void getArgs() {
+
     }
 }

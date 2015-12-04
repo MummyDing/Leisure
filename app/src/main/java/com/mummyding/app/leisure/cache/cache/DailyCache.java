@@ -38,7 +38,7 @@ public class DailyCache extends BaseCache<DailyBean>{
     }
 
     @Override
-    protected void putData(String category) {
+    protected void putData() {
         db.execSQL(mHelper.DROP_TABLE + table.NAME);
         db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
@@ -61,12 +61,6 @@ public class DailyCache extends BaseCache<DailyBean>{
         values.put(DailyTable.INFO, dailyBean.getInfo());
         db.insert(DailyTable.COLLECTION_NAME, null, values);
     }
-
-   /* @Override
-    public List<DailyBean> getmList() {
-        return mList;
-    }*/
-
     @Override
     public synchronized List<DailyBean> loadFromCache() {
         String sql = "select * from "+table.NAME;
