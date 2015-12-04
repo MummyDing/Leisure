@@ -29,8 +29,6 @@ public class ReadingCache extends BaseCache<BookBean>{
         super(context, handler, category, urls);
     }
 
-
-
     @Override
     protected void putData() {
         db.execSQL(mHelper.DROP_TABLE + table.NAME);
@@ -66,7 +64,7 @@ public class ReadingCache extends BaseCache<BookBean>{
     }
 
     @Override
-    public synchronized List<BookBean> loadFromCache() {
+    public synchronized void loadFromCache() {
         String sql = null;
         if(mCategory == null){
             sql = "select * from "+table.NAME;
@@ -88,7 +86,6 @@ public class ReadingCache extends BaseCache<BookBean>{
         }
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
         cursor.close();
-        return mList;
     }
 
     @Override
@@ -117,7 +114,6 @@ public class ReadingCache extends BaseCache<BookBean>{
                     for (BookBean bookBean : bookBeans) {
                         mList.add(bookBean);
                     }
-                    cache();
                     mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
                 }
             });

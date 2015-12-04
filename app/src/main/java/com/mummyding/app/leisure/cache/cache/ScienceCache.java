@@ -61,7 +61,7 @@ public class ScienceCache extends BaseCache<ArticleBean>{
     }
 
     @Override
-    public synchronized List<ArticleBean> loadFromCache() {
+    public synchronized void loadFromCache() {
         String sql = null;
         if(mCategory == null){
             sql = "select * from "+table.NAME;
@@ -86,7 +86,6 @@ public class ScienceCache extends BaseCache<ArticleBean>{
         }
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
         cursor.close();
-        return mList;
     }
 
     @Override
@@ -111,7 +110,6 @@ public class ScienceCache extends BaseCache<ArticleBean>{
                 for (ArticleBean articleBean : articleBeans) {
                     mList.add(articleBean);
                 }
-                cache();
                 mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
             }
         });

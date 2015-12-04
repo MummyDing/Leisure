@@ -11,4 +11,6 @@ public interface ICache<T>{
     List<T> getmList();
     boolean hasData();
     void load();
+    void loadFromCache();
+    void cache();
 }

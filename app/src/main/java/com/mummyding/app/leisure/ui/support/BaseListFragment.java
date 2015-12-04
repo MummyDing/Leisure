@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 
 import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.cache.cache.ICache;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.Utils;
 import com.yalantis.phoenix.PullToRefreshView;
@@ -34,6 +35,7 @@ public abstract class BaseListFragment extends Fragment{
     protected ProgressBar progressBar;
 
     protected RecyclerView.Adapter adapter;
+    protected ICache cache;
 
     protected int mLayout = 0;
 
@@ -56,7 +58,7 @@ public abstract class BaseListFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setLayout();
-        setCache();
+        needCache = setCache();
         getArgs();
         parentView = inflater.inflate(mLayout, container, false);
         withHeaderTab = setHeaderTab();
@@ -75,10 +77,14 @@ public abstract class BaseListFragment extends Fragment{
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(mLayoutManager);
+
+        View view = getActivity().findViewById(R.id.tab_layout);
         if(withHeaderTab){
-            getActivity().findViewById(R.id.tab_layout).setVisibility(View.VISIBLE);
+             view.setVisibility(View.VISIBLE);
         }else{
-            getActivity().findViewById(R.id.tab_layout).setVisibility(View.GONE);
+            if(view !=null) {
+                view.setVisibility(View.GONE);
+            }
         }
 
         if(withRefreshView){
@@ -133,7 +139,7 @@ public abstract class BaseListFragment extends Fragment{
                         Utils.DLog(getString(R.string.text_refresh_success));
                     }
                     if(needCache){
-                        
+                        cache.cache();
                     }
                     break;
                 case CONSTANT.ID_FROM_CACHE:

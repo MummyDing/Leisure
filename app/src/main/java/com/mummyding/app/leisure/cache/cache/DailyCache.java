@@ -62,7 +62,7 @@ public class DailyCache extends BaseCache<DailyBean>{
         db.insert(DailyTable.COLLECTION_NAME, null, values);
     }
     @Override
-    public synchronized List<DailyBean> loadFromCache() {
+    public synchronized void loadFromCache() {
         String sql = "select * from "+table.NAME;
         Cursor cursor = query(sql);
         while (cursor.moveToNext()){
@@ -76,7 +76,6 @@ public class DailyCache extends BaseCache<DailyBean>{
         }
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
         cursor.close();
-        return mList;
     }
     public void load(){
         Request.Builder builder = new Request.Builder();
@@ -99,7 +98,6 @@ public class DailyCache extends BaseCache<DailyBean>{
                 try {
                     mList.addAll(SAXDailyParse.parse(is));
                     is.close();
-                    cache();
                     mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();

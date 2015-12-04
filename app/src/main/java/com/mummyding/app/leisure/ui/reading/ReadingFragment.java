@@ -56,7 +56,6 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class ReadingFragment extends BaseListFragment {
 
-    private ReadingCache readingCache;
     private int pos;
     private String mCategory;
     private String [] mUrls;
@@ -65,27 +64,27 @@ public class ReadingFragment extends BaseListFragment {
 
     @Override
     protected void onCreateCache() {
-        readingCache = new ReadingCache(getContext(),handler,mCategory,mUrls);
+        cache = new ReadingCache(getContext(),handler,mCategory,mUrls);
     }
 
     @Override
     protected RecyclerView.Adapter bindAdapter() {
-        return new ReadingAdapter(getContext(),readingCache);
+        return new ReadingAdapter(getContext(),cache);
     }
 
     @Override
     protected void loadFromNet() {
-        readingCache.load();
+        cache.load();
     }
 
     @Override
     protected void loadFromCache() {
-        readingCache.loadFromCache();
+        cache.loadFromCache();
     }
 
     @Override
     protected boolean hasData() {
-        return readingCache.hasData();
+        return cache.hasData();
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.mummyding.app.leisure.ui.reading;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,19 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.google.gson.Gson;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ReadingApi;
-import com.mummyding.app.leisure.model.reading.BookBean;
-import com.mummyding.app.leisure.model.reading.ReadingBean;
-import com.mummyding.app.leisure.support.CONSTANT;
-import com.mummyding.app.leisure.support.HttpUtil;
+import com.mummyding.app.leisure.cache.cache.ReadingCache;
+import com.mummyding.app.leisure.support.Utils;
+import com.mummyding.app.leisure.support.adapter.ReadingAdapter;
 import com.mummyding.app.leisure.ui.support.BaseListFragment;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.Request;
-
-import java.io.IOException;
-
 public class ReadingActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -58,32 +49,39 @@ public class ReadingActivity extends AppCompatActivity {
 
         @Override
         protected void onCreateCache() {
-
+            Utils.showToast(url);
+            cache = new ReadingCache(getContext(),handler,null,new String[]{url});
         }
 
         @Override
         protected RecyclerView.Adapter bindAdapter() {
-            return null;
+            return new ReadingAdapter(getContext(),cache);
         }
 
         @Override
         protected void loadFromNet() {
+            cache.load();
 
         }
 
         @Override
         protected void loadFromCache() {
-
+            loadFromNet();
         }
 
         @Override
         protected boolean hasData() {
-            return false;
+            return cache.hasData();
         }
 
         @Override
         protected void getArgs() {
 
+        }
+
+        @Override
+        protected boolean setCache() {
+            return false;
         }
     }
 }

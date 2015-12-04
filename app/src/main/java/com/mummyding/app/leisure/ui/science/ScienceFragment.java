@@ -43,33 +43,32 @@ import java.util.List;
 
 public class ScienceFragment extends BaseListFragment{
 
-    private ScienceCache scienceCache;
     private String mCategory;
     private String mUrl;
 
     @Override
     protected void onCreateCache() {
-        scienceCache = new ScienceCache(getContext(),handler,mCategory,mUrl);
+        cache = new ScienceCache(getContext(),handler,mCategory,mUrl);
     }
 
     @Override
     protected RecyclerView.Adapter bindAdapter() {
-        return new ScienceAdapter(getContext(),scienceCache);
+        return new ScienceAdapter(getContext(),cache);
     }
 
     @Override
     protected void loadFromNet() {
-        scienceCache.load();
+        cache.load();
     }
 
     @Override
     protected void loadFromCache() {
-        scienceCache.loadFromCache();
+        cache.loadFromCache();
     }
 
     @Override
     protected boolean hasData() {
-        return scienceCache.hasData();
+        return cache.hasData();
     }
 
     @Override

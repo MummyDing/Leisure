@@ -79,7 +79,7 @@ public abstract class BaseCache<T> implements ICache<T>{
         return !mList.isEmpty();
     }
 
-    public  abstract List<T> loadFromCache();
+    public  abstract void loadFromCache();
     protected Cursor query(String sql){
         return mHelper.getReadableDatabase().rawQuery(sql,null);
     }

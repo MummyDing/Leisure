@@ -58,7 +58,7 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class DailyFragment extends BaseListFragment{
 
-    private DailyCache dailyCache;
+
 
     @Override
     protected boolean setHeaderTab() {
@@ -67,27 +67,27 @@ public class DailyFragment extends BaseListFragment{
 
     @Override
     protected void onCreateCache() {
-        dailyCache = new DailyCache(getContext(),handler);
+        cache = new DailyCache(getContext(),handler);
     }
 
     @Override
     protected RecyclerView.Adapter bindAdapter() {
-        return new DailyAdapter(getContext(),dailyCache);
+        return new DailyAdapter(getContext(),cache);
     }
 
     @Override
     protected void loadFromNet() {
-        dailyCache.load();
+        cache.load();
     }
 
     @Override
     protected void loadFromCache() {
-        dailyCache.loadFromCache();
+        cache.loadFromCache();
     }
 
     @Override
     protected boolean hasData() {
-        return dailyCache.hasData();
+        return cache.hasData();
     }
 
     @Override
