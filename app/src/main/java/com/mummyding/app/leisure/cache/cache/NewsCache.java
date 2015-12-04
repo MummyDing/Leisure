@@ -81,6 +81,7 @@ public class NewsCache extends BaseCache<NewsBean>{
             newsBean.setIs_collected(cursor.getInt(NewsTable.ID_IS_COLLECTED));
             mList.add(newsBean);
         }
+        mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
        // cursor.close();
         return mList;
     }
@@ -107,6 +108,7 @@ public class NewsCache extends BaseCache<NewsBean>{
                 try {
                     mList.addAll(SAXNewsParse.parse(is));
                     is.close();
+                    cache();
                     mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();

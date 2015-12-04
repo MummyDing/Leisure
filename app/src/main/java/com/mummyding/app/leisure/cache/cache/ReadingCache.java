@@ -25,9 +25,10 @@ public class ReadingCache extends BaseCache<BookBean>{
 
     private ReadingTable table;
 
-    protected ReadingCache(Context context, Handler handler, String category, String[] urls) {
+    public ReadingCache(Context context, Handler handler, String category, String[] urls) {
         super(context, handler, category, urls);
     }
+
 
 
     @Override
@@ -85,6 +86,7 @@ public class ReadingCache extends BaseCache<BookBean>{
             bookBean.setIs_collected(cursor.getInt(ReadingTable.ID_IS_COLLECTED));
             mList.add(bookBean);
         }
+        mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
         cursor.close();
         return mList;
     }
@@ -115,6 +117,7 @@ public class ReadingCache extends BaseCache<BookBean>{
                     for (BookBean bookBean : bookBeans) {
                         mList.add(bookBean);
                     }
+                    cache();
                     mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
                 }
             });

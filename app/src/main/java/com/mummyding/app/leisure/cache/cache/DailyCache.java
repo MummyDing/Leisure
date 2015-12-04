@@ -74,6 +74,7 @@ public class DailyCache extends BaseCache<DailyBean>{
             dailyBean.setIs_collected(cursor.getInt(DailyTable.ID_IS_COLLETED));
             mList.add(dailyBean);
         }
+        mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
         cursor.close();
         return mList;
     }
@@ -98,6 +99,7 @@ public class DailyCache extends BaseCache<DailyBean>{
                 try {
                     mList.addAll(SAXDailyParse.parse(is));
                     is.close();
+                    cache();
                     mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();

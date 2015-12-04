@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -15,6 +16,7 @@ import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.model.reading.ReadingBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
+import com.mummyding.app.leisure.ui.support.BaseListFragment;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 
@@ -47,42 +49,41 @@ public class ReadingActivity extends AppCompatActivity {
         transaction.replace(R.id.framelayout,fragment);
         transaction.commit();
     }
-    class BookListFragment extends ReadingFragment{
-        @Override
-        protected void getData() {
-        }
-        @Override
-        protected void loadNewsFromNet() {
-            refreshView.setRefreshing(true);
-            new Thread(new Runnable() {
-                @TargetApi(Build.VERSION_CODES.KITKAT)
-                @Override
-                public void run() {
-                        Request.Builder builder = new Request.Builder();
-                        builder.url(url);
-                        Request request = builder.build();
-                        HttpUtil.enqueue(request, new Callback() {
-                            @Override
-                            public void onFailure(Request request, IOException e) {
-                                handler.sendEmptyMessage(CONSTANT.ID_FAILURE);
-                            }
+    class BookListFragment extends BaseListFragment{
 
-                            @Override
-                            public void onResponse(com.squareup.okhttp.Response response) throws IOException {
-                                if (response.isSuccessful() == false) {
-                                    handler.sendEmptyMessage(CONSTANT.ID_FAILURE);
-                                    return;
-                                }
-                                Gson gson = new Gson();
-                                BookBean[] bookBeans = gson.fromJson(response.body().string(), ReadingBean.class).getBooks();
-                                for (BookBean bookBean : bookBeans) {
-                                    items.add(bookBean);
-                                }
-                                handler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
-                            }
-                        });
-                    }
-            }).start();
+        @Override
+        protected boolean setHeaderTab() {
+            return false;
+        }
+
+        @Override
+        protected void onCreateCache() {
+
+        }
+
+        @Override
+        protected RecyclerView.Adapter bindAdapter() {
+            return null;
+        }
+
+        @Override
+        protected void loadFromNet() {
+
+        }
+
+        @Override
+        protected void loadFromCache() {
+
+        }
+
+        @Override
+        protected boolean hasData() {
+            return false;
+        }
+
+        @Override
+        protected void getArgs() {
+
         }
     }
 }

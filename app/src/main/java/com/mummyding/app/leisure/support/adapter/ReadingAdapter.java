@@ -12,32 +12,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.cache.cache.ICache;
 import com.mummyding.app.leisure.cache.cache.ReadingCache;
 import com.mummyding.app.leisure.cache.table.ReadingTable;
 import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.reading.ReadingDetailsActivity;
 
+import com.mummyding.app.leisure.support.adapter.ReadingAdapter.ViewHolder;
+
 import java.util.List;
 
 /**
  * Created by mummyding on 15-11-15.
  */
-public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHolder> {
+public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
 
-    private List<BookBean> items;
-    private Context mContext;
-    private ReadingCache cache;
-    public ReadingAdapter(List<BookBean> items, Context mContext) {
-        this.items = items;
-        this.mContext = mContext;
-        cache = new ReadingCache(LeisureApplication.AppContext);
+
+    public ReadingAdapter(Context context, ICache<BookBean> cache) {
+        super(context, cache);
     }
 
     @Override
@@ -72,26 +70,24 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
             holder.parentView.setBackground(mContext.getResources().getDrawable(R.drawable.item_bg, null));
         }
 
+        if(isCollection){
+            return;
+        }
+
+
         holder.collect_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 bookBean.setIs_collected(isChecked ? 1 : 0);
-                cache.execSQL(ReadingTable.updateCollectionFlag(bookBean.getTitle(), isChecked ? 1 : 0));
+                mCache.execSQL(ReadingTable.updateCollectionFlag(bookBean.getTitle(), isChecked ? 1 : 0));
                 if(isChecked){
-                    cache.addToCollection(bookBean);
+                    mCache.addToCollection(bookBean);
                 }else{
-                    cache.execSQL(ReadingTable.deleteCollectionFlag(bookBean.getTitle()));
+                    mCache.execSQL(ReadingTable.deleteCollectionFlag(bookBean.getTitle()));
                 }
             }
         });
         holder.collect_cb.setChecked(bookBean.getIs_collected() ==1 ? true:false);
-    }
-    public BookBean getItem(int pos){
-        return items.get(pos);
-    }
-    @Override
-    public int getItemCount() {
-        return items.size();
     }
      class ViewHolder extends RecyclerView.ViewHolder{
          private View parentView;
@@ -105,7 +101,10 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
              imageView = (SimpleDraweeView) itemView.findViewById(R.id.bookImg);
              title = (TextView) itemView.findViewById(R.id.bookTitle);
              info = (TextView) itemView.findViewById(R.id.bookInfo);
-             collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
+
+             if(isCollection == false) {
+                 collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
+             }
          }
      }
 }

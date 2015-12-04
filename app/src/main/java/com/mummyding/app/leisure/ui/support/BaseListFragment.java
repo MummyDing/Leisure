@@ -40,7 +40,7 @@ public abstract class BaseListFragment extends Fragment{
 
     protected boolean withHeaderTab = true;
     protected boolean withRefreshView = true;
-    protected boolean isNewLoad = true;
+    protected boolean needCache = true;
 
 
     protected abstract void onCreateCache();
@@ -56,6 +56,7 @@ public abstract class BaseListFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setLayout();
+        setCache();
         getArgs();
         parentView = inflater.inflate(mLayout, container, false);
         withHeaderTab = setHeaderTab();
@@ -73,7 +74,7 @@ public abstract class BaseListFragment extends Fragment{
         mLayoutManager = new LinearLayoutManager(LeisureApplication.AppContext);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        recyclerView.setLayoutManager(mLayoutManager);
         if(withHeaderTab){
             getActivity().findViewById(R.id.tab_layout).setVisibility(View.VISIBLE);
         }else{
@@ -111,6 +112,9 @@ public abstract class BaseListFragment extends Fragment{
     protected boolean setRefreshView(){
         return true;
     }
+    protected boolean setCache(){
+        return true;
+    }
     protected void setLayout(){
         mLayout = R.layout.layout_common_list;
     }
@@ -128,19 +132,24 @@ public abstract class BaseListFragment extends Fragment{
                     if(isAdded()){
                         Utils.DLog(getString(R.string.text_refresh_success));
                     }
+                    if(needCache){
+                        
+                    }
+                    break;
+                case CONSTANT.ID_FROM_CACHE:
+                    if(withRefreshView && hasData() == false){
+                        loadFromNet();
+                        return false;
+                    }
                     break;
             }
             if(withRefreshView){
                 refreshView.setRefreshing(false);
             }
 
-
             if(hasData()){
                 placeHolder.setVisibility(View.GONE);
             }else{
-                if(isNewLoad && withRefreshView){
-                    loadFromNet();
-                }
                 placeHolder.setVisibility(View.VISIBLE);
             }
 
