@@ -1,5 +1,6 @@
 package com.mummyding.app.leisure.ui.collection;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.mummyding.app.leisure.R;
@@ -18,10 +19,15 @@ public class BaseCollectionFragment extends AbsTopNavigationFragment{
         pagerAdapter = new PagerAdapter(getFragmentManager(),tabTitles) {
             @Override
             public Fragment getItem(int position) {
-
-                return null;
+                Fragment fragment = new CollectionFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt(getString(R.string.id_pos),position);
+                fragment.setArguments(bundle);
+                return fragment;
             }
         };
         return pagerAdapter;
     }
+
+
 }

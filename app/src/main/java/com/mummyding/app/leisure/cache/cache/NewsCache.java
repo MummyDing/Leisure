@@ -1,7 +1,9 @@
 package com.mummyding.app.leisure.cache.cache;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Handler;
 
 import com.mummyding.app.leisure.cache.table.NewsTable;
@@ -96,6 +98,7 @@ public class NewsCache extends BaseCache<NewsBean>{
                 mHandler.sendEmptyMessage(CONSTANT.ID_FAILURE);
             }
 
+            @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
                 if (response.isSuccessful() == false) {
