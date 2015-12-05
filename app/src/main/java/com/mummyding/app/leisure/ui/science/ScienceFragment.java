@@ -20,7 +20,7 @@ public class ScienceFragment extends BaseListFragment{
 
     @Override
     protected void onCreateCache() {
-        cache = new ScienceCache(getContext(),handler,mCategory,mUrl);
+        cache = new ScienceCache(handler,mCategory,mUrl);
     }
 
     @Override

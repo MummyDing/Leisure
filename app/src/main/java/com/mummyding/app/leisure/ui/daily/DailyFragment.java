@@ -20,7 +20,7 @@ public class DailyFragment extends BaseListFragment{
 
     @Override
     protected void onCreateCache() {
-        cache = new DailyCache(getContext(),handler);
+        cache = new DailyCache(handler);
     }
 
     @Override

@@ -25,7 +25,6 @@ public abstract class AbsTopNavigationFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       //    setRetainInstance(true);
     }
     @Nullable
     @Override
@@ -38,13 +37,5 @@ public abstract class AbsTopNavigationFragment extends Fragment{
         viewPager.setAdapter(pagerAdapter);
         smartTabLayout.setViewPager(viewPager);
         return parentView;
-    }
-    public void onDestroyView() {
-        super.onDestroyView();
-        parentView = null;
-        viewPager = null;
-        pagerAdapter = null;
-        smartTabLayout = null;
-        Utils.DLog("special~~~~~~~~");
     }
 }

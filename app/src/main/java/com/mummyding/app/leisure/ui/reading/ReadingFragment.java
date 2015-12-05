@@ -21,7 +21,7 @@ public class ReadingFragment extends BaseListFragment {
 
     @Override
     protected void onCreateCache() {
-        cache = new ReadingCache(getContext(),handler,mCategory,mUrls);
+        cache = new ReadingCache(handler,mCategory,mUrls);
     }
 
     @Override

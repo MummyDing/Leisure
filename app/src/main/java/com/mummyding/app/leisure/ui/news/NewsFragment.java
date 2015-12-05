@@ -17,7 +17,7 @@ public class NewsFragment extends BaseListFragment {
 
     @Override
     protected void onCreateCache() {
-        cache = new NewsCache(getContext(),handler,mCategory,mUrl);
+        cache = new NewsCache(handler,mCategory,mUrl);
     }
 
     @Override

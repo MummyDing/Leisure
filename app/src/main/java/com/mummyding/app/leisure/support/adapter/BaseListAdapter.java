@@ -18,7 +18,6 @@ public abstract class BaseListAdapter<M,VH extends RecyclerView.ViewHolder> exte
     protected ICache<M> mCache;
 
     protected boolean isCollection = false;
-    protected int mItemLayout = 0;
 
 
     public BaseListAdapter(Context context, ICache<M> cache) {

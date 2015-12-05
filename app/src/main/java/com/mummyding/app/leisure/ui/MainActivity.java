@@ -1,26 +1,19 @@
 package com.mummyding.app.leisure.ui;
 
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -33,19 +26,18 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mummyding.app.leisure.R;
-import com.mummyding.app.leisure.support.ScreenUtil;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.about.AboutActivity;
 import com.mummyding.app.leisure.ui.collection.BaseCollectionFragment;
 import com.mummyding.app.leisure.ui.daily.DailyFragment;
 import com.mummyding.app.leisure.ui.news.BaseNewsFragment;
-import com.mummyding.app.leisure.ui.news.NewsFragment;
 import com.mummyding.app.leisure.ui.reading.BaseReadingFragment;
 import com.mummyding.app.leisure.ui.reading.ReadingActivity;
-import com.mummyding.app.leisure.ui.reading.ReadingFragment;
 import com.mummyding.app.leisure.ui.science.BaseScienceFragment;
 
-import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,12 +48,21 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction fragmentTransaction;
     private  Fragment currentFragment ;
     private Menu menu;
+    List<Fragment> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ScreenUtil.init(this);
         initData();
+
+        list = new ArrayList<>();
+        list.add(new DailyFragment());
+        list.add(new BaseReadingFragment());
+        list.add(new BaseNewsFragment());
+        list.add(new BaseScienceFragment());
+        list.add(new BaseCollectionFragment());
+
+
         currentFragment =new DailyFragment();
         switchFragment();
     }
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             getMenuInflater().inflate(resourceMenu, menu);
         }
         currentFragment = null;
+        fragment = null;
     }
     private void initData(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -178,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.menu_home:
                 drawer.setSelection(R.mipmap.ic_home);
-                currentFragment =  new DailyFragment();
+                currentFragment = new DailyFragment();
                 break;
             case R.id.menu_reading:
                 drawer.setSelection(R.mipmap.ic_reading);
@@ -197,7 +199,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         switchFragment();
-        currentFragment = null;
         return super.onOptionsItemSelected(item);
     }
     private void showSearchDialog(){

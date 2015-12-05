@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 
+import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.database.DatabaseHelper;
 import com.mummyding.app.leisure.database.cache.ICache;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by mummyding on 15-11-26.
  */
 public abstract class BaseCache<T> implements ICache<T> {
-    protected Context mContext;
+    protected Context mContext = LeisureApplication.AppContext;
     protected DatabaseHelper mHelper;
     protected SQLiteDatabase db;
 
@@ -29,22 +30,21 @@ public abstract class BaseCache<T> implements ICache<T> {
     protected String mUrl;
     protected String[] mUrls;
 
-    protected BaseCache(Context context,Handler handler,String category){
-        mContext = context;
+    protected BaseCache(Handler handler,String category){
         mHelper = DatabaseHelper.instance(mContext);
         mCategory = category;
         mHandler = handler;
     }
-    protected BaseCache(Context context,Handler handler,String category,String[] urls){
-        this(context,handler,category);
+    protected BaseCache(Handler handler,String category,String[] urls){
+        this(handler,category);
         mUrls = urls;
     }
-    protected BaseCache(Context context,Handler handler,String category,String url){
-        this(context,handler,category);
+    protected BaseCache(Handler handler,String category,String url){
+        this(handler,category);
         mUrl = url;
     }
-    protected BaseCache(Context context,Handler handler){
-        this(context,handler,null);
+    protected BaseCache(Handler handler){
+        this(handler,null);
     }
 
     protected abstract void putData();

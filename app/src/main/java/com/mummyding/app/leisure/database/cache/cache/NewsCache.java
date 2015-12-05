@@ -31,8 +31,8 @@ public class NewsCache extends BaseCache<NewsBean> {
 
     private NewsTable table;
 
-    public NewsCache(Context context, Handler handler, String category, String url) {
-        super(context, handler, category, url);
+    public NewsCache( Handler handler, String category, String url) {
+        super(handler, category, url);
     }
 
 

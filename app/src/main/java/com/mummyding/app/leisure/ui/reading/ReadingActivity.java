@@ -50,7 +50,7 @@ public class ReadingActivity extends AppCompatActivity {
         @Override
         protected void onCreateCache() {
             Utils.showToast(url);
-            cache = new ReadingCache(getContext(),handler,null,new String[]{url});
+            cache = new ReadingCache(handler,null,new String[]{url});
         }
 
         @Override

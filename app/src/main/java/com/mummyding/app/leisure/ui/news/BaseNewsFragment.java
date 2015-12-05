@@ -32,9 +32,4 @@ public  class BaseNewsFragment extends AbsTopNavigationFragment {
         };
         return pagerAdapter;
     }
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        pagerAdapter = null;
-    }
 }

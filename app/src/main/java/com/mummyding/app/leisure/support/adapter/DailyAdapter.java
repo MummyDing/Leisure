@@ -43,7 +43,6 @@ public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final DailyBean dailyBean = getItem(position);
         holder.title.setText(dailyBean.getTitle());
-        holder.image.setImageURI(null);
         holder.image.setImageURI(Uri.parse(dailyBean.getImage()));
         holder.info.setText(dailyBean.getInfo());
         holder.parentView.setOnClickListener(new View.OnClickListener() {

@@ -32,8 +32,8 @@ import javax.xml.parsers.ParserConfigurationException;
 public class DailyCache extends BaseCache<DailyBean> {
     private DailyTable table;
 
-    public DailyCache(Context context, Handler handler) {
-        super(context, handler);
+    public DailyCache(Handler handler) {
+        super(handler);
     }
 
     @Override

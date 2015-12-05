@@ -24,8 +24,8 @@ public class ScienceCache extends BaseCache<ArticleBean> {
 
     private ScienceTable table;
 
-    public ScienceCache(Context context, Handler handler, String category, String url) {
-        super(context, handler, category, url);
+    public ScienceCache(Handler handler, String category, String url) {
+        super(handler, category, url);
     }
 
 

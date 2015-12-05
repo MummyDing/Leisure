@@ -23,8 +23,8 @@ public class ReadingCache extends BaseCache<BookBean> {
 
     private ReadingTable table;
 
-    public ReadingCache(Context context, Handler handler, String category, String[] urls) {
-        super(context, handler, category, urls);
+    public ReadingCache(Handler handler, String category, String[] urls) {
+        super(handler, category, urls);
     }
 
     @Override
