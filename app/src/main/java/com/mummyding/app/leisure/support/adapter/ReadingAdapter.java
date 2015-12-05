@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.cache.cache.ICache;
 import com.mummyding.app.leisure.cache.cache.ReadingCache;
+import com.mummyding.app.leisure.cache.table.DailyTable;
 import com.mummyding.app.leisure.cache.table.ReadingTable;
 import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.support.Utils;
@@ -48,7 +50,7 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onBindViewHolder(ViewHolder holder,int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final BookBean bookBean = getItem(position);
         holder.title.setText(bookBean.getTitle());
         holder.info.setText(bookBean.getInfo());
@@ -71,6 +73,30 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
         }
 
         if(isCollection){
+            holder.collect_cb.setVisibility(View.GONE);
+            holder.text.setText(R.string.text_remove);
+            holder.text.setTextSize(20);
+            holder.text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+            holder.text.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(holder.parentView, R.string.notify_remove_from_collection, Snackbar.LENGTH_SHORT).
+                            setAction(mContext.getString(R.string.text_ok), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    if (mItems.contains(bookBean) == false) {
+                                        return;
+                                    }
+                                    mCache.execSQL(ReadingTable.updateCollectionFlag(bookBean.getTitle(), 0));
+                                    mCache.execSQL(ReadingTable.deleteCollectionFlag(bookBean.getTitle()));
+                                    mItems.remove(position);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .show();
+                }
+            });
             return;
         }
 
@@ -95,15 +121,16 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
          private TextView title;
          private TextView info;
          private CheckBox collect_cb;
+         private TextView text;
          public ViewHolder(View itemView) {
              super(itemView);
              parentView = itemView;
              imageView = (SimpleDraweeView) itemView.findViewById(R.id.bookImg);
              title = (TextView) itemView.findViewById(R.id.bookTitle);
              info = (TextView) itemView.findViewById(R.id.bookInfo);
-
-             if(isCollection == false) {
-                 collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
+             collect_cb = (CheckBox) itemView.findViewById(R.id.collect_cb);
+             if(isCollection) {
+                 text = (TextView) parentView.findViewById(R.id.text);
              }
          }
      }

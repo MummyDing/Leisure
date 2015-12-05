@@ -52,6 +52,8 @@
                 android:gravity="center"
                 android:padding="10dp"/>
             <TextView
+                android:id="@+id/text"
+                android:clickable="true"
                 android:text="@string/text_collection"
                 android:layout_below="@+id/collect_cb"
                 android:layout_width="wrap_content"

@@ -6,26 +6,31 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 
+import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.cache.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.crypto.spec.DHGenParameterSpec;
 
 /**
  * Created by mummyding on 15-12-3.
  */
 public abstract class BaseCollectionCache<T> implements ICache<T>{
 
-    protected Context mContext;
     protected DatabaseHelper mHelper;
     protected SQLiteDatabase db;
 
-    protected ContentValues values;
 
     protected List<T> mList = new ArrayList<>();
 
     protected Handler mHandler;
 
+    public BaseCollectionCache(Handler mHandler) {
+        this.mHandler = mHandler;
+        mHelper = DatabaseHelper.instance(LeisureApplication.AppContext);
+    }
 
     @Override
     public void addToCollection(T object) {
@@ -34,7 +39,8 @@ public abstract class BaseCollectionCache<T> implements ICache<T>{
 
     @Override
     public void execSQL(String sql) {
-
+        db = mHelper.getWritableDatabase();
+        db.execSQL(sql);
     }
 
     @Override

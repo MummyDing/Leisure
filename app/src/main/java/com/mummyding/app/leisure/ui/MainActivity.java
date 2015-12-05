@@ -33,6 +33,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.support.ScreenUtil;
 import com.mummyding.app.leisure.support.Utils;
+import com.mummyding.app.leisure.ui.collection.BaseCollectionFragment;
 import com.mummyding.app.leisure.ui.daily.DailyFragment;
 import com.mummyding.app.leisure.ui.news.BaseNewsFragment;
 import com.mummyding.app.leisure.ui.news.NewsFragment;
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
             switchFragment(currentFragment, getString(R.string.news),R.menu.menu_news);
         }else if(currentFragment instanceof BaseScienceFragment){
             switchFragment(currentFragment, getString(R.string.science),R.menu.menu_science);
+        }else if(currentFragment instanceof BaseCollectionFragment){
+            switchFragment(currentFragment,getString(R.string.shake),R.menu.menu_daily);
         }
     }
     private void switchFragment(Fragment fragment,String title,int resourceMenu){
@@ -139,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                                Toast.makeText(MainActivity.this, "about", Toast.LENGTH_SHORT).show();
                                break;
                            case R.mipmap.ic_shake:
+                               currentFragment = new BaseCollectionFragment();
                                Toast.makeText(MainActivity.this, "Shake Shakes", Toast.LENGTH_SHORT).show();
                                break;
                        }

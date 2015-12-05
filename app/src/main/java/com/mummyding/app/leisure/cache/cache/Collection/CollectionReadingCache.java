@@ -1,48 +1,43 @@
 package com.mummyding.app.leisure.cache.cache.Collection;
 
+import android.database.Cursor;
+import android.os.Handler;
+
+import com.mummyding.app.leisure.cache.cache.BaseCollectionCache;
 import com.mummyding.app.leisure.cache.cache.ICache;
+import com.mummyding.app.leisure.cache.table.ReadingTable;
 import com.mummyding.app.leisure.model.reading.BookBean;
+import com.mummyding.app.leisure.support.CONSTANT;
 
 import java.util.List;
 
 /**
  * Created by mummyding on 15-12-4.
  */
-public class CollectionReadingCache implements ICache<BookBean>{
+public class CollectionReadingCache extends BaseCollectionCache<BookBean> {
 
 
-    @Override
-    public void addToCollection(BookBean object) {
+    private ReadingTable table;
 
-    }
-
-    @Override
-    public void execSQL(String sql) {
-
-    }
-
-    @Override
-    public List<BookBean> getmList() {
-        return null;
-    }
-
-    @Override
-    public boolean hasData() {
-        return false;
-    }
-
-    @Override
-    public void load() {
-
+    public CollectionReadingCache(Handler mHandler) {
+        super(mHandler);
     }
 
     @Override
     public void loadFromCache() {
-
-    }
-
-    @Override
-    public void cache() {
-
+        Cursor cursor = query(table.SELECT_ALL_FROM_COLLECTION);
+        while (cursor.moveToNext()){
+            BookBean bookBean = new BookBean();
+            bookBean.setTitle(cursor.getString(table.ID_TITLE));
+            bookBean.setSummary(cursor.getString(table.ID_SUMMARY));
+            bookBean.setImage(cursor.getString(table.ID_INFO));
+            bookBean.setImage(cursor.getString(table.ID_IMAGE));
+            bookBean.setInfo(cursor.getString(table.ID_INFO));
+            bookBean.setEbook_url(cursor.getString(table.ID_EBOOK_URL));
+            bookBean.setAuthor_intro(cursor.getString(table.ID_AUTHOR_INTRO));
+            bookBean.setCatalog(cursor.getString(table.ID_CATALOG));
+            mList.add(bookBean);
+        }
+        mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
     }
 }

@@ -38,6 +38,8 @@ public class NewsTable {
             LINK+" text,"+
             CATEGORY+" text)";
 
+    public static final String SELECT_ALL_FROM_COLLECTION = "select * from "+COLLECTION_NAME;
+
     public static final String SQL_INIT_COLLECTION_FLAG= "update "+NAME+
             " set "+IS_COLLECTED+" =1 where "+TITLE+" in ( select "+TITLE+
             " from "+COLLECTION_NAME+")";

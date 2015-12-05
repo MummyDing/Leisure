@@ -2,6 +2,7 @@ package com.mummyding.app.leisure.support.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.cache.cache.ICache;
 import com.mummyding.app.leisure.cache.cache.NewsCache;
+import com.mummyding.app.leisure.cache.table.DailyTable;
 import com.mummyding.app.leisure.cache.table.NewsTable;
 import com.mummyding.app.leisure.model.news.NewsBean;
 import com.mummyding.app.leisure.ui.support.WebViewUrlActivity;
@@ -45,7 +47,7 @@ public class NewsAdapter extends BaseListAdapter<NewsBean,NewsAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final NewsBean newsBean = getItem(position);
         holder.description.setText(newsBean.getDescription());
         holder.title.setText(newsBean.getTitle());
@@ -61,6 +63,27 @@ public class NewsAdapter extends BaseListAdapter<NewsBean,NewsAdapter.ViewHolder
         });
 
         if(isCollection){
+            holder.collect_cb.setVisibility(View.GONE);
+            holder.text.setVisibility(View.VISIBLE);
+            holder.text.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(holder.parentView, R.string.notify_remove_from_collection, Snackbar.LENGTH_SHORT).
+                            setAction(mContext.getString(R.string.text_ok), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (mItems.contains(newsBean)  == false){
+                                        return;
+                                    }
+                                    mCache.execSQL(NewsTable.updateCollectionFlag(newsBean.getTitle(), 0));
+                                    mCache.execSQL(NewsTable.deleteCollectionFlag(newsBean.getTitle()));
+                                    mItems.remove(position);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .show();
+                }
+            });
             return;
         }
 
@@ -85,6 +108,7 @@ public class NewsAdapter extends BaseListAdapter<NewsBean,NewsAdapter.ViewHolder
         private TextView description;
         private TextView date;
         private CheckBox collect_cb;
+        private TextView text;
         private int position;
          ViewHolder(View itemView) {
              super(itemView);
@@ -93,6 +117,7 @@ public class NewsAdapter extends BaseListAdapter<NewsBean,NewsAdapter.ViewHolder
              description = (TextView) itemView.findViewById(R.id.description);
              date = (TextView) itemView.findViewById(R.id.date);
              collect_cb = (CheckBox) itemView.findViewById(R.id.collect_cb);
+             text = (TextView) itemView.findViewById(R.id.text);
          }
     }
 

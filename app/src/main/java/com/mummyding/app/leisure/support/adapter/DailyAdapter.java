@@ -2,9 +2,12 @@ package com.mummyding.app.leisure.support.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Size;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -16,6 +19,7 @@ import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.cache.cache.ICache;
 import com.mummyding.app.leisure.cache.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.DailyBean;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.support.WebViewLocalActivity;
 
 import com.mummyding.app.leisure.support.adapter.DailyAdapter.ViewHolder;
@@ -39,7 +43,7 @@ public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final DailyBean dailyBean = getItem(position);
         holder.title.setText(dailyBean.getTitle());
         holder.image.setImageURI(null);
@@ -57,6 +61,29 @@ public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
         });
 
         if(isCollection){
+            holder.collect_cb.setVisibility(View.GONE);
+            holder.text.setText(R.string.text_remove);
+            holder.text.setTextSize(20);
+            holder.text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+            holder.text.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(holder.parentView, R.string.notify_remove_from_collection,Snackbar.LENGTH_SHORT).
+                            setAction(mContext.getString(R.string.text_ok), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (mItems.contains(dailyBean) == false){
+                                        return;
+                                    }
+                                    mCache.execSQL(DailyTable.updateCollectionFlag(dailyBean.getTitle(), 0));
+                                    mCache.execSQL(DailyTable.deleteCollectionFlag(dailyBean.getTitle()));
+                                    mItems.remove(position);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .show();
+                }
+            });
             return;
         }
 
@@ -81,14 +108,16 @@ public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
         private SimpleDraweeView image;
         private TextView info;
         private CheckBox collect_cb;
+        private TextView text;
         public ViewHolder(View itemView) {
             super(itemView);
             parentView = itemView;
             title = (TextView) parentView.findViewById(R.id.title);
             image = (SimpleDraweeView) parentView.findViewById(R.id.image);
             info = (TextView) parentView.findViewById(R.id.info);
-            if(isCollection == false) {
-                collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
+            collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
+            if(isCollection) {
+                text = (TextView) parentView.findViewById(R.id.text);
             }
         }
     }

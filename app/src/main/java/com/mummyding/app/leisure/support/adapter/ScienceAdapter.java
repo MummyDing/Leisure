@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class ScienceAdapter extends BaseListAdapter<ArticleBean,ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final ArticleBean articleBean = getItem(position);
         holder.title.setText(articleBean.getTitle());
         holder.image.setImageURI(Uri.parse(articleBean.getImage_info().getUrl()));
@@ -58,6 +59,27 @@ public class ScienceAdapter extends BaseListAdapter<ArticleBean,ViewHolder>{
         });
 
         if(isCollection){
+            holder.collect_cb.setVisibility(View.GONE);
+            holder.text.setVisibility(View.VISIBLE);
+            holder.text.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(holder.parentView, R.string.notify_remove_from_collection, Snackbar.LENGTH_SHORT).
+                            setAction(mContext.getString(R.string.text_ok), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if(mItems.contains(articleBean) == false){
+                                        return;
+                                    }
+                                    mCache.execSQL(ScienceTable.updateCollectionFlag(articleBean.getTitle(), 0));
+                                    mCache.execSQL(ScienceTable.deleteCollectionFlag(articleBean.getTitle()));
+                                    mItems.remove(position);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .show();
+                }
+            });
             return;
         }
 
@@ -85,6 +107,7 @@ public class ScienceAdapter extends BaseListAdapter<ArticleBean,ViewHolder>{
         private TextView comment;
         private SimpleDraweeView image;
         private CheckBox collect_cb;
+        private TextView text;
         public ViewHolder(View itemView) {
             super(itemView);
             parentView = itemView;
@@ -93,10 +116,8 @@ public class ScienceAdapter extends BaseListAdapter<ArticleBean,ViewHolder>{
             info = (TextView) parentView.findViewById(R.id.info);
             image = (SimpleDraweeView) parentView.findViewById(R.id.image);
             comment = (TextView) parentView.findViewById(R.id.comment);
-
-            if(isCollection == false) {
-                collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
-            }
+            collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
+            text = (TextView) itemView.findViewById(R.id.text);
         }
     }
 }

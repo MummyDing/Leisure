@@ -1,6 +1,7 @@
 package com.mummyding.app.leisure.cache.cache.Collection;
 
 import android.database.Cursor;
+import android.os.Handler;
 
 import com.mummyding.app.leisure.cache.cache.BaseCollectionCache;
 import com.mummyding.app.leisure.cache.table.DailyTable;
@@ -12,6 +13,11 @@ import com.mummyding.app.leisure.support.CONSTANT;
  */
 public class CollectionDailyCache extends BaseCollectionCache<DailyBean>{
     private DailyTable table;
+
+    public CollectionDailyCache(Handler mHandler) {
+        super(mHandler);
+    }
+
     @Override
     public synchronized void loadFromCache() {
         Cursor cursor = query(table.SELECT_ALL_FROM_COLLECTION);

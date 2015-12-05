@@ -58,33 +58,32 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class NewsFragment extends BaseListFragment {
 
-    private NewsCache newsCache;
     private String mCategory;
     private String mUrl;
 
     @Override
     protected void onCreateCache() {
-        newsCache = new NewsCache(getContext(),handler,mCategory,mUrl);
+        cache = new NewsCache(getContext(),handler,mCategory,mUrl);
     }
 
     @Override
     protected RecyclerView.Adapter bindAdapter() {
-        return new NewsAdapter(getContext(),newsCache);
+        return new NewsAdapter(getContext(),cache);
     }
 
     @Override
     protected void loadFromNet() {
-        newsCache.load();
+        cache.load();
     }
 
     @Override
     protected void loadFromCache() {
-        newsCache.loadFromCache();
+        cache.loadFromCache();
     }
 
     @Override
     protected boolean hasData() {
-        return newsCache.hasData();
+        return cache.hasData();
     }
 
     @Override
