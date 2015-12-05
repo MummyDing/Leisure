@@ -2,12 +2,10 @@ package com.mummyding.app.leisure.support.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
-import android.util.Size;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -16,10 +14,9 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.R;
-import com.mummyding.app.leisure.cache.cache.ICache;
-import com.mummyding.app.leisure.cache.table.DailyTable;
+import com.mummyding.app.leisure.database.cache.ICache;
+import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.DailyBean;
-import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.support.WebViewLocalActivity;
 
 import com.mummyding.app.leisure.support.adapter.DailyAdapter.ViewHolder;

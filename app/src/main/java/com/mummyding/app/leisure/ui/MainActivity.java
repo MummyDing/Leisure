@@ -27,12 +27,15 @@ import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.support.ScreenUtil;
 import com.mummyding.app.leisure.support.Utils;
+import com.mummyding.app.leisure.ui.about.AboutActivity;
 import com.mummyding.app.leisure.ui.collection.BaseCollectionFragment;
 import com.mummyding.app.leisure.ui.daily.DailyFragment;
 import com.mummyding.app.leisure.ui.news.BaseNewsFragment;
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         }else if(currentFragment instanceof BaseScienceFragment){
             switchFragment(currentFragment, getString(R.string.science),R.menu.menu_science);
         }else if(currentFragment instanceof BaseCollectionFragment){
-            switchFragment(currentFragment,getString(R.string.shake),R.menu.menu_daily);
+            switchFragment(currentFragment,getString(R.string.text_collection),R.menu.menu_daily);
         }
     }
     private void switchFragment(Fragment fragment,String title,int resourceMenu){
@@ -90,9 +93,20 @@ public class MainActivity extends AppCompatActivity {
     private void initData(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-         header = new AccountHeaderBuilder().withActivity(this)
+        header = new AccountHeaderBuilder().withActivity(this)
                 .withCompactStyle(false)
                 .withHeaderBackground(R.drawable.header)
+                .addProfiles(new ProfileDrawerItem().withIcon(R.drawable.logo)
+                        .withEmail(getString(R.string.author_email))
+                        .withName(getString(R.string.author_name)))
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
+                        Intent i = new Intent(MainActivity.this, AboutActivity.class);
+                        startActivity(i);
+                        return false;
+                    }
+                })
                 .build();
        drawer = new DrawerBuilder().withActivity(this)
                 .withToolbar(toolbar)
@@ -103,9 +117,8 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.reading).withIcon(R.mipmap.ic_reading).withIdentifier(R.mipmap.ic_reading),
                         new PrimaryDrawerItem().withName(R.string.news).withIcon(R.mipmap.ic_news).withIdentifier(R.mipmap.ic_news),
                         new PrimaryDrawerItem().withName(R.string.science).withIcon(R.mipmap.ic_science).withIdentifier(R.mipmap.ic_science),
-                        new PrimaryDrawerItem().withName(R.string.shake).withIcon(R.mipmap.ic_shake).withIdentifier(R.mipmap.ic_shake),
-                        new SectionDrawerItem(),
-                        new SecondaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_setting).withIdentifier(R.mipmap.ic_setting),
+                        new SectionDrawerItem().withName(R.string.app_name),
+                        new SecondaryDrawerItem().withName(R.string.id_collection).withIcon(R.mipmap.ic_collect).withIdentifier(R.mipmap.ic_collect),
                         new SecondaryDrawerItem().withName(R.string.about).withIcon(R.mipmap.ic_about).withIdentifier(R.mipmap.ic_about)
                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                    @Override
@@ -135,16 +148,16 @@ public class MainActivity extends AppCompatActivity {
                                }
                                currentFragment = new BaseScienceFragment();
                                break;
-                           case R.mipmap.ic_setting:
-                               Toast.makeText(MainActivity.this, "setting", Toast.LENGTH_SHORT).show();
+                           case R.mipmap.ic_collect:
+                               if (currentFragment instanceof BaseCollectionFragment) {
+                                   return false;
+                               }
+                               currentFragment = new BaseCollectionFragment();
                                break;
                            case R.mipmap.ic_about:
-                               Toast.makeText(MainActivity.this, "about", Toast.LENGTH_SHORT).show();
-                               break;
-                           case R.mipmap.ic_shake:
-                               currentFragment = new BaseCollectionFragment();
-                               Toast.makeText(MainActivity.this, "Shake Shakes", Toast.LENGTH_SHORT).show();
-                               break;
+                               Intent i = new Intent(MainActivity.this, AboutActivity.class);
+                               startActivity(i);
+                               return false;
                        }
                        switchFragment();
                        return false;

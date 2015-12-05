@@ -1,4 +1,4 @@
-package com.mummyding.app.leisure.cache.cache;
+package com.mummyding.app.leisure.database.cache;
 
 import java.util.List;
 

@@ -15,6 +15,7 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,6 +32,15 @@ public class Utils {
        return mContext.getResources()
                .openRawResource(fileID);
     }
+
+    public static String rawFileToString (int fileID){
+        InputStream is = readFileFromRaw(fileID);
+        Scanner scanner = new Scanner(is, "UTF-8");
+        String text = scanner.useDelimiter("\\A").next();
+        return text;
+    }
+
+
     public static Document getDocmentByIS(InputStream is){
         DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;

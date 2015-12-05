@@ -1,13 +1,13 @@
-package com.mummyding.app.leisure.cache;
+package com.mummyding.app.leisure.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.mummyding.app.leisure.cache.table.DailyTable;
-import com.mummyding.app.leisure.cache.table.NewsTable;
-import com.mummyding.app.leisure.cache.table.ReadingTable;
-import com.mummyding.app.leisure.cache.table.ScienceTable;
+import com.mummyding.app.leisure.database.table.DailyTable;
+import com.mummyding.app.leisure.database.table.NewsTable;
+import com.mummyding.app.leisure.database.table.ReadingTable;
+import com.mummyding.app.leisure.database.table.ScienceTable;
 
 /**
  * Created by mummyding on 15-11-26.

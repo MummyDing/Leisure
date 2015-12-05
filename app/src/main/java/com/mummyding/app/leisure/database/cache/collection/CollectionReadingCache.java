@@ -1,15 +1,12 @@
-package com.mummyding.app.leisure.cache.cache.Collection;
+package com.mummyding.app.leisure.database.cache.collection;
 
 import android.database.Cursor;
 import android.os.Handler;
 
-import com.mummyding.app.leisure.cache.cache.BaseCollectionCache;
-import com.mummyding.app.leisure.cache.cache.ICache;
-import com.mummyding.app.leisure.cache.table.ReadingTable;
+import com.mummyding.app.leisure.database.cache.cache.BaseCollectionCache;
+import com.mummyding.app.leisure.database.table.ReadingTable;
 import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.support.CONSTANT;
-
-import java.util.List;
 
 /**
  * Created by mummyding on 15-12-4.

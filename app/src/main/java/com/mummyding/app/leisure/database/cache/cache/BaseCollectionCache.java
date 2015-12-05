@@ -1,23 +1,20 @@
-package com.mummyding.app.leisure.cache.cache;
+package com.mummyding.app.leisure.database.cache.cache;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 
 import com.mummyding.app.leisure.LeisureApplication;
-import com.mummyding.app.leisure.cache.DatabaseHelper;
+import com.mummyding.app.leisure.database.DatabaseHelper;
+import com.mummyding.app.leisure.database.cache.ICache;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.crypto.spec.DHGenParameterSpec;
-
 /**
  * Created by mummyding on 15-12-3.
  */
-public abstract class BaseCollectionCache<T> implements ICache<T>{
+public abstract class BaseCollectionCache<T> implements ICache<T> {
 
     protected DatabaseHelper mHelper;
     protected SQLiteDatabase db;

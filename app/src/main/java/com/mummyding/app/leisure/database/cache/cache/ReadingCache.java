@@ -1,12 +1,12 @@
-package com.mummyding.app.leisure.cache.cache;
+package com.mummyding.app.leisure.database.cache.cache;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Handler;
 
 import com.google.gson.Gson;
-import com.mummyding.app.leisure.api.ReadingApi;
-import com.mummyding.app.leisure.cache.table.ReadingTable;
+import com.mummyding.app.leisure.database.cache.BaseCache;
+import com.mummyding.app.leisure.database.table.ReadingTable;
 import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.model.reading.ReadingBean;
 import com.mummyding.app.leisure.support.CONSTANT;
@@ -15,13 +15,11 @@ import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by mummyding on 15-11-26.
  */
-public class ReadingCache extends BaseCache<BookBean>{
+public class ReadingCache extends BaseCache<BookBean> {
 
     private ReadingTable table;
 

@@ -1,4 +1,4 @@
-package com.mummyding.app.leisure.cache.cache;
+package com.mummyding.app.leisure.database.cache.cache;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -7,7 +7,8 @@ import android.os.Build;
 import android.os.Handler;
 
 import com.mummyding.app.leisure.api.DailyApi;
-import com.mummyding.app.leisure.cache.table.DailyTable;
+import com.mummyding.app.leisure.database.cache.BaseCache;
+import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.DailyBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
@@ -22,15 +23,13 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Created by mummyding on 15-11-26.
  */
-public class DailyCache extends BaseCache<DailyBean>{
+public class DailyCache extends BaseCache<DailyBean> {
     private DailyTable table;
 
     public DailyCache(Context context, Handler handler) {

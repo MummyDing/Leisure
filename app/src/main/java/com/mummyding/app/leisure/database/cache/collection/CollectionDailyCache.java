@@ -1,10 +1,10 @@
-package com.mummyding.app.leisure.cache.cache.Collection;
+package com.mummyding.app.leisure.database.cache.collection;
 
 import android.database.Cursor;
 import android.os.Handler;
 
-import com.mummyding.app.leisure.cache.cache.BaseCollectionCache;
-import com.mummyding.app.leisure.cache.table.DailyTable;
+import com.mummyding.app.leisure.database.cache.cache.BaseCollectionCache;
+import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.DailyBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 

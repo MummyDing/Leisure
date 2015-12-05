@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.R;
-import com.mummyding.app.leisure.cache.cache.ICache;
-import com.mummyding.app.leisure.cache.table.ScienceTable;
+import com.mummyding.app.leisure.database.cache.ICache;
+import com.mummyding.app.leisure.database.table.ScienceTable;
 import com.mummyding.app.leisure.model.science.ArticleBean;
 import com.mummyding.app.leisure.ui.support.WebViewUrlActivity;
 import com.mummyding.app.leisure.support.adapter.ScienceAdapter.ViewHolder;

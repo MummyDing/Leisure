@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 
 import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
-import com.mummyding.app.leisure.cache.cache.ICache;
+import com.mummyding.app.leisure.database.cache.ICache;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.Utils;
 import com.yalantis.phoenix.PullToRefreshView;

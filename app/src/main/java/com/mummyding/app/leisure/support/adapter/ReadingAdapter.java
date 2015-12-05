@@ -16,19 +16,14 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
-import com.mummyding.app.leisure.cache.cache.ICache;
-import com.mummyding.app.leisure.cache.cache.ReadingCache;
-import com.mummyding.app.leisure.cache.table.DailyTable;
-import com.mummyding.app.leisure.cache.table.ReadingTable;
+import com.mummyding.app.leisure.database.cache.ICache;
+import com.mummyding.app.leisure.database.table.ReadingTable;
 import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.reading.ReadingDetailsActivity;
 
 import com.mummyding.app.leisure.support.adapter.ReadingAdapter.ViewHolder;
-
-import java.util.List;
 
 /**
  * Created by mummyding on 15-11-15.

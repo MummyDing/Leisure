@@ -2,6 +2,7 @@ package com.mummyding.app.leisure.ui.support;
 
 
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.support.BaseWebViewActivity;
 
 public class WebViewLocalActivity extends BaseWebViewActivity {

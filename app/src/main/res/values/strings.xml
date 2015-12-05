@@ -31,4 +31,7 @@
     <string name="text_refresh_success">刷新成功</string>
     <string name="text_remove">移除</string>
     <string name="notify_remove_from_collection">确定从收藏中移除吗？</string>
+    <string name="id_collection">Collection</string>
+    <string name="author_email">MummyDing@outlook.com</string>
+    <string name="author_name">MummyDing</string>
 </resources>

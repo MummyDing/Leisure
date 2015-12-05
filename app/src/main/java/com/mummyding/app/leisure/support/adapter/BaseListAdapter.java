@@ -2,12 +2,9 @@ package com.mummyding.app.leisure.support.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.mummyding.app.leisure.R;
-import com.mummyding.app.leisure.cache.cache.BaseCollectionCache;
-import com.mummyding.app.leisure.cache.cache.ICache;
+import com.mummyding.app.leisure.database.cache.cache.BaseCollectionCache;
+import com.mummyding.app.leisure.database.cache.ICache;
 
 import java.util.List;
 

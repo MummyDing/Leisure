@@ -10,16 +10,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
-import com.mummyding.app.leisure.cache.cache.ICache;
-import com.mummyding.app.leisure.cache.cache.NewsCache;
-import com.mummyding.app.leisure.cache.table.DailyTable;
-import com.mummyding.app.leisure.cache.table.NewsTable;
+import com.mummyding.app.leisure.database.cache.ICache;
+import com.mummyding.app.leisure.database.table.NewsTable;
 import com.mummyding.app.leisure.model.news.NewsBean;
 import com.mummyding.app.leisure.ui.support.WebViewUrlActivity;
-
-import java.util.List;
 
 /**
  * Created by mummyding on 15-11-14.
@@ -72,7 +67,7 @@ public class NewsAdapter extends BaseListAdapter<NewsBean,NewsAdapter.ViewHolder
                             setAction(mContext.getString(R.string.text_ok), new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    if (mItems.contains(newsBean)  == false){
+                                    if (mItems.contains(newsBean) == false) {
                                         return;
                                     }
                                     mCache.execSQL(NewsTable.updateCollectionFlag(newsBean.getTitle(), 0));

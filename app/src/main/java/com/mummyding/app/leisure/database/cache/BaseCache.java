@@ -1,4 +1,4 @@
-package com.mummyding.app.leisure.cache.cache;
+package com.mummyding.app.leisure.database.cache;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 
-import com.mummyding.app.leisure.cache.DatabaseHelper;
+import com.mummyding.app.leisure.database.DatabaseHelper;
+import com.mummyding.app.leisure.database.cache.ICache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Created by mummyding on 15-11-26.
  */
-public abstract class BaseCache<T> implements ICache<T>{
+public abstract class BaseCache<T> implements ICache<T> {
     protected Context mContext;
     protected DatabaseHelper mHelper;
     protected SQLiteDatabase db;

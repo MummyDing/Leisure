@@ -1,11 +1,12 @@
-package com.mummyding.app.leisure.cache.cache;
+package com.mummyding.app.leisure.database.cache.cache;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Handler;
 
 import com.google.gson.Gson;
-import com.mummyding.app.leisure.cache.table.ScienceTable;
+import com.mummyding.app.leisure.database.cache.BaseCache;
+import com.mummyding.app.leisure.database.table.ScienceTable;
 import com.mummyding.app.leisure.model.science.ArticleBean;
 import com.mummyding.app.leisure.model.science.ScienceBean;
 import com.mummyding.app.leisure.support.CONSTANT;
@@ -15,13 +16,11 @@ import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by mummyding on 15-11-26.
  */
-public class ScienceCache extends BaseCache<ArticleBean>{
+public class ScienceCache extends BaseCache<ArticleBean> {
 
     private ScienceTable table;
 

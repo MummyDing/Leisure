@@ -1,16 +1,12 @@
-package com.mummyding.app.leisure.cache.cache.Collection;
+package com.mummyding.app.leisure.database.cache.collection;
 
-import android.content.ContentUris;
 import android.database.Cursor;
 import android.os.Handler;
 
-import com.mummyding.app.leisure.cache.cache.BaseCollectionCache;
-import com.mummyding.app.leisure.cache.cache.ICache;
-import com.mummyding.app.leisure.cache.table.ScienceTable;
+import com.mummyding.app.leisure.database.cache.cache.BaseCollectionCache;
+import com.mummyding.app.leisure.database.table.ScienceTable;
 import com.mummyding.app.leisure.model.science.ArticleBean;
 import com.mummyding.app.leisure.support.CONSTANT;
-
-import java.util.List;
 
 /**
  * Created by mummyding on 15-12-4.

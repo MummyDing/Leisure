@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ReadingApi;
-import com.mummyding.app.leisure.cache.cache.ReadingCache;
+import com.mummyding.app.leisure.database.cache.cache.ReadingCache;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.ReadingAdapter;
 import com.mummyding.app.leisure.ui.support.BaseListFragment;
