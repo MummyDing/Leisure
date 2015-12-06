@@ -24,8 +24,9 @@ package com.mummyding.app.leisure.support.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
-import com.mummyding.app.leisure.database.cache.cache.BaseCollectionCache;
+import com.mummyding.app.leisure.database.cache.BaseCollectionCache;
 import com.mummyding.app.leisure.database.cache.ICache;
+import com.mummyding.app.leisure.support.Settings;
 
 import java.util.List;
 
@@ -40,11 +41,14 @@ public abstract class BaseListAdapter<M,VH extends RecyclerView.ViewHolder> exte
 
     protected boolean isCollection = false;
 
+    protected boolean isNoPicMode = false;
 
     public BaseListAdapter(Context context, ICache<M> cache) {
         mContext = context;
         mCache = cache;
         mItems = cache.getmList();
+
+        isNoPicMode = Settings.getInstance().getBoolean(Settings.NO_PIC_MODE,false);
 
         if(cache instanceof BaseCollectionCache){
             isCollection = true;

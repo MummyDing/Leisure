@@ -42,4 +42,5 @@
     <string name="text_preference">偏好</string>
     <string name="text_shake_to_return">搖晃返回</string>
     <string name="text_network">網路</string>
+    <string name="text_clear_cache_successful">緩存清除成功!</string>
 </resources>

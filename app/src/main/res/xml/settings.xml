@@ -6,11 +6,6 @@
             android:key="@string/id_language"
             android:title="@string/text_language" />
         <CheckBoxPreference
-            android:key="auto_refresh"
-            android:title="@string/text_auto_refresh"
-            android:summary="@string/text_auto_refresh_summary"
-            />
-        <CheckBoxPreference
             android:key="night_mode"
             android:title="@string/text_night_mode"
             android:checked="false"/>
@@ -26,7 +21,13 @@
             android:title="@string/text_no_pic_mode"
             android:checked="false"
             android:summary="@string/text_no_pic_mode_summary"/>
+        <CheckBoxPreference
+            android:key="auto_refresh"
+            android:title="@string/text_auto_refresh"
+            android:summary="@string/text_auto_refresh_summary"
+            />
         <Preference
+            android:key="clear_cache"
             android:title="@string/text_clear_cache"
             android:summary="@string/text_clear_cache_summary"/>
     </PreferenceCategory>

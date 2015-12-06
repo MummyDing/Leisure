@@ -64,7 +64,13 @@ public class ScienceAdapter extends BaseListAdapter<ArticleBean,ViewHolder>{
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final ArticleBean articleBean = getItem(position);
         holder.title.setText(articleBean.getTitle());
-        holder.image.setImageURI(Uri.parse(articleBean.getImage_info().getUrl()));
+
+        if(isNoPicMode){
+            holder.image.setImageURI(null);
+        }else {
+            holder.image.setImageURI(Uri.parse(articleBean.getImage_info().getUrl()));
+        }
+
         holder.description.setText(articleBean.getSummary());
         holder.info.setText(articleBean.getInfo());
         holder.comment.setText(String.valueOf(articleBean.getReplies_count()));

@@ -22,11 +22,17 @@
 package com.mummyding.app.leisure.support;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.database.DatabaseHelper;
+import com.mummyding.app.leisure.database.table.DailyTable;
+import com.mummyding.app.leisure.database.table.NewsTable;
+import com.mummyding.app.leisure.database.table.ReadingTable;
+import com.mummyding.app.leisure.database.table.ScienceTable;
 
 
 import org.w3c.dom.Document;
@@ -36,6 +42,7 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -102,5 +109,42 @@ public class Utils {
     }
     public static String getImageHtml(){
         return "<head><style>img{max-width: 320px !important;}</style></head>";
+    }
+
+    public static int getCurrentLanguage() {
+        int lang = Settings.getInstance().getInt(Settings.LANGUAGE, -1);
+        if (lang == -1) {
+            String language = Locale.getDefault().getLanguage();
+            String country = Locale.getDefault().getCountry();
+
+            if (language.equalsIgnoreCase("zh")) {
+                if (country.equalsIgnoreCase("CN")) {
+                    lang = 1;
+                } else {
+                    lang = 2;
+                }
+            } else {
+                lang = 0;
+            }
+        }
+        return lang;
+    }
+    public static void clearCache(){
+
+        DatabaseHelper mHelper = DatabaseHelper.instance(mContext);
+        SQLiteDatabase db = mHelper.getWritableDatabase();
+
+        db.execSQL(mHelper.DROP_TABLE + DailyTable.NAME);
+        db.execSQL(DailyTable.CREATE_TABLE);
+
+        db.execSQL(mHelper.DROP_TABLE + NewsTable.NAME);
+        db.execSQL(NewsTable.CREATE_TABLE);
+
+        db.execSQL(mHelper.DROP_TABLE + ReadingTable.NAME);
+        db.execSQL(ReadingTable.CREATE_TABLE);
+
+        db.execSQL(mHelper.DROP_TABLE + ScienceTable.NAME);
+        db.execSQL(ScienceTable.CREATE_TABLE);
+
     }
 }

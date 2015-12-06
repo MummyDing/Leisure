@@ -36,6 +36,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.support.Utils;
 
 public abstract class BaseWebViewActivity extends AppCompatActivity {
@@ -65,6 +66,7 @@ public abstract class BaseWebViewActivity extends AppCompatActivity {
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setDatabaseEnabled(true);
+        webView.getSettings().setBlockNetworkImage(Settings.getInstance().getBoolean(Settings.NO_PIC_MODE,false));
 
         loadData();
         setProgressBarIndeterminateVisibility(true);
@@ -73,19 +75,16 @@ public abstract class BaseWebViewActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
-                Utils.DLog("=-=-=-=-=");
             }
 
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 view.loadUrl("file:///android_asset/error.html");
-                //view.loadDataWithBaseURL("about:blank", Utils.rawFileToString(R.raw.error), "text/html", "utf-8", null);
             }
 
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 view.loadUrl("file:///android_asset/error.html");
-                //view.loadDataWithBaseURL("about:blank", Utils.rawFileToString(R.raw.error), "text/html", "utf-8", null);
             }
 
             @Override

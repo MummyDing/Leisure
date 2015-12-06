@@ -19,7 +19,7 @@
  *
  */
 
-package com.mummyding.app.leisure.database.cache.cache;
+package com.mummyding.app.leisure.database.cache;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

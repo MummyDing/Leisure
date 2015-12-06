@@ -24,7 +24,7 @@ package com.mummyding.app.leisure.database.cache.collection;
 import android.database.Cursor;
 import android.os.Handler;
 
-import com.mummyding.app.leisure.database.cache.cache.BaseCollectionCache;
+import com.mummyding.app.leisure.database.cache.BaseCollectionCache;
 import com.mummyding.app.leisure.database.table.ScienceTable;
 import com.mummyding.app.leisure.model.science.ArticleBean;
 import com.mummyding.app.leisure.support.CONSTANT;

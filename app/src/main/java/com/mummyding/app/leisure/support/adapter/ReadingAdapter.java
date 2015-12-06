@@ -70,7 +70,13 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
         final BookBean bookBean = getItem(position);
         holder.title.setText(bookBean.getTitle());
         holder.info.setText(bookBean.getInfo());
-        holder.imageView.setImageURI(Uri.parse(bookBean.getImage()));
+
+        if(isNoPicMode){
+            holder.image.setImageURI(null);
+        }else {
+            holder.image.setImageURI(Uri.parse(bookBean.getImage()));
+        }
+
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +139,7 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
     }
      class ViewHolder extends RecyclerView.ViewHolder{
          private View parentView;
-         private SimpleDraweeView imageView;
+         private SimpleDraweeView image;
          private TextView title;
          private TextView info;
          private CheckBox collect_cb;
@@ -141,7 +147,7 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
          public ViewHolder(View itemView) {
              super(itemView);
              parentView = itemView;
-             imageView = (SimpleDraweeView) itemView.findViewById(R.id.bookImg);
+             image = (SimpleDraweeView) itemView.findViewById(R.id.bookImg);
              title = (TextView) itemView.findViewById(R.id.bookTitle);
              info = (TextView) itemView.findViewById(R.id.bookInfo);
              collect_cb = (CheckBox) itemView.findViewById(R.id.collect_cb);
