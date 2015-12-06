@@ -40,6 +40,8 @@ import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.database.cache.ICache;
 import com.mummyding.app.leisure.support.CONSTANT;
+import com.mummyding.app.leisure.support.HttpUtil;
+import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.support.Utils;
 import com.yalantis.phoenix.PullToRefreshView;
 
@@ -65,6 +67,7 @@ public abstract class BaseListFragment extends Fragment{
     protected boolean withHeaderTab = true;
     protected boolean withRefreshView = true;
     protected boolean needCache = true;
+    protected boolean autoRefreshMode = false;
 
 
     protected abstract void onCreateCache();
@@ -135,6 +138,8 @@ public abstract class BaseListFragment extends Fragment{
             });
         }
 
+        autoRefreshMode = Settings.getInstance().getBoolean(Settings.AUTO_REFRESH,false);
+        HttpUtil.readNetworkState();
         loadFromCache();
 
         return parentView;
@@ -174,6 +179,10 @@ public abstract class BaseListFragment extends Fragment{
                     break;
                 case CONSTANT.ID_FROM_CACHE:
                     if(withRefreshView && hasData() == false){
+                        loadFromNet();
+                        return false;
+                    }else if(withRefreshView && HttpUtil.isWIFI){
+                        progressBar.setVisibility(View.GONE);
                         loadFromNet();
                         return false;
                     }

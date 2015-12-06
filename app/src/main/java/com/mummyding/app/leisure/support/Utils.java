@@ -22,6 +22,7 @@
 package com.mummyding.app.leisure.support;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
@@ -147,4 +148,31 @@ public class Utils {
         db.execSQL(ScienceTable.CREATE_TABLE);
 
     }
+
+    // Must be called before setContentView()
+    public static void changeLanguage(Context context, int lang) {
+        String language = null;
+        String country = null;
+
+        switch (lang) {
+            case 1:
+                language = "zh";
+                country = "CN";
+                break;
+            case 2:
+                language = "zh";
+                country = "TW";
+                break;
+            default:
+                language = "en";
+                country = "US";
+                break;
+        }
+
+        Locale locale = new Locale(language, country);
+        Configuration conf = context.getResources().getConfiguration();
+        conf.locale = locale;
+        context.getApplicationContext().getResources().updateConfiguration(conf, context.getResources().getDisplayMetrics());
+    }
+
 }

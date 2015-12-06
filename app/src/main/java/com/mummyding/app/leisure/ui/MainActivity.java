@@ -47,6 +47,7 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.about.AboutActivity;
 import com.mummyding.app.leisure.ui.collection.BaseCollectionFragment;
@@ -70,10 +71,20 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction fragmentTransaction;
     private  Fragment currentFragment ;
     private Menu menu;
+
+    private int mLang = -1;
+
     List<Fragment> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Language
+        mLang = Utils.getCurrentLanguage();
+        if (mLang > -1) {
+            Utils.changeLanguage(this, mLang);
+        }
+
         setContentView(R.layout.activity_main);
         initData();
 /*
@@ -111,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
             menu.clear();
             getMenuInflater().inflate(resourceMenu, menu);
         }
-        currentFragment = null;
     }
     private void initData(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -257,4 +267,14 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(Settings.needRecreate) {
+            Settings.needRecreate = false;
+            this.recreate();
+        }
+    }
+
 }

@@ -38,9 +38,18 @@ public class ReadingActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private String url;
+    private int mLang = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Language
+        mLang = Utils.getCurrentLanguage();
+        if (mLang > -1) {
+            Utils.changeLanguage(this, mLang);
+        }
+
+
         setContentView(R.layout.activity_reading);
         initData();
     }

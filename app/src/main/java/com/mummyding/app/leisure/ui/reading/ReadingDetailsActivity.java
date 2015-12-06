@@ -45,9 +45,17 @@ public class ReadingDetailsActivity extends AppCompatActivity {
     private PagerAdapter adapter;
     private Toolbar toolbar;
     private TabLayout tabLayout;
+    private int mLang = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Language
+        mLang = Utils.getCurrentLanguage();
+        if (mLang > -1) {
+            Utils.changeLanguage(this, mLang);
+        }
+
         setContentView(R.layout.activity_reading_details);
         initData();
     }

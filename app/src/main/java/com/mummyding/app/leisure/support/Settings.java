@@ -12,9 +12,7 @@ import com.mummyding.app.leisure.LeisureApplication;
  */
 public class Settings {
 
-
-
-
+    public static  boolean needRecreate = false;
 
     public static final String XML_NAME = "settings";
 

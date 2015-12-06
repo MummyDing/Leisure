@@ -6,13 +6,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.support.Utils;
 
 public class SettingsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private int mLang = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Language
+        mLang = Utils.getCurrentLanguage();
+        if (mLang > -1) {
+            Utils.changeLanguage(this, mLang);
+        }
+
         setContentView(R.layout.activity_settings);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
