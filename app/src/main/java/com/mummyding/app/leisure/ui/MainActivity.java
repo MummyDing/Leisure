@@ -320,7 +320,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         float value[] = event.values;
         if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-            if(Math.abs(value[0]) > CONSTANT.shakeValue || Math.abs(value[1]) > CONSTANT.shakeValue || Math.abs(value[2])>CONSTANT.shakeValue){
+            if((Math.abs(value[0]) + Math.abs(value[1]) + Math.abs(value[2]))>CONSTANT.shakeValue){
                 isShake = true;
 
                 Utils.DLog(value[0]+"  "+value[1]+"  "+value[2]);
