@@ -27,6 +27,11 @@ public class CollectionFragment extends BaseListFragment {
     }
 
     @Override
+    protected boolean setRefreshView() {
+        return false;
+    }
+
+    @Override
     protected void onCreateCache() {
         switch (pos){
             case 0:

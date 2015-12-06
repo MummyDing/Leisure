@@ -48,8 +48,12 @@ public class ReadingActivity extends AppCompatActivity {
         }
 
         @Override
+        protected boolean setRefreshView() {
+            return false;
+        }
+
+        @Override
         protected void onCreateCache() {
-            Utils.showToast(url);
             cache = new ReadingCache(handler,null,new String[]{url});
         }
 
@@ -61,7 +65,6 @@ public class ReadingActivity extends AppCompatActivity {
         @Override
         protected void loadFromNet() {
             cache.load();
-
         }
 
         @Override

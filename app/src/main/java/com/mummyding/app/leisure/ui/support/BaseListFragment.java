@@ -78,6 +78,8 @@ public abstract class BaseListFragment extends Fragment{
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(mLayoutManager);
+        refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
+
 
         View view = getActivity().findViewById(R.id.tab_layout);
         if(withHeaderTab){
@@ -89,7 +91,6 @@ public abstract class BaseListFragment extends Fragment{
         }
 
         if(withRefreshView){
-            refreshView = (PullToRefreshView) parentView.findViewById(R.id.pull_to_refresh);
             refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
@@ -102,6 +103,13 @@ public abstract class BaseListFragment extends Fragment{
                 public void onClick(View v) {
                     placeHolder.setVisibility(View.GONE);
                     loadFromNet();
+                }
+            });
+        }else{
+            refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                        refreshView.setRefreshing(false);
                 }
             });
         }
