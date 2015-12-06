@@ -170,7 +170,7 @@ public class BookBean implements Serializable{
         }
         return mContext.getString(R.string.text_author)+sb+"\n"+
                 mContext.getString(R.string.text_pubdate)+getPubdate()+"\n" +
-                mContext.getString(R.string.id_pages)+getPages()+"\n" +
+                mContext.getString(R.string.pages)+getPages()+"\n" +
                 mContext.getString(R.string.text_price)+getPrice();
     }
 }

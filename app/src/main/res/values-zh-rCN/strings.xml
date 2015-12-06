@@ -5,7 +5,6 @@
     <string name="science">科学</string>
     <string name="video">Video</string>
     <string name="music">Music</string>
-    <string name="setting">Setting</string>
     <string name="about">关于</string>
     <string name="shake">Shake</string>
     <string name="text_ebook">电子书</string>
@@ -16,7 +15,6 @@
     <string name="Text_Net_Exception">网络异常</string>
     <string name="id_book">book</string>
     <string name="text_noinfo">\n\n\n\n\t\t\t\t\t\t\t\t\t抱歉,暂无信息</string>
-    <string name="text_author">"作者 "</string>
     <string name="text_debug_data">"调试数据 "</string>
     <string name="text_pubdate">"出版日期 "</string>
     <string name="id_pages">"页数 "</string>
@@ -34,4 +32,19 @@
     <string name="id_collection">Collection</string>
     <string name="author_email">MummyDing@outlook.com</string>
     <string name="author_name">MummyDing</string>
+    <string name="collection">收藏</string>
+    <string name="pages">页数</string>
+    <string name="setting">设置</string>
+    <string name="text_auto_refresh">自动刷新</string>
+    <string name="text_auto_refresh_summary">在WIFI下自动从网络加载数据</string>
+    <string name="text_clear_cache">清除缓存</string>
+    <string name="text_clear_cache_summary">清除"闲暇"的缓存</string>
+    <string name="text_language">语言</string>
+    <string name="text_night_mode">夜间模式</string>
+    <string name="text_no_pic_mode">无图模式</string>
+    <string name="text_no_pic_mode_summary">仅在WIFI下加载图片</string>
+    <string name="text_preference">偏好</string>
+    <string name="text_shake_to_return">摇晃返回</string>
+    <string name="text_network">网络</string>
+    <string name="text_author">作者</string>
 </resources>

@@ -23,7 +23,7 @@
         android:layout_height="@dimen/tab_height"
         app:stl_defaultTabTextColor="@color/white"
         app:stl_defaultTabTextMinWidth="80dp"
-        app:stl_indicatorColor="@color/accent"
+        app:stl_indicatorColor="@color/white"
         app:stl_indicatorCornerRadius="1.5dp"
         app:stl_indicatorInterpolation="smart"
         app:stl_indicatorThickness="3dp"

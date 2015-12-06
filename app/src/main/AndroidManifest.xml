@@ -48,6 +48,8 @@
         </activity>
         <activity android:name=".ui.about.AboutActivity" >
         </activity>
+        <activity android:name=".ui.setting.SettingsActivity" >
+        </activity>
     </application>
 
 </manifest>

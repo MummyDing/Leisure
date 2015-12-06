@@ -30,4 +30,16 @@
     <string name="id_collection">Collection</string>
     <string name="author_email">MummyDing@outlook.com</string>
     <string name="author_name">MummyDing</string>
+    <string name="collection">收藏</string>
+    <string name="text_auto_refresh">自動刷新</string>
+    <string name="text_auto_refresh_summary">在WIFI下自動從網路加載數據</string>
+    <string name="text_clear_cache">清除緩存</string>
+    <string name="text_clear_cache_summary">清除"閒暇"緩存</string>
+    <string name="text_language">語言</string>
+    <string name="text_night_mode">夜間模式</string>
+    <string name="text_no_pic_mode">無圖模式</string>
+    <string name="text_no_pic_mode_summary">僅在WIFI下加載圖片</string>
+    <string name="text_preference">偏好</string>
+    <string name="text_shake_to_return">搖晃返回</string>
+    <string name="text_network">網路</string>
 </resources>

@@ -55,6 +55,7 @@ import com.mummyding.app.leisure.ui.news.BaseNewsFragment;
 import com.mummyding.app.leisure.ui.reading.BaseReadingFragment;
 import com.mummyding.app.leisure.ui.reading.ReadingActivity;
 import com.mummyding.app.leisure.ui.science.BaseScienceFragment;
+import com.mummyding.app.leisure.ui.setting.SettingsActivity;
 
 import java.util.List;
 
@@ -139,8 +140,9 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.reading).withIcon(R.mipmap.ic_reading).withIdentifier(R.mipmap.ic_reading),
                         new PrimaryDrawerItem().withName(R.string.news).withIcon(R.mipmap.ic_news).withIdentifier(R.mipmap.ic_news),
                         new PrimaryDrawerItem().withName(R.string.science).withIcon(R.mipmap.ic_science).withIdentifier(R.mipmap.ic_science),
+                        new PrimaryDrawerItem().withName(R.string.collection).withIcon(R.mipmap.ic_collect).withIdentifier(R.mipmap.ic_collect),
                         new SectionDrawerItem().withName(R.string.app_name),
-                        new SecondaryDrawerItem().withName(R.string.collection).withIcon(R.mipmap.ic_collect).withIdentifier(R.mipmap.ic_collect),
+                        new SecondaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_setting).withIdentifier(R.mipmap.ic_setting),
                         new SecondaryDrawerItem().withName(R.string.about).withIcon(R.mipmap.ic_about).withIdentifier(R.mipmap.ic_about)
                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                    @Override
@@ -176,9 +178,13 @@ public class MainActivity extends AppCompatActivity {
                                }
                                currentFragment = new BaseCollectionFragment();
                                break;
+                           case R.mipmap.ic_setting:
+                               Intent toSetting = new Intent(MainActivity.this, SettingsActivity.class);
+                               startActivity(toSetting);
+                               return false;
                            case R.mipmap.ic_about:
-                               Intent i = new Intent(MainActivity.this, AboutActivity.class);
-                               startActivity(i);
+                               Intent toAbout = new Intent(MainActivity.this, AboutActivity.class);
+                               startActivity(toAbout);
                                return false;
                        }
                        switchFragment();
@@ -241,5 +247,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawer.isDrawerOpen()){
+            drawer.closeDrawer();
+        }else{
+            super.onBackPressed();
+        }
     }
 }

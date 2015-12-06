@@ -16,7 +16,6 @@
     <string name="Text_Net_Exception">Network Exception</string>
     <string name="id_book" translatable="false">book</string>
     <string name="text_noinfo">\n\n\n\n\t\t\t\t\t\t\t\t\tSorry,No Message Here</string>
-    <string name="text_author">"作者 "</string>
     <string name="text_debug_data">"Debug Data"</string>
     <string name="text_pubdate">"Publish Date "</string>
     <string name="id_pages">"Page "</string>
@@ -29,10 +28,24 @@
     <string name="id_category" translatable="false">category</string>
     <string name="text_collection">Collection</string>
     <string name="text_refresh_success">Refresh Successfully</string>
-    <string name="text_remove">移除</string>
     <string name="notify_remove_from_collection">Are you sure to remove it from collection ?</string>
     <string name="id_collection" translatable="false">Collection</string>
     <string name="author_email">MummyDing@outlook.com</string>
     <string name="author_name">MummyDing</string>
     <string name="collection">Collection</string>
+    <string name="pages">Page　</string>
+    <string name="text_language">Language</string>
+    <string name="id_language">language</string>
+    <string name="text_preference">Preference</string>
+    <string name="text_auto_refresh">Auto Refresh</string>
+    <string name="text_auto_refresh_summary">Load data from network automatically if WIFI is connected</string>
+    <string name="text_night_mode">Night Mode</string>
+    <string name="text_shake_to_return">Shake to return</string>
+    <string name="text_no_pic_mode">Auto save traffic</string>
+    <string name="text_no_pic_mode_summary">Load pictures only if WIFI is connected</string>
+    <string name="text_clear_cache">Clear Cache</string>
+    <string name="text_clear_cache_summary">Clear Leisure\'s Cache</string>
+    <string name="text_network">Network</string>
+    <string name="text_remove">Remove</string>
+    <string name="text_author">Author</string>
 </resources>
