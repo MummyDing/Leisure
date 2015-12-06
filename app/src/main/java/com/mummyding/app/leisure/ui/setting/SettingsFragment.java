@@ -91,7 +91,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public boolean onPreferenceClick(Preference preference) {
         if(preference == mLanguage){
             showLangDialog();
-            Settings.needRecreate = true;
+
         }else if(preference == mClearCache){
             Utils.clearCache();
             Snackbar.make(getView(), R.string.text_clear_cache_successful,Snackbar.LENGTH_SHORT).show();
@@ -107,9 +107,16 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mSettings.putInt(Settings.LANGUAGE, which);
+                                if (which != Utils.getCurrentLanguage()) {
+                                    mSettings.putInt(Settings.LANGUAGE, which);
+                                    Settings.needRecreate = true;
+                                }
+
                                 dialog.dismiss();
-                                getActivity().recreate();
+
+                                if (Settings.needRecreate) {
+                                    getActivity().recreate();
+                                }
                             }
                         }
                 )

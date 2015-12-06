@@ -23,6 +23,10 @@ package com.mummyding.app.leisure.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -47,6 +51,7 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.about.AboutActivity;
@@ -62,7 +67,7 @@ import java.util.List;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private Toolbar toolbar;
     private Drawer drawer ;
@@ -73,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
     private Menu menu;
 
     private int mLang = -1;
+
+    private SensorManager mSensorManager;
+
+    private boolean isShake = false;
+    private boolean isShakeMode = true;
 
     List<Fragment> list;
     @Override
@@ -87,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         initData();
+
+
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+
 /*
         list = new ArrayList<>();
         list.add(new DailyFragment());
@@ -263,18 +277,61 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if(drawer.isDrawerOpen()){
             drawer.closeDrawer();
-        }else{
+        }else if(isShake == false){
             super.onBackPressed();
         }
+        isShake = false;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+
+
+        isShakeMode = Settings.getInstance().getBoolean(Settings.SHAKE_TO_RETURN,true);
+
         if(Settings.needRecreate) {
             Settings.needRecreate = false;
             this.recreate();
         }
     }
 
+    @Override
+    protected void onStop() {
+        mSensorManager.unregisterListener(this);
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        mSensorManager.unregisterListener(this);
+        super.onPause();
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+        if(isShakeMode == false){
+            return;
+        }
+
+        float value[] = event.values;
+        if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+            if(Math.abs(value[0]) > CONSTANT.shakeValue || Math.abs(value[1]) > CONSTANT.shakeValue || Math.abs(value[2])>CONSTANT.shakeValue){
+                isShake = true;
+
+                Utils.DLog(value[0]+"  "+value[1]+"  "+value[2]);
+                onBackPressed();
+            }
+        }
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
 }
