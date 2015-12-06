@@ -78,13 +78,14 @@ public abstract class BaseWebViewActivity extends AppCompatActivity {
 
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-
-                view.loadDataWithBaseURL("about:blank", Utils.rawFileToString(R.raw.error), "text/html", "utf-8", null);
+                view.loadUrl("file:///android_asset/error.html");
+                //view.loadDataWithBaseURL("about:blank", Utils.rawFileToString(R.raw.error), "text/html", "utf-8", null);
             }
 
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                view.loadDataWithBaseURL("about:blank", Utils.rawFileToString(R.raw.error), "text/html", "utf-8", null);
+                view.loadUrl("file:///android_asset/error.html");
+                //view.loadDataWithBaseURL("about:blank", Utils.rawFileToString(R.raw.error), "text/html", "utf-8", null);
             }
 
             @Override

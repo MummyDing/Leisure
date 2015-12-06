@@ -54,14 +54,6 @@ public class Utils {
                .openRawResource(fileID);
     }
 
-    public static String rawFileToString (int fileID){
-        InputStream is = readFileFromRaw(fileID);
-        Scanner scanner = new Scanner(is, "UTF-8");
-        String text = scanner.useDelimiter("\\A").next();
-        return text;
-    }
-
-
     public static Document getDocmentByIS(InputStream is){
         DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;

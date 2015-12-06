@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">閒暇</string>
+    <string name="news">資訊</string>
+    <string name="reading">閱讀</string>
+    <string name="science">科學</string>
+    <string name="setting">設定</string>
+    <string name="about">關於</string>
+    <string name="text_ebook">電子書</string>
+    <string name="id_pos">position</string>
+    <string name="id_url">url</string>
+    <string name="id_html_content">content</string>
+    <string name="daily">日報</string>
+    <string name="Text_Net_Exception">網路異常</string>
+    <string name="id_book">book</string>
+    <string name="text_noinfo">\n\n\n\n\t\t\t\t\t\t\t\t\t暫無訊息</string>
+    <string name="text_author">"作者"</string>
+    <string name="text_pubdate">"出版日期　"</string>
+    <string name="id_pages">"頁數　"</string>
+    <string name="text_price">"價格　"</string>
+    <string name="text_search">搜索　</string>
+    <string name="id_search_text">search_text</string>
+    <string name="text_search_result">查詢結果　</string>
+    <string name="text_ok">確定　</string>
+    <string name="text_search_books">"  查詢圖書"</string>
+    <string name="id_category">category</string>
+    <string name="text_collection">收藏</string>
+    <string name="text_refresh_success">刷新成功</string>
+    <string name="text_remove">移除</string>
+    <string name="notify_remove_from_collection">確定從收藏中移除嗎?</string>
+    <string name="id_collection">Collection</string>
+    <string name="author_email">MummyDing@outlook.com</string>
+    <string name="author_name">MummyDing</string>
+</resources>

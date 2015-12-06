@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         }else if(currentFragment instanceof BaseScienceFragment){
             switchFragment(currentFragment, getString(R.string.science),R.menu.menu_science);
         }else if(currentFragment instanceof BaseCollectionFragment){
-            switchFragment(currentFragment,getString(R.string.text_collection),R.menu.menu_daily);
+            switchFragment(currentFragment,getString(R.string.collection),R.menu.menu_daily);
         }
     }
     private void switchFragment(Fragment fragment,String title,int resourceMenu){
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.news).withIcon(R.mipmap.ic_news).withIdentifier(R.mipmap.ic_news),
                         new PrimaryDrawerItem().withName(R.string.science).withIcon(R.mipmap.ic_science).withIdentifier(R.mipmap.ic_science),
                         new SectionDrawerItem().withName(R.string.app_name),
-                        new SecondaryDrawerItem().withName(R.string.id_collection).withIcon(R.mipmap.ic_collect).withIdentifier(R.mipmap.ic_collect),
+                        new SecondaryDrawerItem().withName(R.string.collection).withIcon(R.mipmap.ic_collect).withIdentifier(R.mipmap.ic_collect),
                         new SecondaryDrawerItem().withName(R.string.about).withIcon(R.mipmap.ic_about).withIdentifier(R.mipmap.ic_about)
                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                    @Override
