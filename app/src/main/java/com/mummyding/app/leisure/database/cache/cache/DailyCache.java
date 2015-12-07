@@ -43,6 +43,7 @@ import org.xml.sax.SAXException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -106,7 +107,6 @@ public class DailyCache extends BaseCache<DailyBean> {
             public void onFailure(Request request, IOException e) {
                 mHandler.sendEmptyMessage(CONSTANT.ID_FAILURE);
             }
-            @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(Response response) throws IOException {
                 if(response.isSuccessful() == false) {
@@ -114,7 +114,7 @@ public class DailyCache extends BaseCache<DailyBean> {
                     return;
                 }
                 InputStream is =
-                        new ByteArrayInputStream(response.body().string().getBytes(StandardCharsets.UTF_8));
+                        new ByteArrayInputStream(response.body().string().getBytes(Charset.forName("UTF-8")));
                 try {
                     mList.addAll(SAXDailyParse.parse(is));
                     is.close();

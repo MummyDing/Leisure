@@ -28,12 +28,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -64,7 +66,6 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
         return vh;
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final BookBean bookBean = getItem(position);
@@ -87,18 +88,27 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
                 mContext.startActivity(intent);
             }
         });
+
+        // set ebook
         if(Utils.hasString(bookBean.getEbook_url())) {
-            holder.parentView.setBackground(mContext.getResources().getDrawable(R.drawable.item_bg_selected,null)); //setBackgroundColor(mContext.getResources().getColor(R.color.item_bg));
+            holder.ebook.setVisibility(View.VISIBLE);
         }
         else {
-            holder.parentView.setBackground(mContext.getResources().getDrawable(R.drawable.item_bg, null));
+            holder.ebook.setVisibility(View.GONE);
         }
+
 
         if(isCollection){
             holder.collect_cb.setVisibility(View.GONE);
             holder.text.setText(R.string.text_remove);
-            holder.text.setTextSize(20);
-            holder.text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+            holder.text.setTextColor(ContextCompat.getColor(mContext,R.color.colorPrimary));
+            //holder.text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+            holder.text.setTextSize(18);
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary,null));
+            }else{
+                holder.text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+            }*/
             holder.text.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -128,14 +138,14 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 bookBean.setIs_collected(isChecked ? 1 : 0);
                 mCache.execSQL(ReadingTable.updateCollectionFlag(bookBean.getTitle(), isChecked ? 1 : 0));
-                if(isChecked){
+                if (isChecked) {
                     mCache.addToCollection(bookBean);
-                }else{
+                } else {
                     mCache.execSQL(ReadingTable.deleteCollectionFlag(bookBean.getTitle()));
                 }
             }
         });
-        holder.collect_cb.setChecked(bookBean.getIs_collected() ==1 ? true:false);
+        holder.collect_cb.setChecked(bookBean.getIs_collected() == 1 ? true : false);
     }
      class ViewHolder extends RecyclerView.ViewHolder{
          private View parentView;
@@ -144,6 +154,7 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
          private TextView info;
          private CheckBox collect_cb;
          private TextView text;
+         private ImageView ebook;
          public ViewHolder(View itemView) {
              super(itemView);
              parentView = itemView;
@@ -151,6 +162,7 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
              title = (TextView) itemView.findViewById(R.id.bookTitle);
              info = (TextView) itemView.findViewById(R.id.bookInfo);
              collect_cb = (CheckBox) itemView.findViewById(R.id.collect_cb);
+             ebook = (ImageView) itemView.findViewById(R.id.ebook);
              if(isCollection) {
                  text = (TextView) parentView.findViewById(R.id.text);
              }

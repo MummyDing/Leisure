@@ -41,6 +41,7 @@ import org.xml.sax.SAXException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -118,7 +119,6 @@ public class NewsCache extends BaseCache<NewsBean> {
                 mHandler.sendEmptyMessage(CONSTANT.ID_FAILURE);
             }
 
-            @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
                 if (response.isSuccessful() == false) {
@@ -126,7 +126,7 @@ public class NewsCache extends BaseCache<NewsBean> {
                     return;
                 }
                 InputStream is =
-                        new ByteArrayInputStream(response.body().string().getBytes(StandardCharsets.UTF_8));
+                        new ByteArrayInputStream(response.body().string().getBytes(Charset.forName("UTF-8")));
                 try {
                     mList.addAll(SAXNewsParse.parse(is));
                     is.close();

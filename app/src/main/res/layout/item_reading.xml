@@ -9,7 +9,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true">
-
+    <ImageView
+        android:id="@+id/ebook"
+        android:src="@mipmap/ic_ebook_blue"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="right"
+        android:layout_margin="10dp"
+        />
     <LinearLayout
         style="@style/CardView.Content"
         android:layout_width="match_parent"
