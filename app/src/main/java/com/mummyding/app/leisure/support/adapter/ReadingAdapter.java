@@ -43,6 +43,7 @@ import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.database.cache.ICache;
 import com.mummyding.app.leisure.database.table.ReadingTable;
 import com.mummyding.app.leisure.model.reading.BookBean;
+import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.reading.ReadingDetailsActivity;
 
@@ -75,7 +76,7 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
         holder.title.setText(bookBean.getTitle());
         holder.info.setText(bookBean.getInfo());
 
-        if(isNoPicMode){
+        if(isNoPicMode && HttpUtil.isWIFI == false){
             holder.image.setImageURI(null);
         }else {
             holder.image.setImageURI(Uri.parse(bookBean.getImage()));
@@ -105,7 +106,6 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
             holder.collect_cb.setVisibility(View.GONE);
             holder.text.setText(R.string.text_remove);
             holder.text.setTextColor(ContextCompat.getColor(mContext,R.color.colorPrimary));
-            //holder.text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
             holder.text.setTextSize(18);
             holder.text.setOnClickListener(new View.OnClickListener() {
                 @Override

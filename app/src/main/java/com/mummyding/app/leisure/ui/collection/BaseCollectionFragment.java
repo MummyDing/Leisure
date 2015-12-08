@@ -61,5 +61,4 @@ public class BaseCollectionFragment extends AbsTopNavigationFragment{
         }
     }
 
-
 }

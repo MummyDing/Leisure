@@ -20,12 +20,13 @@ public class Settings {
 
     public static final String NO_PIC_MODE = "no_pic_mode";
 
-    public static final String NIGTH_MODE = "night_mode";
+    public static final String NIGHT_MODE = "night_mode";
 
     public static final String AUTO_REFRESH = "auto_refresh";
 
     public static final String LANGUAGE = "language";
 
+    public static final String EXIT_CONFIRM = "exit_confirm";
 
 
     private static Settings sInstance;

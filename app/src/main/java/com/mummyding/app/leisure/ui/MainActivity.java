@@ -27,6 +27,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -83,8 +84,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private boolean isShake = false;
     private boolean isShakeMode = true;
+    private boolean isExitConfirm = true;
+    private long lastPressTime = 0;
 
-    List<Fragment> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,15 +102,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
-/*
-        list = new ArrayList<>();
-        list.add(new DailyFragment());
-        list.add(new BaseReadingFragment());
-        list.add(new BaseNewsFragment());
-        list.add(new BaseScienceFragment());
-        list.add(new BaseCollectionFragment());*/
-
 
         currentFragment = new DailyFragment();
         switchFragment();
@@ -128,22 +121,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
     private void switchFragment(Fragment fragment,String title,int resourceMenu){
-
-        List<Fragment> fragments = fragmentManager.getFragments();
-
-        if(fragments != null && fragments.size() >1){
-            while (fragments.size() > 1){
-                fragmentManager.getFragments().remove(fragments.get(0));
-            }
-        }
-        if(fragmentManager.getFragments() != null ) {
-            Utils.DLog("manage  \n" + fragmentManager.getFragments().toString());
-            Utils.DLog(fragmentManager.getFragments().size()+"====");
-          //  fragmentManager.getFragments().clear();
-        }
-
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.framelayout, fragment, title);
+        fragmentTransaction.replace(R.id.framelayout, fragment);
         fragmentTransaction.commit();
         getSupportActionBar().setTitle(title);
         if(menu != null) {
@@ -293,10 +272,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onBackPressed() {
         if(drawer.isDrawerOpen()){
             drawer.closeDrawer();
-        }else if(isShake == false){
+        }else if(isShake == false && canExit()){
             super.onBackPressed();
         }
         isShake = false;
+    }
+
+    private boolean canExit(){
+        if(isExitConfirm){
+            if(System.currentTimeMillis() - lastPressTime > CONSTANT.exitConfirmTime){
+                lastPressTime = System.currentTimeMillis();
+                Snackbar.make(getCurrentFocus(), R.string.notify_exit_confirm,Snackbar.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -308,6 +298,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
         isShakeMode = Settings.getInstance().getBoolean(Settings.SHAKE_TO_RETURN,true);
+        isExitConfirm = Settings.getInstance().getBoolean(Settings.EXIT_CONFIRM,true);
 
         if(Settings.needRecreate) {
             Settings.needRecreate = false;
@@ -338,8 +329,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
             if((Math.abs(value[0]) + Math.abs(value[1]) + Math.abs(value[2]))>CONSTANT.shakeValue){
                 isShake = true;
-
-                Utils.DLog(value[0]+"  "+value[1]+"  "+value[2]);
                 onBackPressed();
             }
         }

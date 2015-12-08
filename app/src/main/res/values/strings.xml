@@ -55,4 +55,7 @@
         <item>繁體中文</item>
     </string-array>
     <string name="text_clear_cache_successful">Cache Clear Successfully!</string>
+    <string name="text_exit_confirm">Exit Confirm</string>
+    <string name="text_exit_confirm_summary">Press back key twice to exit</string>
+    <string name="notify_exit_confirm">press again to exit</string>
 </resources>

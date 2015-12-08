@@ -38,6 +38,7 @@ import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.database.cache.ICache;
 import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.DailyBean;
+import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.ui.support.WebViewLocalActivity;
 
 import com.mummyding.app.leisure.support.adapter.DailyAdapter.ViewHolder;
@@ -68,7 +69,7 @@ public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
         final DailyBean dailyBean = getItem(position);
         holder.title.setText(dailyBean.getTitle());
 
-        if(isNoPicMode){
+        if(isNoPicMode && HttpUtil.isWIFI == false){
             holder.image.setImageURI(null);
         }else {
             holder.image.setImageURI(Uri.parse(dailyBean.getImage()));

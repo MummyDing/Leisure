@@ -13,6 +13,11 @@
             android:key="shake_to_return"
             android:title="@string/text_shake_to_return"
             android:checked="true"/>
+        <CheckBoxPreference
+            android:key="exit_confirm"
+            android:title="@string/text_exit_confirm"
+            android:summary="@string/text_exit_confirm_summary"
+            android:checked="true"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/text_network">

@@ -38,6 +38,7 @@ import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.database.cache.ICache;
 import com.mummyding.app.leisure.database.table.ScienceTable;
 import com.mummyding.app.leisure.model.science.ArticleBean;
+import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.ui.support.WebViewUrlActivity;
 import com.mummyding.app.leisure.support.adapter.ScienceAdapter.ViewHolder;
 
@@ -68,7 +69,7 @@ public class ScienceAdapter extends BaseListAdapter<ArticleBean,ViewHolder>{
         final ArticleBean articleBean = getItem(position);
         holder.title.setText(articleBean.getTitle());
 
-        if(isNoPicMode){
+        if(isNoPicMode && HttpUtil.isWIFI == false){
             holder.image.setImageURI(null);
         }else {
             holder.image.setImageURI(Uri.parse(articleBean.getImage_info().getUrl()));
