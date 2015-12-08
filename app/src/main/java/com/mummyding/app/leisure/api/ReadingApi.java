@@ -27,7 +27,10 @@ import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.support.Utils;
 
 /**
- * Created by mummyding on 15-11-15.
+ * Created by mummyding on 2015-11-15.<br>
+ * DouBan(www.douban.com) Books Api
+ * @author MummyDing
+ * @version 1.0
  */
 public class ReadingApi {
     public static final int TAG_LEN = 3;
@@ -63,6 +66,12 @@ public class ReadingApi {
         }
         return null;
     }
+
+    /**
+     * Get book tags randomly
+     * @param tag
+     * @return tags
+     */
     public static String [] getTags(String [] tag){
         int len = tag.length;
         String [] res = new String[TAG_LEN];
@@ -82,6 +91,14 @@ public class ReadingApi {
         }
         return res;
     }
+
+    /**
+     * Get details of book ,it contains Book Summary, Book Contents and Author Introduction<br>
+     * if api does provide any info ,it will return a "" string
+     * @param position position of tab.
+     * @param book
+     * @return
+     */
     public static String getBookInfo(int position,BookBean book){
         switch (position){
             case 0:

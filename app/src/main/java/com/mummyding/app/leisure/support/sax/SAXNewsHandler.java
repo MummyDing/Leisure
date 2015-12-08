@@ -32,6 +32,8 @@ import java.util.List;
 
 /**
  * Created by mummyding on 15-11-14.
+ *@author MummyDing
+ * @version Leisure 1.0
  */
 public class SAXNewsHandler extends DefaultHandler {
     private List<NewsBean> items = new LinkedList<>();

@@ -41,6 +41,13 @@ import java.io.IOException;
 
 /**
  * Created by mummyding on 15-11-26.
+ * Reading Cache. function:<br>
+ * <li>Get Books data from Douban Books api via net</li>
+ * <li>Cache Books data to database if it updates</li>
+ * <li>Load Books data from database</li>
+ * <li>Notify to fragment/activity if work completed</li>
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class ReadingCache extends BaseCache<BookBean> {
 

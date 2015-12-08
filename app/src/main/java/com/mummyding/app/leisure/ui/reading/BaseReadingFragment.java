@@ -21,22 +21,30 @@
 
 package com.mummyding.app.leisure.ui.reading;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ReadingApi;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.PagerAdapter;
 import com.mummyding.app.leisure.ui.support.AbsTopNavigationFragment;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mummyding on 15-11-15.
  */
 public class BaseReadingFragment extends AbsTopNavigationFragment{
     private PagerAdapter pagerAdapter;
+    private List<ReadingFragment> fragments = new ArrayList<>();
+
     @Override
     protected PagerAdapter initPagerAdapter() {
-        pagerAdapter = new PagerAdapter(getFragmentManager(), ReadingApi.Tag_Titles) {
+        pagerAdapter = new PagerAdapter(getChildFragmentManager(), ReadingApi.Tag_Titles) {
             @Override
             public Fragment getItem(int position) {
                 ReadingFragment fragment = new ReadingFragment();
@@ -50,9 +58,14 @@ public class BaseReadingFragment extends AbsTopNavigationFragment{
         return pagerAdapter;
     }
 
+    /**
+     * destroy child fragments
+     */
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        pagerAdapter = null;
+    public void onDetach() {
+        super.onDetach();
+        if(getChildFragmentManager().getFragments()!=null){
+            getChildFragmentManager().getFragments().clear();
+        }
     }
 }

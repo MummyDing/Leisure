@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         list.add(new BaseCollectionFragment());*/
 
 
-        currentFragment =new DailyFragment();
+        currentFragment = new DailyFragment();
         switchFragment();
     }
 
@@ -128,14 +128,29 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
     private void switchFragment(Fragment fragment,String title,int resourceMenu){
+
+        List<Fragment> fragments = fragmentManager.getFragments();
+
+        if(fragments != null && fragments.size() >1){
+            while (fragments.size() > 1){
+                fragmentManager.getFragments().remove(fragments.get(0));
+            }
+        }
+        if(fragmentManager.getFragments() != null ) {
+            Utils.DLog("manage  \n" + fragmentManager.getFragments().toString());
+            Utils.DLog(fragmentManager.getFragments().size()+"====");
+          //  fragmentManager.getFragments().clear();
+        }
+
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.framelayout, fragment);
+        fragmentTransaction.replace(R.id.framelayout, fragment, title);
         fragmentTransaction.commit();
         getSupportActionBar().setTitle(title);
         if(menu != null) {
             menu.clear();
             getMenuInflater().inflate(resourceMenu, menu);
         }
+
     }
     private void initData(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -182,13 +197,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                                if (currentFragment instanceof BaseReadingFragment) {
                                    return false;
                                }
+                               new BaseNewsFragment();
                                currentFragment = new BaseReadingFragment();
                                break;
                            case R.mipmap.ic_news:
                                if (currentFragment instanceof BaseNewsFragment) {
                                    return false;
                                }
-                               currentFragment = new BaseNewsFragment();
+                                   currentFragment = new BaseNewsFragment();
                                break;
                            case R.mipmap.ic_science:
                                if (currentFragment instanceof BaseScienceFragment) {

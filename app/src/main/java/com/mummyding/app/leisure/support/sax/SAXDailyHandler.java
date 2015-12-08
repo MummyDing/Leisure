@@ -34,6 +34,9 @@ import java.util.List;
 
 /**
  * Created by mummyding on 15-11-21.
+ * Handler for daily xml parse.
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class SAXDailyHandler extends DefaultHandler {
     private List<DailyBean> items = new LinkedList<>();

@@ -27,7 +27,10 @@ import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.Utils;
 
 /**
- * Created by mummyding on 15-11-21.
+ * Created by mummyding on 15-11-21.<br>
+ * Daily Data Model.
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class DailyBean {
     private String title;

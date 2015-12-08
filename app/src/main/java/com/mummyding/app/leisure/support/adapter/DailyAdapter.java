@@ -44,7 +44,10 @@ import com.mummyding.app.leisure.support.adapter.DailyAdapter.ViewHolder;
 
 
 /**
- * Created by mummyding on 15-11-21.
+ * Created by mummyding on 15-11-21.<br>
+ * Daily RecyclerView Adapter. It can provide different view according to Cache Type.<br>
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
 

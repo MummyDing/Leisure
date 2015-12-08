@@ -21,11 +21,13 @@
 
 package com.mummyding.app.leisure.ui.science;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ScienceApi;
 import com.mummyding.app.leisure.database.cache.cache.ScienceCache;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.ScienceAdapter;
 import com.mummyding.app.leisure.ui.support.BaseListFragment;
 
@@ -68,5 +70,54 @@ public class ScienceFragment extends BaseListFragment{
     protected void getArgs() {
         mUrl = ScienceApi.science_channel_url+ScienceApi.channel_tag[getArguments().getInt(getString(R.string.id_pos))];
         mCategory = getArguments().getString(getString(R.string.id_category));
+    }
+
+
+    @Override
+    public void onStart() {
+        Utils.DLog("science-------" + mCategory + "start");
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        Utils.DLog("science-------"+mCategory+"resume");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Utils.DLog("science-------"+mCategory+"onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Utils.DLog("science-------"+mCategory+"onstop");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Utils.DLog("science-------"+mCategory+"onDestroyView");
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        Utils.DLog("science-------"+mCategory+"onDestory");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        Utils.DLog("science-------"+mCategory+"onDetach");
+        super.onDetach();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Utils.DLog("science-------"+mCategory+"onAttach");
+        super.onAttach(context);
     }
 }

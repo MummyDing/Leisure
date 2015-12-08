@@ -25,7 +25,10 @@ package com.mummyding.app.leisure.model.science;
 import java.io.Serializable;
 
 /**
- * Created by mummyding on 15-11-17.
+ * Created by mummyding on 15-11-17.<br>
+ * Article Model . It represents a single Guokr Article
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class ArticleBean implements Serializable{
 

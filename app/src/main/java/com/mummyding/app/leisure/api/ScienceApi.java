@@ -23,6 +23,9 @@ package com.mummyding.app.leisure.api;
 
 /**
  * Created by mummyding on 15-11-17.
+ * Guokr (www.guokr.com) scientific api.
+ * @author MummyDing
+ * @version Leisure
  */
 public class ScienceApi {
     public static String [] channel_tag={"hot","frontier","review","interview","visual","brief","fact","techb"};

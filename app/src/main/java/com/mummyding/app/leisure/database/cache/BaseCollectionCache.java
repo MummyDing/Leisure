@@ -34,6 +34,9 @@ import java.util.List;
 
 /**
  * Created by mummyding on 15-12-3.
+ * Abstract Class. It provides a common framework for collection cache.<br>
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public abstract class BaseCollectionCache<T> implements ICache<T> {
 

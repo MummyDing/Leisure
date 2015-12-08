@@ -21,9 +21,11 @@
 
 package com.mummyding.app.leisure.ui.daily;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.mummyding.app.leisure.database.cache.cache.DailyCache;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.DailyAdapter;
 import com.mummyding.app.leisure.ui.support.BaseListFragment;
 
@@ -68,4 +70,53 @@ public class DailyFragment extends BaseListFragment{
     protected void getArgs() {
 
     }
+
+    @Override
+    public void onStart() {
+        Utils.DLog("daily-------"+"start");
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        Utils.DLog("daily-------"+"resume");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Utils.DLog("daily-------"+"onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Utils.DLog("daily-------"+"onstop");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Utils.DLog("daily-------"+"onDestroyView");
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        Utils.DLog("daily-------"+"onDestory");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        Utils.DLog("daily-------"+"onDetach");
+        super.onDetach();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Utils.DLog("daily-------"+"onAttach");
+        super.onAttach(context);
+    }
+
 }

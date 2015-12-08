@@ -39,6 +39,10 @@ import java.util.List;
 
 /**
  * Created by mummyding on 15-11-26.
+ * Abstract Class. if provides a common framework for data cache(except Collection Cache)<br>
+ * And it supports Generic, so it is flexible.<br>
+ *  @author MummyDing
+ *  @version Leisure 1.0
  */
 public abstract class BaseCache<T> implements ICache<T> {
     protected Context mContext = LeisureApplication.AppContext;

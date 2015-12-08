@@ -48,6 +48,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Created by mummyding on 15-11-26.
+ * News Cache. function:<br>
+ * <li>Get News data from XinHuaNet api via net</li>
+ * <li>Cache News data to database if it updates</li>
+ * <li>Load News data from database</li>
+ * <li>Notify to fragment/activity if work completed</li>
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class NewsCache extends BaseCache<NewsBean> {
 

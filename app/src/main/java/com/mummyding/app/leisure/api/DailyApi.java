@@ -22,7 +22,10 @@
 package com.mummyding.app.leisure.api;
 
 /**
- * Created by mummyding on 15-11-22.
+ *  Created by mummyding on 15-11-22.<br>
+ *  ZhiHu(link www.zhihu.com) Daily Api<br>
+ *  @author MummyDing
+ *  @version Leisure 1.0
  */
 public class DailyApi {
     public static String daily_url = "https://diy-devz.rhcloud.com/zhihu";

@@ -40,6 +40,13 @@ import java.io.IOException;
 
 /**
  * Created by mummyding on 15-11-26.
+ * Science Cache. function:<br>
+ * <li>Get Article data from Guokr Scientific api via net</li>
+ * <li>Cache Article data to database if it updates</li>
+ * <li>Load Article data from database</li>
+ * <li>Notify to fragment/activity if work completed</li>
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class ScienceCache extends BaseCache<ArticleBean> {
 

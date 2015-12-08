@@ -24,7 +24,10 @@ package com.mummyding.app.leisure.model.reading;
 import java.io.Serializable;
 
 /**
- * Created by mummyding on 15-11-15.
+ * Created by mummyding on 15-11-15.<br>
+ * Reading Model . <br>
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class ReadingBean implements Serializable{
 

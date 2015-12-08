@@ -31,7 +31,10 @@ import com.mummyding.app.leisure.database.table.ReadingTable;
 import com.mummyding.app.leisure.database.table.ScienceTable;
 
 /**
- * Created by mummyding on 15-11-26.
+ * Created by mummyding on 15-11-26.<br>
+ * DatabaseHelper Class. it uses to manage Leisure's cache.
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
     private  static final String DB_NAME= "Leisure";

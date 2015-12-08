@@ -35,7 +35,10 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by mummyding on 15-11-22.
+ * Created by mummyding on 15-11-22.<br>
+ * Utils for Post Data via network and get network state of cell phone.
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class HttpUtil {
     private static final OkHttpClient mOkHttpClient = new OkHttpClient();

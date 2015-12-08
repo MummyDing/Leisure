@@ -21,13 +21,17 @@
 
 package com.mummyding.app.leisure.ui.news;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.NewsApi;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.PagerAdapter;
 import com.mummyding.app.leisure.ui.support.AbsTopNavigationFragment;
+
+import java.lang.reflect.Field;
 
 /**
  * Created by mummyding on 15-11-13.
@@ -40,7 +44,7 @@ public  class BaseNewsFragment extends AbsTopNavigationFragment {
     protected PagerAdapter initPagerAdapter() {
         name = NewsApi.getNewsTitle();
         url = NewsApi.getNewsUrl();
-        pagerAdapter = new PagerAdapter(getFragmentManager(),name) {
+        pagerAdapter = new PagerAdapter(getChildFragmentManager(),name) {
             @Override
             public Fragment getItem(int position) {
                 NewsFragment fragment = new NewsFragment();
@@ -53,4 +57,23 @@ public  class BaseNewsFragment extends AbsTopNavigationFragment {
         };
         return pagerAdapter;
     }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if(getChildFragmentManager().getFragments()!=null){
+            getChildFragmentManager().getFragments().clear();
+        }
+    }
 }
+
+
+  /* // isRemove = true;
+        try {
+            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+            childFragmentManager.setAccessible(true);
+            childFragmentManager.set(this, null);
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }*/

@@ -37,7 +37,7 @@ public class BaseCollectionFragment extends AbsTopNavigationFragment{
     protected PagerAdapter initPagerAdapter() {
         String [] tabTitles ={getContext().getString(R.string.daily),getContext().getString(R.string.reading)
                 ,getContext().getString(R.string.news),getContext().getString(R.string.science)};
-        pagerAdapter = new PagerAdapter(getFragmentManager(),tabTitles) {
+        pagerAdapter = new PagerAdapter(getChildFragmentManager(),tabTitles) {
             @Override
             public Fragment getItem(int position) {
                 Fragment fragment = new CollectionFragment();
@@ -48,6 +48,17 @@ public class BaseCollectionFragment extends AbsTopNavigationFragment{
             }
         };
         return pagerAdapter;
+    }
+
+    /**
+     * destroy child fragments
+     */
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if(getChildFragmentManager().getFragments()!=null){
+            getChildFragmentManager().getFragments().clear();
+        }
     }
 
 

@@ -39,7 +39,7 @@ public class DailyTable {
     public static final int ID_INFO = 1;
     public static final int ID_IMAGE = 2;
     public static final int ID_DESCRIPTION = 3;
-    public static final int ID_IS_COLLETED = 4;
+    public static final int ID_IS_COLLECTED = 4;
 
 
     public static final String CREATE_TABLE = "create table "+NAME+

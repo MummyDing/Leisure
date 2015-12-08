@@ -26,6 +26,8 @@ import com.mummyding.app.leisure.support.Utils;
 
 /**
  * Created by mummyding on 15-11-14.
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class NewsBean {
     private String title;

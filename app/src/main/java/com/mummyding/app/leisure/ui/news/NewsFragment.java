@@ -21,10 +21,12 @@
 
 package com.mummyding.app.leisure.ui.news;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.database.cache.cache.NewsCache;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.NewsAdapter;
 import com.mummyding.app.leisure.ui.support.BaseListFragment;
 
@@ -65,5 +67,54 @@ public class NewsFragment extends BaseListFragment {
     protected void getArgs() {
         mUrl = getArguments().getString(getString(R.string.id_url));
         mCategory = getArguments().getString(getString(R.string.id_category));
+    }
+
+
+    @Override
+    public void onStart() {
+        Utils.DLog("news-------" +mCategory+ "start");
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        Utils.DLog("news-------"+mCategory+"resume");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Utils.DLog("news-------"+mCategory+"onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Utils.DLog("news-------"+mCategory+"onstop");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Utils.DLog("news-------"+mCategory+"onDestroyView");
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        Utils.DLog("news-------"+mCategory+"onDestory");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        Utils.DLog("news-------"+mCategory+"onDetach");
+        super.onDetach();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Utils.DLog("news-------"+mCategory+"onAttach");
+        super.onAttach(context);
     }
 }

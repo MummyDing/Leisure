@@ -30,6 +30,9 @@ import java.io.Serializable;
 
 /**
  * Created by mummyding on 15-11-15.
+ * Book Model . it represents a single book info.<br>
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class BookBean implements Serializable{
     String [] author;

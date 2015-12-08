@@ -26,11 +26,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
- * Created by mummyding on 15-11-13.
+ * Created by mummyding on 15-11-13.<br>
+ * Abstract Class. A common PagerAdapter for ViewPager.<br>
+ * You must implement GetItem method if inherits it .
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public abstract class PagerAdapter extends FragmentStatePagerAdapter {
 
     private String [] titles;
+
     public PagerAdapter(FragmentManager fm, String[] titles) {
         super(fm);
         this.titles =titles;
@@ -45,4 +50,5 @@ public abstract class PagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         return titles[position];
     }
+
 }

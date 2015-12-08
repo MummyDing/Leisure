@@ -36,9 +36,11 @@ import com.mummyding.app.leisure.database.cache.ICache;
 import com.mummyding.app.leisure.database.table.NewsTable;
 import com.mummyding.app.leisure.model.news.NewsBean;
 import com.mummyding.app.leisure.ui.support.WebViewUrlActivity;
-
 /**
- * Created by mummyding on 15-11-14.
+ * Created by mummyding on 15-11-14.<br>
+ * News RecyclerView Adapter. It can provide different view according to Cache Type.<br>
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class NewsAdapter extends BaseListAdapter<NewsBean,NewsAdapter.ViewHolder> {
 

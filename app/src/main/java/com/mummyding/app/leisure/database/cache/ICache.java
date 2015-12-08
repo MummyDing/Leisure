@@ -24,7 +24,10 @@ package com.mummyding.app.leisure.database.cache;
 import java.util.List;
 
 /**
- * Created by mummyding on 15-12-3.
+ * Created by mummyding on 15-12-3.<br>
+ * Cache Interface. All cache class must implement this interface.
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public interface ICache<T>{
     void addToCollection(T object);

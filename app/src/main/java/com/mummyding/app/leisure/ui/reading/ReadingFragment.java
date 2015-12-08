@@ -21,11 +21,13 @@
 
 package com.mummyding.app.leisure.ui.reading;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.ReadingApi;
 import com.mummyding.app.leisure.database.cache.cache.ReadingCache;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.ReadingAdapter;
 import com.mummyding.app.leisure.ui.support.BaseListFragment;
 
@@ -74,5 +76,54 @@ public class ReadingFragment extends BaseListFragment {
         for(int i = 0; i < tags.length;i++){
             mUrls[i] = ReadingApi.searchByTag+tags[i];
         }
+    }
+
+
+    @Override
+    public void onStart() {
+        Utils.DLog("reading-------" + mCategory + "start");
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        Utils.DLog("reading-------"+mCategory+"resume");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Utils.DLog("reading-------"+mCategory+"onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Utils.DLog("reading-------"+mCategory+"onstop");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Utils.DLog("reading-------"+mCategory+"onDestroyView");
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        Utils.DLog("reading-------"+mCategory+"onDestory");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        Utils.DLog("reading-------"+mCategory+"onDetach");
+        super.onDetach();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Utils.DLog("reading-------"+mCategory+"onAttach");
+        super.onAttach(context);
     }
 }

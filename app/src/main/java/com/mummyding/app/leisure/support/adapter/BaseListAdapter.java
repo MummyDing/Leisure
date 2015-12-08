@@ -31,7 +31,11 @@ import com.mummyding.app.leisure.support.Settings;
 import java.util.List;
 
 /**
- * Created by mummyding on 15-12-3.
+ * Created by mummyding on 15-12-3.<br>
+ * Abstract. It provides a common framework for RecyclerView adapter.<br>
+ * All RecyclerView adapter inherits from this method.
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public abstract class BaseListAdapter<M,VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>{
 

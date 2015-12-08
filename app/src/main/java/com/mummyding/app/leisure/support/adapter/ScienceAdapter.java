@@ -44,7 +44,10 @@ import com.mummyding.app.leisure.support.adapter.ScienceAdapter.ViewHolder;
 
 
 /**
- * Created by mummyding on 15-11-18.
+ * Created by mummyding on 2015-11-18.<br>
+ * Science RecyclerView Adapter. It can provide different view according to Cache Type.<br>
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class ScienceAdapter extends BaseListAdapter<ArticleBean,ViewHolder>{
 

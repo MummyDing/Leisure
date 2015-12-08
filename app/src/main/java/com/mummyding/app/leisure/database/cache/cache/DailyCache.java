@@ -21,10 +21,7 @@
 
 package com.mummyding.app.leisure.database.cache.cache;
 
-import android.annotation.TargetApi;
-import android.content.Context;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Handler;
 
 import com.mummyding.app.leisure.api.DailyApi;
@@ -44,12 +41,18 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Created by mummyding on 15-11-26.
+ * Daily Cache. function:<br>
+ * <li>Get Daily data from ZhiHu api via net</li>
+ * <li>Cache Daily data to database if it updates</li>
+ * <li>Load Daily data from database</li>
+ * <li>Notify to fragment/activity if work completed</li>
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class DailyCache extends BaseCache<DailyBean> {
     private DailyTable table;
@@ -65,9 +68,9 @@ public class DailyCache extends BaseCache<DailyBean> {
         for(int i=0;i<mList.size();i++){
             DailyBean dailyBean = mList.get(i);
             values.put(DailyTable.TITLE,dailyBean.getTitle());
-            values.put(DailyTable.DESCRIPTION,dailyBean.getDescription());
-            values.put(DailyTable.IMAGE,dailyBean.getImage());
             values.put(DailyTable.INFO, dailyBean.getInfo());
+            values.put(DailyTable.IMAGE,dailyBean.getImage());
+            values.put(DailyTable.DESCRIPTION,dailyBean.getDescription());
             values.put(DailyTable.IS_COLLECTED,dailyBean.getIs_collected());
             db.insert(DailyTable.NAME, null, values);
         }
@@ -77,9 +80,9 @@ public class DailyCache extends BaseCache<DailyBean> {
     @Override
     protected void putData(DailyBean dailyBean) {
         values.put(DailyTable.TITLE,dailyBean.getTitle());
-        values.put(DailyTable.DESCRIPTION,dailyBean.getDescription());
-        values.put(DailyTable.IMAGE, dailyBean.getImage());
         values.put(DailyTable.INFO, dailyBean.getInfo());
+        values.put(DailyTable.IMAGE, dailyBean.getImage());
+        values.put(DailyTable.DESCRIPTION,dailyBean.getDescription());
         db.insert(DailyTable.COLLECTION_NAME, null, values);
     }
     @Override
@@ -92,7 +95,7 @@ public class DailyCache extends BaseCache<DailyBean> {
             dailyBean.setImage(cursor.getString(DailyTable.ID_IMAGE));
             dailyBean.setDescription(cursor.getString(DailyTable.ID_DESCRIPTION));
             dailyBean.setInfo(cursor.getString(DailyTable.ID_INFO));
-            dailyBean.setIs_collected(cursor.getInt(DailyTable.ID_IS_COLLETED));
+            dailyBean.setIs_collected(cursor.getInt(DailyTable.ID_IS_COLLECTED));
             mList.add(dailyBean);
         }
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);

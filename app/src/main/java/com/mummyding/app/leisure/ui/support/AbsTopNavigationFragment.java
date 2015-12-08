@@ -21,6 +21,7 @@
 
 package com.mummyding.app.leisure.ui.support;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -39,10 +40,10 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
  */
 public abstract class AbsTopNavigationFragment extends Fragment{
     protected View parentView;
-    private ViewPager viewPager;
-    private PagerAdapter pagerAdapter;
+    protected ViewPager viewPager;
+    protected   PagerAdapter pagerAdapter;
     private SmartTabLayout smartTabLayout;
-    protected abstract PagerAdapter initPagerAdapter();
+    protected abstract  PagerAdapter initPagerAdapter();
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,4 +60,5 @@ public abstract class AbsTopNavigationFragment extends Fragment{
         smartTabLayout.setViewPager(viewPager);
         return parentView;
     }
+
 }

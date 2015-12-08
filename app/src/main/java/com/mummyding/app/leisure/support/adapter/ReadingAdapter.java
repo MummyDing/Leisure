@@ -49,7 +49,10 @@ import com.mummyding.app.leisure.ui.reading.ReadingDetailsActivity;
 import com.mummyding.app.leisure.support.adapter.ReadingAdapter.ViewHolder;
 
 /**
- * Created by mummyding on 15-11-15.
+ * Created by mummyding on 2015-11-15.<br>
+ * Reading RecyclerView Adapter. It can provide different view according to Cache Type.<br>
+ * @author MummyDing
+ * @version Leisure 1.0
  */
 public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
 
@@ -104,11 +107,6 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
             holder.text.setTextColor(ContextCompat.getColor(mContext,R.color.colorPrimary));
             //holder.text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
             holder.text.setTextSize(18);
-            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                holder.text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary,null));
-            }else{
-                holder.text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
-            }*/
             holder.text.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
