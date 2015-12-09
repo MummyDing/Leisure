@@ -56,7 +56,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         mShakeToReturn.setChecked(Settings.isShakeMode);
         mExitConfirm.setChecked(Settings.isExitConfirm);
         mNoPicMode.setChecked(Settings.noPicMode);
-        
+
         mAutoRefresh.setOnPreferenceChangeListener(this);
         mNightMode.setOnPreferenceChangeListener(this);
         mShakeToReturn.setOnPreferenceChangeListener(this);

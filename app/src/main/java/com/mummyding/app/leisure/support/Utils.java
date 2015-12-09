@@ -22,6 +22,8 @@
 package com.mummyding.app.leisure.support;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -178,6 +180,18 @@ public class Utils {
         Configuration conf = context.getResources().getConfiguration();
         conf.locale = locale;
         context.getApplicationContext().getResources().updateConfiguration(conf, context.getResources().getDisplayMetrics());
+    }
+
+    public static String getVersion() {
+        try {
+            PackageManager manager = mContext.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(mContext.getPackageName(), 0);
+            String version = info.versionName;
+            return  version;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

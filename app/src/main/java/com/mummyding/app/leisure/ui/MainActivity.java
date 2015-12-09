@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         currentFragment = new DailyFragment();
         switchFragment();
+
+        Utils.DLog("------version: "+Utils.getVersion());
     }
 
     private void switchFragment(){
@@ -178,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                                 .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
                         new SectionDrawerItem().withName(R.string.app_name).withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
                         new SecondaryDrawerItem().withName(R.string.text_night_mode).withIcon(R.mipmap.ic_night).withIdentifier(R.mipmap.ic_night)
-                                .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white):ContextCompat.getColor(this,R.color.text_light)),
+                                .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_light)),
                         new SecondaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_setting).withIdentifier(R.mipmap.ic_setting)
                                 .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white):ContextCompat.getColor(this,R.color.text_light)),
                         new SecondaryDrawerItem().withName(R.string.about).withIcon(R.mipmap.ic_about).withIdentifier(R.mipmap.ic_about)
