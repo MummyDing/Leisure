@@ -21,6 +21,7 @@
 
 package com.mummyding.app.leisure.ui.support;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -67,6 +68,10 @@ public abstract class BaseWebViewActivity extends AppCompatActivity {
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setDatabaseEnabled(true);
+
+        if(Settings.isNightMode) {
+            webView.setBackgroundColor(ContextCompat.getColor(this, R.color.night_primary));
+        }
         if(HttpUtil.isWIFI == false) {
             webView.getSettings().setBlockNetworkImage(Settings.getInstance().getBoolean(Settings.NO_PIC_MODE, false));
         }

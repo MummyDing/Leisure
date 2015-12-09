@@ -8,6 +8,17 @@
     <color name="secondary_text">#B9B9B9</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
+    <color name="dividerColor">#0077D9</color>
     <color name="white">#ffffff</color>
+    <color name="bar_title">#ffffff</color>
+    <color name="text_color">#000000</color>
+    <color name="text_light">#ADADAD</color>
+    <color name="text_bright">#0078D8</color>
     <color name="transparent">#00000000</color>
+
+
+    <color name="night_primary">#4A4A4A</color>
+    <color name="night_primary_dark">#454545</color>
+    <color name="night_accent">#4682B4</color>
+
 </resources>

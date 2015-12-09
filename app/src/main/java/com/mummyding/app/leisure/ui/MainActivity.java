@@ -31,6 +31,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.Settings;
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private boolean isShake = false;
     private long lastPressTime = 0;
-
+    private Settings mSettings = Settings.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,12 +95,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         //Settings
-        Settings.isShakeMode = Settings.getInstance().getBoolean(Settings.SHAKE_TO_RETURN,true);
-        Settings.searchID = Settings.getInstance().getInt(Settings.SEARCH,0);
-        Settings.isAutoRefresh = Settings.getInstance().getBoolean(Settings.AUTO_REFRESH,false);
-        Settings.isExitConfirm = Settings.getInstance().getBoolean(Settings.EXIT_CONFIRM,true);
-        Settings.isNightMode = Settings.getInstance().getBoolean(Settings.NIGHT_MODE,false);
-        Settings.noPicMode = Settings.getInstance().getBoolean(Settings.NO_PIC_MODE,false);
+        Settings.isShakeMode = mSettings.getBoolean(Settings.SHAKE_TO_RETURN, true);
+        Settings.searchID = mSettings.getInt(Settings.SEARCH, 0);
+        Settings.isAutoRefresh = mSettings.getBoolean(Settings.AUTO_REFRESH, false);
+        Settings.isExitConfirm = mSettings.getBoolean(Settings.EXIT_CONFIRM, true);
+        Settings.isNightMode = mSettings.getBoolean(Settings.NIGHT_MODE, false);
+        Settings.noPicMode = mSettings.getBoolean(Settings.NO_PIC_MODE, false);
+
+
+        if(Settings.isNightMode){
+            this.setTheme(R.style.NightTheme);
+        }else{
+            this.setTheme(R.style.DayTheme);
+        }
 
         setContentView(R.layout.activity_main);
         initData();
@@ -155,16 +164,26 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 .withToolbar(toolbar)
                 .withActionBarDrawerToggleAnimated(true)
                 .withAccountHeader(header)
+                .withSliderBackgroundColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.night_primary) : ContextCompat.getColor(this, R.color.white))
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.daily).withIcon(R.mipmap.ic_home).withIdentifier(R.mipmap.ic_home),
-                        new PrimaryDrawerItem().withName(R.string.reading).withIcon(R.mipmap.ic_reading).withIdentifier(R.mipmap.ic_reading),
-                        new PrimaryDrawerItem().withName(R.string.news).withIcon(R.mipmap.ic_news).withIdentifier(R.mipmap.ic_news),
-                        new PrimaryDrawerItem().withName(R.string.science).withIcon(R.mipmap.ic_science).withIdentifier(R.mipmap.ic_science),
-                        new PrimaryDrawerItem().withName(R.string.collection).withIcon(R.mipmap.ic_collect).withIdentifier(R.mipmap.ic_collect),
-                        new SectionDrawerItem().withName(R.string.app_name),
-                        new SecondaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_setting).withIdentifier(R.mipmap.ic_setting),
+                        new PrimaryDrawerItem().withName(R.string.daily).withIcon(R.mipmap.ic_home).withIdentifier(R.mipmap.ic_home)
+                                .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
+                        new PrimaryDrawerItem().withName(R.string.reading).withIcon(R.mipmap.ic_reading).withIdentifier(R.mipmap.ic_reading)
+                                .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
+                        new PrimaryDrawerItem().withName(R.string.news).withIcon(R.mipmap.ic_news).withIdentifier(R.mipmap.ic_news)
+                                .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
+                        new PrimaryDrawerItem().withName(R.string.science).withIcon(R.mipmap.ic_science).withIdentifier(R.mipmap.ic_science)
+                                .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
+                        new PrimaryDrawerItem().withName(R.string.collection).withIcon(R.mipmap.ic_collect).withIdentifier(R.mipmap.ic_collect)
+                                .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
+                        new SectionDrawerItem().withName(R.string.app_name).withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
+                        new SecondaryDrawerItem().withName(R.string.text_night_mode).withIcon(R.mipmap.ic_night).withIdentifier(R.mipmap.ic_night)
+                                .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white):ContextCompat.getColor(this,R.color.text_light)),
+                        new SecondaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_setting).withIdentifier(R.mipmap.ic_setting)
+                                .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white):ContextCompat.getColor(this,R.color.text_light)),
                         new SecondaryDrawerItem().withName(R.string.about).withIcon(R.mipmap.ic_about).withIdentifier(R.mipmap.ic_about)
-                ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                                .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white):ContextCompat.getColor(this,R.color.text_light))
+                        ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                    @Override
                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                        switch (drawerItem.getIdentifier()) {
@@ -199,6 +218,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                                }
                                currentFragment = new BaseCollectionFragment();
                                break;
+                           case R.mipmap.ic_night:
+                               Settings.isNightMode = !Settings.isNightMode;
+                               mSettings.putBoolean(mSettings.NIGHT_MODE, Settings.isNightMode);
+                               MainActivity.this.recreate();
+                               return false;
                            case R.mipmap.ic_setting:
                                Intent toSetting = new Intent(MainActivity.this, SettingsActivity.class);
                                toSetting.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

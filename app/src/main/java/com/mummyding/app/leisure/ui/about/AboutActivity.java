@@ -52,6 +52,12 @@ public class AboutActivity extends AppCompatActivity implements SensorEventListe
             Utils.changeLanguage(this, mLang);
         }
 
+        //set Theme
+        if(Settings.isNightMode){
+            this.setTheme(R.style.NightTheme);
+        }else{
+            this.setTheme(R.style.DayTheme);
+        }
 
         setContentView(R.layout.activity_about);
 

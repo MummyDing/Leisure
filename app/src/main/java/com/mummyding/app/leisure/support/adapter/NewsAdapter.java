@@ -75,7 +75,7 @@ public class NewsAdapter extends BaseListAdapter<NewsBean,NewsAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, WebViewUrlActivity.class);
-                intent.putExtra("url", getItem(position).getLink());
+                intent.putExtra(mContext.getString(R.string.id_url), getItem(position).getLink());
                 mContext.startActivity(intent);
             }
         });

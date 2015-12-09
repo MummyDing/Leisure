@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="barTitleColor" format="color"/>
+    <attr name="textColor" format="color"/>
+    <attr name="textLight" format="color"/>
+    <attr name="textBright" format="color"/>
+    <attr name="dividerColor" format="color"/>
+    <attr name="barColor" format="color"/>
+</resources>

@@ -32,6 +32,14 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
         }
 
 
+        //set Theme
+        if(Settings.isNightMode){
+            this.setTheme(R.style.NightTheme);
+        }else{
+            this.setTheme(R.style.DayTheme);
+        }
+
+
         setContentView(R.layout.activity_settings);
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);

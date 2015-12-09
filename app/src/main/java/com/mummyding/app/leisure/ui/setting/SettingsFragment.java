@@ -1,7 +1,6 @@
 package com.mummyding.app.leisure.ui.setting;
 
 import android.content.DialogInterface;
-import android.hardware.Sensor;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -57,8 +56,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         mShakeToReturn.setChecked(Settings.isShakeMode);
         mExitConfirm.setChecked(Settings.isExitConfirm);
         mNoPicMode.setChecked(Settings.noPicMode);
-
-
+        
         mAutoRefresh.setOnPreferenceChangeListener(this);
         mNightMode.setOnPreferenceChangeListener(this);
         mShakeToReturn.setOnPreferenceChangeListener(this);
@@ -79,7 +77,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             return true;
         }else if(preference == mNightMode){
             Settings.isNightMode = Boolean.valueOf(newValue.toString());
+            Settings.needRecreate = true;
             mSettings.putBoolean(mSettings.NIGHT_MODE, Settings.isNightMode);
+            getActivity().recreate();
             return true;
         }else if(preference == mShakeToReturn){
             Settings.isShakeMode = Boolean.valueOf(newValue.toString());
@@ -107,7 +107,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             Settings.needRecreate = true;
             Snackbar.make(getView(), R.string.text_clear_cache_successful,Snackbar.LENGTH_SHORT).show();
         }else if(preference == mSearch){
-            Utils.DLog("search");
             ShowSearchSettingDialog();
         }
         return false;
@@ -125,9 +124,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                                     mSettings.putInt(Settings.LANGUAGE, which);
                                     Settings.needRecreate = true;
                                 }
-
                                 dialog.dismiss();
-
                                 if (Settings.needRecreate) {
                                     getActivity().recreate();
                                 }

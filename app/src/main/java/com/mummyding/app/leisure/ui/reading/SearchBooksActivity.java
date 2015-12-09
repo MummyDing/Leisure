@@ -59,6 +59,13 @@ public class SearchBooksActivity extends AppCompatActivity implements SensorEven
         }
 
 
+        //set Theme
+        if(Settings.isNightMode){
+            this.setTheme(R.style.NightTheme);
+        }else{
+            this.setTheme(R.style.DayTheme);
+        }
+
         setContentView(R.layout.activity_reading);
         initData();
 

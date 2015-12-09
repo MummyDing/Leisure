@@ -6,10 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    android:background="?attr/barColor">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:titleTextColor="@color/accent"
+        android:titleTextColor="?attr/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"
         app:popupTheme="@style/Base.ThemeOverlay.AppCompat.Light"
@@ -28,8 +29,8 @@
         app:stl_indicatorInterpolation="smart"
         app:stl_indicatorThickness="3dp"
         app:stl_indicatorWithoutPadding="true"
-        android:background="@color/primary"
-        app:stl_dividerColor="@color/primary"
+        android:background="?attr/colorPrimary"
+        app:stl_dividerColor="?attr/colorPrimary"
         app:stl_defaultTabTextSize="15sp"
         android:visibility="gone" />
 </android.support.design.widget.AppBarLayout>

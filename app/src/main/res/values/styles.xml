@@ -1,13 +1,36 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="DayTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="background">@color/primary</item>
+        <item name="background">@color/white</item>
+        <item name="barTitleColor">@color/bar_title</item>
+        <item name="barColor">@color/primary</item>
+        <item name="textColor">@color/text_color</item>
+        <item name="textLight">@color/text_light</item>
+        <item name="textBright">@color/primary</item>
+        <item name="dividerColor">@color/dividerColor</item>
     </style>
+
+
+    <style name="NightTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/night_primary</item>
+        <item name="colorPrimaryDark">@color/night_primary_dark</item>
+        <item name="colorAccent">@color/night_accent</item>
+        <item name="background">@color/night_primary</item>
+        <item name="barTitleColor">@color/white</item>
+        <item name="barColor">@color/night_primary_dark</item>
+        <item name="textColor">@color/white</item>
+        <item name="textLight">@color/text_light</item>
+        <item name="textBright">@color/night_primary</item>
+        <item name="dividerColor">@color/dividerColor</item>
+
+    </style>
+
     <style name="CardView.Content" parent="android:Widget">
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>

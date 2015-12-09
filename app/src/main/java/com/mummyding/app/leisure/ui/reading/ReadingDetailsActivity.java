@@ -66,6 +66,14 @@ public class ReadingDetailsActivity extends AppCompatActivity implements SensorE
             Utils.changeLanguage(this, mLang);
         }
 
+
+        //set Theme
+        if(Settings.isNightMode){
+            this.setTheme(R.style.NightTheme);
+        }else{
+            this.setTheme(R.style.DayTheme);
+        }
+
         setContentView(R.layout.activity_reading_details);
         initData();
 
