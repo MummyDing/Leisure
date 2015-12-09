@@ -20,7 +20,6 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
     private Toolbar toolbar;
     private int mLang = -1;
     private SensorManager mSensorManager;
-    private boolean isShakeMode = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,31 +52,20 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
 
 
     @Override
-    protected void onStart() {
-        Utils.DLog("Settings------onStart");
-        super.onStart();
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
-        Utils.DLog("Settings-------onResume");
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
-
-        isShakeMode = Settings.getInstance().getBoolean(Settings.SHAKE_TO_RETURN,true);
     }
 
     @Override
     protected void onStop() {
-        Utils.DLog("Settings----------onStop");
         mSensorManager.unregisterListener(this);
         super.onStop();
     }
 
     @Override
     protected void onPause() {
-        Utils.DLog("Settings--------onPause");
         mSensorManager.unregisterListener(this);
         super.onPause();
     }
@@ -85,7 +73,7 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        if(isShakeMode == false){
+        if(Settings.isShakeMode == false){
             return;
         }
 

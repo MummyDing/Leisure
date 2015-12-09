@@ -51,4 +51,6 @@
     <string name="text_exit_confirm">退出确认</string>
     <string name="text_exit_confirm_summary">按两次返回键退出应用</string>
     <string name="notify_exit_confirm">再按一次退出</string>
+    <string name="text_search_by_category">按类别搜索</string>
+    <string name="text_search_by_keyword">按关键字搜索</string>
 </resources>

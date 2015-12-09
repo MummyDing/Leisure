@@ -67,7 +67,6 @@ public abstract class BaseListFragment extends Fragment{
     protected boolean withHeaderTab = true;
     protected boolean withRefreshView = true;
     protected boolean needCache = true;
-    protected boolean autoRefreshMode = false;
 
 
     protected abstract void onCreateCache();
@@ -138,7 +137,6 @@ public abstract class BaseListFragment extends Fragment{
             });
         }
 
-        autoRefreshMode = Settings.getInstance().getBoolean(Settings.AUTO_REFRESH,false);
         HttpUtil.readNetworkState();
         loadFromCache();
 
@@ -181,7 +179,7 @@ public abstract class BaseListFragment extends Fragment{
                     if(withRefreshView && hasData() == false){
                         loadFromNet();
                         return false;
-                    }else if(withRefreshView && HttpUtil.isWIFI){
+                    }else if(Settings.isAutoRefresh && HttpUtil.isWIFI){
                         progressBar.setVisibility(View.GONE);
                         loadFromNet();
                         return false;

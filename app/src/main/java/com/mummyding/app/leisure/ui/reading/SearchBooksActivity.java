@@ -40,7 +40,7 @@ import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.ReadingAdapter;
 import com.mummyding.app.leisure.ui.support.BaseListFragment;
-public class ReadingActivity extends AppCompatActivity implements SensorEventListener {
+public class SearchBooksActivity extends AppCompatActivity implements SensorEventListener {
 
     private Toolbar toolbar;
     private String url;
@@ -76,7 +76,11 @@ public class ReadingActivity extends AppCompatActivity implements SensorEventLis
                 onBackPressed();
             }
         });
-        url = ReadingApi.searchByText+getIntent().getStringExtra(getString(R.string.id_search_text));
+        if(Settings.searchID == 0) {
+            url = ReadingApi.searchByText + getIntent().getStringExtra(getString(R.string.id_search_text));
+        }else if(Settings.searchID == 1){
+            url = ReadingApi.searchByTag + getIntent().getStringExtra(getString(R.string.id_search_text));
+        }
         BookListFragment fragment = new BookListFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.framelayout,fragment);

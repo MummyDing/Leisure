@@ -5,6 +5,9 @@
         <Preference
             android:key="@string/id_language"
             android:title="@string/text_language" />
+        <Preference
+            android:key="search"
+            android:title="@string/text_search"/>
         <CheckBoxPreference
             android:key="night_mode"
             android:title="@string/text_night_mode"

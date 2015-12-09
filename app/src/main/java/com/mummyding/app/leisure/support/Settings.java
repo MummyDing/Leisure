@@ -13,6 +13,12 @@ import com.mummyding.app.leisure.LeisureApplication;
 public class Settings {
 
     public static  boolean needRecreate = false;
+    public static boolean isShakeMode = true;
+    public static boolean noPicMode = false;
+    public static boolean isNightMode = false;
+    public static boolean isAutoRefresh = false;
+    public static boolean isExitConfirm = true;
+    public static int searchID = 0;
 
     public static final String XML_NAME = "settings";
 
@@ -28,6 +34,9 @@ public class Settings {
 
     public static final String EXIT_CONFIRM = "exit_confirm";
 
+    public static final String CLEAR_CACHE = "clear_cache";
+
+    public static final String SEARCH = "search";
 
     private static Settings sInstance;
 

@@ -54,6 +54,15 @@
         <item>简体中文</item>
         <item>繁體中文</item>
     </string-array>
+
+    <string-array name="search">
+        <item>@string/text_search_by_keyword</item>
+        <item>@string/text_search_by_category</item>
+    </string-array>
+
+    <string name="text_search_by_keyword">Search By Keyword</string>
+    <string name="text_search_by_category">Search By Category</string>
+
     <string name="text_clear_cache_successful">Cache Clear Successfully!</string>
     <string name="text_exit_confirm">Exit Confirm</string>
     <string name="text_exit_confirm_summary">Press back key twice to exit</string>

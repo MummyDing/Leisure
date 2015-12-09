@@ -31,12 +31,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -62,12 +60,9 @@ import com.mummyding.app.leisure.ui.collection.BaseCollectionFragment;
 import com.mummyding.app.leisure.ui.daily.DailyFragment;
 import com.mummyding.app.leisure.ui.news.BaseNewsFragment;
 import com.mummyding.app.leisure.ui.reading.BaseReadingFragment;
-import com.mummyding.app.leisure.ui.reading.ReadingActivity;
+import com.mummyding.app.leisure.ui.reading.SearchBooksActivity;
 import com.mummyding.app.leisure.ui.science.BaseScienceFragment;
 import com.mummyding.app.leisure.ui.setting.SettingsActivity;
-
-import java.util.List;
-
 
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
@@ -85,8 +80,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager mSensorManager;
 
     private boolean isShake = false;
-    private boolean isShakeMode = true;
-    private boolean isExitConfirm = true;
     private long lastPressTime = 0;
 
     @Override
@@ -99,11 +92,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             Utils.changeLanguage(this, mLang);
         }
 
-
+        //Settings
+        Settings.isShakeMode = Settings.getInstance().getBoolean(Settings.SHAKE_TO_RETURN,true);
+        Settings.searchID = Settings.getInstance().getInt(Settings.SEARCH,0);
+        Settings.isAutoRefresh = Settings.getInstance().getBoolean(Settings.AUTO_REFRESH,false);
+        Settings.isExitConfirm = Settings.getInstance().getBoolean(Settings.EXIT_CONFIRM,true);
+        Settings.isNightMode = Settings.getInstance().getBoolean(Settings.NIGHT_MODE,false);
+        Settings.noPicMode = Settings.getInstance().getBoolean(Settings.NO_PIC_MODE,false);
 
         setContentView(R.layout.activity_main);
         initData();
-
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -263,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(Utils.hasString(editText.getText().toString())){
-                            Intent intent = new Intent(MainActivity.this,ReadingActivity.class);
+                            Intent intent = new Intent(MainActivity.this,SearchBooksActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putString(getString(R.string.id_search_text),editText.getText().toString());
                             intent.putExtras(bundle);
@@ -284,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     private boolean canExit(){
-        if(isExitConfirm){
+        if(Settings.isExitConfirm){
             if(System.currentTimeMillis() - lastPressTime > CONSTANT.exitConfirmTime){
                 lastPressTime = System.currentTimeMillis();
                 Snackbar.make(getCurrentFocus(), R.string.notify_exit_confirm,Snackbar.LENGTH_SHORT).show();
@@ -296,7 +294,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     protected void onStart() {
-        Utils.DLog("Main-----onStart");
         super.onStart();
     }
 
@@ -304,13 +301,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
-        Utils.DLog("MainActivity-------onResume");
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
-
-
-        isShakeMode = Settings.getInstance().getBoolean(Settings.SHAKE_TO_RETURN,true);
-        isExitConfirm = Settings.getInstance().getBoolean(Settings.EXIT_CONFIRM,true);
 
         if(Settings.needRecreate) {
             Settings.needRecreate = false;
@@ -320,14 +312,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     protected void onStop() {
-        Utils.DLog("Main------onStop");
         mSensorManager.unregisterListener(this);
         super.onStop();
     }
 
     @Override
     protected void onPause() {
-        Utils.DLog("Main=----onPause");
         mSensorManager.unregisterListener(this);
         super.onPause();
     }
@@ -335,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        if(isShakeMode == false){
+        if(Settings.isShakeMode == false){
             return;
         }
 

@@ -1,6 +1,7 @@
 package com.mummyding.app.leisure.ui.setting;
 
 import android.content.DialogInterface;
+import android.hardware.Sensor;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -9,9 +10,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 
 import com.mummyding.app.leisure.R;
-import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.support.Utils;
+
 
 /**
  * Created by mummyding on 15-12-6.
@@ -23,16 +24,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private Settings mSettings;
 
 
-
-    private String LANGUAGE = "language";
-    private String AUTO_REFRESH = "auto_refresh";
-    private String NIGHT_MODE = "night_mode";
-    private String SHAKE_TO_RETURN = "shake_to_return";
-    private String NO_PIC_MODE = "no_pic_mode";
-    private String EXIT_CONFIRM = "exit_confirm";
-    private String CLEAR_CACHE = "clear_cache";
-
     private Preference mLanguage;
+    private Preference mSearch;
     private CheckBoxPreference mAutoRefresh;
     private CheckBoxPreference mNightMode;
     private CheckBoxPreference mShakeToReturn;
@@ -47,20 +40,23 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         mSettings = Settings.getInstance();
 
-        mLanguage = findPreference(LANGUAGE);
-        mAutoRefresh = (CheckBoxPreference) findPreference(AUTO_REFRESH);
-        mNightMode = (CheckBoxPreference) findPreference(NIGHT_MODE);
-        mShakeToReturn = (CheckBoxPreference) findPreference(SHAKE_TO_RETURN);
-        mNoPicMode = (CheckBoxPreference) findPreference(NO_PIC_MODE);
-        mExitConfirm = (CheckBoxPreference) findPreference(EXIT_CONFIRM);
-        mClearCache = findPreference(CLEAR_CACHE);
+        mLanguage = findPreference(Settings.LANGUAGE);
+        mSearch = findPreference(Settings.SEARCH);
+        mAutoRefresh = (CheckBoxPreference) findPreference(Settings.AUTO_REFRESH);
+        mNightMode = (CheckBoxPreference) findPreference(Settings.NIGHT_MODE);
+        mShakeToReturn = (CheckBoxPreference) findPreference(Settings.SHAKE_TO_RETURN);
+        mNoPicMode = (CheckBoxPreference) findPreference(Settings.NO_PIC_MODE);
+        mExitConfirm = (CheckBoxPreference) findPreference(Settings.EXIT_CONFIRM);
+        mClearCache = findPreference(Settings.CLEAR_CACHE);
 
         mLanguage.setSummary(this.getResources().getStringArray(R.array.langs)[Utils.getCurrentLanguage()]);
-        mAutoRefresh.setChecked(mSettings.getBoolean(mSettings.AUTO_REFRESH, false));
-        mNightMode.setChecked(mSettings.getBoolean(mSettings.NIGHT_MODE, false));
-        mShakeToReturn.setChecked(mSettings.getBoolean(mSettings.SHAKE_TO_RETURN, true));
-        mExitConfirm.setChecked(mSettings.getBoolean(mSettings.EXIT_CONFIRM,true));
-        mNoPicMode.setChecked(mSettings.getBoolean(mSettings.NO_PIC_MODE, false));
+        mSearch.setSummary(this.getResources().getStringArray(R.array.search)[Settings.searchID]);
+
+        mAutoRefresh.setChecked(Settings.isAutoRefresh);
+        mNightMode.setChecked(Settings.isNightMode);
+        mShakeToReturn.setChecked(Settings.isShakeMode);
+        mExitConfirm.setChecked(Settings.isExitConfirm);
+        mNoPicMode.setChecked(Settings.noPicMode);
 
 
         mAutoRefresh.setOnPreferenceChangeListener(this);
@@ -71,25 +67,32 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
 
         mLanguage.setOnPreferenceClickListener(this);
+        mSearch.setOnPreferenceClickListener(this);
         mClearCache.setOnPreferenceClickListener(this);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if(preference == mAutoRefresh){
-            mSettings.putBoolean(mSettings.AUTO_REFRESH,Boolean.valueOf(newValue.toString()));
+            Settings.isAutoRefresh = Boolean.valueOf(newValue.toString());
+            mSettings.putBoolean(mSettings.AUTO_REFRESH, Settings.isAutoRefresh);
             return true;
         }else if(preference == mNightMode){
-            mSettings.putBoolean(mSettings.NIGHT_MODE,Boolean.valueOf(newValue.toString()));
+            Settings.isNightMode = Boolean.valueOf(newValue.toString());
+            mSettings.putBoolean(mSettings.NIGHT_MODE, Settings.isNightMode);
             return true;
         }else if(preference == mShakeToReturn){
-            mSettings.putBoolean(mSettings.SHAKE_TO_RETURN,Boolean.valueOf(newValue.toString()));
+            Settings.isShakeMode = Boolean.valueOf(newValue.toString());
+            mSettings.putBoolean(mSettings.SHAKE_TO_RETURN,mSettings.isShakeMode);
             return true;
         }else if(preference == mExitConfirm){
-            mSettings.putBoolean(mSettings.EXIT_CONFIRM, Boolean.valueOf(newValue.toString()));
+            Settings.isExitConfirm = Boolean.valueOf(newValue.toString());
+            mSettings.putBoolean(mSettings.EXIT_CONFIRM, Settings.isExitConfirm);
             return true;
         }else if(preference == mNoPicMode){
-            mSettings.putBoolean(mSettings.NO_PIC_MODE,Boolean.valueOf(newValue.toString()));
+            Settings.noPicMode = Boolean.valueOf(newValue.toString());
+            Settings.needRecreate = true;
+            mSettings.putBoolean(mSettings.NO_PIC_MODE, Settings.noPicMode);
             return true;
         }
         return false;
@@ -99,10 +102,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public boolean onPreferenceClick(Preference preference) {
         if(preference == mLanguage){
             showLangDialog();
-
         }else if(preference == mClearCache){
             Utils.clearCache();
+            Settings.needRecreate = true;
             Snackbar.make(getView(), R.string.text_clear_cache_successful,Snackbar.LENGTH_SHORT).show();
+        }else if(preference == mSearch){
+            Utils.DLog("search");
+            ShowSearchSettingDialog();
         }
         return false;
     }
@@ -127,8 +133,24 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                                 }
                             }
                         }
-                )
-                .show();
+                ).show();
 
+    }
+
+    private void ShowSearchSettingDialog(){
+        new AlertDialog.Builder(getActivity())
+                .setTitle(getString(R.string.text_search))
+                .setSingleChoiceItems(
+                        getResources().getStringArray(R.array.search), Settings.searchID,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Settings.searchID = which;
+                                mSettings.putInt(Settings.SEARCH,which);
+                                mSearch.setSummary(getResources().getStringArray(R.array.search)[Settings.searchID]);
+                                dialog.dismiss();
+                            }
+                        }
+                ).show();
     }
 }

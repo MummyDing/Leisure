@@ -45,14 +45,11 @@ public abstract class BaseListAdapter<M,VH extends RecyclerView.ViewHolder> exte
 
     protected boolean isCollection = false;
 
-    protected boolean isNoPicMode = false;
 
     public BaseListAdapter(Context context, ICache<M> cache) {
         mContext = context;
         mCache = cache;
         mItems = cache.getmList();
-
-        isNoPicMode = Settings.getInstance().getBoolean(Settings.NO_PIC_MODE,false);
 
         if(cache instanceof BaseCollectionCache){
             isCollection = true;
