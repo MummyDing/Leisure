@@ -22,34 +22,19 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".ui.MainActivity"
-            android:launchMode="singleInstance"
-            android:screenOrientation="nosensor" >
+            android:screenOrientation="nosensor"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.support.WebViewUrlActivity"
-            android:launchMode="singleInstance" >
-        </activity>
-        <activity
-            android:name=".ui.reading.ReadingDetailsActivity"
-            android:launchMode="singleInstance" >
-        </activity>
-        <activity
-            android:name=".ui.support.WebViewLocalActivity"
-            android:launchMode="singleInstance" >
-        </activity>
-        <activity
-            android:name=".ui.reading.ReadingActivity"
-            android:launchMode="singleInstance" >
-        </activity>
-        <activity android:name=".ui.about.AboutActivity" >
-        </activity>
-        <activity android:name=".ui.setting.SettingsActivity" >
-        </activity>
+        <activity android:name=".ui.support.WebViewUrlActivity"/>
+        <activity android:name=".ui.reading.ReadingDetailsActivity"/>
+        <activity android:name=".ui.support.WebViewLocalActivity"/>
+        <activity android:name=".ui.reading.ReadingActivity"/>
+        <activity android:name=".ui.about.AboutActivity"/>
+        <activity android:name=".ui.setting.SettingsActivity"/>
     </application>
 
 </manifest>

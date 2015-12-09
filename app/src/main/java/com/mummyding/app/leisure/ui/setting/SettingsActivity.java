@@ -1,5 +1,6 @@
 package com.mummyding.app.leisure.ui.setting;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -31,6 +32,7 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
             Utils.changeLanguage(this, mLang);
         }
 
+
         setContentView(R.layout.activity_settings);
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -51,9 +53,15 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
 
 
     @Override
+    protected void onStart() {
+        Utils.DLog("Settings------onStart");
+        super.onStart();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-
+        Utils.DLog("Settings-------onResume");
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
 
@@ -62,12 +70,14 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
 
     @Override
     protected void onStop() {
+        Utils.DLog("Settings----------onStop");
         mSensorManager.unregisterListener(this);
         super.onStop();
     }
 
     @Override
     protected void onPause() {
+        Utils.DLog("Settings--------onPause");
         mSensorManager.unregisterListener(this);
         super.onPause();
     }

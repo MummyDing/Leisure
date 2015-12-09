@@ -31,10 +31,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -96,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (mLang > -1) {
             Utils.changeLanguage(this, mLang);
         }
+
+
 
         setContentView(R.layout.activity_main);
         initData();
@@ -199,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                                break;
                            case R.mipmap.ic_setting:
                                Intent toSetting = new Intent(MainActivity.this, SettingsActivity.class);
+                               toSetting.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                startActivity(toSetting);
                                return false;
                            case R.mipmap.ic_about:
@@ -290,9 +295,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     @Override
+    protected void onStart() {
+        Utils.DLog("Main-----onStart");
+        super.onStart();
+    }
+
+
+    @Override
     protected void onResume() {
         super.onResume();
-
+        Utils.DLog("MainActivity-------onResume");
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
 
@@ -308,12 +320,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     protected void onStop() {
+        Utils.DLog("Main------onStop");
         mSensorManager.unregisterListener(this);
         super.onStop();
     }
 
     @Override
     protected void onPause() {
+        Utils.DLog("Main=----onPause");
         mSensorManager.unregisterListener(this);
         super.onPause();
     }
