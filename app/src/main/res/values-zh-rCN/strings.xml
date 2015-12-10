@@ -53,4 +53,21 @@
     <string name="notify_exit_confirm">再按一次退出</string>
     <string name="text_search_by_category">按类别搜索</string>
     <string name="text_search_by_keyword">按关键字搜索</string>
+    <string name="text_attention">注意</string>
+    <string name="text_attention_summary">此应用禁止用于商业目的</string>
+    <string name="text_author_github">作者 GitHub</string>
+    <string name="text_blog">博客</string>
+    <string name="text_check_update">检查更新</string>
+    <string name="text_copyright">版权</string>
+    <string name="text_current_version">当前版本</string>
+    <string name="text_data">数据</string>
+    <string name="text_data_summary">所有数据均来自公开的API,版权属于原作者</string>
+    <string name="text_good_job">点个赞</string>
+    <string name="text_good_job_summary">去https://github.com/MummyDing/Leisure给个star吧！</string>
+    <string name="text_share_leisure">分享闲暇</string>
+    <string name="text_email">邮箱</string>
+    <string name="notify_find_new_version">发现新版本　</string>
+    <string name="notify_current_is_latest">已经是最新版本</string>
+    <string name="notif_info_copied">信息已添加至剪切板,你可以将其粘贴到编辑区域</string>
+    <string name="text_share_info">欢迎使用“闲暇”,它集"知乎日报"、"果壳科学人"、"新华网新闻"以及"豆瓣图书"于一体,满足你日常休闲阅读需求,你可以到https://github.com/MummyDing/Leisure/下载</string>
 </resources>

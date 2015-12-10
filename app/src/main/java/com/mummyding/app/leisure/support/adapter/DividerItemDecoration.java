@@ -1,5 +1,4 @@
 
-
 package com.mummyding.app.leisure.support.adapter;/*
         * Copyright (C) 2014 The Android Open Source Project
         *

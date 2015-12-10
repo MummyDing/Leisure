@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/app_name">
+        <Preference
+            android:title="@string/text_current_version"
+            android:summary="@string/leisure_version"/>
+        <Preference
+            android:key="check_update"
+            android:title="@string/text_check_update"/>
+        <Preference
+            android:key="star_project"
+            android:title="@string/text_good_job"
+            android:summary="@string/text_good_job_summary"/>
+        <Preference
+            android:key="share"
+            android:title="@string/text_share_leisure" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/text_author"
+        android:summary="@string/author_name">
+        <Preference
+            android:key="blog"
+            android:title="@string/text_blog"
+            android:summary="@string/author_blog" />
+        <Preference
+            android:key="github"
+            android:title="@string/text_author_github"
+            android:summary="@string/author_github"/>
+        <Preference
+            android:key="email"
+            android:title="@string/text_email"
+            android:summary="@string/author_email" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/text_copyright">
+        <Preference
+            android:title="@string/text_data"
+            android:summary="@string/text_data_summary" />
+        <Preference
+            android:title="@string/text_attention"
+            android:summary="@string/text_attention_summary"/>
+        <Preference
+            android:title="@string/text_license"
+            android:summary="   Leisure is free software: you can redistribute it and/or modify　it under the terms of the GNU General
+Public License as published by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.\n
+    Leisure is distributed in the hope that it will be useful,but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,22 +1,20 @@
 /*
+ *  Copyright (C) 2015 MummyDing
  *
- *  * Copyright (C) 2015 MummyDing
- *  *
- *  * This file is part of Leisure( <https://github.com/MummyDing/Leisure> )
- *  *
- *  * Leisure is free software: you can redistribute it and/or modify
- *  * it under the terms of the GNU General Public License as published by
- *  * the Free Software Foundation, either version 3 of the License, or
- *  * (at your option) any later version.
- *  *
- *  * Leisure is distributed in the hope that it will be useful,
- *  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  * GNU General Public License for more details.
- *  *
- *  * You should have received a copy of the GNU General Public License
- *  * along with Leisure.  If not, see <http://www.gnu.org/licenses/>.
+ *  This file is part of Leisure( <https://github.com/MummyDing/Leisure> )
  *
+ *  Leisure is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *                             ｀
+ *  Leisure is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Leisure.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.mummyding.app.leisure.ui.daily;
@@ -71,52 +69,5 @@ public class DailyFragment extends BaseListFragment{
 
     }
 
-    @Override
-    public void onStart() {
-        Utils.DLog("daily-------"+"start");
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        Utils.DLog("daily-------"+"resume");
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        Utils.DLog("daily-------"+"onPause");
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        Utils.DLog("daily-------"+"onstop");
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroyView() {
-        Utils.DLog("daily-------"+"onDestroyView");
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        Utils.DLog("daily-------"+"onDestory");
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach() {
-        Utils.DLog("daily-------"+"onDetach");
-        super.onDetach();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        Utils.DLog("daily-------"+"onAttach");
-        super.onAttach(context);
-    }
 
 }

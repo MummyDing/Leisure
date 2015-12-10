@@ -48,4 +48,21 @@
     <string name="notify_exit_confirm">再按一次退出</string>
     <string name="text_search_by_category">按類別搜索</string>
     <string name="text_search_by_keyword">按關鍵字搜索</string>
+    <string name="text_attention">注意</string>
+    <string name="text_attention_summary">此應用禁止用於商業目的</string>
+    <string name="text_author_github">作者 GitHub</string>
+    <string name="text_blog">部落格</string>
+    <string name="text_check_update">檢查更新</string>
+    <string name="text_copyright">版權</string>
+    <string name="text_data">數據</string>
+    <string name="text_data_summary">所有數據均來自公開API,版權屬於原作者</string>
+    <string name="text_good_job">點個贊</string>
+    <string name="text_good_job_summary">去https://github.com/MummyDing/Leisure 給個star吧！</string>
+    <string name="text_share_leisure">分享閒暇</string>
+    <string name="text_current_version">當前版本</string>
+    <string name="text_email">郵箱</string>
+    <string name="notify_find_new_version">發現新版本　</string>
+    <string name="notify_current_is_latest">已經是最新版本</string>
+    <string name="notif_info_copied">資訊已經被添加至剪貼簿</string>
+    <string name="text_share_info">歡迎使用"閒暇",它集"知乎日報"、"果殼科學人"\"新華網新聞"、以及"豆瓣圖書"於一體,滿足你日常休閒閱讀需要,你可以到　https://github.com/MummyDing/Leisure/下載</string>
 </resources>

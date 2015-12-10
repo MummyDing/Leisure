@@ -1,22 +1,20 @@
 /*
+ *  Copyright (C) 2015 MummyDing
  *
- *  * Copyright (C) 2015 MummyDing
- *  *
- *  * This file is part of Leisure( <https://github.com/MummyDing/Leisure> )
- *  *
- *  * Leisure is free software: you can redistribute it and/or modify
- *  * it under the terms of the GNU General Public License as published by
- *  * the Free Software Foundation, either version 3 of the License, or
- *  * (at your option) any later version.
- *  *
- *  * Leisure is distributed in the hope that it will be useful,
- *  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  * GNU General Public License for more details.
- *  *
- *  * You should have received a copy of the GNU General Public License
- *  * along with Leisure.  If not, see <http://www.gnu.org/licenses/>.
+ *  This file is part of Leisure( <https://github.com/MummyDing/Leisure> )
  *
+ *  Leisure is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *                             ｀
+ *  Leisure is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Leisure.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.mummyding.app.leisure.ui;
@@ -176,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                                 .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
                         new PrimaryDrawerItem().withName(R.string.science).withIcon(R.mipmap.ic_science).withIdentifier(R.mipmap.ic_science)
                                 .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
-                        new PrimaryDrawerItem().withName(R.string.collection).withIcon(R.mipmap.ic_collect).withIdentifier(R.mipmap.ic_collect)
+                        new PrimaryDrawerItem().withName(R.string.collection).withIcon(R.mipmap.ic_collect_grey).withIdentifier(R.mipmap.ic_collect_grey)
                                 .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
                         new SectionDrawerItem().withName(R.string.app_name).withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
                         new SecondaryDrawerItem().withName(R.string.text_night_mode).withIcon(R.mipmap.ic_night).withIdentifier(R.mipmap.ic_night)
@@ -214,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                                }
                                currentFragment = new BaseScienceFragment();
                                break;
-                           case R.mipmap.ic_collect:
+                           case R.mipmap.ic_collect_grey:
                                if (currentFragment instanceof BaseCollectionFragment) {
                                    return false;
                                }

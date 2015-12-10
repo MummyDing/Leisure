@@ -1,32 +1,34 @@
 /*
+ *  Copyright (C) 2015 MummyDing
  *
- *  * Copyright (C) 2015 MummyDing
- *  *
- *  * This file is part of Leisure( <https://github.com/MummyDing/Leisure> )
- *  *
- *  * Leisure is free software: you can redistribute it and/or modify
- *  * it under the terms of the GNU General Public License as published by
- *  * the Free Software Foundation, either version 3 of the License, or
- *  * (at your option) any later version.
- *  *
- *  * Leisure is distributed in the hope that it will be useful,
- *  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  * GNU General Public License for more details.
- *  *
- *  * You should have received a copy of the GNU General Public License
- *  * along with Leisure.  If not, see <http://www.gnu.org/licenses/>.
+ *  This file is part of Leisure( <https://github.com/MummyDing/Leisure> )
  *
+ *  Leisure is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *                             ｀
+ *  Leisure is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Leisure.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.mummyding.app.leisure.support;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -91,7 +93,7 @@ public class Utils {
         while (matcher.find()){
             res = matcher.group();
         }
-        return res.substring(start,res.length() -end);
+        return res.substring(start, res.length() - end);
     }
     public static String RegexFind(String regex,String string){
         return RegexFind(regex, string, 1, 1);
@@ -193,5 +195,13 @@ public class Utils {
             return null;
         }
     }
+
+    public static void copyToClipboard(View view,String info) {
+        ClipboardManager cm = (ClipboardManager) mContext.getSystemService(mContext.CLIPBOARD_SERVICE);
+        ClipData cd = ClipData.newPlainText("msg", info);
+        cm.setPrimaryClip(cd);
+        Snackbar.make(view, R.string.notif_info_copied,Snackbar.LENGTH_SHORT).show();
+    }
+
 
 }

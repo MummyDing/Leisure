@@ -67,4 +67,26 @@
     <string name="text_exit_confirm">Exit Confirm</string>
     <string name="text_exit_confirm_summary">Press back key twice to exit</string>
     <string name="notify_exit_confirm">press again to exit</string>
+    <string name="text_current_version">Current Version</string>
+    <string name="text_share_leisure">Share Leisure</string>
+    <string name="text_check_update">Check Update</string>
+    <string name="text_good_job">Good Job</string>
+    <string name="text_good_job_summary">Give me a star at https://github.com/MummyDing/Leisure</string>
+    <string name="text_blog">Blog</string>
+    <string name="author_blog">http://blog.csdn.net/mummyding</string>
+    <string name="text_author_github">Author GitHub</string>
+    <string name="author_github">https://github.com/MummyDing</string>
+    <string name="text_copyright">Copyright</string>
+    <string name="text_data">Data</string>
+    <string name="text_email">E-Mail</string>
+    <string name="text_data_summary">The data are from public API,all rights belong to original author</string>
+    <string name="text_attention">Attention</string>
+    <string name="text_attention_summary">This app is not allowed for COMMERCIAL Purposes</string>
+    <string name="text_license">License</string>
+    <string name="leisure_version">Leisure Version 1.0</string>
+    <string name="notify_current_is_latest">Current Version is the latest Version</string>
+    <string name="notify_find_new_version">"Find new Version "</string>
+    <string name="notif_info_copied">Info copied to Clipboard! You can paste it to an edit area</string>
+    <string name="project_url">https://github.com/MummyDing/Leisure/</string>
+    <string name="text_share_info">Welcome to use Leisure,it contains Zhihu Daily,Guokr Scientific,XinhuaNet News and Douban Books.You can download it at https://github.com/MummyDing/Leisure/</string>
 </resources>
