@@ -4,8 +4,9 @@ Leisure is an Android App,it contains Zhihu Daily,Guokr Scientific,XinhuaNet New
   　　　
 ![alt text](./logo.png)   
 
-
-视频(Video): [http://v.youku.com/v_show/id_XMTQwOTU4MzE5Mg==.html][1]
+豌豆荚应用下载地址:  [http://www.wandoujia.com/apps/com.mummyding.app.leisure][1]
+视频(Video): [http://v.youku.com/v_show/id_XMTQwOTU4MzE5Mg==.html][2]
+Blog:[http://blog.csdn.net/mummyding/article/details/50266203][3]
 
 -----------
 
@@ -28,5 +29,24 @@ Leisure is an Android App,it contains Zhihu Daily,Guokr Scientific,XinhuaNet New
   - 自动刷新:开启该功能后，在WIFI下自动刷新，获取最新内容
   - 语言:　支持繁简中文和英文，满足用户语言习惯
   - 清除缓存:用户可以手动清除缓存，节约手机存储空间
+  
+  
+MainActivity: 入口界面。做一些初始化的工作，加载应用整体框架，负责基本子界面的切换。<br>
+BaseListFragment：列表界面基类。定制性强，可自定义是否启用头部导航布局　下拉刷新等组件<br>
+AsbtopNavigationFragment:　头部导航布局基类,继承它即可管理头部导航布局。<br>
+BaseAdapter: RecyclerView　的Adapter基类<br>
+       -- BaseCache 主模块数据缓存基类　<br>
+ICache---　缓存接口<br>
+       -- BaseCollectionCache　收藏模块缓存基类<br>
 
-[1]:(http://v.youku.com/v_show/id_XMTQwOTU4MzE5Mg==.html)
+
+# 应用截图
+
+<img src="/ScreenShots/home.png" width="200" height="380"/> 
+<img src="/ScreenShots/science.png" width="200" height="380"/> 
+<img src="/ScreenShots/ebook.png" width="200" height="380"/> 
+<img src="/ScreenShots/settings.png" width="200" height="380"/> 
+<img src="/ScreenShots/about.png" width="200" height="380"/> 
+[1]:(http://www.wandoujia.com/apps/com.mummyding.app.leisure)
+[2]:(http://v.youku.com/v_show/id_XMTQwOTU4MzE5Mg==.html)
+[3]:(http://blog.csdn.net/mummyding/article/details/50266203)
