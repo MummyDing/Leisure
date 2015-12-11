@@ -35,9 +35,9 @@ MainActivity: 入口界面。做一些初始化的工作，加载应用整体框
 BaseListFragment：列表界面基类。定制性强，可自定义是否启用头部导航布局　下拉刷新等组件<br>
 AsbtopNavigationFragment:　头部导航布局基类,继承它即可管理头部导航布局。<br>
 BaseAdapter: RecyclerView　的Adapter基类<br>
-                -- BaseCache 主模块数据缓存基类<br>
-ICache ---　缓存接口<br>
-                -- BaseCollectionCache　收藏模块缓存基类<br>
+       -- BaseCache 主模块数据缓存基类　<br>
+ICache---　缓存接口<br>
+       -- BaseCollectionCache　收藏模块缓存基类<br>
 
 
 # 应用截图
