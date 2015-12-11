@@ -2,11 +2,17 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/app_name">
         <Preference
+            android:key="app_intro"
+            android:title="@string/text_app_intro"/>
+        <Preference
             android:title="@string/text_current_version"
             android:summary="@string/leisure_version"/>
         <Preference
             android:key="check_update"
             android:title="@string/text_check_update"/>
+        <Preference
+            android:key="demo_video"
+            android:title="@string/text_demo_video"/>
         <Preference
             android:key="star_project"
             android:title="@string/text_good_job"

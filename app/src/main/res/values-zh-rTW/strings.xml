@@ -65,4 +65,6 @@
     <string name="notify_current_is_latest">已經是最新版本</string>
     <string name="notif_info_copied">資訊已經被添加至剪貼簿</string>
     <string name="text_share_info">歡迎使用"閒暇",它集"知乎日報"、"果殼科學人"\"新華網新聞"、以及"豆瓣圖書"於一體,滿足你日常休閒閱讀需要,你可以到　https://github.com/MummyDing/Leisure/下載</string>
+    <string name="text_demo_video">演示視訊</string>
+    <string name="text_app_intro">應用簡介</string>
 </resources>

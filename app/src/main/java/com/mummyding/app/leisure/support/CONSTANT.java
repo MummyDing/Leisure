@@ -30,6 +30,7 @@ public class CONSTANT {
 
     public static final String CURRENT_VERSION = "1.0";
 
+    public static final String DEMO_VIDEO_URL = "http://v.youku.com/v_show/id_XMTQwOTU4MzE5Mg==.html";
 
     public static final String MONTH [] =
             {"","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"};

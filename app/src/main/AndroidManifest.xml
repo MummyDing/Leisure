@@ -35,6 +35,8 @@
         <activity android:name=".ui.reading.SearchBooksActivity"/>
         <activity android:name=".ui.about.AboutActivity"/>
         <activity android:name=".ui.setting.SettingsActivity"/>
+        <activity android:name=".ui.about.DemoVideoActivity"/>
+        <activity android:name=".ui.about.AppIntroActivity"/>
     </application>
 
 </manifest>

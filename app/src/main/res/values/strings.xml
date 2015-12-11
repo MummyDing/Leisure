@@ -89,4 +89,6 @@
     <string name="notif_info_copied">Info copied to Clipboard! You can paste it to an edit area</string>
     <string name="project_url">https://github.com/MummyDing/Leisure/</string>
     <string name="text_share_info">Welcome to use Leisure,it contains Zhihu Daily,Guokr Scientific,XinhuaNet News and Douban Books.You can download it at https://github.com/MummyDing/Leisure/</string>
+    <string name="text_demo_video">Demo Video</string>
+    <string name="text_app_intro">App Introduction</string>
 </resources>

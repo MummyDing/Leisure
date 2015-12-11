@@ -19,6 +19,7 @@
 
 package com.mummyding.app.leisure.ui.about;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -45,6 +46,8 @@ import java.io.IOException;
  */
 public class AboutFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener{
 
+    private Preference mAppIntro;
+    private Preference mDemoVideo;
     private Preference mCheckUpdate;
     private Preference mStarProject;
     private Preference mShare;
@@ -53,6 +56,8 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
     private Preference mEmail;
 
 
+    private final String APP_INTRO = "app_intro";
+    private final String DEMO_VIDEO = "demo_video";
     private final String CHECK_UPDATE = "check_update";
     private final String START_PROJECT = "star_project";
     private final String SHARE = "share";
@@ -67,7 +72,8 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.about);
 
-
+        mAppIntro = findPreference(APP_INTRO);
+        mDemoVideo = findPreference(DEMO_VIDEO);
         mCheckUpdate = findPreference(CHECK_UPDATE);
         mStarProject = findPreference(START_PROJECT);
         mShare = findPreference(SHARE);
@@ -75,6 +81,8 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
         mGitHub = findPreference(GITHUB);
         mEmail = findPreference(EMAIL);
 
+        mAppIntro.setOnPreferenceClickListener(this);
+        mDemoVideo.setOnPreferenceClickListener(this);
         mCheckUpdate.setOnPreferenceClickListener(this);
         mStarProject.setOnPreferenceClickListener(this);
         mShare.setOnPreferenceClickListener(this);
@@ -88,7 +96,14 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if(mCheckUpdate == preference){
+
+        if(mAppIntro == preference){
+            Intent toIntro = new Intent(getActivity(),AppIntroActivity.class);
+            startActivity(toIntro);
+        }else if(mDemoVideo == preference){
+            Intent toVideo = new Intent(getActivity(),DemoVideoActivity.class);
+            startActivity(toVideo);
+        }else if(mCheckUpdate == preference){
             progressBar.setVisibility(View.VISIBLE);
 
             Request.Builder builder = new Request.Builder();
@@ -97,16 +112,17 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
             HttpUtil.enqueue(request, new Callback() {
                 @Override
                 public void onFailure(Request request, IOException e) {
-                    Snackbar.make(getView(),"Fail to get version info,please check your network setting",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), "Fail to get version info,please check your network setting", Snackbar.LENGTH_SHORT).show();
                     handle.sendEmptyMessage(1);
                 }
+
                 @Override
                 public void onResponse(Response response) throws IOException {
                     String latestVersion = response.body().string();
-                    if(CONSTANT.CURRENT_VERSION.equals(latestVersion.trim())){
-                        Snackbar.make(getView(), getString(R.string.notify_current_is_latest),Snackbar.LENGTH_SHORT).show();
-                    }else {
-                        Snackbar.make(getView(), getString(R.string.notify_find_new_version)+latestVersion,Snackbar.LENGTH_SHORT).show();
+                    if (CONSTANT.CURRENT_VERSION.equals(latestVersion.trim())) {
+                        Snackbar.make(getView(), getString(R.string.notify_current_is_latest), Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        Snackbar.make(getView(), getString(R.string.notify_find_new_version) + latestVersion, Snackbar.LENGTH_SHORT).show();
                     }
                     handle.sendEmptyMessage(1);
                 }

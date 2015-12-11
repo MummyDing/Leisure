@@ -70,4 +70,6 @@
     <string name="notify_current_is_latest">已经是最新版本</string>
     <string name="notif_info_copied">信息已添加至剪切板,你可以将其粘贴到编辑区域</string>
     <string name="text_share_info">欢迎使用“闲暇”,它集"知乎日报"、"果壳科学人"、"新华网新闻"以及"豆瓣图书"于一体,满足你日常休闲阅读需求,你可以到https://github.com/MummyDing/Leisure/下载</string>
+    <string name="text_demo_video">演示视频</string>
+    <string name="text_app_intro">应用简介</string>
 </resources>
