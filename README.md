@@ -4,6 +4,7 @@ Leisure is an Android App,it contains Zhihu Daily,Guokr Scientific,XinhuaNet New
   　　　
 ![alt text](./logo.png)   
 
+酷安应用市场下载地址:[http://coolapk.com/apk/com.mummyding.app.leisure][5]<br>
 豌豆荚应用下载地址:  [http://www.wandoujia.com/apps/com.mummyding.app.leisure][1]<br>
 360应用市场下载地址: [http://m.app.so.com/detail/index?pname=com.mummyding.app.leisure&id=3167599][4]<br>
 视频(Video): [http://v.youku.com/v_show/id_XMTQwOTU4MzE5Mg==.html][2]<br>
@@ -52,3 +53,4 @@ ICache---　缓存接口<br>
 [2]:(http://v.youku.com/v_show/id_XMTQwOTU4MzE5Mg==.html)
 [3]:(http://blog.csdn.net/mummyding/article/details/50266203)
 [4]:(http://m.app.so.com/detail/index?pname=com.mummyding.app.leisure&id=3167599)
+[5]:(http://coolapk.com/apk/com.mummyding.app.leisure)
