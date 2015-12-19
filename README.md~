@@ -1,5 +1,5 @@
 # 闲暇(Leisure)
-Leisure is an Android App,it contains Zhihu Daily,Guokr Scientific,XinhuaNet News and Douban Books 
+Leisure is an Android App containing Zhihu Daily,Guokr Scientific,XinhuaNet News and Douban Books. 
 
   　　　
 ![alt text](./logo.png)   
