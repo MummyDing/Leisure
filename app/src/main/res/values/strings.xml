@@ -83,12 +83,12 @@
     <string name="text_attention">Attention</string>
     <string name="text_attention_summary">This app is not allowed for COMMERCIAL Purposes</string>
     <string name="text_license">License</string>
-    <string name="leisure_version">Leisure Version 1.0</string>
+    <string name="leisure_version">Leisure Version 1.1</string>
     <string name="notify_current_is_latest">Current Version is the latest Version</string>
     <string name="notify_find_new_version">"Find new Version "</string>
     <string name="notif_info_copied">Info copied to Clipboard! You can paste it to an edit area</string>
     <string name="project_url">https://github.com/MummyDing/Leisure/</string>
-    <string name="text_share_info">Welcome to use Leisure,it contains Zhihu Daily,Guokr Scientific,XinhuaNet News and Douban Books.You can download it at https://github.com/MummyDing/Leisure/raw/master/app/leisure-release.apk</string>
+    <string name="text_share_info">Welcome to use Leisure,it contains Zhihu Daily,Guokr Scientific,XinhuaNet News and Douban Books.You can download it at http://coolapk.com/apk/com.mummyding.app.leisure</string>
     <string name="text_demo_video">Demo Video</string>
     <string name="text_app_intro">App Introduction</string>
 </resources>

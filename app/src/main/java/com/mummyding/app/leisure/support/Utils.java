@@ -61,6 +61,8 @@ import javax.xml.parsers.ParserConfigurationException;
  * Created by mummyding on 15-11-13.
  */
 public class Utils {
+
+    private static boolean DEBUG = false;
     private static Context mContext = LeisureApplication.AppContext;
     public static InputStream readFileFromRaw(int fileID){
        return mContext.getResources()
@@ -111,7 +113,9 @@ public class Utils {
         Toast.makeText(mContext,text,Toast.LENGTH_SHORT).show();
     }
     public static void DLog(String text){
-        Log.d(mContext.getString(R.string.text_debug_data), text);
+        if(DEBUG) {
+            Log.d(mContext.getString(R.string.text_debug_data), text);
+        }
     }
     public static String getImageHtml(){
         return "<head><style>img{max-width: 320px !important;}</style></head>";

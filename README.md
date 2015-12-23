@@ -43,6 +43,8 @@ ICache---　缓存接口<br>
        -- BaseCollectionCache　收藏模块缓存基类<br>
 
 
+#当前版本: Version 1.1
+
 # 应用截图
 
 <img src="/ScreenShots/home.png" width="200" height="380"/> 

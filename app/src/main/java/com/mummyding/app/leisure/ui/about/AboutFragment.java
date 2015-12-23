@@ -131,7 +131,12 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
         }else if(mStarProject == preference){
             Utils.copyToClipboard(getView(), getString(R.string.project_url));
         }else if(mShare == preference){
-            Utils.copyToClipboard(getView(), getString(R.string.text_share_info));
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.text_share_info));
+            startActivity(Intent.createChooser(sharingIntent, getString(R.string.text_share_leisure)));
+
         }else if(mBlog == preference){
             Utils.copyToClipboard(getView(),getString(R.string.author_blog));
         }else if(mGitHub == preference){
