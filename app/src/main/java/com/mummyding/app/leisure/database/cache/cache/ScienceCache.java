@@ -58,7 +58,7 @@ public class ScienceCache extends BaseCache<ArticleBean> {
     @Override
     protected void putData() {
         db.execSQL(mHelper.DROP_TABLE+table.NAME);
-        db.execSQL(table.CREATE_TABLE);
+       // db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             ArticleBean articleBean = mList.get(i);
             values.put(ScienceTable.TITLE,articleBean.getTitle());
@@ -130,6 +130,7 @@ public class ScienceCache extends BaseCache<ArticleBean> {
                     mHandler.sendEmptyMessage(CONSTANT.ID_FAILURE);
                     return;
                 }
+                mList.clear();
                 Gson gson = new Gson();
                 ArticleBean[] articleBeans = (gson.fromJson(response.body().string(), ScienceBean.class)).getResult();
                 for (ArticleBean articleBean : articleBeans) {

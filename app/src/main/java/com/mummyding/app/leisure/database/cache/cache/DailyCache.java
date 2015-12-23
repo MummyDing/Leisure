@@ -62,7 +62,7 @@ public class DailyCache extends BaseCache<DailyBean> {
     @Override
     protected void putData() {
         db.execSQL(mHelper.DROP_TABLE + table.NAME);
-        db.execSQL(table.CREATE_TABLE);
+       // db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             DailyBean dailyBean = mList.get(i);
             values.put(DailyTable.TITLE,dailyBean.getTitle());
@@ -117,6 +117,7 @@ public class DailyCache extends BaseCache<DailyBean> {
                 InputStream is =
                         new ByteArrayInputStream(response.body().string().getBytes(Charset.forName("UTF-8")));
                 try {
+                    mList.clear();
                     mList.addAll(SAXDailyParse.parse(is));
                     is.close();
                     mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);

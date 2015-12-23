@@ -58,7 +58,7 @@ public class ReadingCache extends BaseCache<BookBean> {
     @Override
     protected void putData() {
         db.execSQL(mHelper.DROP_TABLE + table.NAME);
-        db.execSQL(table.CREATE_TABLE);
+        //db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             BookBean bookBean = mList.get(i);
             values.put(ReadingTable.TITLE,bookBean.getTitle());
@@ -137,6 +137,7 @@ public class ReadingCache extends BaseCache<BookBean> {
                     }
                     Gson gson = new Gson();
                     BookBean[] bookBeans = gson.fromJson(response.body().string(), ReadingBean.class).getBooks();
+                    mList.clear();
                     for (BookBean bookBean : bookBeans) {
                         mList.add(bookBean);
                     }

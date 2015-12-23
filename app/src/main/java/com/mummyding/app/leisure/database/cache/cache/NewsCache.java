@@ -66,7 +66,7 @@ public class NewsCache extends BaseCache<NewsBean> {
     @Override
     protected void putData() {
         db.execSQL(mHelper.DROP_TABLE + table.NAME);
-        db.execSQL(table.CREATE_TABLE);
+       // db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             NewsBean newsBean =  mList.get(i);
             values.put(NewsTable.TITLE,newsBean.getTitle());
@@ -133,6 +133,7 @@ public class NewsCache extends BaseCache<NewsBean> {
                 InputStream is =
                         new ByteArrayInputStream(response.body().string().getBytes(Charset.forName("UTF-8")));
                 try {
+                    mList.clear();
                     mList.addAll(SAXNewsParse.parse(is));
                     is.close();
                     mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);

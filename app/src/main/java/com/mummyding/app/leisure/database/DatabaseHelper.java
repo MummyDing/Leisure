@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private  static final String DB_NAME= "Leisure";
     private static  DatabaseHelper instance = null;
     private static final int DB_VERSION = 1;
-    public static final String DROP_TABLE = "drop table if exists ";
+    public static final String DROP_TABLE = "delete from ";
     private DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
