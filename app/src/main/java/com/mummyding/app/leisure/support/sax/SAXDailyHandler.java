@@ -19,8 +19,6 @@
 
 package com.mummyding.app.leisure.support.sax;
 
-import com.mummyding.app.leisure.model.daily.DailyBean;
-import com.mummyding.app.leisure.model.news.NewsBean;
 import com.mummyding.app.leisure.support.Utils;
 
 import org.xml.sax.Attributes;

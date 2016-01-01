@@ -23,32 +23,51 @@ package com.mummyding.app.leisure.model.daily;
 /**
  * Created by mummyding on 16-1-1.
  */
-public class DailyBean {
-    private String date;
-    private StoryBean[] stories;
-    private TopStory[] top_stories;
+public class TopStory {
+    private String title;
+    private String image;
+    private int id;
 
-    public String getDate() {
-        return date;
+    private String body;
+    private String largepic;
+
+    public String getTitle() {
+        return title;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public StoryBean[] getStories() {
-        return stories;
+    public String getImage() {
+        return image;
     }
 
-    public void setStories(StoryBean[] stories) {
-        this.stories = stories;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public TopStory[] getTop_stories() {
-        return top_stories;
+    public int getId() {
+        return id;
     }
 
-    public void setTop_stories(TopStory[] top_stories) {
-        this.top_stories = top_stories;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getLargepic() {
+        return largepic;
+    }
+
+    public void setLargepic(String largepic) {
+        this.largepic = largepic;
     }
 }

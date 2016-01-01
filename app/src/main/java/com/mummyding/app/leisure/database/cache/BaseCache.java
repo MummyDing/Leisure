@@ -27,10 +27,6 @@ import android.os.Handler;
 
 import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.database.DatabaseHelper;
-import com.mummyding.app.leisure.database.cache.ICache;
-import com.mummyding.app.leisure.database.cache.cache.DailyCache;
-import com.mummyding.app.leisure.database.table.DailyTable;
-import com.mummyding.app.leisure.support.CONSTANT;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -35,21 +35,17 @@ import android.widget.Toast;
 import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.database.DatabaseHelper;
-import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.database.table.NewsTable;
 import com.mummyding.app.leisure.database.table.ReadingTable;
 import com.mummyding.app.leisure.database.table.ScienceTable;
 
 
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

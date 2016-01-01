@@ -35,7 +35,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.database.cache.ICache;
 import com.mummyding.app.leisure.database.table.DailyTable;
-import com.mummyding.app.leisure.model.daily.DailyBean;
+import com.mummyding.app.leisure.model.daily.StoryBean;
 import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.ui.support.WebViewLocalActivity;
@@ -49,10 +49,10 @@ import com.mummyding.app.leisure.support.adapter.DailyAdapter.ViewHolder;
  * @author MummyDing
  * @version Leisure 1.0
  */
-public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
+public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
 
 
-    public DailyAdapter(Context context, ICache<DailyBean> cache) {
+    public DailyAdapter(Context context, ICache<StoryBean> cache) {
         super(context, cache);
     }
 
@@ -65,21 +65,21 @@ public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final DailyBean dailyBean = getItem(position);
-        holder.title.setText(dailyBean.getTitle());
+        final StoryBean storyBean = getItem(position);
+        holder.title.setText(storyBean.getTitle());
 
         if(Settings.noPicMode && HttpUtil.isWIFI == false){
             holder.image.setImageURI(null);
         }else {
-            holder.image.setImageURI(Uri.parse(dailyBean.getImage()));
+            holder.image.setImageURI(Uri.parse(storyBean.getImages()[0]));
         }
-        holder.info.setText(dailyBean.getInfo());
+        //holder.info.setText(storyBean.getInfo());
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, WebViewLocalActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString(mContext.getString(R.string.id_html_content), dailyBean.getDescription());
+                bundle.putString(mContext.getString(R.string.id_html_content), storyBean.getBody());
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
@@ -97,11 +97,11 @@ public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
                             setAction(mContext.getString(R.string.text_ok), new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    if (mItems.contains(dailyBean) == false){
+                                    if (mItems.contains(storyBean) == false){
                                         return;
                                     }
-                                    mCache.execSQL(DailyTable.updateCollectionFlag(dailyBean.getTitle(), 0));
-                                    mCache.execSQL(DailyTable.deleteCollectionFlag(dailyBean.getTitle()));
+                                    mCache.execSQL(DailyTable.updateCollectionFlag(storyBean.getTitle(), 0));
+                                    mCache.execSQL(DailyTable.deleteCollectionFlag(storyBean.getTitle()));
                                     mItems.remove(position);
                                     notifyDataSetChanged();
                                 }
@@ -115,23 +115,23 @@ public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
         holder.collect_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                dailyBean.setIs_collected(isChecked ? 1:0);
-                mCache.execSQL(DailyTable.updateCollectionFlag(dailyBean.getTitle(), isChecked ? 1 : 0));
+                storyBean.setCollected(isChecked ? 1:0);
+                mCache.execSQL(DailyTable.updateCollectionFlag(storyBean.getTitle(), isChecked ? 1 : 0));
                 if(isChecked){
-                    mCache.addToCollection(dailyBean);
+                    mCache.addToCollection(storyBean);
                 }else{
-                    mCache.execSQL(DailyTable.deleteCollectionFlag(dailyBean.getTitle()));
+                    mCache.execSQL(DailyTable.deleteCollectionFlag(storyBean.getTitle()));
                 }
             }
         });
-        holder.collect_cb.setChecked(dailyBean.getIs_collected()==1 ? true:false);
+        holder.collect_cb.setChecked(storyBean.isCollected() == 1 ? true:false);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private View parentView;
         private TextView title;
         private SimpleDraweeView image;
-        private TextView info;
+       // private TextView info;
         private CheckBox collect_cb;
         private TextView text;
         public ViewHolder(View itemView) {
@@ -139,7 +139,7 @@ public class DailyAdapter extends BaseListAdapter<DailyBean,ViewHolder>{
             parentView = itemView;
             title = (TextView) parentView.findViewById(R.id.title);
             image = (SimpleDraweeView) parentView.findViewById(R.id.image);
-            info = (TextView) parentView.findViewById(R.id.info);
+            //info = (TextView) parentView.findViewById(R.id.info);
             collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
             if(isCollection) {
                 text = (TextView) parentView.findViewById(R.id.text);
