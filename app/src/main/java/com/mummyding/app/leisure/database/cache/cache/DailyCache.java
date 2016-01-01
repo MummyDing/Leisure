@@ -30,20 +30,11 @@ import com.mummyding.app.leisure.model.daily.DailyBean;
 import com.mummyding.app.leisure.model.daily.StoryBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
-import com.mummyding.app.leisure.support.sax.SAXDailyParse;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-import org.xml.sax.DTDHandler;
-import org.xml.sax.SAXException;
-
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Created by mummyding on 15-11-26.
@@ -120,7 +111,7 @@ public class DailyCache extends BaseCache<StoryBean> {
                     mHandler.sendEmptyMessage(CONSTANT.ID_FAILURE);
                     return;
                 }
-                String res = response.body().toString();
+                String res = response.body().string();
                 mList.clear();
                 Gson gson = new Gson();
                 StoryBean[] storyBeans = (gson.fromJson(res, DailyBean.class)).getStories();

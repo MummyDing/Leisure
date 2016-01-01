@@ -54,7 +54,7 @@ public class DailyTable {
             LARGEPIC+" text," +
             IS_COLLECTED+" integer)";
 
-    public static final String CRATE_COLLECTION_TABLE = "create table "+COLLECTION_NAME+
+    public static final String CREATE_COLLECTION_TABLE = "create table "+COLLECTION_NAME+
             "("+TITLE+" text primary key,"+
             ID+" integer,"+
             IMAGE+" text,"+

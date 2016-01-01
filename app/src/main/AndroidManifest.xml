@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mummyding.app.leisure"
     android:versionCode="3"
-    android:versionName="2.0"
-    >
+    android:versionName="2.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -22,24 +21,25 @@
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/DayTheme" >
+        android:theme="@style/DayTheme">
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="nosensor"
-            >
+            android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.support.WebViewUrlActivity"/>
-        <activity android:name=".ui.reading.ReadingDetailsActivity"/>
-        <activity android:name=".ui.support.WebViewLocalActivity"/>
-        <activity android:name=".ui.reading.SearchBooksActivity"/>
-        <activity android:name=".ui.about.AboutActivity"/>
-        <activity android:name=".ui.setting.SettingsActivity"/>
-        <activity android:name=".ui.about.DemoVideoActivity"/>
-        <activity android:name=".ui.about.AppIntroActivity"/>
+        <activity android:name=".ui.support.WebViewUrlActivity" />
+        <activity android:name=".ui.reading.ReadingDetailsActivity" />
+        <activity android:name=".ui.support.WebViewLocalActivity" />
+        <activity android:name=".ui.reading.SearchBooksActivity" />
+        <activity android:name=".ui.about.AboutActivity" />
+        <activity android:name=".ui.setting.SettingsActivity" />
+        <activity android:name=".ui.about.DemoVideoActivity" />
+        <activity android:name=".ui.about.AppIntroActivity" />
+        <activity android:name=".ui.daily.DailyDetailsActivity"></activity>
     </application>
 
 </manifest>

@@ -33,14 +33,17 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.api.DailyApi;
 import com.mummyding.app.leisure.database.cache.ICache;
 import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.StoryBean;
 import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Settings;
+import com.mummyding.app.leisure.ui.daily.DailyDetailsActivity;
 import com.mummyding.app.leisure.ui.support.WebViewLocalActivity;
 
 import com.mummyding.app.leisure.support.adapter.DailyAdapter.ViewHolder;
+import com.mummyding.app.leisure.ui.support.WebViewUrlActivity;
 
 
 /**
@@ -77,9 +80,9 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, WebViewLocalActivity.class);
+                Intent intent = new Intent(mContext, DailyDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString(mContext.getString(R.string.id_html_content), storyBean.getBody());
+                bundle.putString(mContext.getString(R.string.id_url), DailyApi.daily_details_url+storyBean.getId());
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }

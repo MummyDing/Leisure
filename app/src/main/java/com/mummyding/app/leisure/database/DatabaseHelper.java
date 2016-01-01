@@ -23,6 +23,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.database.table.NewsTable;
 import com.mummyding.app.leisure.database.table.ReadingTable;
 import com.mummyding.app.leisure.database.table.ScienceTable;

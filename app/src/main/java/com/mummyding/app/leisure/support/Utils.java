@@ -35,6 +35,7 @@ import android.widget.Toast;
 import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.database.DatabaseHelper;
+import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.database.table.NewsTable;
 import com.mummyding.app.leisure.database.table.ReadingTable;
 import com.mummyding.app.leisure.database.table.ScienceTable;
@@ -43,8 +44,10 @@ import com.mummyding.app.leisure.database.table.ScienceTable;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -83,6 +86,36 @@ public class Utils {
             e.printStackTrace();
         }
         return doc ;
+    }
+
+    // convert InputStream to String
+    public static String getStringFromInputStream(InputStream is) {
+
+        BufferedReader br = null;
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        try {
+
+            br = new BufferedReader(new InputStreamReader(is));
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return sb.toString();
+
     }
     public static String RegexFind(String regex,String string,int start,int end){
         Pattern pattern = Pattern.compile(regex);

@@ -26,6 +26,7 @@ package com.mummyding.app.leisure.model.daily;
 public class DailyDetailsBean {
     private String body;
     private String image;
+    private String title;
     private String[] css;
 
     public String getBody() {
@@ -50,5 +51,13 @@ public class DailyDetailsBean {
 
     public void setCss(String[] css) {
         this.css = css;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
