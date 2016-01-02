@@ -59,7 +59,7 @@ public class ReadingCache extends BaseCache<BookBean> {
 
     @Override
     protected void putData() {
-        db.execSQL(mHelper.DROP_TABLE + table.NAME);
+        db.execSQL(mHelper.DROP_TABLE+table.NAME+" where "+table.CATEGORY+"=\'"+mCategory+"\'");
 //        db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             BookBean bookBean = mList.get(i);

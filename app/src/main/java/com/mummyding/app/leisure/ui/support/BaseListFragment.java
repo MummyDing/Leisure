@@ -136,8 +136,13 @@ public abstract class BaseListFragment extends Fragment{
         }
 
         HttpUtil.readNetworkState();
-        loadFromCache();
-
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                loadFromCache();
+            }
+        }).start();
+        
         return parentView;
     }
 
