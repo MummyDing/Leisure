@@ -115,7 +115,7 @@ public class DailyDetailsActivity extends AppCompatActivity {
         });
         getSupportActionBar().setTitle(title);
         Utils.DLog("uu"+body+"  "+imageUrl);
-        if(body == "" || body == null) {
+        if(body == "" || body == null||imageUrl == null || imageUrl == "") {
             loadDataFromNet();
             Utils.DLog("enter");
         }else{

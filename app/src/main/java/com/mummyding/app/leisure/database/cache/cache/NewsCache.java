@@ -96,6 +96,7 @@ public class NewsCache extends BaseCache<NewsBean> {
 
     @Override
     public synchronized void loadFromCache() {
+        mList.clear();
         String sql = null;
         if(mCategory == null){
             sql = "select * from "+table.NAME;

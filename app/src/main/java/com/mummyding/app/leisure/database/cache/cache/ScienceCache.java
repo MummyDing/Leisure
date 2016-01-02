@@ -88,6 +88,7 @@ public class ScienceCache extends BaseCache<ArticleBean> {
 
     @Override
     public synchronized void loadFromCache() {
+        mList.clear();
         String sql = null;
         if(mCategory == null){
             sql = "select * from "+table.NAME;
@@ -138,7 +139,7 @@ public class ScienceCache extends BaseCache<ArticleBean> {
                         collectionTitles.add(mList.get(i).getTitle());
                     }
                 }
-                
+
                 mList.clear();
                 Gson gson = new Gson();
                 ArticleBean[] articleBeans = (gson.fromJson(response.body().string(), ScienceBean.class)).getResult();

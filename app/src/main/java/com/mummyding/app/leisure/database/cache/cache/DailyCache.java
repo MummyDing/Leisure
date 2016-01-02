@@ -70,7 +70,7 @@ public class DailyCache extends BaseCache<StoryBean> {
             values.put(DailyTable.IS_COLLECTED,storyBean.isCollected());
             db.insert(DailyTable.NAME, null, values);
         }
-        db.execSQL(DailyTable.SQL_INIT_COLLECTION_FLAG);
+        ///db.execSQL(DailyTable.SQL_INIT_COLLECTION_FLAG);
     }
 
     @Override
@@ -84,6 +84,7 @@ public class DailyCache extends BaseCache<StoryBean> {
     }
     @Override
     public synchronized void loadFromCache() {
+        mList.clear();
         String sql = "select * from "+DailyTable.NAME;
         Cursor cursor = query(sql);
         while (cursor.moveToNext()){
@@ -123,7 +124,8 @@ public class DailyCache extends BaseCache<StoryBean> {
                         collectionTitles.add(mList.get(i).getTitle());
                     }
                 }
-                Utils.DLog("sizesize---------:"+collectionTitles.size());
+                Utils.DLog("sizesize---------:"+collectionTitles.size()+"old"+mList.size());
+
                 mList.clear();
 
 
@@ -141,6 +143,7 @@ public class DailyCache extends BaseCache<StoryBean> {
                         }
                     }
                 }
+                Utils.DLog("new: "+mList.size());
                 mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
             }
         });
