@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -49,9 +50,10 @@ public class NewsAdapter extends BaseListAdapter<NewsBean,NewsAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(parent.getContext(),R.layout.item_news,null);
-        final ViewHolder vh = new ViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_news, parent, false);
+        final ViewHolder vh = new ViewHolder(itemView);
+        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, WebViewUrlActivity.class);

@@ -80,7 +80,6 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
         }else {
             holder.image.setImageURI(Uri.parse(storyBean.getImages()[0]));
         }
-        //holder.info.setText(storyBean.getInfo());
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
