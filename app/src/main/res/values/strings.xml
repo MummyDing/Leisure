@@ -91,4 +91,5 @@
     <string name="text_share_info">Welcome to use Leisure,it contains Zhihu Daily,Guokr Scientific,XinhuaNet News and Douban Books.You can download it at http://coolapk.com/apk/com.mummyding.app.leisure</string>
     <string name="text_demo_video">Demo Video</string>
     <string name="text_app_intro">App Introduction</string>
+    <string name="id_title">title</string>
 </resources>

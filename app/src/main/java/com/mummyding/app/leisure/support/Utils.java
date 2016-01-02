@@ -61,7 +61,7 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class Utils {
 
-    private static boolean DEBUG = false;
+    private static boolean DEBUG = true;
     private static Context mContext = LeisureApplication.AppContext;
     public static InputStream readFileFromRaw(int fileID){
        return mContext.getResources()

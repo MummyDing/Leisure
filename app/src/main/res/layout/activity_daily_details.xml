@@ -47,11 +47,17 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
-        <WebView
-            android:id="@+id/webview"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"/>
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <WebView
+                android:id="@+id/webview"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                />
+        </android.support.v4.widget.NestedScrollView>
         <ProgressBar
             android:id="@+id/progressbar"
             android:layout_width="wrap_content"

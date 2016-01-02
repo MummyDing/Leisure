@@ -83,6 +83,7 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
                 Intent intent = new Intent(mContext, DailyDetailsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString(mContext.getString(R.string.id_url), DailyApi.daily_details_url+storyBean.getId());
+                bundle.putString(mContext.getString(R.string.id_title),storyBean.getTitle());
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }

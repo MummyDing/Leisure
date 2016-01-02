@@ -23,6 +23,8 @@ package com.mummyding.app.leisure.ui.daily;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PersistableBundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -55,6 +57,7 @@ public class DailyDetailsActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private DailyDetailsBean dailyDetailsBean;
     private String url;
+    private String title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +67,7 @@ public class DailyDetailsActivity extends AppCompatActivity {
     }
     private void getData(){
         url = getIntent().getStringExtra(getString(R.string.id_url));
-
+        title = getIntent().getStringExtra(getString(R.string.id_title));
     }
     private void initView(){
         simpleDraweeView = (SimpleDraweeView) findViewById(R.id.ivImage);
@@ -91,12 +94,24 @@ public class DailyDetailsActivity extends AppCompatActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                webView.loadDataWithBaseURL("file:///android_asset/", "<link rel=\"stylesheet\" type=\"text/css\" href=\"dailycss.css\" />"+dailyDetailsBean.getBody(), "text/html", "utf-8", null);
                 return false;
             }
         });
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        getSupportActionBar().setTitle(title);
         loadDataFromNet();
+        progressBar.setVisibility(View.VISIBLE);
     }
+
+
 
     private void loadDataFromNet(){
         Request.Builder builder = new Request.Builder();
@@ -125,13 +140,12 @@ public class DailyDetailsActivity extends AppCompatActivity {
                 case CONSTANT.ID_FAILURE:
                     break;
                 case CONSTANT.ID_SUCCESS:
-                    getSupportActionBar().setTitle(dailyDetailsBean.getTitle());
                     simpleDraweeView.setImageURI(Uri.parse(dailyDetailsBean.getImage()));
                     webView.loadDataWithBaseURL("file:///android_asset/", "<link rel=\"stylesheet\" type=\"text/css\" href=\"dailycss.css\" />"+dailyDetailsBean.getBody(), "text/html", "utf-8", null);
                     break;
             }
             progressBar.setVisibility(View.GONE);
-            return true;
+            return false;
         }
     });
 }
