@@ -35,6 +35,7 @@ import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by mummyding on 15-11-26.
@@ -130,11 +131,27 @@ public class ScienceCache extends BaseCache<ArticleBean> {
                     mHandler.sendEmptyMessage(CONSTANT.ID_FAILURE);
                     return;
                 }
+
+                ArrayList<String> collectionTitles = new ArrayList<String>();
+                for(int i = 0 ; i<mList.size() ; i++ ){
+                    if(mList.get(i).getIs_collected() == 1){
+                        collectionTitles.add(mList.get(i).getTitle());
+                    }
+                }
+                
                 mList.clear();
                 Gson gson = new Gson();
                 ArticleBean[] articleBeans = (gson.fromJson(response.body().string(), ScienceBean.class)).getResult();
                 for (ArticleBean articleBean : articleBeans) {
                     mList.add(articleBean);
+                }
+
+                for(String title:collectionTitles){
+                    for(int i=0 ; i<mList.size() ; i++){
+                        if(title.equals(mList.get(i).getTitle())){
+                            mList.get(i).setIs_collected(1);
+                        }
+                    }
                 }
                 mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
             }

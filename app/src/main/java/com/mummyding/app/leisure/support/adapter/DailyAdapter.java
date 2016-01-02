@@ -40,6 +40,7 @@ import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.StoryBean;
 import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Settings;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.daily.DailyDetailsActivity;
 import com.mummyding.app.leisure.ui.support.WebViewLocalActivity;
 
@@ -87,10 +88,15 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
                 Bundle bundle = new Bundle();
                 bundle.putString(mContext.getString(R.string.id_url), DailyApi.daily_details_url+storyBean.getId());
                 bundle.putString(mContext.getString(R.string.id_title),storyBean.getTitle());
+                bundle.putString(mContext.getString(R.string.id_body),storyBean.getBody());;
+                bundle.putString(mContext.getString(R.string.id_imageurl),storyBean.getLargepic());
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });
+
+        Utils.DLog("sssssBODY  "+storyBean.getBody());
+        Utils.DLog("ssssIMAGE:  "+storyBean.getLargepic());
 
         if(isCollection){
             holder.collect_cb.setVisibility(View.GONE);
@@ -116,8 +122,10 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
                             .show();
                 }
             });
+
             return;
         }
+
 
         holder.collect_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -125,6 +133,7 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
                 storyBean.setCollected(isChecked ? 1:0);
                 mCache.execSQL(DailyTable.updateCollectionFlag(storyBean.getTitle(), isChecked ? 1 : 0));
                 if(isChecked){
+                    mCache.loadFromCache();
                     mCache.addToCollection(storyBean);
                 }else{
                     mCache.execSQL(DailyTable.deleteCollectionFlag(storyBean.getTitle()));

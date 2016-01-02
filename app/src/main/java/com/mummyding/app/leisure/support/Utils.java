@@ -178,16 +178,16 @@ public class Utils {
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
         db.execSQL(mHelper.DROP_TABLE + DailyTable.NAME);
-        db.execSQL(DailyTable.CREATE_TABLE);
+      //  db.execSQL(DailyTable.CREATE_TABLE);
 
         db.execSQL(mHelper.DROP_TABLE + NewsTable.NAME);
-        db.execSQL(NewsTable.CREATE_TABLE);
+      //  db.execSQL(NewsTable.CREATE_TABLE);
 
         db.execSQL(mHelper.DROP_TABLE + ReadingTable.NAME);
-        db.execSQL(ReadingTable.CREATE_TABLE);
+      //  db.execSQL(ReadingTable.CREATE_TABLE);
 
         db.execSQL(mHelper.DROP_TABLE + ScienceTable.NAME);
-        db.execSQL(ScienceTable.CREATE_TABLE);
+      //  db.execSQL(ScienceTable.CREATE_TABLE);
 
     }
 

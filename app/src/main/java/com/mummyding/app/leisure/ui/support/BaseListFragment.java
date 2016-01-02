@@ -178,7 +178,7 @@ public abstract class BaseListFragment extends Fragment{
                         loadFromNet();
                         return false;
                     }else if(Settings.isAutoRefresh && HttpUtil.isWIFI){
-                        progressBar.setVisibility(View.GONE);
+                       // progressBar.setVisibility(View.GONE);
                         loadFromNet();
                         return false;
                     }

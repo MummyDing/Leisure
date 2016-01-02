@@ -32,10 +32,12 @@ import com.mummyding.app.leisure.model.reading.BookBean;
 import com.mummyding.app.leisure.model.reading.ReadingBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
+import com.mummyding.app.leisure.support.Utils;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by mummyding on 15-11-26.
@@ -58,7 +60,7 @@ public class ReadingCache extends BaseCache<BookBean> {
     @Override
     protected void putData() {
         db.execSQL(mHelper.DROP_TABLE + table.NAME);
-        //db.execSQL(table.CREATE_TABLE);
+//        db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             BookBean bookBean = mList.get(i);
             values.put(ReadingTable.TITLE,bookBean.getTitle());
@@ -72,6 +74,7 @@ public class ReadingCache extends BaseCache<BookBean> {
             values.put(ReadingTable.IS_COLLECTED,bookBean.getIs_collected());
             db.insert(ReadingTable.NAME,null,values);
         }
+        Utils.DLog("insert cache reading size: "+mList.size());
         db.execSQL(table.SQL_INIT_COLLECTION_FLAG);
     }
 
@@ -86,6 +89,7 @@ public class ReadingCache extends BaseCache<BookBean> {
         values.put(ReadingTable.EBOOK_URL,bookBean.getEbook_url() == null?"":bookBean.getEbook_url());
         values.put(ReadingTable.SUMMARY,bookBean.getSummary() == null?"":bookBean.getSummary());
 
+        Utils.DLog("insert data reading size: "+mList.size());
         db.insert(ReadingTable.COLLECTION_NAME, null, values);
     }
 
@@ -110,13 +114,14 @@ public class ReadingCache extends BaseCache<BookBean> {
             bookBean.setIs_collected(cursor.getInt(ReadingTable.ID_IS_COLLECTED));
             mList.add(bookBean);
         }
+        Utils.DLog("from cache reading size: "+mList.size());
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
         cursor.close();
     }
 
     @Override
     public void load() {
-
+        Utils.DLog("from net reading size: "+mList.size());
         for(int i = 0 ; i<mUrls.length; i++){
             String url = mUrls[i];
             Request.Builder builder = new Request.Builder();
@@ -135,11 +140,25 @@ public class ReadingCache extends BaseCache<BookBean> {
                         mHandler.sendEmptyMessage(CONSTANT.ID_FAILURE);
                         return;
                     }
+                    ArrayList<String> collectionTitles = new ArrayList<String>();
+                    for(int i = 0 ; i<mList.size() ; i++ ){
+                        if(mList.get(i).getIs_collected() == 1){
+                            collectionTitles.add(mList.get(i).getTitle());
+                        }
+                    }
                     Gson gson = new Gson();
                     BookBean[] bookBeans = gson.fromJson(response.body().string(), ReadingBean.class).getBooks();
                     mList.clear();
                     for (BookBean bookBean : bookBeans) {
                         mList.add(bookBean);
+                    }
+
+                    for(String title:collectionTitles){
+                        for(int i=0 ; i<mList.size() ; i++){
+                            if(title.equals(mList.get(i).getTitle())){
+                                mList.get(i).setIs_collected(1);
+                            }
+                        }
                     }
                     mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
                 }

@@ -30,11 +30,14 @@ import com.mummyding.app.leisure.model.daily.DailyBean;
 import com.mummyding.app.leisure.model.daily.StoryBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
+import com.mummyding.app.leisure.support.Utils;
+import com.mummyding.app.leisure.support.sax.SAXNewsParse;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by mummyding on 15-11-26.
@@ -47,7 +50,7 @@ import java.io.IOException;
  * @version Leisure 1.0
  */
 public class DailyCache extends BaseCache<StoryBean> {
-    private DailyTable table;
+
 
     public DailyCache(Handler handler) {
         super(handler);
@@ -55,7 +58,7 @@ public class DailyCache extends BaseCache<StoryBean> {
 
     @Override
     protected void putData() {
-        db.execSQL(mHelper.DROP_TABLE + table.NAME);
+        db.execSQL(mHelper.DROP_TABLE + DailyTable.NAME);
        // db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             StoryBean storyBean = mList.get(i);
@@ -67,7 +70,7 @@ public class DailyCache extends BaseCache<StoryBean> {
             values.put(DailyTable.IS_COLLECTED,storyBean.isCollected());
             db.insert(DailyTable.NAME, null, values);
         }
-        db.execSQL(table.SQL_INIT_COLLECTION_FLAG);
+        db.execSQL(DailyTable.SQL_INIT_COLLECTION_FLAG);
     }
 
     @Override
@@ -75,13 +78,13 @@ public class DailyCache extends BaseCache<StoryBean> {
         values.put(DailyTable.TITLE,storyBean.getTitle());
         values.put(DailyTable.ID, storyBean.getId());
         values.put(DailyTable.IMAGE, storyBean.getImages()[0]);
-        values.put(DailyTable.BODY, storyBean.getBody());
+        values.put(DailyTable.BODY, storyBean.getBody() == null ? "":storyBean.getBody());
         values.put(DailyTable.LARGEPIC, storyBean.getLargepic());
         db.insert(DailyTable.COLLECTION_NAME, null, values);
     }
     @Override
     public synchronized void loadFromCache() {
-        String sql = "select * from "+table.NAME;
+        String sql = "select * from "+DailyTable.NAME;
         Cursor cursor = query(sql);
         while (cursor.moveToNext()){
             StoryBean storyBean = new StoryBean();
@@ -90,9 +93,10 @@ public class DailyCache extends BaseCache<StoryBean> {
             storyBean.setImages(new String[]{cursor.getString(DailyTable.ID_IMAGE)});
             storyBean.setBody(cursor.getString(DailyTable.ID_BODY));
             storyBean.setLargepic(cursor.getString(DailyTable.ID_LARGEPIC));
-            storyBean.setCollected(cursor.getInt(DailyTable.ID_IS_CLOOECTED));
+            storyBean.setCollected(cursor.getInt(DailyTable.ID_IS_COLLECTED));
             mList.add(storyBean);
         }
+
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
         cursor.close();
     }
@@ -112,11 +116,30 @@ public class DailyCache extends BaseCache<StoryBean> {
                     return;
                 }
                 String res = response.body().string();
+
+                ArrayList<String> collectionTitles = new ArrayList<String>();
+                for(int i = 0 ; i<mList.size() ; i++ ){
+                    if(mList.get(i).isCollected() == 1){
+                        collectionTitles.add(mList.get(i).getTitle());
+                    }
+                }
+                Utils.DLog("sizesize---------:"+collectionTitles.size());
                 mList.clear();
+
+
                 Gson gson = new Gson();
                 StoryBean[] storyBeans = (gson.fromJson(res, DailyBean.class)).getStories();
                 for (StoryBean storyBeen : storyBeans) {
                     mList.add(storyBeen);
+                }
+
+
+                for(String title:collectionTitles){
+                    for(int i=0 ; i<mList.size() ; i++){
+                        if(title.equals(mList.get(i).getTitle())){
+                            mList.get(i).setCollected(1);
+                        }
+                    }
                 }
                 mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
             }

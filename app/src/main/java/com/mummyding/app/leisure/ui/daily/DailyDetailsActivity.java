@@ -38,9 +38,12 @@ import android.widget.ProgressBar;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.database.cache.cache.DailyCache;
+import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.DailyDetailsBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
+import com.mummyding.app.leisure.support.Utils;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -56,6 +59,9 @@ public class DailyDetailsActivity extends AppCompatActivity {
     private DailyDetailsBean dailyDetailsBean;
     private String url;
     private String title;
+    private String imageUrl;
+    private String body;
+    private DailyCache cache;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,13 +72,16 @@ public class DailyDetailsActivity extends AppCompatActivity {
     private void getData(){
         url = getIntent().getStringExtra(getString(R.string.id_url));
         title = getIntent().getStringExtra(getString(R.string.id_title));
+        body = getIntent().getStringExtra(getString(R.string.id_body));
+        imageUrl = getIntent().getStringExtra(getString(R.string.id_imageurl));
+        Utils.DLog(imageUrl+"imageurl");
     }
     private void initView(){
         simpleDraweeView = (SimpleDraweeView) findViewById(R.id.ivImage);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         webView = (WebView) findViewById(R.id.webview);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
-
+        cache = new DailyCache(handler);
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -105,7 +114,13 @@ public class DailyDetailsActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setTitle(title);
-        loadDataFromNet();
+        Utils.DLog("uu"+body+"  "+imageUrl);
+        if(body == "" || body == null) {
+            loadDataFromNet();
+            Utils.DLog("enter");
+        }else{
+            handler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
+        }
         progressBar.setVisibility(View.VISIBLE);
     }
 
@@ -126,6 +141,11 @@ public class DailyDetailsActivity extends AppCompatActivity {
                 String res = response.body().string();
                 Gson gson = new Gson();
                 dailyDetailsBean = gson.fromJson(res, DailyDetailsBean.class);
+                cache.execSQL(DailyTable.updateBodyContent(DailyTable.NAME,title,dailyDetailsBean.getBody()));
+                cache.execSQL(DailyTable.updateBodyContent(DailyTable.COLLECTION_NAME,title,dailyDetailsBean.getBody()));
+                cache.execSQL(DailyTable.updateLargePic(DailyTable.NAME,title,dailyDetailsBean.getImage()));
+                cache.execSQL(DailyTable.updateLargePic(DailyTable.COLLECTION_NAME,title,dailyDetailsBean.getImage()));
+                Utils.DLog("iiimage----"+dailyDetailsBean.getImage());
                 handler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
             }
         });
@@ -140,6 +160,11 @@ public class DailyDetailsActivity extends AppCompatActivity {
                 case CONSTANT.ID_SUCCESS:
                     simpleDraweeView.setImageURI(Uri.parse(dailyDetailsBean.getImage()));
                     webView.loadDataWithBaseURL("file:///android_asset/", "<link rel=\"stylesheet\" type=\"text/css\" href=\"dailycss.css\" />"+dailyDetailsBean.getBody(), "text/html", "utf-8", null);
+                    Utils.DLog("net");
+                    break;
+                case CONSTANT.ID_FROM_CACHE:
+                    simpleDraweeView.setImageURI(Uri.parse(imageUrl));
+                    webView.loadDataWithBaseURL("file:///android_asset/", "<link rel=\"stylesheet\" type=\"text/css\" href=\"dailycss.css\" />"+body, "text/html", "utf-8", null);
                     break;
             }
             progressBar.setVisibility(View.GONE);

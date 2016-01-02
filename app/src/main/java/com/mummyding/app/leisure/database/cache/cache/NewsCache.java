@@ -27,9 +27,12 @@ import android.os.Handler;
 
 import com.mummyding.app.leisure.database.cache.BaseCache;
 import com.mummyding.app.leisure.database.table.NewsTable;
+import com.mummyding.app.leisure.model.daily.StoryBean;
 import com.mummyding.app.leisure.model.news.NewsBean;
+import com.mummyding.app.leisure.model.science.ScienceBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
+import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.sax.SAXNewsParse;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
@@ -41,6 +44,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -77,7 +81,6 @@ public class NewsCache extends BaseCache<NewsBean> {
             values.put(NewsTable.CATEGORY,mCategory);
             db.insert(NewsTable.NAME,null,values);
         }
-        db.execSQL(table.SQL_INIT_COLLECTION_FLAG);
     }
 
 
@@ -133,8 +136,22 @@ public class NewsCache extends BaseCache<NewsBean> {
                 InputStream is =
                         new ByteArrayInputStream(response.body().string().getBytes(Charset.forName("UTF-8")));
                 try {
+                    ArrayList<String> collectionTitles = new ArrayList<String>();
+                    for(int i = 0 ; i<mList.size() ; i++ ){
+                        if(mList.get(i).getIs_collected() == 1){
+                            collectionTitles.add(mList.get(i).getTitle());
+                        }
+                    }
+                    Utils.DLog("sizesize---------:"+collectionTitles.size());
                     mList.clear();
                     mList.addAll(SAXNewsParse.parse(is));
+                    for(String title:collectionTitles){
+                        for(int i=0 ; i<mList.size() ; i++){
+                            if(title.equals(mList.get(i).getTitle())){
+                                mList.get(i).setIs_collected(1);
+                            }
+                        }
+                    }
                     is.close();
                     mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
                 } catch (ParserConfigurationException e) {

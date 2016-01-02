@@ -46,6 +46,7 @@ public class CollectionDailyCache extends BaseCollectionCache<StoryBean>{
             storyBean.setId(cursor.getInt(table.ID_ID));
             storyBean.setImages(new String[]{cursor.getString(table.ID_IMAGE)});
             storyBean.setBody(cursor.getString(table.ID_BODY));
+            storyBean.setLargepic(cursor.getString(table.ID_LARGEPIC));
             mList.add(storyBean);
         }
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);

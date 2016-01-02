@@ -42,7 +42,7 @@ public class DailyTable {
     public static final int ID_IMAGE = 2;
     public static final int ID_BODY = 3;
     public static final int ID_LARGEPIC = 4;
-    public static final int ID_IS_CLOOECTED = 5;
+    public static final int ID_IS_COLLECTED = 5;
 
     public static final String SELECT_ALL_FROM_COLLECTION = "select * from "+COLLECTION_NAME;
 
@@ -67,6 +67,14 @@ public class DailyTable {
 
     public static  String updateCollectionFlag(String title,int flag){
         return "update "+NAME+" set "+IS_COLLECTED+" ="+flag+" where "+
+                TITLE+"=\'"+title+"\'";
+    }
+    public static String updateBodyContent(String tableName,String title,String body){
+        return "update "+tableName+" set "+BODY+" =\'"+body+"\' where "+
+                TITLE+"=\'"+title+"\'";
+    }
+    public static String updateLargePic(String tableName,String title,String imageUrl){
+        return "update "+tableName+" set "+LARGEPIC+" =\'"+imageUrl+"\' where "+
                 TITLE+"=\'"+title+"\'";
     }
     public static String deleteCollectionFlag(String title){
