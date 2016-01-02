@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -61,8 +62,11 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View parentView = View.inflate(mContext,R.layout.item_daily,null);
-        ViewHolder vh = new ViewHolder(parentView);
+       // View parentView = View.inflate(mContext,R.layout.item_daily,null);
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_daily, parent, false);
+       // ViewHolder vh = new ViewHolder(itemView);
+        ViewHolder vh = new ViewHolder(itemView);
         return vh;
     }
 
