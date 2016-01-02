@@ -142,7 +142,7 @@ public abstract class BaseListFragment extends Fragment{
                 loadFromCache();
             }
         }).start();
-        
+
         return parentView;
     }
 

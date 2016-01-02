@@ -50,7 +50,6 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-import com.mummyding.app.leisure.LeisureApplication;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.Settings;
@@ -100,6 +99,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Settings.isNightMode = mSettings.getBoolean(Settings.NIGHT_MODE, false);
         Settings.noPicMode = mSettings.getBoolean(Settings.NO_PIC_MODE, false);
 
+
+        // change Brightness
+        if(mSettings.isNightMode && Utils.getSysScreenBrightness() > CONSTANT.NIGHT_BRIGHTNESS){
+            Utils.setSysScreenBrightness(CONSTANT.NIGHT_BRIGHTNESS);
+        }else if(mSettings.isNightMode == false && Utils.getSysScreenBrightness() == CONSTANT.NIGHT_BRIGHTNESS){
+            Utils.setSysScreenBrightness(CONSTANT.DAY_BRIGHTNESS);
+        }
 
         if(Settings.isNightMode){
             this.setTheme(R.style.NightTheme);

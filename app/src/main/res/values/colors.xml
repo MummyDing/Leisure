@@ -17,8 +17,8 @@
     <color name="transparent">#00000000</color>
 
 
-    <color name="night_primary">#4A4A4A</color>
-    <color name="night_primary_dark">#454545</color>
+    <color name="night_primary">#3A3A3A</color>
+    <color name="night_primary_dark">#353535</color>
     <color name="night_accent">#4682B4</color>
 
 </resources>

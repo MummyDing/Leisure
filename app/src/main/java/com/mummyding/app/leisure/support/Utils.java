@@ -21,11 +21,13 @@ package com.mummyding.app.leisure.support;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
@@ -234,6 +236,37 @@ public class Utils {
         ClipData cd = ClipData.newPlainText("msg", info);
         cm.setPrimaryClip(cd);
         Snackbar.make(view, R.string.notif_info_copied,Snackbar.LENGTH_SHORT).show();
+    }
+
+
+
+    /**
+     * 获得当前系统的亮度值： 0~255
+     */
+    /** 可调节的最大亮度值 */
+    public static final int MAX_BRIGHTNESS = 255;
+    public static int getSysScreenBrightness() {
+        int screenBrightness = MAX_BRIGHTNESS;
+        try {
+            screenBrightness = android.provider.Settings.System.getInt(mContext.getContentResolver(), android.provider.Settings.System.SCREEN_BRIGHTNESS);
+        } catch (Exception e) {
+            Utils.DLog("获得当前系统的亮度值失败：");
+        }
+        return screenBrightness;
+    }
+
+    /**
+     * 设置当前系统的亮度值:0~255
+     */
+    public static void setSysScreenBrightness(int brightness) {
+        try {
+            ContentResolver resolver = mContext.getContentResolver();
+            Uri uri = android.provider.Settings.System.getUriFor(android.provider.Settings.System.SCREEN_BRIGHTNESS);
+            android.provider.Settings.System.putInt(resolver, android.provider.Settings.System.SCREEN_BRIGHTNESS, brightness);
+            resolver.notifyChange(uri, null); // 实时通知改变
+        } catch (Exception e) {
+            Utils.DLog("设置当前系统的亮度值失败："+e);
+        }
     }
 
 

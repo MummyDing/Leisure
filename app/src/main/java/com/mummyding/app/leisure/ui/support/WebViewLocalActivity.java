@@ -31,6 +31,7 @@ public class WebViewLocalActivity extends BaseWebViewActivity {
     }
     @Override
     protected void loadData() {
-        webView.loadDataWithBaseURL("about:blank", data, "text/html", "utf-8", null);
+        //webView.loadDataWithBaseURL("about:blank", data, "text/html", "utf-8", null);
+        webView.loadDataWithBaseURL("file:///android_asset/", "<link rel=\"stylesheet\" type=\"text/css\" href=\"dailycss.css\" />"+data, "text/html", "utf-8", null);
     }
 }

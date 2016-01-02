@@ -45,6 +45,6 @@ public class CONSTANT {
     public static final int exitConfirmTime = 2000;
     public static final float shakeValue=25f;
 
-
-
+    public static final int NIGHT_BRIGHTNESS = 40;
+    public static final int DAY_BRIGHTNESS = 150;
 }

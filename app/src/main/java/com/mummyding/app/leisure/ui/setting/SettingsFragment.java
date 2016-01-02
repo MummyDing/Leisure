@@ -28,6 +28,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.support.Utils;
 
@@ -98,6 +99,12 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             Settings.isNightMode = Boolean.valueOf(newValue.toString());
             Settings.needRecreate = true;
             mSettings.putBoolean(mSettings.NIGHT_MODE, Settings.isNightMode);
+
+            if(mSettings.isNightMode && Utils.getSysScreenBrightness() > CONSTANT.NIGHT_BRIGHTNESS){
+                Utils.setSysScreenBrightness(CONSTANT.NIGHT_BRIGHTNESS);
+            }else if(mSettings.isNightMode == false && Utils.getSysScreenBrightness() == CONSTANT.NIGHT_BRIGHTNESS){
+                Utils.setSysScreenBrightness(CONSTANT.DAY_BRIGHTNESS);
+            }
             getActivity().recreate();
             return true;
         }else if(preference == mShakeToReturn){
