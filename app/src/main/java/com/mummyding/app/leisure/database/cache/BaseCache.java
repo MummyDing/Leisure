@@ -78,7 +78,6 @@ public abstract class BaseCache<T> implements ICache<T> {
         putData();
         db.setTransactionSuccessful();
         db.endTransaction();
-       // db.close();
     }
     public synchronized void addToCollection(T object){
         db = mHelper.getWritableDatabase();
@@ -87,12 +86,10 @@ public abstract class BaseCache<T> implements ICache<T> {
         putData(object);
         db.setTransactionSuccessful();
         db.endTransaction();
-        // db.close();
     }
     public synchronized void execSQL(String sql){
         db = mHelper.getWritableDatabase();
         db.execSQL(sql);
-       // db.close();
     }
 
     public  List<T> getmList(){

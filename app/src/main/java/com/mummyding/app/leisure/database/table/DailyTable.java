@@ -20,7 +20,6 @@
 
 package com.mummyding.app.leisure.database.table;
 
-import java.net.PortUnreachableException;
 
 /**
  * Created by mummyding on 16-1-1.

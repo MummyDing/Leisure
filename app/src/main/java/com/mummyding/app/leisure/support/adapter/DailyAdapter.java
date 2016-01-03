@@ -96,8 +96,6 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
             }
         });
 
-        Utils.DLog("sssssBODY  "+storyBean.getBody());
-        Utils.DLog("ssssIMAGE:  "+storyBean.getLargepic());
 
         if(isCollection){
             holder.collect_cb.setVisibility(View.GONE);
@@ -134,7 +132,6 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
                 storyBean.setCollected(isChecked ? 1:0);
                 mCache.execSQL(DailyTable.updateCollectionFlag(storyBean.getId(), isChecked ? 1 : 0));
                 if(isChecked){
-                   // mCache.loadFromCache();
                     mCache.addToCollection(storyBean);
                 }else{
                     mCache.execSQL(DailyTable.deleteCollectionFlag(storyBean.getId()));
