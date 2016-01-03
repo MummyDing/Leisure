@@ -56,6 +56,7 @@ ICache---　缓存接口<br>
 #源码打包下载
 1. [Version 1.0][7]
 2. [Version 1.1][8]
+3. [Version 2.0][9]
 
 # 应用截图
 
@@ -72,3 +73,4 @@ ICache---　缓存接口<br>
 [6]: http://app.mi.com/detail/130045
 [7]: https://github.com/MummyDing/Leisure/archive/v1.0.zip
 [8]: https://github.com/MummyDing/Leisure/archive/v1.1.zip
+[9]: https://github.com/MummyDing/Leisure/archive/v2.0.zip
