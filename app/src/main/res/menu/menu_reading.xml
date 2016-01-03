@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/menu_search" android:title="@string/text_search"
         android:icon="@mipmap/ic_search_white" app:showAsAction="always"/>
-    <item android:id="@+id/menu_news" android:title="@string/news"
-        android:icon="@mipmap/ic_news_white" app:showAsAction="always"/>
+    <item android:id="@+id/menu_home" android:title="@string/daily"
+        android:icon="@mipmap/ic_home_white" app:showAsAction="always"/>
 </menu>
