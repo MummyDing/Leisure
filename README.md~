@@ -43,7 +43,19 @@ ICache---　缓存接口<br>
        -- BaseCollectionCache　收藏模块缓存基类<br>
 
 
-#当前版本: Version 1.1
+#版本更新
+2015-12-12 初版(1.0)完成<br>
+2015-12-24 Version 1.1 版发布<br>
+0.初版发布之后收到了很多朋友的反馈,在此表示感谢!<br>
+由于最近比较忙,在第一版中日报数据服务器不稳定等问题准备放在第三个版本中.<br>
+1.这版的更新主要是修复一个严重的bug:数据冗余,刷新后之前数据没有被清除,新老数据出现重复.下载更新版本后,手动刷新即可获取正确数据.
+2.软件开发靠开发者一人之力是不够的,MummyDing希望各位也能参与进来,让"闲暇"越来越好!<br>
+3.Bug反馈即可在评论区留言,同时也可到项目主页发布issue:https://github.com/MummyDing/Leisure/issues<br>
+本项目为开源项目,技术交流可以通过邮箱联系:MummyDing@outlook.com<br>
+
+#源码打包下载
+1. [Version 1.0][7]
+2. [Version 1.1][8]
 
 # 应用截图
 
@@ -57,4 +69,6 @@ ICache---　缓存接口<br>
 [3]:(http://blog.csdn.net/mummyding/article/details/50266203)
 [4]:(http://m.app.so.com/detail/index?pname=com.mummyding.app.leisure&id=3167599)
 [5]:(http://coolapk.com/apk/com.mummyding.app.leisure)
-[6]:http://app.mi.com/detail/130045
+[6]: http://app.mi.com/detail/130045
+[7]: https://github.com/MummyDing/Leisure/archive/v1.0.zip
+[8]: https://github.com/MummyDing/Leisure/archive/v1.1.zip
