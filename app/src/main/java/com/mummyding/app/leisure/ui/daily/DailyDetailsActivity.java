@@ -70,6 +70,7 @@ public class DailyDetailsActivity extends AppCompatActivity implements SensorEve
     private DailyDetailsBean dailyDetailsBean;
     private String url;
     private String title;
+    private int id;
     private String imageUrl;
     private String body;
     private DailyCache cache;
@@ -98,10 +99,11 @@ public class DailyDetailsActivity extends AppCompatActivity implements SensorEve
     }
     private void getData(){
         url = getIntent().getStringExtra(getString(R.string.id_url));
+        id = getIntent().getIntExtra(getString(R.string.id_id),0);
         title = getIntent().getStringExtra(getString(R.string.id_title));
         body = getIntent().getStringExtra(getString(R.string.id_body));
         imageUrl = getIntent().getStringExtra(getString(R.string.id_imageurl));
-        Utils.DLog(imageUrl+"imageurl");
+
     }
     private void initView(){
         simpleDraweeView = (SimpleDraweeView) findViewById(R.id.ivImage);
@@ -184,11 +186,10 @@ public class DailyDetailsActivity extends AppCompatActivity implements SensorEve
                 String res = response.body().string();
                 Gson gson = new Gson();
                 dailyDetailsBean = gson.fromJson(res, DailyDetailsBean.class);
-                cache.execSQL(DailyTable.updateBodyContent(DailyTable.NAME,title,dailyDetailsBean.getBody()));
-                cache.execSQL(DailyTable.updateBodyContent(DailyTable.COLLECTION_NAME,title,dailyDetailsBean.getBody()));
-                cache.execSQL(DailyTable.updateLargePic(DailyTable.NAME,title,dailyDetailsBean.getImage()));
-                cache.execSQL(DailyTable.updateLargePic(DailyTable.COLLECTION_NAME,title,dailyDetailsBean.getImage()));
-                Utils.DLog("iiimage----"+dailyDetailsBean.getImage());
+                cache.execSQL(DailyTable.updateBodyContent(DailyTable.NAME,id,dailyDetailsBean.getBody()));
+                cache.execSQL(DailyTable.updateBodyContent(DailyTable.COLLECTION_NAME,id,dailyDetailsBean.getBody()));
+                cache.execSQL(DailyTable.updateLargePic(DailyTable.NAME,id,dailyDetailsBean.getImage()));
+                cache.execSQL(DailyTable.updateLargePic(DailyTable.COLLECTION_NAME,id,dailyDetailsBean.getImage()));
                 handler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
             }
         });

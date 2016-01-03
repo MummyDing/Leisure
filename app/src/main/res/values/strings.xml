@@ -94,4 +94,5 @@
     <string name="id_title">title</string>
     <string name="id_body">body</string>
     <string name="id_imageurl">imageUrl</string>
+    <string name="id_id">id</string>
 </resources>

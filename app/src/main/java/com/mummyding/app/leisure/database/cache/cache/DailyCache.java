@@ -38,6 +38,7 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mummyding on 15-11-26.
@@ -85,7 +86,9 @@ public class DailyCache extends BaseCache<StoryBean> {
     @Override
     public synchronized void loadFromCache() {
         mList.clear();
-        String sql = "select * from "+DailyTable.NAME;
+        String sql = "select * from "+DailyTable.NAME+" order by "+DailyTable.ID+" desc";
+        //ArrayList<StoryBean> reverseList = new ArrayList<>();
+
         Cursor cursor = query(sql);
         while (cursor.moveToNext()){
             StoryBean storyBean = new StoryBean();
@@ -97,7 +100,11 @@ public class DailyCache extends BaseCache<StoryBean> {
             storyBean.setCollected(cursor.getInt(DailyTable.ID_IS_COLLECTED));
             mList.add(storyBean);
         }
-
+     /*   mList.clear();
+        for(int i = reverseList.size() -1 ; i>=0 ; i--){
+            mList.add(reverseList.get(i));
+        }
+*/
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
         cursor.close();
     }
@@ -124,7 +131,54 @@ public class DailyCache extends BaseCache<StoryBean> {
                         collectionTitles.add(mList.get(i).getTitle());
                     }
                 }
-                Utils.DLog("sizesize---------:"+collectionTitles.size()+"old"+mList.size());
+
+                List<StoryBean> oldList = new ArrayList<StoryBean>();
+                List<StoryBean> newList = new ArrayList<StoryBean>();
+
+                for(StoryBean storyBean:mList){
+                    oldList.add(storyBean);
+                }
+
+                Gson gson = new Gson();
+                DailyBean dailyBean = gson.fromJson(res, DailyBean.class);
+                StoryBean[] storyBeans = dailyBean.getStories();
+                for (StoryBean storyBeen : storyBeans) {
+                    newList.add(storyBeen);
+                }
+
+                loadOld(dailyBean.getDate(),oldList,newList);
+
+            }
+        });
+    }
+
+    private  void loadOld(String date, final List<StoryBean> oldList, final List<StoryBean> newList){
+        Request.Builder builder = new Request.Builder();
+        builder.url(DailyApi.daily_old_url + date);
+        Request request = builder.build();
+        HttpUtil.enqueue(request, new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                mHandler.sendEmptyMessage(CONSTANT.ID_FAILURE);
+            }
+            @Override
+            public void onResponse(Response response) throws IOException {
+                if(response.isSuccessful() == false) {
+                    mHandler.sendEmptyMessage(CONSTANT.ID_FAILURE);
+                    return;
+                }
+                String res = response.body().string();
+
+                ArrayList<Integer> collectionIDs = new ArrayList<Integer>();
+                for(int i = 0 ; i<oldList.size() ; i++ ){
+                    if(oldList.get(i).isCollected() == 1){
+                        collectionIDs.add(oldList.get(i).getId());
+                    }
+                }
+
+
+
+                Utils.DLog("sizesize---------:"+collectionIDs.size()+"old"+mList.size());
 
                 mList.clear();
 
@@ -132,17 +186,23 @@ public class DailyCache extends BaseCache<StoryBean> {
                 Gson gson = new Gson();
                 StoryBean[] storyBeans = (gson.fromJson(res, DailyBean.class)).getStories();
                 for (StoryBean storyBeen : storyBeans) {
-                    mList.add(storyBeen);
+                    newList.add(storyBeen);
                 }
 
+                for(StoryBean storyBean: newList){
+                    mList.add(storyBean);
+                }
 
-                for(String title:collectionTitles){
+                // setCollection flag
+                for(Integer id:collectionIDs){
                     for(int i=0 ; i<mList.size() ; i++){
-                        if(title.equals(mList.get(i).getTitle())){
+                        if(id.equals(mList.get(i).getId())){
                             mList.get(i).setCollected(1);
                         }
                     }
                 }
+
+
                 Utils.DLog("new: "+mList.size());
                 mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
             }

@@ -47,16 +47,16 @@ public class DailyTable {
     public static final String SELECT_ALL_FROM_COLLECTION = "select * from "+COLLECTION_NAME;
 
     public static final String CREATE_TABLE = "create table "+NAME+
-            "("+TITLE+" text primary key,"+
-            ID+" integer,"+
+            "("+TITLE+" text,"+
+            ID+" integer primary key,"+
             IMAGE+" text,"+
             BODY+" text,"+
             LARGEPIC+" text," +
             IS_COLLECTED+" integer)";
 
     public static final String CREATE_COLLECTION_TABLE = "create table "+COLLECTION_NAME+
-            "("+TITLE+" text primary key,"+
-            ID+" integer,"+
+            "("+TITLE+" text,"+
+            ID+" integer  primary key,"+
             IMAGE+" text,"+
             BODY+" text,"+
             LARGEPIC+" text)";
@@ -65,19 +65,19 @@ public class DailyTable {
             " set "+IS_COLLECTED+" =1 where "+TITLE+" in ( select "+TITLE+
             " from "+COLLECTION_NAME+")";
 
-    public static  String updateCollectionFlag(String title,int flag){
+    public static  String updateCollectionFlag(int id,int flag){
         return "update "+NAME+" set "+IS_COLLECTED+" ="+flag+" where "+
-                TITLE+"=\'"+title+"\'";
+                ID+"="+id;
     }
-    public static String updateBodyContent(String tableName,String title,String body){
+    public static String updateBodyContent(String tableName,int id,String body){
         return "update "+tableName+" set "+BODY+" =\'"+body+"\' where "+
-                TITLE+"=\'"+title+"\'";
+                ID+"="+id;
     }
-    public static String updateLargePic(String tableName,String title,String imageUrl){
+    public static String updateLargePic(String tableName,int id,String imageUrl){
         return "update "+tableName+" set "+LARGEPIC+" =\'"+imageUrl+"\' where "+
-                TITLE+"=\'"+title+"\'";
+                ID+"="+id;
     }
-    public static String deleteCollectionFlag(String title){
-        return "delete from "+COLLECTION_NAME+" where title=\'"+title+"\'";
+    public static String deleteCollectionFlag(int id){
+        return "delete from "+COLLECTION_NAME+" where +"+ID+"="+id;
     }
 }

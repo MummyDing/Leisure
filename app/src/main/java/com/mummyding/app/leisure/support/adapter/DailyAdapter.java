@@ -90,6 +90,7 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
                 bundle.putString(mContext.getString(R.string.id_title),storyBean.getTitle());
                 bundle.putString(mContext.getString(R.string.id_body),storyBean.getBody());;
                 bundle.putString(mContext.getString(R.string.id_imageurl),storyBean.getLargepic());
+                bundle.putInt(mContext.getString(R.string.id_id),storyBean.getId());
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
@@ -113,8 +114,8 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
                                     if (mItems.contains(storyBean) == false){
                                         return;
                                     }
-                                    mCache.execSQL(DailyTable.updateCollectionFlag(storyBean.getTitle(), 0));
-                                    mCache.execSQL(DailyTable.deleteCollectionFlag(storyBean.getTitle()));
+                                    mCache.execSQL(DailyTable.updateCollectionFlag(storyBean.getId(), 0));
+                                    mCache.execSQL(DailyTable.deleteCollectionFlag(storyBean.getId()));
                                     mItems.remove(position);
                                     notifyDataSetChanged();
                                 }
@@ -131,12 +132,12 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 storyBean.setCollected(isChecked ? 1:0);
-                mCache.execSQL(DailyTable.updateCollectionFlag(storyBean.getTitle(), isChecked ? 1 : 0));
+                mCache.execSQL(DailyTable.updateCollectionFlag(storyBean.getId(), isChecked ? 1 : 0));
                 if(isChecked){
-                    mCache.loadFromCache();
+                   // mCache.loadFromCache();
                     mCache.addToCollection(storyBean);
                 }else{
-                    mCache.execSQL(DailyTable.deleteCollectionFlag(storyBean.getTitle()));
+                    mCache.execSQL(DailyTable.deleteCollectionFlag(storyBean.getId()));
                 }
             }
         });
