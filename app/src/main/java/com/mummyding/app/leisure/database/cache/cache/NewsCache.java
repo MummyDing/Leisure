@@ -19,17 +19,12 @@
 
 package com.mummyding.app.leisure.database.cache.cache;
 
-import android.annotation.TargetApi;
-import android.content.Context;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Handler;
 
 import com.mummyding.app.leisure.database.cache.BaseCache;
 import com.mummyding.app.leisure.database.table.NewsTable;
-import com.mummyding.app.leisure.model.daily.StoryBean;
 import com.mummyding.app.leisure.model.news.NewsBean;
-import com.mummyding.app.leisure.model.science.ScienceBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Utils;
@@ -43,7 +38,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -69,7 +63,7 @@ public class NewsCache extends BaseCache<NewsBean> {
 
     @Override
     protected void putData() {
-        db.execSQL(mHelper.DROP_TABLE+table.NAME+" where "+table.CATEGORY+"=\'"+mCategory+"\'");
+        db.execSQL(mHelper.DELETE_TABLE_DATA +table.NAME+" where "+table.CATEGORY+"=\'"+mCategory+"\'");
        // db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             NewsBean newsBean =  mList.get(i);

@@ -179,16 +179,16 @@ public class Utils {
         DatabaseHelper mHelper = DatabaseHelper.instance(mContext);
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
-        db.execSQL(mHelper.DROP_TABLE + DailyTable.NAME);
+        db.execSQL(mHelper.DELETE_TABLE_DATA + DailyTable.NAME);
       //  db.execSQL(DailyTable.CREATE_TABLE);
 
-        db.execSQL(mHelper.DROP_TABLE + NewsTable.NAME);
+        db.execSQL(mHelper.DELETE_TABLE_DATA + NewsTable.NAME);
       //  db.execSQL(NewsTable.CREATE_TABLE);
 
-        db.execSQL(mHelper.DROP_TABLE + ReadingTable.NAME);
+        db.execSQL(mHelper.DELETE_TABLE_DATA + ReadingTable.NAME);
       //  db.execSQL(ReadingTable.CREATE_TABLE);
 
-        db.execSQL(mHelper.DROP_TABLE + ScienceTable.NAME);
+        db.execSQL(mHelper.DELETE_TABLE_DATA + ScienceTable.NAME);
       //  db.execSQL(ScienceTable.CREATE_TABLE);
 
     }

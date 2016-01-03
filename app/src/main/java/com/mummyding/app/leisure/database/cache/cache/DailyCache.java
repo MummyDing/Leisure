@@ -30,8 +30,6 @@ import com.mummyding.app.leisure.model.daily.DailyBean;
 import com.mummyding.app.leisure.model.daily.StoryBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.HttpUtil;
-import com.mummyding.app.leisure.support.Utils;
-import com.mummyding.app.leisure.support.sax.SAXNewsParse;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -59,7 +57,7 @@ public class DailyCache extends BaseCache<StoryBean> {
 
     @Override
     protected void putData() {
-        db.execSQL(mHelper.DROP_TABLE + DailyTable.NAME);
+        db.execSQL(mHelper.DELETE_TABLE_DATA + DailyTable.NAME);
        // db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             StoryBean storyBean = mList.get(i);
@@ -71,7 +69,6 @@ public class DailyCache extends BaseCache<StoryBean> {
             values.put(DailyTable.IS_COLLECTED,storyBean.isCollected());
             db.insert(DailyTable.NAME, null, values);
         }
-        ///db.execSQL(DailyTable.SQL_INIT_COLLECTION_FLAG);
     }
 
     @Override
@@ -87,7 +84,6 @@ public class DailyCache extends BaseCache<StoryBean> {
     public synchronized void loadFromCache() {
         mList.clear();
         String sql = "select * from "+DailyTable.NAME+" order by "+DailyTable.ID+" desc";
-        //ArrayList<StoryBean> reverseList = new ArrayList<>();
 
         Cursor cursor = query(sql);
         while (cursor.moveToNext()){
@@ -100,14 +96,10 @@ public class DailyCache extends BaseCache<StoryBean> {
             storyBean.setCollected(cursor.getInt(DailyTable.ID_IS_COLLECTED));
             mList.add(storyBean);
         }
-     /*   mList.clear();
-        for(int i = reverseList.size() -1 ; i>=0 ; i--){
-            mList.add(reverseList.get(i));
-        }
-*/
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
         cursor.close();
     }
+    // load today's data
     public void load(){
         Request.Builder builder = new Request.Builder();
         builder.url(DailyApi.daily_url);
@@ -152,6 +144,7 @@ public class DailyCache extends BaseCache<StoryBean> {
         });
     }
 
+    // load yesterday's data
     private  void loadOld(String date, final List<StoryBean> oldList, final List<StoryBean> newList){
         Request.Builder builder = new Request.Builder();
         builder.url(DailyApi.daily_old_url + date);
@@ -176,10 +169,7 @@ public class DailyCache extends BaseCache<StoryBean> {
                     }
                 }
 
-
-
-                Utils.DLog("sizesize---------:"+collectionIDs.size()+"old"+mList.size());
-
+                // clear old data
                 mList.clear();
 
 
@@ -202,8 +192,7 @@ public class DailyCache extends BaseCache<StoryBean> {
                     }
                 }
 
-
-                Utils.DLog("new: "+mList.size());
+                // notify
                 mHandler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
             }
         });

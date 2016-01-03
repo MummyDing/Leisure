@@ -19,7 +19,6 @@
 
 package com.mummyding.app.leisure.database.cache.cache;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.os.Handler;
 
@@ -58,7 +57,7 @@ public class ScienceCache extends BaseCache<ArticleBean> {
 
     @Override
     protected void putData() {
-        db.execSQL(mHelper.DROP_TABLE+table.NAME+" where "+table.CATEGORY+"=\'"+mCategory+"\'");
+        db.execSQL(mHelper.DELETE_TABLE_DATA +table.NAME+" where "+table.CATEGORY+"=\'"+mCategory+"\'");
        // db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             ArticleBean articleBean = mList.get(i);
