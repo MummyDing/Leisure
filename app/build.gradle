@@ -15,8 +15,8 @@ android {
         applicationId "com.mummyding.app.leisure"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 3
-        versionName "2.0"
+        versionCode 4
+        versionName "2.1"
         signingConfig signingConfigs.LeisureKey
     }
     buildTypes {

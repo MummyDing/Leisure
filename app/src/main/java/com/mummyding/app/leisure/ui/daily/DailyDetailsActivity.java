@@ -130,7 +130,8 @@ public class DailyDetailsActivity extends AppCompatActivity implements SensorEve
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                webView.loadDataWithBaseURL("file:///android_asset/", "<link rel=\"stylesheet\" type=\"text/css\" href=\"dailycss.css\" />"+dailyDetailsBean.getBody(), "text/html", "utf-8", null);
+                //fix issue #6
+                webView.loadUrl(url);
                 return false;
             }
         });
