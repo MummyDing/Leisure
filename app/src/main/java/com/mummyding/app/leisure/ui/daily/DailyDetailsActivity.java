@@ -160,7 +160,6 @@ public class DailyDetailsActivity extends AppCompatActivity implements SensorEve
             }
         });
         getSupportActionBar().setTitle(title);
-        Utils.DLog("uu"+body+"  "+imageUrl);
         if(body == "" || body == null||imageUrl == null || imageUrl == "") {
             loadDataFromNet();
             Utils.DLog("enter");
@@ -185,6 +184,7 @@ public class DailyDetailsActivity extends AppCompatActivity implements SensorEve
             @Override
             public void onResponse(Response response) throws IOException {
                 String res = response.body().string();
+                Utils.DLog(res);
                 Gson gson = new Gson();
                 dailyDetailsBean = gson.fromJson(res, DailyDetailsBean.class);
                 cache.execSQL(DailyTable.updateBodyContent(DailyTable.NAME,id,dailyDetailsBean.getBody()));

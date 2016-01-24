@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="phoenix-1.2.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.yalantis/phoenix/1.2.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.yalantis/phoenix/1.2.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.yalantis/phoenix/1.2.2/46e2eabe60a64ce111da881ed4f6586b29e872bd/phoenix-1.2.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
