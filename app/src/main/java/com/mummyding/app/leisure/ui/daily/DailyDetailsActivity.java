@@ -149,6 +149,9 @@ public class DailyDetailsActivity extends AppCompatActivity implements SensorEve
         }
         if(HttpUtil.isWIFI == false) {
             webView.getSettings().setBlockNetworkImage(Settings.getInstance().getBoolean(Settings.NO_PIC_MODE, false));
+        }else {
+            // fix issue #13
+            webView.getSettings().setBlockNetworkImage(false);
         }
 
         setSupportActionBar(toolbar);
@@ -191,6 +194,11 @@ public class DailyDetailsActivity extends AppCompatActivity implements SensorEve
                 cache.execSQL(DailyTable.updateBodyContent(DailyTable.COLLECTION_NAME,id,dailyDetailsBean.getBody()));
                 cache.execSQL(DailyTable.updateLargePic(DailyTable.NAME,id,dailyDetailsBean.getImage()));
                 cache.execSQL(DailyTable.updateLargePic(DailyTable.COLLECTION_NAME,id,dailyDetailsBean.getImage()));
+
+
+                imageUrl = dailyDetailsBean.getImage();
+                body = dailyDetailsBean.getBody();
+
                 handler.sendEmptyMessage(CONSTANT.ID_SUCCESS);
             }
         });
@@ -203,12 +211,11 @@ public class DailyDetailsActivity extends AppCompatActivity implements SensorEve
                 case CONSTANT.ID_FAILURE:
                     break;
                 case CONSTANT.ID_SUCCESS:
-                    simpleDraweeView.setImageURI(Uri.parse(dailyDetailsBean.getImage()));
-                    webView.loadDataWithBaseURL("file:///android_asset/", "<link rel=\"stylesheet\" type=\"text/css\" href=\"dailycss.css\" />"+dailyDetailsBean.getBody(), "text/html", "utf-8", null);
-                    Utils.DLog("net");
-                    break;
                 case CONSTANT.ID_FROM_CACHE:
-                    simpleDraweeView.setImageURI(Uri.parse(imageUrl));
+                    // fix issue #13
+                    if(HttpUtil.isWIFI == true || Settings.getInstance().getBoolean(Settings.NO_PIC_MODE, false) == false) {
+                        simpleDraweeView.setImageURI(Uri.parse(imageUrl));
+                    }
                     webView.loadDataWithBaseURL("file:///android_asset/", "<link rel=\"stylesheet\" type=\"text/css\" href=\"dailycss.css\" />"+body, "text/html", "utf-8", null);
                     break;
             }

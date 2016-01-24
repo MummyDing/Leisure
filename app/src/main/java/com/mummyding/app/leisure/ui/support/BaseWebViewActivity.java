@@ -67,11 +67,14 @@ public abstract class BaseWebViewActivity extends AppCompatActivity {
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setDatabaseEnabled(true);
 
-      /*  if(Settings.isNightMode) {
+       /*  if(Settings.isNightMode) {
             webView.setBackgroundColor(ContextCompat.getColor(this, R.color.night_primary));
         }*/
         if(HttpUtil.isWIFI == false) {
             webView.getSettings().setBlockNetworkImage(Settings.getInstance().getBoolean(Settings.NO_PIC_MODE, false));
+        }else {
+            // fix issue #13
+            webView.getSettings().setBlockNetworkImage(false);
         }
 
         loadData();
