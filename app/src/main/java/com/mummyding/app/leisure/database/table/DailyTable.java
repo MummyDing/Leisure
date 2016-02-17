@@ -69,6 +69,8 @@ public class DailyTable {
                 ID+"="+id;
     }
     public static String updateBodyContent(String tableName,int id,String body){
+        // fix issue #9
+        body = body.replaceAll("'","`");
         return "update "+tableName+" set "+BODY+" =\'"+body+"\' where "+
                 ID+"="+id;
     }
