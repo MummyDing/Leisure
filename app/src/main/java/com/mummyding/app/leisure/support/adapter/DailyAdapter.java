@@ -63,10 +63,8 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-       // View parentView = View.inflate(mContext,R.layout.item_daily,null);
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_daily, parent, false);
-       // ViewHolder vh = new ViewHolder(itemView);
         ViewHolder vh = new ViewHolder(itemView);
         return vh;
     }
@@ -88,7 +86,7 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
                 Bundle bundle = new Bundle();
                 bundle.putString(mContext.getString(R.string.id_url), DailyApi.daily_details_url+storyBean.getId());
                 bundle.putString(mContext.getString(R.string.id_title),storyBean.getTitle());
-                bundle.putString(mContext.getString(R.string.id_body),storyBean.getBody());;
+                bundle.putString(mContext.getString(R.string.id_body),storyBean.getBody());
                 bundle.putString(mContext.getString(R.string.id_imageurl),storyBean.getLargepic());
                 bundle.putInt(mContext.getString(R.string.id_id),storyBean.getId());
                 intent.putExtras(bundle);
@@ -96,7 +94,7 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
             }
         });
 
-
+/*
         if(isCollection){
             holder.collect_cb.setVisibility(View.GONE);
             holder.text.setText(R.string.text_remove);
@@ -138,7 +136,7 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
                 }
             }
         });
-        holder.collect_cb.setChecked(storyBean.isCollected() == 1 ? true:false);
+        holder.collect_cb.setChecked(storyBean.isCollected() == 1 ? true:false);*/
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -146,18 +144,18 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
         private TextView title;
         private SimpleDraweeView image;
        // private TextView info;
-        private CheckBox collect_cb;
-        private TextView text;
+        //private CheckBox collect_cb;
+        //private TextView text;
         public ViewHolder(View itemView) {
             super(itemView);
             parentView = itemView;
             title = (TextView) parentView.findViewById(R.id.title);
             image = (SimpleDraweeView) parentView.findViewById(R.id.image);
             //info = (TextView) parentView.findViewById(R.id.info);
-            collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
+          /*  collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
             if(isCollection) {
                 text = (TextView) parentView.findViewById(R.id.text);
-            }
+            }*/
         }
     }
 }
