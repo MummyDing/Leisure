@@ -95,4 +95,7 @@
     <string name="id_body">body</string>
     <string name="id_imageurl">imageUrl</string>
     <string name="id_id">id</string>
+    <string name="hint_share_to">Share to...</string>
+    <string name="share">share</string>
+    <string name="text_share_from">"share from "</string>
 </resources>

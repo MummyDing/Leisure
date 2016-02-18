@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permisson.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <supports-screens
         android:anyDensity="true"
@@ -40,7 +40,8 @@
         <activity android:name=".ui.setting.SettingsActivity" />
         <activity android:name=".ui.about.DemoVideoActivity" />
         <activity android:name=".ui.about.AppIntroActivity" />
-        <activity android:name=".ui.daily.DailyDetailsActivity"></activity>
+        <activity android:name=".ui.daily.DailyDetailsActivity" />
+        <activity android:name=".ui.support.BaseDetailsActivity"></activity>
     </application>
 
 </manifest>
