@@ -50,6 +50,10 @@ public class ScienceCache extends BaseCache<ArticleBean> {
 
     private ScienceTable table;
 
+    public ScienceCache(){
+        super();
+    }
+
     public ScienceCache(Handler handler, String category, String url) {
         super(handler, category, url);
     }

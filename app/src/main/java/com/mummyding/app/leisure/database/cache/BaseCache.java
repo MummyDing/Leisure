@@ -52,7 +52,11 @@ public abstract class BaseCache<T> implements ICache<T> {
     protected String mUrl;
     protected String[] mUrls;
 
-    protected BaseCache(Handler handler,String category){
+    public BaseCache() {
+        mHelper = DatabaseHelper.instance(mContext);
+    }
+
+    protected BaseCache(Handler handler, String category){
         mHelper = DatabaseHelper.instance(mContext);
         mCategory = category;
         mHandler = handler;

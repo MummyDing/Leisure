@@ -26,7 +26,7 @@
     <string name="text_collection">收藏</string>
     <string name="text_refresh_success">刷新成功</string>
     <string name="text_remove">移除</string>
-    <string name="notify_remove_from_collection">確定從收藏中移除嗎?</string>
+    <string name="notify_remove_from_collection">成功從收藏中移除</string>
     <string name="id_collection">Collection</string>
     <string name="author_email">MummyDing@outlook.com</string>
     <string name="author_name">MummyDing</string>

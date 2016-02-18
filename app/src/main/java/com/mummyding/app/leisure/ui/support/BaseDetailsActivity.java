@@ -89,6 +89,7 @@ public abstract class BaseDetailsActivity extends AppCompatActivity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
         super.onCreate(savedInstanceState);
+        loadSettings();
         setContentView(getLayoutID());
     }
 

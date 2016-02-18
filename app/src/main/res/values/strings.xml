@@ -28,7 +28,7 @@
     <string name="id_category" translatable="false">category</string>
     <string name="text_collection">Collection</string>
     <string name="text_refresh_success">Refresh Successfully</string>
-    <string name="notify_remove_from_collection">Are you sure to remove it from collection ?</string>
+    <string name="notify_remove_from_collection">Remove it from collection successful!!</string>
     <string name="id_collection" translatable="false">Collection</string>
     <string name="author_email">MummyDing@outlook.com</string>
     <string name="author_name">MummyDing</string>
@@ -100,4 +100,5 @@
     <string name="text_share_from">"share from "</string>
     <string name="notify_add_to_collection">add to collection successful</string>
     <string name="id_small_image">id_small_image</string>
+    <string name="id_science">id_science</string>
 </resources>

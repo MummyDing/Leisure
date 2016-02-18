@@ -28,7 +28,6 @@
     <string name="text_collection">收 藏</string>
     <string name="text_refresh_success">刷新成功</string>
     <string name="text_remove">移除</string>
-    <string name="notify_remove_from_collection">确定从收藏中移除吗？</string>
     <string name="id_collection">Collection</string>
     <string name="author_email">MummyDing@outlook.com</string>
     <string name="author_name">MummyDing</string>
@@ -72,4 +71,5 @@
     <string name="text_share_info">欢迎使用“闲暇”,它集"知乎日报"、"果壳科学人"、"新华网新闻"以及"豆瓣图书"于一体,满足你日常休闲阅读需求,你可以到http://coolapk.com/apk/com.mummyding.app.leisure下载</string>
     <string name="text_demo_video">演示视频</string>
     <string name="text_app_intro">应用简介</string>
+    <string name="notify_remove_from_collection">成功从收藏移除!</string>
 </resources>

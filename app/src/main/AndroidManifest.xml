@@ -41,7 +41,7 @@
         <activity android:name=".ui.about.DemoVideoActivity" />
         <activity android:name=".ui.about.AppIntroActivity" />
         <activity android:name=".ui.daily.DailyDetailsActivity" />
-        <activity android:name=".ui.support.BaseDetailsActivity"></activity>
+        <activity android:name=".ui.science.ScienceDetailsActivity"/>
     </application>
 
 </manifest>
