@@ -46,6 +46,8 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public abstract class BaseDetailsActivity extends AppCompatActivity {
 
@@ -77,8 +79,6 @@ public abstract class BaseDetailsActivity extends AppCompatActivity {
         }else{
             this.setTheme(R.style.DayTheme);
         }
-
-
 
     }
 
@@ -176,6 +176,11 @@ public abstract class BaseDetailsActivity extends AppCompatActivity {
         });
 
 
+        Class clsWebSettingsClassic = null;
+
+
+
+
          /*
          cache web page
          */
@@ -185,9 +190,7 @@ public abstract class BaseDetailsActivity extends AppCompatActivity {
         contentView.getSettings().setDatabaseEnabled(true);
 
 
-        if(Settings.isNightMode) {
-            contentView.setBackgroundColor(ContextCompat.getColor(this, R.color.night_primary));
-        }
+
         if(HttpUtil.isWIFI == false) {
             contentView.getSettings().setBlockNetworkImage(Settings.getInstance().getBoolean(Settings.NO_PIC_MODE, false));
         }else {

@@ -101,4 +101,5 @@
     <string name="notify_add_to_collection">add to collection successful</string>
     <string name="id_small_image">id_small_image</string>
     <string name="id_science">id_science</string>
+    <string name="text_hot">hot</string>
 </resources>
