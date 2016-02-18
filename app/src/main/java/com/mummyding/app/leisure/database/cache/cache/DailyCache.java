@@ -34,6 +34,8 @@ import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.xml.sax.DTDHandler;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +71,7 @@ public class DailyCache extends BaseCache<StoryBean> {
             values.put(DailyTable.IS_COLLECTED,storyBean.isCollected());
             db.insert(DailyTable.NAME, null, values);
         }
+        db.execSQL(DailyTable.SQL_INIT_COLLECTION_FLAG);
     }
 
     @Override

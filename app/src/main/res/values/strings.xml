@@ -98,4 +98,6 @@
     <string name="hint_share_to">Share to...</string>
     <string name="share">share</string>
     <string name="text_share_from">"share from "</string>
+    <string name="notify_add_to_collection">add to collection successful</string>
+    <string name="id_small_image">id_small_image</string>
 </resources>

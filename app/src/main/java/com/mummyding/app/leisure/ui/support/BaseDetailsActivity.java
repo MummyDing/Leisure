@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
@@ -56,7 +57,7 @@ public abstract class BaseDetailsActivity extends AppCompatActivity {
     protected ProgressBar progressBar;
     protected ProgressBar progressBarTopPic;
     protected ImageButton networkBtn;
-
+    protected boolean isCollected;
 
 
     protected abstract void onDataRefresh();
@@ -272,6 +273,7 @@ public abstract class BaseDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_share,menu);
+        updateCollectionMenu(menu.findItem(R.id.menu_collect));
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -283,10 +285,31 @@ public abstract class BaseDetailsActivity extends AppCompatActivity {
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getShareInfo());
             startActivity(Intent.createChooser(sharingIntent,getString(R.string.hint_share_to)));
             return super.onOptionsItemSelected(item);
+        }else if(item.getItemId() == R.id.menu_collect){
+            if(isCollected){
+                removeFromCollection();
+                isCollected = false;
+                updateCollectionMenu(item);
+                Snackbar.make(mainContent, R.string.notify_remove_from_collection,Snackbar.LENGTH_SHORT).show();
+            }else {
+                addToCollection();
+                isCollected = true;
+                updateCollectionMenu(item);
+                Snackbar.make(mainContent, R.string.notify_add_to_collection,Snackbar.LENGTH_SHORT).show();
+
+            }
         }
         return true;
     }
-
+    protected void updateCollectionMenu(MenuItem item){
+        if(isCollected){
+            item.setIcon(R.mipmap.ic_star_black);
+        }else {
+            item.setIcon(R.mipmap.ic_star_white);
+        }
+    }
+    protected abstract void removeFromCollection();
+    protected abstract void addToCollection();
     protected abstract String getShareInfo();
 
 }

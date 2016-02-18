@@ -23,29 +23,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.api.DailyApi;
 import com.mummyding.app.leisure.database.cache.ICache;
-import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.StoryBean;
 import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Settings;
-import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.daily.DailyDetailsActivity;
-import com.mummyding.app.leisure.ui.support.WebViewLocalActivity;
 
 import com.mummyding.app.leisure.support.adapter.DailyAdapter.ViewHolder;
-import com.mummyding.app.leisure.ui.support.WebViewUrlActivity;
 
 
 /**
@@ -88,74 +81,28 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
                 bundle.putString(mContext.getString(R.string.id_title),storyBean.getTitle());
                 bundle.putString(mContext.getString(R.string.id_body),storyBean.getBody());
                 bundle.putString(mContext.getString(R.string.id_imageurl),storyBean.getLargepic());
+                bundle.putString(mContext.getString(R.string.id_small_image),storyBean.getImages()[0]);
                 bundle.putInt(mContext.getString(R.string.id_id),storyBean.getId());
+                if(isCollection){
+                    bundle.putBoolean(mContext.getString(R.string.id_collection),true);
+                }else {
+                    bundle.putBoolean(mContext.getString(R.string.id_collection), storyBean.isCollected() == 1 ? true : false);
+                }
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });
-
-/*
-        if(isCollection){
-            holder.collect_cb.setVisibility(View.GONE);
-            holder.text.setText(R.string.text_remove);
-            holder.text.setTextSize(20);
-            holder.text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
-            holder.text.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(holder.parentView, R.string.notify_remove_from_collection,Snackbar.LENGTH_SHORT).
-                            setAction(mContext.getString(R.string.text_ok), new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    if (mItems.contains(storyBean) == false){
-                                        return;
-                                    }
-                                    mCache.execSQL(DailyTable.updateCollectionFlag(storyBean.getId(), 0));
-                                    mCache.execSQL(DailyTable.deleteCollectionFlag(storyBean.getId()));
-                                    mItems.remove(position);
-                                    notifyDataSetChanged();
-                                }
-                            })
-                            .show();
-                }
-            });
-
-            return;
-        }
-
-
-        holder.collect_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                storyBean.setCollected(isChecked ? 1:0);
-                mCache.execSQL(DailyTable.updateCollectionFlag(storyBean.getId(), isChecked ? 1 : 0));
-                if(isChecked){
-                    mCache.addToCollection(storyBean);
-                }else{
-                    mCache.execSQL(DailyTable.deleteCollectionFlag(storyBean.getId()));
-                }
-            }
-        });
-        holder.collect_cb.setChecked(storyBean.isCollected() == 1 ? true:false);*/
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private View parentView;
         private TextView title;
         private SimpleDraweeView image;
-       // private TextView info;
-        //private CheckBox collect_cb;
-        //private TextView text;
         public ViewHolder(View itemView) {
             super(itemView);
             parentView = itemView;
             title = (TextView) parentView.findViewById(R.id.title);
             image = (SimpleDraweeView) parentView.findViewById(R.id.image);
-            //info = (TextView) parentView.findViewById(R.id.info);
-          /*  collect_cb = (CheckBox) parentView.findViewById(R.id.collect_cb);
-            if(isCollection) {
-                text = (TextView) parentView.findViewById(R.id.text);
-            }*/
         }
     }
 }

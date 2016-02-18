@@ -45,9 +45,11 @@ import android.widget.ProgressBar;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.mummyding.app.leisure.R;
+import com.mummyding.app.leisure.api.DailyApi;
 import com.mummyding.app.leisure.database.cache.cache.DailyCache;
 import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.DailyDetailsBean;
+import com.mummyding.app.leisure.model.daily.StoryBean;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.DisplayUtil;
 import com.mummyding.app.leisure.support.HttpUtil;
@@ -72,7 +74,7 @@ public class DailyDetailsActivity extends BaseDetailsActivity implements SensorE
     private String title;
     private String body;
     private DailyCache cache;
-
+    private StoryBean storyBean;
 
     @Override
     protected void onDataRefresh() {
@@ -91,10 +93,10 @@ public class DailyDetailsActivity extends BaseDetailsActivity implements SensorE
                 Utils.DLog(res);
                 Gson gson = new Gson();
                 dailyDetailsBean = gson.fromJson(res, DailyDetailsBean.class);
-                cache.execSQL(DailyTable.updateBodyContent(DailyTable.NAME,id,dailyDetailsBean.getBody()));
-                cache.execSQL(DailyTable.updateBodyContent(DailyTable.COLLECTION_NAME,id,dailyDetailsBean.getBody()));
-                cache.execSQL(DailyTable.updateLargePic(DailyTable.NAME,id,dailyDetailsBean.getImage()));
-                cache.execSQL(DailyTable.updateLargePic(DailyTable.COLLECTION_NAME,id,dailyDetailsBean.getImage()));
+                cache.execSQL(DailyTable.updateBodyContent(DailyTable.NAME,dailyDetailsBean.getTitle(),dailyDetailsBean.getBody()));
+                cache.execSQL(DailyTable.updateBodyContent(DailyTable.COLLECTION_NAME,dailyDetailsBean.getTitle(),dailyDetailsBean.getBody()));
+                cache.execSQL(DailyTable.updateLargePic(DailyTable.NAME,dailyDetailsBean.getTitle(),dailyDetailsBean.getImage()));
+                cache.execSQL(DailyTable.updateLargePic(DailyTable.COLLECTION_NAME,dailyDetailsBean.getTitle(),dailyDetailsBean.getImage()));
 
 
                 imageUrl = dailyDetailsBean.getImage();
@@ -113,11 +115,19 @@ public class DailyDetailsActivity extends BaseDetailsActivity implements SensorE
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
     }
     private void getData(){
+        storyBean = new StoryBean();
         url = getIntent().getStringExtra(getString(R.string.id_url));
         id = getIntent().getIntExtra(getString(R.string.id_id),0);
         body = getIntent().getStringExtra(getString(R.string.id_body));
         title = getIntent().getStringExtra(getString(R.string.id_title));
         imageUrl = getIntent().getStringExtra(getString(R.string.id_imageurl));
+        isCollected = getIntent().getBooleanExtra(getString(R.string.id_collection),false);
+
+        storyBean.setId(id);
+        storyBean.setBody(body);
+        storyBean.setTitle(title);
+        storyBean.setLargepic(imageUrl);
+        storyBean.setImages(new String[]{getIntent().getStringExtra(getString(R.string.id_small_image))});
 
     }
 
@@ -132,8 +142,20 @@ public class DailyDetailsActivity extends BaseDetailsActivity implements SensorE
     }
 
     @Override
+    protected void removeFromCollection() {
+        cache.execSQL(DailyTable.updateCollectionFlag(storyBean.getTitle(),0));
+        cache.execSQL(DailyTable.deleteCollectionFlag(storyBean.getTitle()));
+    }
+
+    @Override
+    protected void addToCollection() {
+        cache.execSQL(DailyTable.updateCollectionFlag(storyBean.getTitle(),1));
+        cache.addToCollection(storyBean);
+    }
+
+    @Override
     protected String getShareInfo() {
-        return getString(R.string.text_share_from)+"["+getString(R.string.app_name)+title+"]:"+url;
+        return "["+getString(R.string.app_name)+title+"]:"+ DailyApi.daily_story_base_url+id+"("+getString(R.string.text_share_from)+")";
     }
 
 
@@ -146,6 +168,7 @@ public class DailyDetailsActivity extends BaseDetailsActivity implements SensorE
                     displayNetworkError();
                     break;
                 case CONSTANT.ID_SUCCESS:
+
                 case CONSTANT.ID_FROM_CACHE:
                     // fix issue #13
                     if(HttpUtil.isWIFI == true || Settings.getInstance().getBoolean(Settings.NO_PIC_MODE, false) == false) {

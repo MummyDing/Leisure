@@ -78,7 +78,7 @@ public class StoryBean {
     }
 
     public void setCollected(int collected) {
-        isCollected = collected == 1 ? true:false;
+        isCollected = (collected == 1 ? true:false);
     }
 
 }

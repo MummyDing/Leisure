@@ -64,21 +64,21 @@ public class DailyTable {
             " set "+IS_COLLECTED+" =1 where "+TITLE+" in ( select "+TITLE+
             " from "+COLLECTION_NAME+")";
 
-    public static  String updateCollectionFlag(int id,int flag){
+    public static  String updateCollectionFlag(String title,int flag){
         return "update "+NAME+" set "+IS_COLLECTED+" ="+flag+" where "+
-                ID+"="+id;
+                TITLE+"="+"\'"+title+"\'";
     }
-    public static String updateBodyContent(String tableName,int id,String body){
+    public static String updateBodyContent(String tableName,String title,String body){
         // fix issue #9
         body = body.replaceAll("'","`");
         return "update "+tableName+" set "+BODY+" =\'"+body+"\' where "+
-                ID+"="+id;
+                TITLE+"="+"\'"+title+"\'";
     }
-    public static String updateLargePic(String tableName,int id,String imageUrl){
+    public static String updateLargePic(String tableName,String title,String imageUrl){
         return "update "+tableName+" set "+LARGEPIC+" =\'"+imageUrl+"\' where "+
-                ID+"="+id;
+                TITLE+"="+"\'"+title+"\'";
     }
-    public static String deleteCollectionFlag(int id){
-        return "delete from "+COLLECTION_NAME+" where +"+ID+"="+id;
+    public static String deleteCollectionFlag(String title){
+        return "delete from "+COLLECTION_NAME+" where +"+TITLE+"="+"\'"+title+"\'";
     }
 }
