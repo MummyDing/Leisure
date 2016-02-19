@@ -85,7 +85,7 @@ ICache---　缓存接口<br>
 1. [Version 1.0][7]
 2. [Version 1.1][8]
 3. [Version 2.0][9]
-
+4. [Version 2.1][10]
 # 应用截图
 
 <img src="/ScreenShots/home.png" width="200" height="380"/> 
@@ -102,3 +102,4 @@ ICache---　缓存接口<br>
 [7]: https://github.com/MummyDing/Leisure/archive/v1.0.zip
 [8]: https://github.com/MummyDing/Leisure/archive/v1.1.zip
 [9]: https://github.com/MummyDing/Leisure/archive/v2.0.zip
+[10]: https://github.com/MummyDing/Leisure/archive/v2.1.zip
