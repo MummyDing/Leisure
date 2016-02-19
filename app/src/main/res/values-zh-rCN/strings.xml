@@ -72,4 +72,11 @@
     <string name="text_demo_video">演示视频</string>
     <string name="text_app_intro">应用简介</string>
     <string name="notify_remove_from_collection">成功从收藏移除!</string>
+    <string name="text_swipe_to_return">滑动返回</string>
+    <string name="text_share_from">分享自</string>
+    <string name="text_left_only">仅左边有效</string>
+    <string name="text_hot"> 热度 </string>
+    <string name="hint_share_to">分享到</string>
+    <string name="notify_add_to_collection">成功添加到收藏</string>
+    <string name="text_anywhere">任意位置有效</string>
 </resources>

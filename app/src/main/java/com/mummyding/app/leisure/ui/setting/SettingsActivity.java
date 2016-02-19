@@ -33,8 +33,9 @@ import com.mummyding.app.leisure.R;
 import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.support.Utils;
+import com.mummyding.app.leisure.ui.support.SwipeBackActivity;
 
-public class SettingsActivity extends AppCompatActivity implements SensorEventListener {
+public class SettingsActivity extends SwipeBackActivity implements SensorEventListener {
 
     private Toolbar toolbar;
     private int mLang = -1;
@@ -57,7 +58,7 @@ public class SettingsActivity extends AppCompatActivity implements SensorEventLi
         }else{
             this.setTheme(R.style.DayTheme);
         }
-
+        Settings.swipeID = Settings.getInstance().getInt(Settings.SWIPE_BACK,0);
 
         setContentView(R.layout.activity_settings);
 

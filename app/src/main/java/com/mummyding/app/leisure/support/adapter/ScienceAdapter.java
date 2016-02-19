@@ -78,7 +78,7 @@ public class ScienceAdapter extends BaseListAdapter<ArticleBean,ViewHolder>{
             holder.image.setImageURI(Uri.parse(articleBean.getImage_info().getUrl()));
         }
 
-        holder.comment.setText(String.valueOf(articleBean.getReplies_count()));
+        holder.comment.setText(" "+articleBean.getReplies_count());
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

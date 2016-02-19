@@ -41,9 +41,10 @@ import com.mummyding.app.leisure.support.CONSTANT;
 import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.support.adapter.PagerAdapter;
+import com.mummyding.app.leisure.ui.support.SwipeBackActivity;
 import com.mummyding.app.leisure.ui.support.WebViewUrlActivity;
 
-public class ReadingDetailsActivity extends AppCompatActivity implements SensorEventListener {
+public class ReadingDetailsActivity extends SwipeBackActivity implements SensorEventListener {
     public static BookBean bookBean;
     private ViewPager viewPager;
     private PagerAdapter adapter;

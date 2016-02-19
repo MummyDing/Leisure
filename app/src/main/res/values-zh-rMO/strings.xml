@@ -67,4 +67,11 @@
     <string name="text_share_info">歡迎使用"閒暇",它集"知乎日報"、"果殼科學人"\"新華網新聞"、以及"豆瓣圖書"於一體,滿足你日常休閒閱讀需要,你可以到　http://coolapk.com/apk/com.mummyding.app.leisure下載</string>
     <string name="text_demo_video">演示視訊</string>
     <string name="text_app_intro">應用簡介</string>
+    <string name="text_swipe_to_return">滑動返回</string>
+    <string name="text_share_from">分享自</string>
+    <string name="text_left_only">僅左邊有效</string>
+    <string name="hint_share_to">分享到</string>
+    <string name="text_anywhere">任意位置有效</string>
+    <string name="notify_add_to_collection">成功添加到收藏</string>
+    <string name="text_hot">熱度</string>
 </resources>

@@ -38,6 +38,7 @@ public class Settings {
     public static boolean isAutoRefresh = false;
     public static boolean isExitConfirm = true;
     public static int searchID = 0;
+    public static int swipeID = 0;
 
     public static final String XML_NAME = "settings";
 
@@ -57,6 +58,7 @@ public class Settings {
 
     public static final String SEARCH = "search";
 
+    public static final String SWIPE_BACK = "swipe_back";
     private static Settings sInstance;
 
     private SharedPreferences mPrefs;

@@ -39,7 +39,7 @@ import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.support.Utils;
 
-public abstract class BaseWebViewActivity extends AppCompatActivity {
+public abstract class BaseWebViewActivity extends SwipeBackActivity {
     protected WebView webView;
     protected ProgressBar progressBar;
     protected boolean isLoading = true;

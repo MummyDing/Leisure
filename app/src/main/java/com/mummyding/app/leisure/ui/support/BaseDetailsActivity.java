@@ -49,7 +49,7 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public abstract class BaseDetailsActivity extends AppCompatActivity {
+public abstract class BaseDetailsActivity extends SwipeBackActivity {
 
     protected Toolbar toolbar;
     protected WebView contentView;
@@ -79,7 +79,6 @@ public abstract class BaseDetailsActivity extends AppCompatActivity {
         }else{
             this.setTheme(R.style.DayTheme);
         }
-
     }
 
     @Override

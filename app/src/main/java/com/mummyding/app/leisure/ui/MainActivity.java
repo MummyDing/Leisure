@@ -94,11 +94,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //Settings
         Settings.isShakeMode = mSettings.getBoolean(Settings.SHAKE_TO_RETURN, true);
         Settings.searchID = mSettings.getInt(Settings.SEARCH, 0);
+        Settings.swipeID = mSettings.getInt(Settings.SWIPE_BACK,0);
         Settings.isAutoRefresh = mSettings.getBoolean(Settings.AUTO_REFRESH, false);
         Settings.isExitConfirm = mSettings.getBoolean(Settings.EXIT_CONFIRM, true);
         Settings.isNightMode = mSettings.getBoolean(Settings.NIGHT_MODE, false);
         Settings.noPicMode = mSettings.getBoolean(Settings.NO_PIC_MODE, false);
-
 
         // change Brightness
         if(mSettings.isNightMode && Utils.getSysScreenBrightness() > CONSTANT.NIGHT_BRIGHTNESS){

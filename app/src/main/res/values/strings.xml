@@ -60,8 +60,16 @@
         <item>@string/text_search_by_category</item>
     </string-array>
 
+    <string-array name="swipe_back">
+        <item>@string/text_anywhere</item>
+        <item>@string/text_left_only</item>
+    </string-array>
+
     <string name="text_search_by_keyword">Search By Keyword</string>
     <string name="text_search_by_category">Search By Category</string>
+
+    <string name="text_left_only">Left Only</string>
+    <string name="text_anywhere">Anywhere</string>
 
     <string name="text_clear_cache_successful">Cache Clear Successfully!</string>
     <string name="text_exit_confirm">Exit Confirm</string>
@@ -101,5 +109,7 @@
     <string name="notify_add_to_collection">add to collection successful</string>
     <string name="id_small_image">id_small_image</string>
     <string name="id_science">id_science</string>
-    <string name="text_hot">hot</string>
+    <string name="text_hot"> hot </string>
+    <string name="id_swipe_back">swipe_back</string>
+    <string name="text_swipe_to_return">Swipe to Return</string>
 </resources>

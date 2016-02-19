@@ -8,10 +8,9 @@
         <Preference
             android:key="search"
             android:title="@string/text_search"/>
-        <CheckBoxPreference
-            android:key="night_mode"
-            android:title="@string/text_night_mode"
-            android:checked="false"/>
+        <Preference
+            android:key="@string/id_swipe_back"
+            android:title="@string/text_swipe_to_return"/>
         <CheckBoxPreference
             android:key="shake_to_return"
             android:title="@string/text_shake_to_return"
@@ -21,6 +20,10 @@
             android:title="@string/text_exit_confirm"
             android:summary="@string/text_exit_confirm_summary"
             android:checked="true"/>
+        <CheckBoxPreference
+            android:key="night_mode"
+            android:title="@string/text_night_mode"
+            android:checked="false"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/text_network">
