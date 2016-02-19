@@ -79,4 +79,6 @@
     <string name="hint_share_to">分享到</string>
     <string name="notify_add_to_collection">成功添加到收藏</string>
     <string name="text_anywhere">任意位置有效</string>
+    <string name="text_day_mode">日间模式</string>
+    <string name="hint_fail_check_update">获取版本信息失败，请检查网络设置</string>
 </resources>

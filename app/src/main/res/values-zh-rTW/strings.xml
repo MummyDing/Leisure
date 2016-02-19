@@ -74,4 +74,6 @@
     <string name="text_anywhere">任意位置有效</string>
     <string name="notify_add_to_collection">成功添加到收藏</string>
     <string name="text_hot">熱度</string>
+    <string name="text_day_mode">日間模式</string>
+    <string name="hint_fail_check_update">獲取版本資訊失敗，請檢查網路設定</string>
 </resources>

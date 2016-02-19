@@ -175,11 +175,6 @@ public abstract class BaseDetailsActivity extends SwipeBackActivity {
         });
 
 
-        Class clsWebSettingsClassic = null;
-
-
-
-
          /*
          cache web page
          */
@@ -263,8 +258,6 @@ public abstract class BaseDetailsActivity extends SwipeBackActivity {
             }
         });
     }
-
-
 
 
     protected void setDefaultColor(){

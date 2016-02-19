@@ -36,13 +36,14 @@ import com.mummyding.app.leisure.support.HttpUtil;
 import com.mummyding.app.leisure.support.Settings;
 import com.mummyding.app.leisure.support.Utils;
 import com.mummyding.app.leisure.ui.setting.SettingsFragment;
+import com.mummyding.app.leisure.ui.support.SwipeBackActivity;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
-public class AboutActivity extends AppCompatActivity implements SensorEventListener {
+public class AboutActivity extends SwipeBackActivity implements SensorEventListener {
 
     private Toolbar toolbar;
     private SensorManager mSensorManager;

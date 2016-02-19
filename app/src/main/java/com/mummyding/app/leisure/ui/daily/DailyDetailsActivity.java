@@ -155,7 +155,7 @@ public class DailyDetailsActivity extends BaseDetailsActivity implements SensorE
 
     @Override
     protected String getShareInfo() {
-        return "["+getString(R.string.app_name)+title+"]:"+ DailyApi.daily_story_base_url+id+"("+getString(R.string.text_share_from)+")";
+        return "["+title+"]:"+ DailyApi.daily_story_base_url+id+" ("+getString(R.string.text_share_from)+getString(R.string.app_name)+")";
     }
 
 

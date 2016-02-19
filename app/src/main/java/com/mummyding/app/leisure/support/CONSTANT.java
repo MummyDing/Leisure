@@ -28,7 +28,7 @@ public class CONSTANT {
 
     public static final String VERSION_URL ="https://raw.githubusercontent.com/MummyDing/Leisure/master/currentVersion.txt"; //"https://raw.githubusercontent.com/MummyDing/Leisure/master/currentVersion.txt";
 
-    public static final String CURRENT_VERSION = "2.0";
+    public static final String CURRENT_VERSION = "2.1";
 
     public static final String DEMO_VIDEO_URL = "http://v.qq.com/page/l/e/8/l0176duy7e8.html";
 

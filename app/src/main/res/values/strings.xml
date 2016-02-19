@@ -91,7 +91,7 @@
     <string name="text_attention">Attention</string>
     <string name="text_attention_summary">This app is not allowed for COMMERCIAL Purposes</string>
     <string name="text_license">License</string>
-    <string name="leisure_version">Leisure Version 2.0</string>
+    <string name="leisure_version">Leisure Version 2.1</string>
     <string name="notify_current_is_latest">Current Version is the latest Version</string>
     <string name="notify_find_new_version">"Find new Version "</string>
     <string name="notif_info_copied">Info copied to Clipboard! You can paste it to an edit area</string>
@@ -112,4 +112,6 @@
     <string name="text_hot"> hot </string>
     <string name="id_swipe_back">swipe_back</string>
     <string name="text_swipe_to_return">Swipe to Return</string>
+    <string name="text_day_mode">Day Mode</string>
+    <string name="hint_fail_check_update">Fail to get version info,please check your network setting</string>
 </resources>

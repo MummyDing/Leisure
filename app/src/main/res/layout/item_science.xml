@@ -26,6 +26,7 @@ card_view:cardPreventCornerOverlap="true">
         android:orientation="vertical">
         <TextView
             android:id="@+id/title"
+            android:textColor="?attr/textColor"
             android:textSize="20sp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
@@ -45,12 +46,14 @@ card_view:cardPreventCornerOverlap="true">
                 android:src="@drawable/ic_comment"
                 />
             <TextView
+                android:textColor="?attr/textLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_hot"
                 android:layout_marginLeft="5dp"/>
             <TextView
                 android:id="@+id/comment"
+                android:textColor="?attr/textLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical" />

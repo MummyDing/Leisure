@@ -12,7 +12,7 @@
             android:key="@string/id_swipe_back"
             android:title="@string/text_swipe_to_return"/>
         <CheckBoxPreference
-            android:key="shake_to_return"
+            android:key="shake_to_return_new"
             android:title="@string/text_shake_to_return"
             android:checked="true"/>
         <CheckBoxPreference

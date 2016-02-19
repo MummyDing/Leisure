@@ -42,7 +42,7 @@ public class Settings {
 
     public static final String XML_NAME = "settings";
 
-    public static final String SHAKE_TO_RETURN = "shake_to_return";
+    public static final String SHAKE_TO_RETURN = "shake_to_return_new";
 
     public static final String NO_PIC_MODE = "no_pic_mode";
 

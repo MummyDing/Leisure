@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         //Settings
-        Settings.isShakeMode = mSettings.getBoolean(Settings.SHAKE_TO_RETURN, true);
+        Settings.isShakeMode = mSettings.getBoolean(Settings.SHAKE_TO_RETURN, false);
         Settings.searchID = mSettings.getInt(Settings.SEARCH, 0);
         Settings.swipeID = mSettings.getInt(Settings.SWIPE_BACK,0);
         Settings.isAutoRefresh = mSettings.getBoolean(Settings.AUTO_REFRESH, false);
@@ -183,7 +183,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         new PrimaryDrawerItem().withName(R.string.collection).withIcon(R.mipmap.ic_collect_grey).withIdentifier(R.mipmap.ic_collect_grey)
                                 .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
                         new SectionDrawerItem().withName(R.string.app_name).withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_color)),
-                        new SecondaryDrawerItem().withName(R.string.text_night_mode).withIcon(R.mipmap.ic_night).withIdentifier(R.mipmap.ic_night)
+                        new SecondaryDrawerItem().withName(Settings.isNightMode == true ? R.string.text_day_mode: R.string.text_night_mode)
+                                .withIcon(Settings.isNightMode == true ? R.mipmap.ic_day_white:R.mipmap.ic_night).withIdentifier(R.mipmap.ic_night)
                                 .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white) : ContextCompat.getColor(this, R.color.text_light)),
                         new SecondaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_setting).withIdentifier(R.mipmap.ic_setting)
                                 .withTextColor(Settings.isNightMode ? ContextCompat.getColor(this, R.color.white):ContextCompat.getColor(this,R.color.text_light)),

@@ -112,7 +112,7 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
             HttpUtil.enqueue(request, new Callback() {
                 @Override
                 public void onFailure(Request request, IOException e) {
-                    Snackbar.make(getView(), "Fail to get version info,please check your network setting", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), R.string.hint_fail_check_update, Snackbar.LENGTH_SHORT).show();
                     handle.sendEmptyMessage(1);
                 }
 
