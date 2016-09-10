@@ -41,7 +41,7 @@ import com.mummyding.app.leisure.ui.support.BaseListFragment;
 public class SearchBooksActivity extends AppCompatActivity implements SensorEventListener {
 
     private Toolbar toolbar;
-    private String url;
+    private static String url;
     private int mLang = -1;
 
     private SensorManager mSensorManager;
@@ -92,7 +92,7 @@ public class SearchBooksActivity extends AppCompatActivity implements SensorEven
         transaction.commit();
     }
 
-    class BookListFragment extends BaseListFragment{
+    public static class BookListFragment extends BaseListFragment{
 
         @Override
         protected boolean setHeaderTab() {

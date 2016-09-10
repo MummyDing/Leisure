@@ -9,33 +9,33 @@
     <string name="about">About</string>
     <string name="shake">Shake</string>
     <string name="text_ebook">EBook</string>
-    <string name="id_pos" translatable="false">position</string>
-    <string name="id_url" translatable="false">url</string>
-    <string name="id_html_content" translatable="false">content</string>
+    <string name="id_pos">position</string>
+    <string name="id_url">url</string>
+    <string name="id_html_content">content</string>
     <string name="daily">Daily</string>
     <string name="Text_Net_Exception">Network Exception</string>
-    <string name="id_book" translatable="false">book</string>
+    <string name="id_book">book</string>
     <string name="text_noinfo">\n\n\n\n\t\t\t\t\t\t\t\t\tSorry,No Message Here</string>
     <string name="text_debug_data">"Debug Data"</string>
     <string name="text_pubdate">"Publish Date "</string>
     <string name="id_pages">"Page "</string>
     <string name="text_price">"Price "</string>
     <string name="text_search">Search</string>
-    <string name="id_search_text" translatable="false">search_text</string>
+    <string name="id_search_text">search_text</string>
     <string name="text_search_result">Search Result</string>
     <string name="text_ok">OK</string>
     <string name="text_search_books">"  Search Books"</string>
-    <string name="id_category" translatable="false">category</string>
+    <string name="id_category">category</string>
     <string name="text_collection">Collection</string>
     <string name="text_refresh_success">Refresh Successfully</string>
     <string name="notify_remove_from_collection">Remove it from collection successful!!</string>
-    <string name="id_collection" translatable="false">Collection</string>
+    <string name="id_collection">Collection</string>
     <string name="author_email">MummyDing@outlook.com</string>
     <string name="author_name">MummyDing</string>
     <string name="collection">Collection</string>
     <string name="pages">Page　</string>
     <string name="text_language">Language</string>
-    <string name="id_language">language</string>
+    <string name="id_language" translatable="false">language</string>
     <string name="text_preference">Preference</string>
     <string name="text_auto_refresh">Auto Refresh</string>
     <string name="text_auto_refresh_summary">Load data from network automatically if WIFI is connected</string>
@@ -52,7 +52,6 @@
     <string-array name="langs" translatable="false">
         <item>English</item>
         <item>简体中文</item>
-        <item>繁體中文</item>
     </string-array>
 
     <string-array name="search">
@@ -81,36 +80,36 @@
     <string name="text_good_job">Good Job</string>
     <string name="text_good_job_summary">Give me a star at https://github.com/MummyDing/Leisure</string>
     <string name="text_blog">Blog</string>
-    <string name="author_blog">http://blog.csdn.net/mummyding</string>
+    <string name="author_blog" translatable="false">mummyding.github.io</string>
     <string name="text_author_github">Author GitHub</string>
-    <string name="author_github">https://github.com/MummyDing</string>
+    <string name="author_github" translatable="false">https://github.com/MummyDing</string>
     <string name="text_copyright">Copyright</string>
     <string name="text_data">Data</string>
     <string name="text_email">E-Mail</string>
     <string name="text_data_summary">The data are from public API,all rights belong to original author</string>
     <string name="text_attention">Attention</string>
     <string name="text_attention_summary">This app is not allowed for COMMERCIAL Purposes</string>
-    <string name="text_license">License</string>
-    <string name="leisure_version">Leisure Version 2.1</string>
+    <string name="text_license" translatable="false">License</string>
+    <string name="leisure_version" translatable="false">Leisure Version 2.2</string>
     <string name="notify_current_is_latest">Current Version is the latest Version</string>
     <string name="notify_find_new_version">"Find new Version "</string>
     <string name="notif_info_copied">Info copied to Clipboard! You can paste it to an edit area</string>
-    <string name="project_url">https://github.com/MummyDing/Leisure/</string>
+    <string name="project_url" translatable="false">https://github.com/MummyDing/Leisure/</string>
     <string name="text_share_info">Welcome to use Leisure,it contains Zhihu Daily,Guokr Scientific,XinhuaNet News and Douban Books.You can download it at http://coolapk.com/apk/com.mummyding.app.leisure</string>
     <string name="text_demo_video">Demo Video</string>
     <string name="text_app_intro">App Introduction</string>
-    <string name="id_title">title</string>
-    <string name="id_body">body</string>
-    <string name="id_imageurl">imageUrl</string>
-    <string name="id_id">id</string>
+    <string name="id_title" translatable="false">title</string>
+    <string name="id_body" translatable="false">body</string>
+    <string name="id_imageurl" translatable="false">imageUrl</string>
+    <string name="id_id" translatable="false">id</string>
     <string name="hint_share_to">Share to...</string>
-    <string name="share">share</string>
+    <string name="share" translatable="false">share</string>
     <string name="text_share_from">"share from "</string>
     <string name="notify_add_to_collection">add to collection successful</string>
-    <string name="id_small_image">id_small_image</string>
-    <string name="id_science">id_science</string>
+    <string name="id_small_image" translatable="false">id_small_image</string>
+    <string name="id_science" translatable="false">id_science</string>
     <string name="text_hot"> hot </string>
-    <string name="id_swipe_back">swipe_back</string>
+    <string name="id_swipe_back" translatable="false">swipe_back</string>
     <string name="text_swipe_to_return">Swipe to Return</string>
     <string name="text_day_mode">Day Mode</string>
     <string name="hint_fail_check_update">Fail to get version info,please check your network setting</string>

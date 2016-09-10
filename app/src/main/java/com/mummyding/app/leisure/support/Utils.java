@@ -207,10 +207,6 @@ public class Utils {
                 language = "zh";
                 country = "CN";
                 break;
-            case 2:
-                language = "zh";
-                country = "TW";
-                break;
             default:
                 language = "en";
                 country = "US";
