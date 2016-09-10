@@ -24,6 +24,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
+    compile files('libs/jsoup-1.8.3.jar')
     compile 'com.ogaclejapan.smarttablayout:library:1.4.2@aar'
     compile('com.mikepenz:materialdrawer:4.4.6@aar') {
         transitive = true

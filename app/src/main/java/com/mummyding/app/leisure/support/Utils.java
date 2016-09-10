@@ -29,6 +29,7 @@ import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -41,6 +42,9 @@ import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.database.table.NewsTable;
 import com.mummyding.app.leisure.database.table.ReadingTable;
 import com.mummyding.app.leisure.database.table.ScienceTable;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 
 import org.w3c.dom.Document;
@@ -269,5 +273,14 @@ public class Utils {
         }
     }
 
+    public static void getRawHtmlFromUrl(String url, Callback callback) {
+        if (callback == null || TextUtils.isEmpty(url)) {
+            return ;
+        }
+        Request.Builder builder = new Request.Builder();
+        builder.url(url);
+        Request request = builder.build();
+        HttpUtil.enqueue(request, callback);
+    }
 
 }

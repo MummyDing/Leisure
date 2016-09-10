@@ -60,7 +60,9 @@ import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class DailyDetailsActivity extends BaseDetailsActivity implements SensorEventListener {
 
@@ -181,7 +183,7 @@ public class DailyDetailsActivity extends BaseDetailsActivity implements SensorE
                             topImage.setTranslationY(Math.max(-scrollY / 2, -DisplayUtil.dip2px(getBaseContext(), 170)));
                         }
                     });
-                    contentView.loadDataWithBaseURL("file:///android_asset/", "<link rel=\"stylesheet\" type=\"text/css\" href=\"dailycss.css\" />"+body, "text/html", "utf-8", null);
+                    contentView.loadDataWithBaseURL("file:///android_asset/", "<link rel=\"stylesheet\" type=\"text/css\" href=\"dailycss.css\" />"+ body, "text/html", "utf-8", null);
                     hideLoading();
                     break;
             }

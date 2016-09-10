@@ -1,0 +1,146 @@
+body,div,p,h1,h2,h3,em,span,a,td,form,input,select,textarea,ul,li,img{margin:0;padding:0;font-style:normal;}
+body {font-size:14px;color:#333;}
+ul,ol {list-style:none;}
+a,img,table{border:none;}
+table {border-collapse:collapse; border-spacing:0px;}
+a{color:#0066cc;text-decoration:none;font-size:14px;}
+input,select,textarea{vertical-align:middle;}
+.index_title{height:36px;padding-top:8px;line-height:36px;border-top:1px solid #feb0ae;border-bottom:1px solid #b30000;background:url(/images/index_title.gif) repeat-x left top;text-align:center;}
+.index_title a img {width:232px; height:30px;}
+.tabNav{height:44px; line-height:40px;}
+.tabNav td{height:44px;background:url(/images/navBg.png) repeat-x;}
+.tabNav td a{font-size:16px;}
+.nav{display:block;height:44px;background:url(/images/nav.png) no-repeat left top;text-align:center;color:#000;font-weight:bold;}
+.tabNav .on{background:url(/images/on.png) repeat-x;}
+.tabNav .on .nav {margin-left:-2px;}
+.tabNav .on .navInner{display:block;height:44px; background:url(/images/navInner.jpg) no-repeat center top; font-size:16px;}
+.index_search {border-bottom:1px solid #afafaf;}
+.searchNav{padding:4px 10px 0px 10px;background:#f4f4f4 url(/images/searchNav.png) repeat-x;}
+.searchNav .sort .ico{display:block; height:75px; text-align:center;background:none;}
+.searchNav .sort .ico .sortImg {display:block; height:35px; background:none;}
+.searchNav .sort .ico .sortImg img {vertical-align:bottom;}
+.searchNav .sort .ico .sortName {display:inline-block; width:55px; height:20px; line-height:20px; color:#034acc; font-weight:bold; white-space:nowrap;}
+.searchNav .sort .on .sortName{color:#fff; background:url(/images/sort_a.gif) no-repeat left top;}
+.index_input {margin-bottom:10px; height:44px; text-align:center;}
+.index_input .field {height:24px; width:201px; padding:10px; border:none; font-size:16px; background:url(/images/field.gif) no-repeat 0px 0px; font-size:16px; overflow:hidden;}
+.index_input .btn{width:45px; height:44px; border:none; cursor:pointer; background:url(/images/btn.gif) no-repeat;}
+.tuijian {padding-bottom:15px; line-height:1.8; text-align:center;}
+.box {padding:9px 7px 5px 7px;}
+.boxHd {height:29px; padding-left:15px; background:url(/images/boxHd.gif) no-repeat left top; line-height:29px;}
+.boxHdBg {height:29px; padding-right:5px; background:url(/images/boxHdBg.gif) no-repeat right top;}
+.boxHdInner {height:29px; color:#fff; font-weight:bold;background:url(/images/boxHdInner.gif) repeat-x;}
+.boxBd {border:1px solid #afafaf;border-top:none;background-color:#f2f2f2;}
+.boxBd .list td {height:70px;border-top:1px solid #afafaf; background:url(/images/list_td.gif) repeat-x left bottom;}
+.boxBd .list .img {width:48px; height:67px; padding:3px 0px 0px 12px;}
+.boxBd .list .img a {display:block; border:1px solid #fff; width:46px; height:63px;}
+.boxBd .list .img a img {width:46px; height:63px;}
+.bookinfo {padding-left:8px;}
+.bookinfo a {font-weight:bold;}
+.more {height:27px; padding-right:26px;background:url(/images/list_td.gif) repeat-x left bottom; border-top:1px solid #afafaf; line-height:27px; text-align:right;}
+.more a {color:#000; font-weight:bold;}
+.notice .boxBd {padding:5px 0px 0px 27px; border-top:1px solid #afafaf;}
+.notice .boxBd li {line-height:24px;}
+.notice .more {border:none; background:none;}
+.notice .boxBd li span {font-weight:bold; margin-right:5px; color:#0066cc;}
+.read .boxBd{padding-top:5px; padding-bottom:40px;}
+.slidbook {width:283px; margin:0px auto;}
+.slidbook .triggerLeft,.slidbook .triggerRight {display:block; float:left; width:40px; height:54px; margin-top:92px; cursor:pointer;}
+.slidbook .triggerLeft {margin-right:17px;}
+.booklist {position:relative; float:left; width:171px; height:280px; margin-right:15px; overflow:hidden;}
+.book {position:absolute; left:0px; top:0px; height:280px;}
+.book li {float:left;width:171px; height:280px; text-align:center;}
+.book .bookCover {width:160px; height:226px; margin-bottom:10px; padding:4px 4px 4px 5px; border:1px solid #bcbcbc; background-color:#fff;}
+.book .bookCover img {width:160px; height:226px;}
+.book .bookname {display:block; width:171px; height:22px; line-height:22px; overflow:hidden; font-weight:bold; font-size:16px;}
+.read .boxBd p {padding:0px 18px; line-height:1.6;}
+.footer {margin-top:10px; text-align:center; font-size:14px;}
+.footer a {color:#0066cc; font-weight:bold;}
+.footer span {color:#999;}
+
+.moreBtn {border-top:4px solid #00a0f1; padding:0px 7px 5px 0px; height:21px; background-color:#fff; text-align:right;}
+.moreBtn a {float:right; display:block; width:34px; height:16px; padding-bottom:5px; padding-left:21px; line-height:16px; text-align:center; color:#fff;}
+.moreBtn .open {background:url(/images/moreBtn_open.gif) no-repeat left top;}
+.moreBtn .close {background:url(/images/moreBtn_close.gif) no-repeat left top;}
+.result {display:block; color:#333; border-bottom:1px solid #e4e4e4; padding:10px 5px 8px 5px; line-height:1.6;}
+.resultTitle {font-size:16px;}
+.bold {font-weight:bold; font-size:14px;}
+.red {color:#cc0101;}
+.resultDetail {padding-left:12px;}
+.gray {color:#666;}
+.person {padding:20px 0px;}
+.person table {margin-bottom:70px;}
+.person td a {color:#000; font-weight:bold;}
+.quit {height:60px; padding-right:30px;}
+.quit a {float:right; width:60px; display:block; text-align:center; color:#000; font-weight:bold;}
+.pagenum {padding:0px 5px; margin:20px 0px 15px 0px; height:40px; line-height:40px;}
+.pagenum td {height:40px;}
+.leftbtn,.rightbtn {display:block; width:40px; height:40px;}
+.leftbtn img,.rightbtn img {width:40px; height:40px;}
+.num {text-align:center; vertical-align:top;}
+.num a {display:inline-block; width:31px; height:31px; margin:0px 3px; text-align:center; line-height:31px; background-color:#ebebeb; vertical-align:middle;}
+.num .on {color:#000; font-weight:bold; cursor:default; background:none;}
+.way {height:30px; text-align:center;}
+.way label {margin-right:5px;}
+.way input {vertical-align:top;}
+.action {position:relative; display:block; padding-left:45px; padding-right:37px; margin-bottom:6px; background-color:#f4f4f4; height:38px; line-height:38px; border:1px solid #c0b8a6; color:#000; font-weight:bold; font-size:16px;}
+.leftBg {position:absolute; left:-1px; top:-1px; display:block; width:5px; height:40px; background:url(/images/leftBg.gif) no-repeat left top;}
+.rightBg {position:absolute; width:36px; height:40px; top:-1px; right:-1px;background:url(/images/rightBg.gif) no-repeat left top;}
+.detail {padding:12px 20px 0px 20px;background:#f4f4f4 url(/images/searchNav.png) repeat-x;}
+.name {margin-bottom:5px;font-size:16px; font-weight:bold;}
+.sheet {padding:10px; margin:25px 0px; background-color:#f2f2f2;}
+.sheet table {border-left:1px solid #c9c9c9;border-top:1px solid #c9c9c9;}
+.sheet table td,.sheet table th {padding:3px 0px; height:28px; border-right:1px solid #c9c9c9;border-bottom:1px solid #c9c9c9;}
+.sheet table th {text-align:center;}
+.sheet table td {padding-left:5px; background-color:#fff;}
+.doIt {margin-bottom:100px; text-align:center; font-weight:bold;}
+.doIt a {margin:0px 20px; font-size:16px;}
+.back {text-align:center; font-weight:bold;}
+.bottomSearch {padding:9px 0px; margin:20px 0px 10px 0px; text-align:center; height:32px; background-color:#efefef;}
+.bottomText {width:160px; height:20px; padding:5px 10px; border:1px solid #d3d3d3; font-size:16px; margin-right:6px;}
+.bottomBtn {width:52px; height:32px; cursor:pointer; border:none; background:url(/images/bottomBtn.gif) no-repeat left top; color:#fff; font-weight:bold;}
+.tool {padding-left:5px;height:31px;background:#f4f4f4 url(/images/searchNav.png) repeat-x; line-height:31px; border-bottom:1px solid #cecece;color:#034acc;}
+.tool a {display:inline-block; height:31px; padding:0px 5px;}
+.newsBox {padding:12px 15px 0px 15px;text-align:center;}
+.newsBoxHd {margin-bottom:5px;font-size:16px; font-weight:bold;}
+.newsBox p {margin-top:20px;text-indent:2em; text-align:left;line-height:1.6;}
+.newsPic img {width:242px; height:160px;}
+.newsPic {margin-top:10px;}
+.sucess {margin:45px 0px 20px 0px;font-size:18px;font-weight:bold;text-align:center;}
+.weizhi {margin-bottom:50px;color:#009900;text-align:center;}
+.weizhi span {font-size:18px; font-weight:bold;}
+.manage {padding:4px 0px 0px 0px; margin-bottom:45px; border-bottom:none;}
+.slidNav {height:28px; padding-top:6px; line-height:28px; border-bottom:1px solid #afafaf; text-align:center;}
+.slidNav a {display:inline-block; width:80px; height:28px; margin:0px 10px; text-align:center; font-weight:bold; color:#000;}
+.slidNav .on {position:relative; margin-bottom:-1px; height:29px; background:url(/images/slidNav.gif) no-repeat left top;}
+.slidDetail {background-color:#fff;}
+.item {padding:15px 0px 5px 17px; border-bottom:1px solid #d8d8d8; line-height:1.6;}
+.green {color:#009900;}
+.itemName {font-size:16px; font-weight:bold;}
+.itemIco {display:inline-block; width:16px; height:15px; margin-right:6px;}
+.daoqi {background:url(/images/daoqi.gif) no-repeat left top;}
+.otherInfo {padding-left:22px;}
+.manage .back {background-color:#fff; padding-top:25px;}
+.yuyue {padding-left:40px;}
+.newsBox .action {text-align:left; font-weight:normal; font-size:14px;}
+.newsBox h2 {margin-bottom:10px;font-size:16px;}
+.newsBox p {margin:0px 0px 25px 0px; text-indent:0px;}
+.book-name {margin-bottom:10px;font-size:18px; font-weight:bold; text-align:left;}
+.bookimg {width:71px; height:100px;}
+.bookimg img {width:71px; height:100px;}
+.bookDetail {padding-left:10px; text-align:left;}
+.searchTab {height:25px; padding-left:15px; border-bottom:1px solid #00A0F1;}
+.searchTab a {display:inline-block; width:70px; height:24px; margin-right:5px; text-align:center; line-height:24px;}
+.searchTab .on {position:relative;height:25px; line-height:25px; margin-bottom:-1px; border:1px solid #00A0F1; border-bottom:none; background-color:#d7ebff; color:#000; font-weight:bold;}
+.resultInfo {padding-left:15px; line-height:26px; background-color:#d7ebff;}
+
+/*12.2*/
+.href_btn {
+background: url("/sms/images/againBtn.gif") no-repeat scroll left top transparent;color: #FFFFFF;border:medium none;
+display: inline-block;font-size: 14px;height: 32px; line-height: 32px;text-align: center;width: 100px;}
+.gcDetail {padding:5px;}
+.gcDetail .boxBd {padding:5px; background-color:#fff;}
+.detailList {padding:1px 0px; margin-bottom:3px; color:#505050;}
+.detailList strong {margin-right:5px; color:#333;}
+.sheet {padding:0px; margin:10px 0px;}
+.sheetBtn {text-align:center; padding-top:15px;}
+.sheetBtn a {display:inline-block; width:70px; height:26px; margin:0px 7px; background:url(../images/sheetBtn.gif) no-repeat left top; line-height:26px; color:#fff; text-align:center; font-size:14px; font-weight:bold;}

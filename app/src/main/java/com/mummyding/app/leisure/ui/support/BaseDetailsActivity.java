@@ -16,6 +16,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +52,7 @@ import java.lang.reflect.Method;
 
 public abstract class BaseDetailsActivity extends SwipeBackActivity {
 
+    private static final String TAG = "BaseDetailsActivity";
     protected Toolbar toolbar;
     protected WebView contentView;
     protected SimpleDraweeView topImage;
@@ -148,7 +150,13 @@ public abstract class BaseDetailsActivity extends SwipeBackActivity {
         });
         getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.top_gradient));
         contentView = (WebView) findViewById(R.id.content_view);
+
         contentView.getSettings().setJavaScriptEnabled(true);
+
+        // 开启缓存
+        contentView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        contentView.getSettings().setDomStorageEnabled(true);
+        contentView.getSettings().setDatabaseEnabled(true);
 
         contentView.setWebViewClient(new WebViewClient(){
             @Override
@@ -163,27 +171,11 @@ public abstract class BaseDetailsActivity extends SwipeBackActivity {
             }
 
             @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                displayNetworkError();
-            }
-
-            @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 contentView.loadUrl(url);
                 return false;
             }
         });
-
-
-         /*
-         cache web page
-         */
-
-        contentView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        contentView.getSettings().setDomStorageEnabled(true);
-        contentView.getSettings().setDatabaseEnabled(true);
-
-
 
         if(HttpUtil.isWIFI == false) {
             contentView.getSettings().setBlockNetworkImage(Settings.getInstance().getBoolean(Settings.NO_PIC_MODE, false));
@@ -191,8 +183,6 @@ public abstract class BaseDetailsActivity extends SwipeBackActivity {
             // fix issue #13
             contentView.getSettings().setBlockNetworkImage(false);
         }
-
-
 
         /**
          * 网络异常就显示
@@ -206,6 +196,7 @@ public abstract class BaseDetailsActivity extends SwipeBackActivity {
             }
         });
 
+        onDataRefresh();
     }
 
 
@@ -232,6 +223,7 @@ public abstract class BaseDetailsActivity extends SwipeBackActivity {
 
                     @Override
                     public void run() {
+                        Log.d(TAG, "onFailure: "+ url);
                         setDefaultColor();
                     }
                 });
@@ -244,6 +236,7 @@ public abstract class BaseDetailsActivity extends SwipeBackActivity {
                     public void run() {
                         if(bitmap == null){
                             setDefaultColor();
+                            Log.d(TAG, "onResponse bitmap null: " + url);
                             return;
                         }
                         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
@@ -251,6 +244,7 @@ public abstract class BaseDetailsActivity extends SwipeBackActivity {
                         } else{
                             topImage.setImageURI(Uri.parse(url));
                         }
+                        Log.d(TAG, "onResponse: " + url);
                         mainContent.setBackgroundColor(ImageUtil.getImageColor(bitmap));
                         progressBarTopPic.setVisibility(View.GONE);
                     }

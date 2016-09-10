@@ -1,0 +1,117 @@
+<div class="container article-page">
+    <div class="main">
+        <div class="content">
+            <div class="content-th">
+
+                <a class="label label-hot" href="http://www.guokr.com/scientific/channel/hot/" target="_blank" data-gaevent="scientific_tag:v1.1.1.1:scientific">热点<b class="gnarrow-right"></b></a>
+
+                <a class="label label-comment" href="http://www.guokr.com/scientific/channel/review/" target="_blank" data-gaevent="scientific_tag:v1.1.1.1:scientific">评论<b class="gnarrow-right"></b></a>
+
+                <a class="label label-common" href="http://www.guokr.com/scientific/subject/biology/" target="_blank">生物<b class="gnarrow-right"></b></a>
+                <h1 itemprop="http://purl.org/dc/terms/title"id="articleTitle">我们为什么要送花？</h1>
+                <p itemprop="http://rdfs.org/sioc/ns#note" class="ghide">情人节 送花 玫瑰 月季</p>
+                <meta itemprop="http://purl.org/dc/terms/abstract" content="不要觉得送花很奇怪，这个一万多年前就出现在尼安德特人身上的行为，背后有很多心理学意义。" />
+
+                <div class="content-th-info">
+
+                        <a itemprop="http://rdfs.org/sioc/ns#has_creator" title="蔓玫" href="http://www.guokr.com/i/0030594664/" data-ukey="0i7qzs">蔓玫</a>
+
+
+                    <meta itemprop="http://purl.org/dc/terms/modified" content="2016-02-14T13:01:31+08:00" />
+
+                    <span>发表于 &nbsp;今天13:01</span>
+
+
+                </div>
+            </div>
+            <div itemprop="http://rdfs.org/sioc/ns#content" class="content-txt" id="articleContent">
+
+                <div class="document">
+                    <div><p>不知道是什么时候开始，一提到“送花”这种行为，就会听到一个让人摸不着头脑的声音——实在不觉得送一把植物生殖器的行为有什么浪漫可言。即使像我这样很喜欢花的人，好像也无力给出有力的反驳。</p>
+
+<p>把花朵定义为“植物生殖器”，这确实像是很酷很犀利的说法。如果这只是开玩笑也就罢了，如果你内心真的坚信如此，那么恕我直言，这心态才是真的有点图样图森破了。要知道，“送花”这一行为如果真的只是“送一把植物生殖器”而已，早就在漫长的时光中，被我们的祖先毫不犹豫的淘汰了。甚至，它也许根本就不会在人类历史上发生。</p>
+
+<p class="img-caption"><img alt="" src="http://1.im.guokr.com/CovuEMp8b_DSp6i5qjkHxQ1IWZ4hC4aHs0dZqCbBxf3oAwAAmwIAAEpQ.jpg?imageView2/1/w/640/h/426" style="width: 640px; height: 427px;">然而收到鲜花，大家还是会露出由衷的微笑。图片：shutterstock.com</p>
+
+<p>所以，某些不打算送花（甚至没有人可以送花）的现代人，真的不打算了解一下“送花”背后那些强大的来龙去脉吗？</p>
+
+<h2>字还不会写，就会送花了？</h2>
+
+<p>让我们张开想象的翅膀，重塑一下一次送花的场景。那是11700年前的某个初夏，有一群生活在新月沃地的尼安德特人，他们当中不幸有几位意外去世了。虽然在上古时代，死亡也许本来就不算是什么意外——但这一次，活着的小伙伴们似乎决定用某种更为郑重的方式来埋葬他们：他们建造了一个（很简单的）墓穴，然后采集了许多美丽清香的野花，包括薄荷、锦葵、矢车菊、葡萄风信子之类，把这些花儿铺满了逝者的身体周围。</p>
+
+<p class="img-caption"><img alt="" src="http://3.im.guokr.com/Wac3Z2Jj7-geQFOGe6buv9LgWe5shxM8Ox4mplziaE56AwAApwEAAEpQ.jpg?imageView2/1/w/640/h/304" style="width: 640px; height: 304px;">图片：donsmaps.com</p>
+
+<p>这并不只是一番想象而已。在伊拉克北部发掘的沙尼达尔洞穴（Cave Shanidar）中，考古发掘已经找到了足够充分的线索，表明有那么几位原始人与花朵一起长眠千古的。虽然也有学者认为当时的情况可能并没有我们想的那么浪漫。植物的存在或许并非人类有意为之，也可能是附近的啮齿类动物贮存种子和果实所导致的。但大部分研究人员和外界舆论都倾向于认为，这也许是世界上最早的“送花”行为之一。</p>
+
+<p>无论一万年前的真相如何，至少可以肯定的是，早在连文字都还没出现的古老岁月里，人类的祖先就已经开始对鲜花表示兴趣，并利用它作为示好的手段之一。</p>
+
+<p>在各种最古老的文明记载中，鲜花从未阙如——古巴比伦的土豪国王送给妃子的礼物是一整座空中花园；古埃及的壁画上一次次描绘着手执鲜花的人像轮廓；古希腊的神话和史诗中，总有被鲜花加冕的诗人/战士，或因为被鲜花诱惑而误入歧途的少女（没错我说的就是被宙斯勾引的欧罗巴）；而在中国，《诗经》里则留下了“维士与女，伊其相谑，赠之以勺药”的句子。一切的一切，无不昭示着鲜花与人类息息相关的命运。</p>
+
+<p class="img-caption"><img alt="" src="http://1.im.guokr.com/xssIfOYOaEOV5IDrwp9Vy8aBZJXHXf54ejcqoGPGL_dSAwAANQIAAEpQ.jpg?imageView2/1/w/640/h/425" style="width: 640px; height: 425px;">图片：fastonlinedivorce2.com</p>
+
+<h2>为什么是花？</h2>
+
+<p>也许你要问，示好的载体可以有很多选择，黄金、钻石、玛瑙莫不如此，但为什么是花呢？</p>
+
+<p>喜欢以漂亮的东西为自己进行装饰，这确实是人类所存在的天性之一。而在早期的人类社会中，能接触到的“漂亮东西”也实在是比较有限：除了鲜花，也许就只剩下漂亮的矿石，或是动物身上的毛皮和骨架了。然而比起挖掘、打磨一块矿石，或是狩猎一只飞禽走兽，采摘鲜花可实在算是个非常轻松的过程。甚至部分鲜花所代表的植物还具有一定的疗愈作用，香味又可以掩盖尸体、排泄物和腐烂食物的臭味，简直是一举多得。</p>
+
+<p>当然，鲜花也并不是完全没有缺点的东西。一方面它们难以保存、容易枯萎；另一方面，对上古时代的人们来说，采摘鲜花多少也要付出点代价，比如放弃即将到来的果实和种子很可能是人类同样需要的生产资料之一。然而根据著名的社会和人类学家杰克·古迪（Jack Goody）在其著作《花之文化》（The Culture of Flowers）中所分析的，正是因为这样的“难以持久”和“需要付出代价来获得”，使得鲜花不同于常见的叶片和最终形态的果实，而是和珍稀的矿石、需要冒着生命危险取得的动物皮毛一样，获得了更加接近某种奢侈品的概念。也就是说，只有在物质资料相对有保障的情况下，花才能作为一个独立的事物被应用于人类的生活中，并作为提供精神愉悦的角色而得到大家喜爱。这也是为什么在绝大多数人类文明发展的初期，鲜花往往是贵族和统治阶级才享用的特殊待遇；而同样是栽培植物，鲜花类的栽培历史却比作物类要晚了许多年。毕竟要先填饱肚子，才有资格考虑装饰品的批量化生产啊。</p>
+
+<p class="img-caption"><img alt="" src="http://2.im.guokr.com/51DdSxMu_D9yxD3lEtNh1Y4KezpmxBhzu_uHx7uHHr7oAwAAmwIAAEpQ.jpg?imageView2/1/w/640/h/426" style="width: 640px; height: 427px;">不过到了今天，鲜切花已经成为了很多地区的支柱性产业。图片：shutterstock.com</p>
+
+<p>这样一来，鲜花就成为了一种具有双重属性的产品。既拥有源自大自然，代表人类天性的“自然属性”，也拥有代表奢侈品、有限物质资料的“社会属性”。加之花朵种类繁多，分布广泛，获取的途径相对简单，当然也就成为人类获取精神审美需求时的最佳选择之一。</p>
+
+<h2>不能说的秘密，由花朵传递</h2>
+
+<p>如果说在人类文明的早期，赠送鲜花这一行为可能只是单纯的想法，只是想要把美丽又珍贵的东西送给你，作为我的一点心意。那么发展至后世，它则有了更细化的门类和一些约定俗成的规矩。现代送花习俗的奠定一般认为是在19世纪的欧洲。这一现象的出现，一方面得益于18世纪的植物学大流行和异域花卉大规模传入，另一方面，也是出于当时人们的情感需求——对于那个年代的年轻男女（尤其是女性）来说，公开、直接表达情感被认为是一件有失礼数的事情。于是一系列精心搭配的小花束（tussie-mussie）应运而生：既可作为闲情逸致的消遣装饰，又携带着当时最流行的“花语，成为恋人们用来秘密传情达意的真爱利器。</p>
+
+<p>说起来，如今为了送什么花而苦恼的各位真该穿越到三百年前的英国或法国去看一看。那时候，无论表白失恋，还是求婚交朋友，都有一系列的指定花材要求，若是一个不小心送错了，不但要贻笑大方，说不定还会断送一生的幸福……</p>
+
+<p class="img-caption"><img alt="" src="http://3.im.guokr.com/F_qVUChaUT6kXZ7waxm0RF98aDVFAtYMFJuBEQQGvsjcBQAAqQMAAEpQ.jpg?imageView2/1/w/640/h/399" style="width: 640px; height: 400px;">维多利亚时代兼有传话功能的小花束。送花者一般会根据当时诗人/作家编造的花语读物进行花材搭配，辅以形状精致小巧的容器。事实上这些花语并无任何科学根据可言，故而在维多利亚时代之后也逐渐式微。图片：welldonelandscaping.com</p>
+
+<h2>赠人鲜花，并非空欢喜</h2>
+
+<p>如果你是一个活在当下，对过往历史完全无感的人，也仍有更多证据可以表明，送花仍然是很有必要的一个行为哦。</p>
+
+<p>虽然花店里的鲜花好像都只是为了满足人们的视觉消费而已，但近年来却有越来越多的科学研究指出，植物生殖器带来的欢喜是切实存在的。在同样的外部环境下，鲜花的存在会让女性对身边的男性更容易抱有好感，就连“要电话”这样的行为也会因为鲜花的助力而提高成功率。（延伸阅读：<a href="http://www.guokr.com/article/438439/">鲜花让她更爱你</a>）</p>
+
+<p class="img-caption"><img alt="" src="http://2.im.guokr.com/oLVmmPNrCU-yXmqWiLTFw4WlJtUbQrYc4lNP26AryeHoAwAAmwIAAEpQ.jpg?imageView2/1/w/640/h/426" style="width: 640px; height: 427px;">有的时候，一朵鲜花更胜千言万语。图片：shutterstock.com</p>
+
+<p>而哈佛大学医学院附属麻省总医院（Massachusetts General Hospital and Harvard Medical School，这名字真是长啊……）的南希·伊特考夫（Nancy Etcoff）在进行了一系列相关实验后，也认为在居室内摆放鲜花会对人体精神状态带来显著可见的正面影响，而收到鲜花这一行为也会充分激发人们内心的愉悦和幸福感。</p>
+
+<p><span style="color:#808080;">题外话：Nancy Etcoff还写过一本挺出名也挺有趣的书，叫《漂亮者生存》。</span></p>
+
+<p>罗格斯大学（Rutgers University）的心理学教授Jeannette Haviland-Jones发起的一项实验中也得到了同样的结论。研究者们选择了价值相当的装饰蜡烛、果篮、鲜花花束作为三种礼物，向完全不知情的参与者们随机派发其中的一种。人们收到礼物时的面部表情随即被记录下来并进行专业分析，得到的却是连Jeannette自己都倍感惊异的结果。几乎所有收到鲜花的人都露出了标志性的“杜彻尼微笑”——真正发自内心的欢乐微笑，而收到蜡烛和果篮的人们却并未展现出如此一致的积极反响。这一影响甚至持续到三天之后。比起蜡烛组和果篮组，鲜花组的成员们仍表现出了更为幸福愉快的精神状态。按照Jeannette自己的说法，这绝不只是因为人们在社交习俗的熏陶下被训练得更喜欢鲜花而已。</p>
+
+<p><span style="color:#808080;">再度题外话：Jeannette的丈夫是和她同校的一名进化生物学家，该系列实验也有他的参与。啊多么有爱的CP。</span></p>
+
+<h2>结语</h2>
+
+<p>无论是重重时光的打磨，还是定型定量的科学分析，我们都有充足理由相信：“送花“确实是人类社交生活中至关重要的环节之一。即使在有很多更时尚、更实用的礼物可供选择的今天，这一行为依旧不会被淘汰或取代，因为它仍代表着人类最初也最根深蒂固的某部分天性——对美的向往，对感情的寄托，对珍贵之物的爱护，对转瞬即逝时光的留恋，对一群长久与我们共存的生灵的惺惺相惜。正如Jeannette的丈夫，生物学家 Terry McGuire所言，“这给了我灵感：也许我们真的已经处于某种形式的协同进化中。我们从承认花朵的存在，到爱上它们，珍惜它们，为它们创造更好的生存环境；于是它们也给予我们一些东西作为回报：比如，让我们快乐。”（编辑：史军）</p>
+
+<h2 class="references">参考资料</h2>
+
+<ol class="reference-item"><li><span style="line-height: normal;">Jack Goody (1993) <em>The Culture of Flowers</em>. Cambridge, UK: Cambridge University Press</span></li>
+	<li>Marianne Beuchert (2002) <em>Symbolik der Pflanzen</em>. Frankfurt, DE: Insel</li>
+	<li>段歆涔 (2013) 史前已有葬花人. 中国科学报</li>
+	<li><a href="http://www.donsmaps.com/clancave.html">Shanidar, the cave in Iraq with Neandertal remains discovered by Dr Ralph Solecki</a></li>
+	<li>Wiki Commons: <a href="https://en.wikipedia.org/wiki/History_of_flower_arrangement">The History of the Tradition of Sending Flowers</a></li>
+	<li>The Garden Diaries: <a href="https://thegardendiaries.wordpress.com/2013/07/03/tussie-mussie-the-victorian-art-of-expressing-yourself/">Tussie Mussie : The Victorian Art of Expressing Yourself</a></li>
+	<li>William M Goldsmitha (2006) <a href="http://www.thecrimson.com/article/2006/10/26/a-bouquet-a-day-a-new/"><em>Bouquet a Day...</em></a>. The Harvard Crimson</li>
+	<li>Rutgers Magazine: <a href="http://urwebsrv..edu/magazine/archive1013/departments/spring-2010/insights/flower-power">Flower Power</a></li>
+</ol></div>
+                    <div class="article-extend">
+
+
+                    </div>
+                </div>
+            </div>
+
+            <p class="copyright">
+
+            本文版权属于果壳网（<a title="果壳网" href="http://www.guokr.com/">guokr.com</a>），禁止转载。如有需要，请联系<a title="联系果壳"  href="mailto:media@guokr.com">media@guokr.com</a>
+
+            </p>
+
+
+</div>
