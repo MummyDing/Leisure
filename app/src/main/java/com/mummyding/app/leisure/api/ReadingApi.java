@@ -32,10 +32,10 @@ import com.mummyding.app.leisure.support.Utils;
  */
 public class ReadingApi {
     public static final int TAG_LEN = 3;
-    public static String searchByTag="http://api.douban.com/v2/book/search?tag=";
-    public static String searchByText="http://api.douban.com/v2/book/search?q=";
+    public static String searchByTag="https://api.douban.com/v2/book/search?tag=";
+    public static String searchByText="https://api.douban.com/v2/book/search?q=";
     public static String searchByID="https://api.douban.com/v2/book/";
-    public static String readEBook="http://read.douban.com/reader/ebook/";
+    public static String readEBook="https://read.douban.com/reader/ebook/";
     public static String Tag_Titles []={"综合","文学","程序员","流行","文化","生活","金融"};
     public static String HomeTag[] ={"科普", "互联网", "科学", "科技","科普","用户体验", "通信", "交互", "旅行","王小波",  "生活", "励志", "成长",  "悬疑", "武侠", "韩寒", "奇幻", "青春文学"};
     public static String LiterTag []={"小说","中国文学", "村上春树", "王小波", "余华", "鲁迅", "米兰·昆德拉", "外国文学", "经典", "童话", "儿童文学", "名著", "外国名著", "杜拉斯", "文学", "散文", "诗歌", "张爱玲", "钱钟书", "诗词", "港台", "随笔", "日本文学", "杂文", "古典文学", "当代文学", "茨威格","米兰·昆德拉","杜拉斯","港台"};
