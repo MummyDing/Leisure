@@ -24,14 +24,14 @@
         android:background="?attr/barColor">
         <ImageView
             android:id="@+id/author"
-            android:src="@drawable/author"
+            android:src="@drawable/logo"
             android:layout_centerHorizontal="true"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="15dp"
             />
         <TextView
-            android:text="MummyDing"
+            android:text="@string/app_name"
             android:textColor="?attr/barTitleColor"
             android:textSize="18sp"
             android:layout_below="@id/author"

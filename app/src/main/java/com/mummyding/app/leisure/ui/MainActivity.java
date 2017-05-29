@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
                 })
                 .build();
+        header.getHeaderBackgroundView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
        drawer = new DrawerBuilder().withActivity(this)
                 .withToolbar(toolbar)
                 .withActionBarDrawerToggleAnimated(true)

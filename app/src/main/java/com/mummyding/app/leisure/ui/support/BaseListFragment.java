@@ -53,7 +53,7 @@ public abstract class BaseListFragment extends Fragment{
     protected RecyclerView.LayoutManager mLayoutManager;
     protected PullToRefreshView refreshView;
 
-    protected ImageView placeHolder;
+    protected View placeHolder;
     protected ProgressBar progressBar;
 
     protected RecyclerView.Adapter adapter;
@@ -88,7 +88,7 @@ public abstract class BaseListFragment extends Fragment{
 
         progressBar = (ProgressBar) parentView.findViewById(R.id.progressbar);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
-        placeHolder = (ImageView) parentView.findViewById(R.id.placeholder);
+        placeHolder = (View) parentView.findViewById(R.id.placeholder);
 
         onCreateCache();
 
