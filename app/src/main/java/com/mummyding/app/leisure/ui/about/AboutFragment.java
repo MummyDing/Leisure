@@ -48,6 +48,7 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
 
     private Preference mAppIntro;
     private Preference mDemoVideo;
+    private Preference mAppVersion;
     private Preference mCheckUpdate;
     private Preference mStarProject;
     private Preference mShare;
@@ -58,6 +59,7 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
 
     private final String APP_INTRO = "app_intro";
     private final String DEMO_VIDEO = "demo_video";
+    private final String APP_VERSION = "app_version";
     private final String CHECK_UPDATE = "check_update";
     private final String START_PROJECT = "star_project";
     private final String SHARE = "share";
@@ -74,6 +76,7 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
 
         mAppIntro = findPreference(APP_INTRO);
         mDemoVideo = findPreference(DEMO_VIDEO);
+        mAppVersion = findPreference(APP_VERSION);
         mCheckUpdate = findPreference(CHECK_UPDATE);
         mStarProject = findPreference(START_PROJECT);
         mShare = findPreference(SHARE);
@@ -83,6 +86,7 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
 
         mAppIntro.setOnPreferenceClickListener(this);
         mDemoVideo.setOnPreferenceClickListener(this);
+        mAppVersion.setOnPreferenceClickListener(this);
         mCheckUpdate.setOnPreferenceClickListener(this);
         mStarProject.setOnPreferenceClickListener(this);
         mShare.setOnPreferenceClickListener(this);
@@ -91,6 +95,8 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
         mEmail.setOnPreferenceClickListener(this);
 
         progressBar = (ProgressBar) getActivity().findViewById(R.id.progressbar);
+
+        mAppVersion.setSummary(getString(R.string.leisure_version) + " " + Utils.getVersion());
     }
 
 
@@ -100,7 +106,7 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
         if(mAppIntro == preference){
             Intent toIntro = new Intent(getActivity(),AppIntroActivity.class);
             startActivity(toIntro);
-        }else if(mDemoVideo == preference){
+        } else if(mDemoVideo == preference){
             Intent toVideo = new Intent(getActivity(),DemoVideoActivity.class);
             startActivity(toVideo);
         }else if(mCheckUpdate == preference){

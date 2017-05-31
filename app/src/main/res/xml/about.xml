@@ -5,8 +5,8 @@
             android:key="app_intro"
             android:title="@string/text_app_intro"/>
         <Preference
-            android:title="@string/text_current_version"
-            android:summary="@string/leisure_version"/>
+            android:key="app_version"
+            android:title="@string/text_current_version"/>
         <Preference
             android:key="check_update"
             android:title="@string/text_check_update"/>
