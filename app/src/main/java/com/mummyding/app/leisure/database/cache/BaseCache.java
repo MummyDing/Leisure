@@ -96,7 +96,7 @@ public abstract class BaseCache<T> implements ICache<T> {
         db.execSQL(sql);
     }
 
-    public  List<T> getmList(){
+    public  List<T> getList(){
         return mList;
     }
     public boolean hasData(){

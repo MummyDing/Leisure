@@ -86,7 +86,8 @@ public class DailyAdapter extends BaseListAdapter<StoryBean,ViewHolder>{
                 if(isCollection){
                     bundle.putBoolean(mContext.getString(R.string.id_collection),true);
                 }else {
-                    bundle.putBoolean(mContext.getString(R.string.id_collection), storyBean.isCollected() == 1 ? true : false);
+                    bundle.putBoolean(mContext.getString(R.string.id_collection),
+                            storyBean.isCollected() == 1);
                 }
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);

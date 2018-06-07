@@ -142,7 +142,7 @@ public class ReadingAdapter extends BaseListAdapter<BookBean,ViewHolder>{
                 }
             }
         });
-        holder.collect_cb.setChecked(bookBean.getIs_collected() == 1 ? true : false);
+        holder.collect_cb.setChecked(bookBean.getIs_collected() == 1);
     }
      class ViewHolder extends RecyclerView.ViewHolder{
          private View parentView;

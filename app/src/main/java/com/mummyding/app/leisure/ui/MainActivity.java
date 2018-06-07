@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Settings.noPicMode = mSettings.getBoolean(Settings.NO_PIC_MODE, false);
 
         // change Brightness
-        if(mSettings.isNightMode && Utils.getSysScreenBrightness() > CONSTANT.NIGHT_BRIGHTNESS){
+        if(Settings.isNightMode && Utils.getSysScreenBrightness() > CONSTANT.NIGHT_BRIGHTNESS){
             Utils.setSysScreenBrightness(CONSTANT.NIGHT_BRIGHTNESS);
-        }else if(mSettings.isNightMode == false && Utils.getSysScreenBrightness() == CONSTANT.NIGHT_BRIGHTNESS){
+        }else if(Settings.isNightMode == false && Utils.getSysScreenBrightness() == CONSTANT.NIGHT_BRIGHTNESS){
             Utils.setSysScreenBrightness(CONSTANT.DAY_BRIGHTNESS);
         }
 
@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                                break;
                            case R.mipmap.ic_night:
                                Settings.isNightMode = !Settings.isNightMode;
-                               mSettings.putBoolean(mSettings.NIGHT_MODE, Settings.isNightMode);
+                               mSettings.putBoolean(Settings.NIGHT_MODE, Settings.isNightMode);
                                MainActivity.this.recreate();
                                return false;
                            case R.mipmap.ic_setting:

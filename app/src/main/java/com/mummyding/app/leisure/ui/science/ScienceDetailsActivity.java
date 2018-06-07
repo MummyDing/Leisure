@@ -47,7 +47,7 @@ public class ScienceDetailsActivity extends BaseDetailsActivity {
         super.onCreate(savedInstanceState);
         mCache = new ScienceCache();
         articleBean = (ArticleBean) getIntent().getSerializableExtra(getString(R.string.id_science));
-        isCollected = (articleBean.getIs_collected()==1? true:false);
+        isCollected = (articleBean.getIs_collected() == 1);
         initView();
     }
 

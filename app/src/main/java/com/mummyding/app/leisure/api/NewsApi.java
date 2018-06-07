@@ -30,25 +30,28 @@ import java.io.InputStream;
 /**
  * Created by mummyding on 15-11-14.<br>
  * XinHua Net(www.xinhuanet.com) News Api
+ *
  * @author mummyding
  * @version Leisure 1.0
  */
 public class NewsApi {
-    private static String [] newsUrl = null;
-    private static String [] newsTitle = null;
+
+    private static String[] newsUrl = null;
+    private static String[] newsTitle = null;
     private static Document document = null;
+
     /**
      * Static Method to get news api address.
      * <p> Get news api address from file raw/news_api.txt , news api are writen
      * in XML format . <br>
-     * @param void
+     *
      * @return String [] news api address
      */
-    public static String [] getNewsUrl(){
+    public static String[] getNewsUrl() {
         // Check if it has already got the address before
         // if true ,return it directly. Otherwise try to get it from file
-        if(newsUrl == null){
-            if(document == null) {
+        if (newsUrl == null) {
+            if (document == null) {
                 // convert file to InputStream
                 InputStream is = Utils.readFileFromRaw(R.raw.news_api);
                 // convert document format from InputStream format
@@ -57,7 +60,7 @@ public class NewsApi {
             // Parsing required data from document.
             NodeList urlList = document.getElementsByTagName("url");
             newsUrl = new String[urlList.getLength()];
-            for(int i = 0 ; i < urlList.getLength();i++){
+            for (int i = 0; i < urlList.getLength(); i++) {
                 newsUrl[i] = urlList.item(i).getTextContent();
             }
         }
@@ -68,18 +71,18 @@ public class NewsApi {
      * Static Method get news titles <br>
      * <p>Get news titles from file raw/news_api.txt. titles are written in Chinese,don't
      * support local. <br>
-     * @param void
+     *
      * @return String []
      */
-    public static String [] getNewsTitle(){
-        if(newsTitle == null){
-            if(document == null) {
+    public static String[] getNewsTitle() {
+        if (newsTitle == null) {
+            if (document == null) {
                 InputStream is = Utils.readFileFromRaw(R.raw.news_api);
-                 document = Utils.getDocmentByIS(is);
+                document = Utils.getDocmentByIS(is);
             }
             NodeList titleList = document.getElementsByTagName("name");
             newsTitle = new String[titleList.getLength()];
-            for(int i = 0 ; i < titleList.getLength();i++){
+            for (int i = 0; i < titleList.getLength(); i++) {
                 newsTitle[i] = titleList.item(i).getTextContent();
             }
         }

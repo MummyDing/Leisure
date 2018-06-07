@@ -26,6 +26,7 @@ import android.database.Cursor;
 import android.os.Handler;
 
 import com.google.gson.Gson;
+import com.mummyding.app.leisure.database.DatabaseHelper;
 import com.mummyding.app.leisure.database.cache.BaseCache;
 import com.mummyding.app.leisure.database.table.ReadingTable;
 import com.mummyding.app.leisure.model.reading.BookBean;
@@ -59,7 +60,7 @@ public class ReadingCache extends BaseCache<BookBean> {
 
     @Override
     protected void putData() {
-        db.execSQL(mHelper.DELETE_TABLE_DATA +table.NAME+" where "+table.CATEGORY+"=\'"+mCategory+"\'");
+        db.execSQL(DatabaseHelper.DELETE_TABLE_DATA + ReadingTable.NAME +" where "+ ReadingTable.CATEGORY +"=\'"+mCategory+"\'");
 //        db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             BookBean bookBean = mList.get(i);
@@ -75,7 +76,7 @@ public class ReadingCache extends BaseCache<BookBean> {
             db.insert(ReadingTable.NAME,null,values);
         }
         Utils.DLog("insert cache reading size: "+mList.size());
-        db.execSQL(table.SQL_INIT_COLLECTION_FLAG);
+        db.execSQL(ReadingTable.SQL_INIT_COLLECTION_FLAG);
     }
 
 
@@ -98,9 +99,9 @@ public class ReadingCache extends BaseCache<BookBean> {
         mList.clear();
         String sql = null;
         if(mCategory == null){
-            sql = "select * from "+table.NAME;
+            sql = "select * from "+ ReadingTable.NAME;
         }else {
-            sql = "select * from "+table.NAME +" where "+table.CATEGORY+"=\'"+mCategory+"\'";
+            sql = "select * from "+ ReadingTable.NAME +" where "+ ReadingTable.CATEGORY +"=\'"+mCategory+"\'";
         }
         Cursor cursor = query(sql);
         while (cursor.moveToNext()){

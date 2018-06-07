@@ -40,13 +40,13 @@ public class CollectionNewsCache extends BaseCollectionCache<NewsBean>{
 
     @Override
     public void loadFromCache() {
-        Cursor cursor = query(table.SELECT_ALL_FROM_COLLECTION);
+        Cursor cursor = query(NewsTable.SELECT_ALL_FROM_COLLECTION);
         while (cursor.moveToNext()){
             NewsBean newsBean = new NewsBean();
-            newsBean.setTitle(cursor.getString(table.ID_TITLE));
-            newsBean.setDescription(cursor.getString(table.ID_DESCRIPTION));
-            newsBean.setLink(cursor.getString(table.ID_LINK));
-            newsBean.setPubTime(cursor.getString(table.ID_PUBTIME));
+            newsBean.setTitle(cursor.getString(NewsTable.ID_TITLE));
+            newsBean.setDescription(cursor.getString(NewsTable.ID_DESCRIPTION));
+            newsBean.setLink(cursor.getString(NewsTable.ID_LINK));
+            newsBean.setPubTime(cursor.getString(NewsTable.ID_PUBTIME));
             mList.add(newsBean);
         }
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);

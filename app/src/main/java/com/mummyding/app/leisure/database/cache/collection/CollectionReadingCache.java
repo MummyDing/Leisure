@@ -41,17 +41,17 @@ public class CollectionReadingCache extends BaseCollectionCache<BookBean> {
 
     @Override
     public void loadFromCache() {
-        Cursor cursor = query(table.SELECT_ALL_FROM_COLLECTION);
+        Cursor cursor = query(ReadingTable.SELECT_ALL_FROM_COLLECTION);
         while (cursor.moveToNext()){
             BookBean bookBean = new BookBean();
-            bookBean.setTitle(cursor.getString(table.ID_TITLE));
-            bookBean.setSummary(cursor.getString(table.ID_SUMMARY));
-            bookBean.setImage(cursor.getString(table.ID_INFO));
-            bookBean.setImage(cursor.getString(table.ID_IMAGE));
-            bookBean.setInfo(cursor.getString(table.ID_INFO));
-            bookBean.setEbook_url(cursor.getString(table.ID_EBOOK_URL));
-            bookBean.setAuthor_intro(cursor.getString(table.ID_AUTHOR_INTRO));
-            bookBean.setCatalog(cursor.getString(table.ID_CATALOG));
+            bookBean.setTitle(cursor.getString(ReadingTable.ID_TITLE));
+            bookBean.setSummary(cursor.getString(ReadingTable.ID_SUMMARY));
+            bookBean.setImage(cursor.getString(ReadingTable.ID_INFO));
+            bookBean.setImage(cursor.getString(ReadingTable.ID_IMAGE));
+            bookBean.setInfo(cursor.getString(ReadingTable.ID_INFO));
+            bookBean.setEbook_url(cursor.getString(ReadingTable.ID_EBOOK_URL));
+            bookBean.setAuthor_intro(cursor.getString(ReadingTable.ID_AUTHOR_INTRO));
+            bookBean.setCatalog(cursor.getString(ReadingTable.ID_CATALOG));
             mList.add(bookBean);
         }
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);

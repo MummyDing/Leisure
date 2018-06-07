@@ -141,8 +141,7 @@ public class Utils {
         return matcher.replaceAll(replace);
     }
     public static boolean hasString(String str){
-        if(str == null || str.equals("")) return false;
-        return true;
+        return !(str == null || str.equals(""));
     }
     public static void showToast(String text){
         Toast.makeText(mContext,text,Toast.LENGTH_SHORT).show();
@@ -183,16 +182,16 @@ public class Utils {
         DatabaseHelper mHelper = DatabaseHelper.instance(mContext);
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
-        db.execSQL(mHelper.DELETE_TABLE_DATA + DailyTable.NAME);
+        db.execSQL(DatabaseHelper.DELETE_TABLE_DATA + DailyTable.NAME);
       //  db.execSQL(DailyTable.CREATE_TABLE);
 
-        db.execSQL(mHelper.DELETE_TABLE_DATA + NewsTable.NAME);
+        db.execSQL(DatabaseHelper.DELETE_TABLE_DATA + NewsTable.NAME);
       //  db.execSQL(NewsTable.CREATE_TABLE);
 
-        db.execSQL(mHelper.DELETE_TABLE_DATA + ReadingTable.NAME);
+        db.execSQL(DatabaseHelper.DELETE_TABLE_DATA + ReadingTable.NAME);
       //  db.execSQL(ReadingTable.CREATE_TABLE);
 
-        db.execSQL(mHelper.DELETE_TABLE_DATA + ScienceTable.NAME);
+        db.execSQL(DatabaseHelper.DELETE_TABLE_DATA + ScienceTable.NAME);
       //  db.execSQL(ScienceTable.CREATE_TABLE);
 
     }
@@ -232,7 +231,8 @@ public class Utils {
     }
 
     public static void copyToClipboard(View view,String info) {
-        ClipboardManager cm = (ClipboardManager) mContext.getSystemService(mContext.CLIPBOARD_SERVICE);
+        ClipboardManager cm = (ClipboardManager) mContext.getSystemService(
+                Context.CLIPBOARD_SERVICE);
         ClipData cd = ClipData.newPlainText("msg", info);
         cm.setPrimaryClip(cd);
         Snackbar.make(view, R.string.notif_info_copied,Snackbar.LENGTH_SHORT).show();

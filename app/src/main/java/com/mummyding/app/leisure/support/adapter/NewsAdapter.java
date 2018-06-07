@@ -117,7 +117,7 @@ public class NewsAdapter extends BaseListAdapter<NewsBean,NewsAdapter.ViewHolder
                 }
             }
         });
-        holder.collect_cb.setChecked(newsBean.getIs_collected() == 1 ? true:false);
+        holder.collect_cb.setChecked(newsBean.getIs_collected() == 1);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

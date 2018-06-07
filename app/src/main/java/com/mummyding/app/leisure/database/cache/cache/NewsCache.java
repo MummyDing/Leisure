@@ -22,6 +22,7 @@ package com.mummyding.app.leisure.database.cache.cache;
 import android.database.Cursor;
 import android.os.Handler;
 
+import com.mummyding.app.leisure.database.DatabaseHelper;
 import com.mummyding.app.leisure.database.cache.BaseCache;
 import com.mummyding.app.leisure.database.table.NewsTable;
 import com.mummyding.app.leisure.model.news.NewsBean;
@@ -63,7 +64,8 @@ public class NewsCache extends BaseCache<NewsBean> {
 
     @Override
     protected void putData() {
-        db.execSQL(mHelper.DELETE_TABLE_DATA +table.NAME+" where "+table.CATEGORY+"=\'"+mCategory+"\'");
+        db.execSQL(
+                DatabaseHelper.DELETE_TABLE_DATA + NewsTable.NAME +" where "+ NewsTable.CATEGORY +"=\'"+mCategory+"\'");
         for(int i=0;i<mList.size();i++){
             NewsBean newsBean =  mList.get(i);
             values.put(NewsTable.TITLE,newsBean.getTitle());
@@ -92,9 +94,9 @@ public class NewsCache extends BaseCache<NewsBean> {
         mList.clear();
         String sql = null;
         if(mCategory == null){
-            sql = "select * from "+table.NAME;
+            sql = "select * from "+ NewsTable.NAME;
         }else {
-            sql = "select * from "+table.NAME +" where "+table.CATEGORY+"=\'"+mCategory+"\'";
+            sql = "select * from "+ NewsTable.NAME +" where "+ NewsTable.CATEGORY +"=\'"+mCategory+"\'";
         }
         Cursor cursor = query(sql);
         while (cursor.moveToNext()) {

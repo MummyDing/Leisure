@@ -24,6 +24,7 @@ import android.os.Handler;
 
 import com.google.gson.Gson;
 import com.mummyding.app.leisure.api.DailyApi;
+import com.mummyding.app.leisure.database.DatabaseHelper;
 import com.mummyding.app.leisure.database.cache.BaseCache;
 import com.mummyding.app.leisure.database.table.DailyTable;
 import com.mummyding.app.leisure.model.daily.DailyBean;
@@ -59,7 +60,7 @@ public class DailyCache extends BaseCache<StoryBean> {
 
     @Override
     protected void putData() {
-        db.execSQL(mHelper.DELETE_TABLE_DATA + DailyTable.NAME);
+        db.execSQL(DatabaseHelper.DELETE_TABLE_DATA + DailyTable.NAME);
        // db.execSQL(table.CREATE_TABLE);
         for(int i=0;i<mList.size();i++){
             StoryBean storyBean = mList.get(i);

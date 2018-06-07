@@ -88,7 +88,7 @@ public abstract class BaseListFragment extends Fragment{
 
         progressBar = (ProgressBar) parentView.findViewById(R.id.progressbar);
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerView);
-        placeHolder = (View) parentView.findViewById(R.id.placeholder);
+        placeHolder = parentView.findViewById(R.id.placeholder);
 
         onCreateCache();
 

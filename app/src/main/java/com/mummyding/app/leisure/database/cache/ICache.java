@@ -30,7 +30,7 @@ import java.util.List;
 public interface ICache<T>{
     void addToCollection(T object);
     void execSQL(String sql);
-    List<T> getmList();
+    List<T> getList();
     boolean hasData();
     void load();
     void loadFromCache();

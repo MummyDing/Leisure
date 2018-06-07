@@ -63,7 +63,7 @@ public abstract class BaseCollectionCache<T> implements ICache<T> {
     }
 
     @Override
-    public List<T> getmList() {
+    public List<T> getList() {
         return mList;
     }
 

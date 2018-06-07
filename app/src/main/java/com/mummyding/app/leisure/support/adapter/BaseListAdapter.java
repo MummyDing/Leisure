@@ -25,8 +25,6 @@ import android.support.v7.widget.RecyclerView;
 import com.mummyding.app.leisure.database.cache.BaseCollectionCache;
 import com.mummyding.app.leisure.database.cache.ICache;
 import com.mummyding.app.leisure.support.HttpUtil;
-import com.mummyding.app.leisure.support.Settings;
-import com.mummyding.app.leisure.support.Utils;
 
 import java.util.List;
 
@@ -49,7 +47,7 @@ public abstract class BaseListAdapter<M,VH extends RecyclerView.ViewHolder> exte
     public BaseListAdapter(Context context, ICache<M> cache) {
         mContext = context;
         mCache = cache;
-        mItems = cache.getmList();
+        mItems = cache.getList();
 
         if(cache instanceof BaseCollectionCache){
             isCollection = true;

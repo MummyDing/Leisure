@@ -99,32 +99,32 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if(preference == mAutoRefresh){
             Settings.isAutoRefresh = Boolean.valueOf(newValue.toString());
-            mSettings.putBoolean(mSettings.AUTO_REFRESH, Settings.isAutoRefresh);
+            mSettings.putBoolean(Settings.AUTO_REFRESH, Settings.isAutoRefresh);
             return true;
         }else if(preference == mNightMode){
             Settings.isNightMode = Boolean.valueOf(newValue.toString());
             Settings.needRecreate = true;
-            mSettings.putBoolean(mSettings.NIGHT_MODE, Settings.isNightMode);
+            mSettings.putBoolean(Settings.NIGHT_MODE, Settings.isNightMode);
 
-            if(mSettings.isNightMode && Utils.getSysScreenBrightness() > CONSTANT.NIGHT_BRIGHTNESS){
+            if(Settings.isNightMode && Utils.getSysScreenBrightness() > CONSTANT.NIGHT_BRIGHTNESS){
                 Utils.setSysScreenBrightness(CONSTANT.NIGHT_BRIGHTNESS);
-            }else if(mSettings.isNightMode == false && Utils.getSysScreenBrightness() == CONSTANT.NIGHT_BRIGHTNESS){
+            }else if(Settings.isNightMode == false && Utils.getSysScreenBrightness() == CONSTANT.NIGHT_BRIGHTNESS){
                 Utils.setSysScreenBrightness(CONSTANT.DAY_BRIGHTNESS);
             }
             getActivity().recreate();
             return true;
         }else if(preference == mShakeToReturn){
             Settings.isShakeMode = Boolean.valueOf(newValue.toString());
-            mSettings.putBoolean(mSettings.SHAKE_TO_RETURN,mSettings.isShakeMode);
+            mSettings.putBoolean(Settings.SHAKE_TO_RETURN, Settings.isShakeMode);
             return true;
         }else if(preference == mExitConfirm){
             Settings.isExitConfirm = Boolean.valueOf(newValue.toString());
-            mSettings.putBoolean(mSettings.EXIT_CONFIRM, Settings.isExitConfirm);
+            mSettings.putBoolean(Settings.EXIT_CONFIRM, Settings.isExitConfirm);
             return true;
         }else if(preference == mNoPicMode){
             Settings.noPicMode = Boolean.valueOf(newValue.toString());
             Settings.needRecreate = true;
-            mSettings.putBoolean(mSettings.NO_PIC_MODE, Settings.noPicMode);
+            mSettings.putBoolean(Settings.NO_PIC_MODE, Settings.noPicMode);
             return true;
         }
         return false;

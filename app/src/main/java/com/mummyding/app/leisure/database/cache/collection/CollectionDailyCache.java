@@ -39,14 +39,14 @@ public class CollectionDailyCache extends BaseCollectionCache<StoryBean>{
 
     @Override
     public synchronized void loadFromCache() {
-        Cursor cursor = query(table.SELECT_ALL_FROM_COLLECTION);
+        Cursor cursor = query(DailyTable.SELECT_ALL_FROM_COLLECTION);
         while (cursor.moveToNext()){
             StoryBean storyBean = new StoryBean();
-            storyBean.setTitle(cursor.getString(table.ID_TITLE));
-            storyBean.setId(cursor.getInt(table.ID_ID));
-            storyBean.setImages(new String[]{cursor.getString(table.ID_IMAGE)});
-            storyBean.setBody(cursor.getString(table.ID_BODY));
-            storyBean.setLargepic(cursor.getString(table.ID_LARGEPIC));
+            storyBean.setTitle(cursor.getString(DailyTable.ID_TITLE));
+            storyBean.setId(cursor.getInt(DailyTable.ID_ID));
+            storyBean.setImages(new String[]{cursor.getString(DailyTable.ID_IMAGE)});
+            storyBean.setBody(cursor.getString(DailyTable.ID_BODY));
+            storyBean.setLargepic(cursor.getString(DailyTable.ID_LARGEPIC));
             mList.add(storyBean);
         }
         mHandler.sendEmptyMessage(CONSTANT.ID_FROM_CACHE);
