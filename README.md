@@ -1,13 +1,12 @@
 # 闲暇(Leisure)
+> 该项目将不再新增功能，仅做重构
+
 Leisure is an Android App containing Zhihu Daily,Guokr Scientific,XinhuaNet News and Douban Books. 
 
-  　　　
+
 ![alt text](./logo.png)   
 
-酷安应用市场下载地址:[http://coolapk.com/apk/com.mummyding.app.leisure][5]<br>
-豌豆荚应用下载地址:  [http://www.wandoujia.com/apps/com.mummyding.app.leisure][1]<br>
-小米应用商店下载地址: [http://app.mi.com/detail/130045][6]<br>
-360应用市场下载地址: [http://m.app.so.com/detail/index?pname=com.mummyding.app.leisure&id=3167599][4]<br>
+60应用市场下载地址: [http://m.app.so.com/detail/index?pname=com.mummyding.app.leisure&id=3167599][4]<br>
 视频(Video): [http://v.youku.com/v_show/id_XMTQwOTU4MzE5Mg==.html][2]<br>
 Blog:[http://blog.csdn.net/mummyding/article/details/50266203][3]<br>
 
@@ -32,8 +31,7 @@ Blog:[http://blog.csdn.net/mummyding/article/details/50266203][3]<br>
   - 自动刷新:开启该功能后，在WIFI下自动刷新，获取最新内容
   - 语言:　支持繁简中文和英文，满足用户语言习惯
   - 清除缓存:用户可以手动清除缓存，节约手机存储空间
-  
-  
+
 MainActivity: 入口界面。做一些初始化的工作，加载应用整体框架，负责基本子界面的切换。<br>
 BaseListFragment：列表界面基类。定制性强，可自定义是否启用头部导航布局　下拉刷新等组件<br>
 AsbtopNavigationFragment:　头部导航布局基类,继承它即可管理头部导航布局。<br>
@@ -60,30 +58,30 @@ ICache---　缓存接口<br>
 3. 修复收藏bug<br>
 4. 各模块列表UI做了优化<br>
 5. 优化夜间模式<br>
-本次更新更侧重于修复之前的bug,UI上的美化将放在之后的版本中.<br>
-个人开发者业余开发,更新不及时请见谅,感谢支持.<br>
-项目地址: https://github.com/MummyDing/Leisure<br>
-**2016-02-19 Version 2.1 版发布**<br>
-新版来了，让大家久等了。上个礼拜还有同学发邮件给我反馈bug，不过这个寒假真的忙<br>
-忙忙，凌晨一点+睡觉已成日常。断断续续地修复了些bug，想想拖的太久还是早点发出来。<br>
-如果你发现之前反馈的bug在这个版本还没修复还请原谅，评论区的留言我都会看，已经<br>
-修复的bug我一般都会新版发布的时候在评论区回复提醒。UI上的更新主要是当前和KevinWu<br>
-合作项目中改进的，废话到此为止,看看这次的更新吧！<br>
-0.修复日报详情页无图模式<br>
-1.修复日报部分卡片FC bug<br>
-2.修复详情页(日报、科学、新闻)内部链接FC bug<br>
-3.优化日报、科学模块列表 <br>
-4.优化日报列表图片清晰度<br>
-5.优化日报、科学详情页布局<br>
-6.优化夜间模式图标&文字 提示<br>
-7.增加滑动返回功能:支持左部滑动&任意位置滑动<br>
-8.关闭日报、科学 详情页夜间模式(这个是因为目前效果不好，等以后优化好了再恢复)<br>
-9.默认关闭摇晃返回<br>
-10.增加日报、科学 文章分享功能<br>
-11.本想重绘个logo，画了半天还是各种丑，无奈又写了个字，丑就让它丑到家吧<br>
-**2016-09-11 Version 2.2 版发布**<br>
-0. 修复6.0以上设备"科学"详情页在网络正常的情况下出现"网络错误"图标  
-1. 修复6.0以上设备“新闻”详情页滑动时出现网络错误页
+  本次更新更侧重于修复之前的bug,UI上的美化将放在之后的版本中.<br>
+  个人开发者业余开发,更新不及时请见谅,感谢支持.<br>
+  项目地址: https://github.com/MummyDing/Leisure<br>
+  **2016-02-19 Version 2.1 版发布**<br>
+  新版来了，让大家久等了。上个礼拜还有同学发邮件给我反馈bug，不过这个寒假真的忙<br>
+  忙忙，凌晨一点+睡觉已成日常。断断续续地修复了些bug，想想拖的太久还是早点发出来。<br>
+  如果你发现之前反馈的bug在这个版本还没修复还请原谅，评论区的留言我都会看，已经<br>
+  修复的bug我一般都会新版发布的时候在评论区回复提醒。UI上的更新主要是当前和KevinWu<br>
+  合作项目中改进的，废话到此为止,看看这次的更新吧！<br>
+  0.修复日报详情页无图模式<br>
+  1.修复日报部分卡片FC bug<br>
+  2.修复详情页(日报、科学、新闻)内部链接FC bug<br>
+  3.优化日报、科学模块列表 <br>
+  4.优化日报列表图片清晰度<br>
+  5.优化日报、科学详情页布局<br>
+  6.优化夜间模式图标&文字 提示<br>
+  7.增加滑动返回功能:支持左部滑动&任意位置滑动<br>
+  8.关闭日报、科学 详情页夜间模式(这个是因为目前效果不好，等以后优化好了再恢复)<br>
+  9.默认关闭摇晃返回<br>
+  10.增加日报、科学 文章分享功能<br>
+  11.本想重绘个logo，画了半天还是各种丑，无奈又写了个字，丑就让它丑到家吧<br>
+  **2016-09-11 Version 2.2 版发布**<br>
+6. 修复6.0以上设备"科学"详情页在网络正常的情况下出现"网络错误"图标  
+7. 修复6.0以上设备“新闻”详情页滑动时出现网络错误页
 #源码打包下载
 1. [Version 1.0][7]
 2. [Version 1.1][8]
@@ -98,11 +96,11 @@ ICache---　缓存接口<br>
 <img src="/ScreenShots/ebook.png" width="200" height="380"/> 
 <img src="/ScreenShots/settings.png" width="200" height="380"/> 
 <img src="/ScreenShots/about.png" width="200" height="380"/> 
-[1]:(http://www.wandoujia.com/apps/com.mummyding.app.leisure)
-[2]:(http://v.youku.com/v_show/id_XMTQwOTU4MzE5Mg==.html)
-[3]:(http://blog.csdn.net/mummyding/article/details/50266203)
-[4]:(http://m.app.so.com/detail/index?pname=com.mummyding.app.leisure&id=3167599)
-[5]:(http://coolapk.com/apk/com.mummyding.app.leisure)
+[1]:http://www.wandoujia.com/apps/com.mummyding.app.leisure
+[]:http://v.youku.com/v_show/id_XMTQwOTU4MzE5Mg==.html
+[3]:http://blog.csdn.net/mummyding/article/details/50266203
+[]:http://m.app.so.com/detail/index?pname=com.mummyding.app.leisure&amp;id=3167599)
+[5]:http://coolapk.com/apk/com.mummyding.app.leisure
 [6]: http://app.mi.com/detail/130045
 [7]: https://github.com/MummyDing/Leisure/archive/v1.0.zip
 [8]: https://github.com/MummyDing/Leisure/archive/v1.1.zip
