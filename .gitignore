@@ -31,3 +31,6 @@ captures/
 
 # Swap Files
 *~
+gradle
+gradlew
+Leisure.iml
